@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
 
-from .models import Promoter, Venue, Event
+from .models import Promoter, Venue, Event, Profile
 
 AuthUser = get_user_model()
 
@@ -111,22 +111,6 @@ class AddEventForm(forms.ModelForm):
     class Meta:
         model = Event
         fields = ('name', 'event_date', 'venue', 'promoter', 'event_flyer', 'description')
-        # labels = {
-        #     'name': '',
-        #     'event_date': '',
-        #     'venue': '',
-        #     'promoter': '',
-        #     'event_flyer': '',
-        #     'description': '',
-        # }
-        # widgets = {
-        #     "name": forms.TextInput(attrs={"class": "form-control", "placeholder": "Event Name"}),
-        #     "event_date": forms.DateTimeInput(attrs={"class": "form-control", "placeholder": "Event Date"}),
-        #     "venue": forms.Select(attrs={"class": "form-control", "placeholder": "Venue"}),
-        #     "promoter": forms.Select(attrs={"class": "form-control", "placeholder": "Promoter"}),
-        #     "event_flyer": forms.TextInput(attrs={"class": "form-control", "placeholder": "Event Flyer"}),
-        #     "description": forms.Textarea(attrs={"class": "form-control", "placeholder": "Event Description"})
-        # }
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
@@ -139,3 +123,17 @@ class AddEventForm(forms.ModelForm):
         if commit:
             instance.save()
         return instance
+
+
+class EditProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('avatar', )
+
+        labels = {
+            'avatar': ''
+        }
+
+        widgets = {
+            'avatar': forms.ClearableFileInput(attrs={"class": "form-control", "placeholder": "Avatar"})
+        }

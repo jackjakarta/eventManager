@@ -20,6 +20,8 @@ urlpatterns = [
     path('user/<int:pk>/venues/', views.user_venues, name='user_venues'),
 
     # Add, Edit, Delete from DB forms
+    path('edit-profile/<int:pk>/', views.edit_profile, name='edit_profile'),
+
     path('add-promoter/', views.add_promoter, name='add_promoter'),
     path('edit-promoter/<int:pk>/', views.edit_promoter, name='edit_promoter'),
     path('delete-promoter/<int:pk>/', views.delete_promoter, name='delete_promoter'),

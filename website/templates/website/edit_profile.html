@@ -1,23 +1,22 @@
 {% extends 'website/base.html' %}
-{% load crispy_forms_tags %}
 
 {% block title %}
-Edit Event - {{ event.name }}
+{{ user.first_name }} {{ user.last_name }} - Edit Profile
 {% endblock %}
 
 {% block content %}
 <div class="col-md-6 offset-md-3">
 
     <div class="container mt-4">
-        <h2 class="display-7">Edit Event</h2>
+        <h2 class="display-7">Edit Profile</h2>
     </div>
 
     <div class="container mt-4">
         <form action="" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-            {{ form | crispy }}
+            {{ form.as_p }}
             <button type="submit" class="btn btn-primary">Update</button>
-            <a href="{% url 'user_events' user.id %}" class="btn btn-secondary">Back</a>
+            <a href="{% url 'profile' user.id %}" class="btn btn-secondary">Back</a>
         </form>
     </div>
 

@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, get_user_model
 
 from .models import Profile, Event, Venue, Promoter
-from .forms import SignUpForm, AddPromoterForm, AddVenueForm, AddEventForm
+from .forms import SignUpForm, AddPromoterForm, AddVenueForm, AddEventForm, EditProfileForm
 from .utils import send_register_user_email
 
 AuthUser = get_user_model()
@@ -61,6 +61,7 @@ def add_promoter(request):
             form = AddPromoterForm(request.POST, user=request.user)
             if form.is_valid():
                 form.save()
+                messages.success(request, "You have successfully added a promoter.")
                 return redirect("home")
         else:
             form = AddPromoterForm()
@@ -107,6 +108,7 @@ def add_venue(request):
             form = AddVenueForm(request.POST, request.FILES, user=request.user)
             if form.is_valid():
                 form.save()
+                messages.success(request, "You have successfully added a venue.")
                 return redirect("home")
         else:
             form = AddVenueForm()
@@ -153,6 +155,7 @@ def add_event(request):
             form = AddEventForm(request.POST, user=request.user)
             if form.is_valid():
                 form.save()
+                messages.success(request, "You have successfully added an event.")
                 return redirect("events")
         else:
             form = AddEventForm()
@@ -188,6 +191,24 @@ def delete_event(request, pk):
         event.delete()
         messages.success(request, "Event deleted successfully!")
         return redirect("events")
+    else:
+        messages.error(request, "You have to be logged in to use this feature!")
+        return redirect("home")
+
+
+def edit_profile(request, pk):
+    if request.user.is_authenticated:
+        profile = Profile.objects.get(user_id=pk)
+        form = EditProfileForm(request.POST or None, instance=profile)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Profile updated successfully.")
+            return redirect("home")
+
+        return render(request, "website/edit_profile.html", {
+            "profile": profile,
+            "form": form,
+        })
     else:
         messages.error(request, "You have to be logged in to use this feature!")
         return redirect("home")
@@ -243,7 +264,7 @@ def login_user(request):
             user = authenticate(request, email=email, password=password)
             if user is not None:
                 login(request, user)
-                messages.success(request, "You've been logged in.")
+                messages.success(request, "You have logged in.")
                 return redirect("home")
             else:
                 messages.error(request, "There was a problem logging you in.")
