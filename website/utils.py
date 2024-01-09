@@ -1,3 +1,6 @@
+import string
+import random
+
 from django.conf import settings
 from django.template.loader import get_template
 from django.core.mail import EmailMultiAlternatives
@@ -39,3 +42,28 @@ def send_register_user_email(user_name, user_email):
     )
     mail.content_subtype = "html"
     mail.send()
+
+
+# Utility
+class RandomGenerator:
+    """Random String Generator. Default length is 10 characters."""
+    def __init__(self, length=10):
+        self.length = length
+
+    def random_string(self):
+        char_list = string.ascii_lowercase + string.digits
+        random_key = "".join(random.choices(char_list, k=self.length))
+
+        return random_key
+
+    def random_digits(self):
+        char_list = string.digits
+        random_key = "".join(random.choices(char_list, k=self.length))
+
+        return random_key
+
+    def random_letters(self):
+        char_list = string.ascii_letters
+        random_key = "".join(random.choices(char_list, k=self.length))
+
+        return random_key

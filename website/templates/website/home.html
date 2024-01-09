@@ -16,14 +16,15 @@ Home Page
 </div>
 
 <div class="container mt-2">
-        <p>EventMngr App in development...</p>
+    <p>EventMngr App in development...</p>
 
+    {% if google_events %}
         {% for event in google_events %}
             <ul>
                 <li>{{ event }}</li>
             </ul>
         {% endfor %}
-
+    {% endif %}
 </div>
 
 {% endblock %}

@@ -12,6 +12,7 @@ Edit Event - {{ event.name }}
         <h2 class="display-7">Edit Event</h2>
     </div>
 
+    {% if user == event.manager %}
     <div class="container mt-4">
         <form action="" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
@@ -20,6 +21,14 @@ Edit Event - {{ event.name }}
             <a href="{% url 'user_events' user.id %}" class="btn btn-secondary">Back</a>
         </form>
     </div>
+    {% else %}
+    <div class="container mt-4">
+        <p>You are not the manager of this event and can't edit it.</p>
+        <p>Contact the event manager: {{ event.manager }}</p>
+        <p><a href="{% url 'events' %}" class="btn btn-secondary">Back</a></p>
+    </div>
+    {% endif %}
+
 
 </div>
 {% endblock %}

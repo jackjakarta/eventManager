@@ -11,6 +11,7 @@
         <h2 class="display-7">Edit Promoter</h2>
     </div>
 
+    {% if user == promoter.manager %}
     <div class="container mt-4">
         <form action="" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
@@ -19,6 +20,13 @@
             <a href="{% url 'user_promoters' user.id %}" class="btn btn-secondary">Back</a>
         </form>
     </div>
+    {% else %}
+    <div class="container mt-4">
+        <p>You are not the manager of this promoter and can't edit it.</p>
+        <p>Contact the event manager: {{ promoter.manager }}</p>
+        <p><a href="{% url 'promoters' %}" class="btn btn-secondary">Back</a></p>
+    </div>
+    {% endif %}
 
 </div>
 {% endblock %}

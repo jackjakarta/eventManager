@@ -24,42 +24,42 @@ class SignUpForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super(SignUpForm, self).__init__(*args, **kwargs)
 
-        self.fields['password1'].widget.attrs['class'] = 'form-control'
-        self.fields['password1'].widget.attrs['placeholder'] = 'Password'
-        self.fields['password1'].label = ''
+        self.fields["password1"].widget.attrs["class"] = "form-control"
+        self.fields["password1"].widget.attrs["placeholder"] = "Password"
+        self.fields["password1"].label = ""
         self.fields[
-            'password1'].help_text = ('<ul class="form-text text-muted small"><li>Your password can\'t be too similar '
+            "password1"].help_text = ('<ul class="form-text text-muted small"><li>Your password can\'t be too similar '
                                       'to your other personal information.</li><li>Your password must contain at least '
                                       '8 characters.</li><li>Your password can\'t be a commonly used password.</li><li>'
                                       'Your password can\'t be entirely numeric.</li></ul>')
 
-        self.fields['password2'].widget.attrs['class'] = 'form-control'
-        self.fields['password2'].widget.attrs['placeholder'] = 'Confirm Password'
-        self.fields['password2'].label = ''
+        self.fields["password2"].widget.attrs["class"] = "form-control"
+        self.fields["password2"].widget.attrs["placeholder"] = "Confirm Password"
+        self.fields["password2"].label = ""
         self.fields[
-            'password2'].help_text = ('<span class="form-text text-muted"><small>Enter the same password as before, '
+            "password2"].help_text = ('<span class="form-text text-muted"><small>Enter the same password as before, '
                                       'for verification.</small></span>')
 
 
 class AddPromoterForm(forms.ModelForm):
     class Meta:
         model = Promoter
-        fields = ('name', 'city', 'email', 'website')
+        fields = ("name", "city", "email", "website", )
         labels = {
-            'name': '',
-            'city': '',
-            'email': '',
-            'website': '',
+            "name": "",
+            "city": "",
+            "email": "",
+            "website": "",
         }
         widgets = {
-            'name': forms.TextInput(attrs={"class": "form-control", "placeholder": "Name"}),
-            'city': forms.TextInput(attrs={"class": "form-control", "placeholder": "City"}),
-            'email': forms.TextInput(attrs={"class": "form-control", "placeholder": "Email"}),
-            'website': forms.TextInput(attrs={"class": "form-control", "placeholder": "Website"}),
+            "name": forms.TextInput(attrs={"class": "form-control", "placeholder": "Name"}),
+            "city": forms.TextInput(attrs={"class": "form-control", "placeholder": "City"}),
+            "email": forms.TextInput(attrs={"class": "form-control", "placeholder": "Email"}),
+            "website": forms.TextInput(attrs={"class": "form-control", "placeholder": "Website"}),
         }
 
     def __init__(self, *args, **kwargs):
-        self.user = kwargs.pop('user', None)
+        self.user = kwargs.pop("user", None)
         super(AddPromoterForm, self).__init__(*args, **kwargs)
 
     def save(self, commit=True):
@@ -74,28 +74,28 @@ class AddPromoterForm(forms.ModelForm):
 class AddVenueForm(forms.ModelForm):
     class Meta:
         model = Venue
-        fields = ('name', 'address', 'city', 'zip_code', 'website', 'email', 'image', )
+        fields = ("name", "address", "city", "zip_code", "website", "email", "image", )
         labels = {
-            'name': '',
-            'address': '',
-            'city': '',
-            'zip_code': '',
-            'website': '',
-            'email': '',
-            'image': 'Venue Image or Logo',
+            "name": "",
+            "address": "",
+            "city": "",
+            "zip_code": "",
+            "website": "",
+            "email": "",
+            "image": "Venue Image or Logo",
         }
         widgets = {
-            'name': forms.TextInput(attrs={"class": "form-control", "placeholder": "Venue Name"}),
-            'address': forms.TextInput(attrs={"class": "form-control", "placeholder": "Address"}),
-            'city': forms.TextInput(attrs={"class": "form-control", "placeholder": "City"}),
-            'zip_code': forms.TextInput(attrs={"class": "form-control", "placeholder": "Zip Code"}),
-            'website': forms.TextInput(attrs={"class": "form-control", "placeholder": "Website"}),
-            'email': forms.TextInput(attrs={"class": "form-control", "placeholder": "Email"}),
-            'image': forms.ClearableFileInput(attrs={"class": "form-control", "placeholder": "Image or Logo"}),
+            "name": forms.TextInput(attrs={"class": "form-control", "placeholder": "Venue Name"}),
+            "address": forms.TextInput(attrs={"class": "form-control", "placeholder": "Address"}),
+            "city": forms.TextInput(attrs={"class": "form-control", "placeholder": "City"}),
+            "zip_code": forms.TextInput(attrs={"class": "form-control", "placeholder": "Zip Code"}),
+            "website": forms.TextInput(attrs={"class": "form-control", "placeholder": "Website"}),
+            "email": forms.TextInput(attrs={"class": "form-control", "placeholder": "Email"}),
+            "image": forms.ClearableFileInput(attrs={"class": "form-control", "placeholder": "Image or Logo"}),
         }
 
     def __init__(self, *args, **kwargs):
-        self.user = kwargs.pop('user', None)
+        self.user = kwargs.pop("user", None)
         super(AddVenueForm, self).__init__(*args, **kwargs)
 
     def save(self, commit=True):
@@ -110,10 +110,10 @@ class AddVenueForm(forms.ModelForm):
 class AddEventForm(forms.ModelForm):
     class Meta:
         model = Event
-        fields = ('name', 'event_date', 'venue', 'promoter', 'event_flyer', 'description')
+        fields = ("name", "event_date", "venue", "promoter", "event_flyer", "description", )
 
     def __init__(self, *args, **kwargs):
-        self.user = kwargs.pop('user', None)
+        self.user = kwargs.pop("user", None)
         super(AddEventForm, self).__init__(*args, **kwargs)
 
     def save(self, commit=True):
@@ -128,12 +128,12 @@ class AddEventForm(forms.ModelForm):
 class EditProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ('avatar', )
+        fields = ("avatar", )
 
         labels = {
-            'avatar': ''
+            "avatar": "Avatar",
         }
 
         widgets = {
-            'avatar': forms.ClearableFileInput(attrs={"class": "form-control", "placeholder": "Avatar"})
+            "avatar": forms.ClearableFileInput(attrs={"class": "form-control"})
         }

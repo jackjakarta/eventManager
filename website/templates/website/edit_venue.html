@@ -11,14 +11,22 @@
         <h2 class="display-7">Edit Venue</h2>
     </div>
 
+    {% if user == venue.manager %}
     <div class="container mt-4">
         <form action="" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit" class="btn btn-info">Update</button>
-            <a href="{% url 'profile' user.id %}" class="btn btn-secondary">Back</a>
+            <a href="{% url 'user_venues' user.id %}" class="btn btn-secondary">Back</a>
         </form>
     </div>
+    {% else %}
+    <div class="container mt-4">
+        <p>You are not the manager of this venue and can't edit it.</p>
+        <p>Contact the event manager: {{ venue.manager }}</p>
+        <p><a href="{% url 'venues' %}" class="btn btn-secondary">Back</a></p>
+    </div>
+    {% endif %}
 
 </div>
 {% endblock %}
