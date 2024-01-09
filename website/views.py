@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, get_user_model
+from icalevents.icalevents import events as ev
+from decouple import config
 
 from .models import Profile, Event, Venue, Promoter
 from .forms import SignUpForm, AddPromoterForm, AddVenueForm, AddEventForm, EditProfileForm
@@ -12,7 +14,11 @@ AuthUser = get_user_model()
 
 # Website Pages Views
 def home(request):
-    return render(request, "website/home.html", {})
+    cal_url = config("CAL_URL")
+    es = ev(cal_url)
+    return render(request, "website/home.html", {
+        "google_events": es,
+    })
 
 
 def venues(request):
