@@ -137,3 +137,10 @@ class EditProfileForm(forms.ModelForm):
         widgets = {
             "avatar": forms.ClearableFileInput(attrs={"class": "form-control"})
         }
+
+
+class DallEImageForm(forms.Form):
+    image_prompt = forms.CharField(max_length=1000, widget=forms.TextInput(
+        attrs={'placeholder': 'Describe your image...'}),
+        label="Image description:"
+    )

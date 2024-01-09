@@ -56,8 +56,6 @@ Profile - {{ user.first_name }} {{ user.last_name }}
             <tr>
                 <th scope="col">Promoter</th>
                 <th scope="col">City</th>
-<!--                <th scope="col">Email</th>-->
-<!--                <th scope="col">Website</th>-->
                 <th scope="col">Manage</th>
             </tr>
         </thead>
@@ -68,8 +66,6 @@ Profile - {{ user.first_name }} {{ user.last_name }}
                     <tr>
                         <td>{{ promoter.name }}</td>
                         <td>{{ promoter.city }}</td>
-<!--                        <td>{{ promoter.email }}</td>-->
-<!--                        <td>{{ promoter.website }}</td>-->
                         <td><a href="{% url 'promoter_page' promoter.id %}" class="btn btn-outline-info btn-sm">View</a> <a href="{% url 'edit_promoter' promoter.id %}" class="btn btn-outline-secondary btn-sm">Edit</a> <a href="{% url 'delete_promoter' promoter.id %}" class="btn btn-outline-danger btn-sm">Delete</a></td>
                     </tr>
                 {% endfor %}
@@ -91,7 +87,6 @@ Profile - {{ user.first_name }} {{ user.last_name }}
                 <th scope="col">Venue Name</th>
                 <th scope="col">City</th>
                 <th scope="col">Email</th>
-<!--                <th scope="col">Website</th>-->
                 <th scope="col">Manage</th>
             </tr>
         </thead>
@@ -103,7 +98,6 @@ Profile - {{ user.first_name }} {{ user.last_name }}
                         <td>{{ venue.name }}</td>
                         <td>{{ venue.city }}</td>
                         <td>{{ venue.email }}</td>
-<!--                        <td>{{ promoter.website }}</td>-->
                         <td><a href="{% url 'venue_page' venue.id %}" class="btn btn-outline-info btn-sm">View</a> <a href="{% url 'edit_venue' venue.id %}" class="btn btn-outline-secondary btn-sm">Edit</a> <a href="{% url 'delete_venue' venue.id %}" class="btn btn-outline-danger btn-sm">Delete</a></td>
                     </tr>
                 {% endfor %}

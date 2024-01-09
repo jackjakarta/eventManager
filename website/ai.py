@@ -1,10 +1,12 @@
 import os
 import requests
+import tempfile
 
 from openai import OpenAI
 from decouple import config
-from django.conf import settings
+from django.core.files import File
 
+from .models import DallEImage
 from .utils import RandomGenerator
 
 
@@ -32,18 +34,23 @@ class ImageDallE:
 
         return self.image_url
 
-    def save_image(self, name=RandomGenerator(6).random_string()):
+    def save_image(self, name=None):
         request_response = requests.get(self.image_url, stream=True)
         if request_response.status_code == 200:
-            timestamp = name
-            image_dir = os.path.join(settings.MEDIA_ROOT, "images")
-            image_filename = f"image_dalle_{timestamp}.png"
-            self.image_path = os.path.join(image_dir, image_filename)
-            os.makedirs(image_dir, exist_ok=True)
+            if name is None:
+                name = RandomGenerator(6).random_string()
 
-            with open(self.image_path, "wb+") as f:
+            # Create a temporary file to store the image
+            with tempfile.NamedTemporaryFile(delete=False, suffix='.png') as temp_image:
                 for chunk in request_response.iter_content(8192):
-                    f.write(chunk)
-            print(f"\nImaged saved at: {self.image_path}.")
+                    temp_image.write(chunk)
+
+            # Open the temporary file and save it to the DallEImage model's image field
+            dalle_image = DallEImage()
+            dalle_image.image.save(f"image_dalle_{name}.png", File(open(temp_image.name, 'rb')))
+            dalle_image.save()
+
+            # Delete the temporary file
+            os.remove(temp_image.name)
         else:
             print("\nFailed to get image!")

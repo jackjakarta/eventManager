@@ -2,11 +2,10 @@ from django.shortcuts import render, redirect
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, get_user_model
-
-# from icalevents.icalevents import events as ev
-# from decouple import config
+from rest_framework import viewsets
 
 from .models import Profile, Event, Venue, Promoter
+from .serializers import EventSerializer
 from .forms import SignUpForm, AddPromoterForm, AddVenueForm, AddEventForm, EditProfileForm
 from .utils import send_register_user_email
 
@@ -15,11 +14,7 @@ AuthUser = get_user_model()
 
 # Website Pages Views
 def home(request):
-    # cal_url = config("CAL_URL")
-    # es = ev(cal_url)
-    return render(request, "website/home.html", {
-        # "google_events": es,
-    })
+    return render(request, "website/home.html", {})
 
 
 def venues(request):
@@ -293,6 +288,7 @@ def login_user(request):
                 return redirect("home")
             else:
                 messages.error(request, "There was a problem logging you in.")
+                return redirect("login")
         else:
             return render(request, "website/login.html")
     else:
@@ -341,3 +337,11 @@ def not_found(request):
     if not settings.DEBUG:
         if response.status_code == 404:
             return response
+
+
+# API View Sets
+class EventViewSet(viewsets.ModelViewSet):
+    serializer_class = EventSerializer
+
+    def get_queryset(self):
+        return Event.objects.all()

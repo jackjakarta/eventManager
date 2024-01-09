@@ -79,3 +79,15 @@ class NewsletterSub(MyModel):
 
     def __str__(self):
         return self.email
+
+
+class DallEImage(MyModel):
+    class Meta:
+        db_table = "dall_e_generated_images"
+
+    title = models.CharField("Image Title", max_length=120, blank=True)
+    image = models.ImageField("Generated Image", upload_to="generated_images/")
+    manager = models.ForeignKey(AuthUser, null=True, on_delete=models.SET_NULL)
+
+    def __str__(self):
+        return self.title
