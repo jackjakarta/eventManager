@@ -1,0 +1,54 @@
+{% extends 'website/base.html' %}
+
+{% block title %}
+All Events
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container mt-4">
+    <h1 class="display-5">Events</h1>
+</div>
+
+<div class="container mt-3">
+    <h2 class="display-7"> All Events:</h2>
+</div>
+
+<div class="container mt-2">
+    <p>Lorem ipsum dolor sit amet.</p>
+</div>
+
+<div class="container">
+    <table class="table table-striped table-hover table-bordered">
+        <thead class="table-light">
+            <tr>
+                <th scope="col">Event Name</th>
+                <th scope="col">Event Date</th>
+                <th scope="col">Event Venue</th>
+                <th scope="col">Event City</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% if events %}
+                {% for event in events %}
+                    <tr>
+                        <td><a href="{% url 'event_page' event.id %}">{{ event.name }}</a></td>
+                        <td>{{ event.event_date }}</td>
+                        <td>{{ event.venue }}</td>
+                        <td>{{ event.venue.city }}</td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+        </tbody>
+    </table>
+</div>
+
+<div class="container">
+    <a href="{% url 'home' %}" class="btn btn-secondary">Back</a>
+    <a href="{% url 'home' %}" class="btn btn-primary">Add Event</a>
+
+</div>
+
+{% endblock %}

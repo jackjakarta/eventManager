@@ -1,0 +1,48 @@
+{% extends 'website/base.html' %}
+
+{% block title %}
+My Venues - {{ user.first_name }} {{ user.last_name }}
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <h1 class="display-5">
+        My Venues
+    </h1>
+</div>
+
+<div class="container mt-3">
+    <table class="table table-striped table-hover table-bordered">
+        <thead class="table-light">
+            <tr>
+                <th scope="col">Venue Name</th>
+                <th scope="col">Location</th>
+                <th scope="col">Email</th>
+                <th scope="col">Website</th>
+                <th scope="col">Manage</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% if venues %}
+                {% for venue in venues %}
+                    <tr>
+                        <td>{{ venue.name }}</td>
+                        <td>{{ venue.city }}</td>
+                        <td>{{ venue.email }}</td>
+                        <td>{{ venue.website }}</td>
+                        <td><a href="{% url 'venue_page' venue.id %}" class="btn btn-outline-info btn-sm">View</a> <a href="{% url 'edit_venue' venue.id %}" class="btn btn-outline-secondary btn-sm">Edit</a> <a href="{% url 'delete_venue' venue.id %}" class="btn btn-outline-danger btn-sm">Delete</a></td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+        </tbody>
+    </table>
+</div>
+
+<div class="container">
+    <a href="{% url 'profile' user.id %}" class="btn btn-secondary">Back</a>
+    <a href="{% url 'add_venue' %}" class="btn btn-info">Add Venue</a>
+</div>
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'website/base.html' %}
+
+{% block title %}
+{{ promoter.name }}
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <h1 class="display-5">
+        Promoter Page
+    </h1>
+</div>
+
+<div class="container mt-3">
+    <ul>
+        <li>{{ promoter.name }}</li>
+    </ul>
+</div>
+
+{% endblock %}

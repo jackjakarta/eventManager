@@ -1,0 +1,150 @@
+{% extends 'website/base.html' %}
+
+{% block title %}
+{{ user.first_name }} {{ user.last_name }}
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container mt-4">
+    <h1 class="display-5">My Profile</h1>
+</div>
+
+
+<div class="container mt-3">
+    <div class="row">
+
+        <!--User Events-->
+    <div class="col-md-6">
+        <h2 class="display-7">
+            My Events
+        </h2>
+        <br/>
+    <table class="table table-striped table-hover table-bordered">
+        <thead class="table-light">
+            <tr>
+                <th scope="col">Event Name</th>
+                <th scope="col">Event Date</th>
+                <th scope="col">Event Venue</th>
+<!--                <th scope="col">Event City</th>-->
+                <th scope="col">Manage</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% if events %}
+                {% for event in events %}
+                    <tr>
+                        <td>{{ event.name }}</td>
+                        <td>{{ event.event_date }}</td>
+                        <td>{{ event.venue }}</td>
+<!--                        <td>{{ event.venue.city }}</td>-->
+                        <td><a href="{% url 'event_page' event.id %}" class="btn btn-outline-info btn-sm">View</a> <a href="{% url 'edit_event' event.id %}" class="btn btn-outline-secondary btn-sm">Edit</a> <a href="{% url 'delete_event' event.id %}" class="btn btn-outline-danger btn-sm">Delete</a></td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+        </tbody>
+    </table>
+        <a href="{% url 'user_events' user.id %}" class="btn btn-secondary">View All</a>
+
+        <br/>
+        <br/>
+        <h2 class="display-7">
+            My Promoters
+        </h2>
+        <br/>
+        <table class="table table-striped table-hover table-bordered">
+        <thead class="table-light">
+            <tr>
+                <th scope="col">Promoter</th>
+                <th scope="col">City</th>
+<!--                <th scope="col">Email</th>-->
+<!--                <th scope="col">Website</th>-->
+                <th scope="col">Manage</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% if events %}
+                {% for promoter in promoters %}
+                    <tr>
+                        <td>{{ promoter.name }}</td>
+                        <td>{{ promoter.city }}</td>
+<!--                        <td>{{ promoter.email }}</td>-->
+<!--                        <td>{{ promoter.website }}</td>-->
+                        <td><a href="{% url 'home' %}" class="btn btn-outline-info btn-sm">View</a> <a href="{% url 'edit_promoter' promoter.id %}" class="btn btn-outline-secondary btn-sm">Edit</a> <a href="{% url 'delete_promoter' promoter.id %}" class="btn btn-outline-danger btn-sm">Delete</a></td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+        </tbody>
+    </table>
+        <a href="{% url 'user_promoters' user.id %}" class="btn btn-secondary">View All</a>
+
+
+        <br/>
+        <br/>
+        <h2 class="display-7">
+            My Venues
+        </h2>
+        <br/>
+        <table class="table table-striped table-hover table-bordered">
+        <thead class="table-light">
+            <tr>
+                <th scope="col">Venue Name</th>
+                <th scope="col">City</th>
+                <th scope="col">Email</th>
+<!--                <th scope="col">Website</th>-->
+                <th scope="col">Manage</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% if venues %}
+                {% for venue in venues %}
+                    <tr>
+                        <td>{{ venue.name }}</td>
+                        <td>{{ venue.city }}</td>
+                        <td>{{ venue.email }}</td>
+<!--                        <td>{{ promoter.website }}</td>-->
+                        <td><a href="{% url 'venue_page' venue.id %}" class="btn btn-outline-info btn-sm">View</a> <a href="{% url 'edit_venue' venue.id %}" class="btn btn-outline-secondary btn-sm">Edit</a> <a href="{% url 'delete_venue' venue.id %}" class="btn btn-outline-danger btn-sm">Delete</a></td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+        </tbody>
+    </table>
+        <a href="{% url 'user_venues' user.id %}" class="btn btn-secondary">View All</a>
+
+    </div>
+
+    <!--User Information-->
+        <div class="col-md-6">
+
+    <div class="card mb-3" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+        {% if profile.avatar %}
+      <img src="{{ profile.avatar.url }}" class="img-fluid rounded-circle" alt="...">
+        {% else %}
+        <img src="#" class="img-fluid rounded-start" alt="...">
+        {% endif %}
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{ user.first_name }} {{ user.last_name }}</h5>
+          <p class="card-text">Email: {{ user }}</p>
+        <p class="card-text"><small class="text-body-secondary">Last login on {{ user.last_login }}</small></p>
+      </div>
+    </div>
+  </div>
+</div>
+    <a href="{% url 'add_event' %}" class="btn btn-info">Add Event</a>
+    <a href="{% url 'add_promoter' %}" class="btn btn-dark">Add Promoter</a>
+    <a href="{% url 'add_venue' %}" class="btn btn-dark">Add Venue</a>
+    <a href="{% url 'home' %}" class="btn btn-outline-secondary">Edit Profile</a>
+</div>
+
+</div>
+</div>
+
+{% endblock %}

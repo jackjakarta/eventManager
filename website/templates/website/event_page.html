@@ -1,0 +1,21 @@
+{% extends 'website/base.html' %}
+
+{% block title %}
+{{ event.page }}
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <h1 class="display-5">
+        Event Page
+    </h1>
+</div>
+
+<div class="container mt-3">
+    <ul>
+        <li>{{ event.name }}</li>
+    </ul>
+</div>
+
+{% endblock %}

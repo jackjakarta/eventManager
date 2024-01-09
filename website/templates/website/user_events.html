@@ -1,0 +1,51 @@
+{% extends 'website/base.html' %}
+
+{% block title %}
+My Events - {{ user.first_name }} {{ user.last_name }}
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <h1 class="display-5">My Events</h1>
+</div>
+
+<div class="container mt-3">
+    <p>Lorem ipsum dolor sit amet.</p>
+</div>
+
+<div class="container">
+    <table class="table table-striped table-hover table-bordered">
+        <thead class="table-light">
+            <tr>
+                <th scope="col">Event Name</th>
+                <th scope="col">Event Date</th>
+                <th scope="col">Event Venue</th>
+                <th scope="col">Event City</th>
+                <th scope="col">Manage</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% if user_events %}
+                {% for event in user_events %}
+                    <tr>
+                        <td>{{ event.name }}</td>
+                        <td>{{ event.event_date }}</td>
+                        <td>{{ event.venue }}</td>
+                        <td>{{ event.venue.city }}</td>
+                        <td><a href="{% url 'event_page' event.id %}" class="btn btn-outline-info btn-sm">View</a> <a href="{% url 'edit_event' event.id %}" class="btn btn-outline-secondary btn-sm">Edit</a> <a href="{% url 'delete_event' event.id %}" class="btn btn-outline-danger btn-sm">Delete</a></td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+        </tbody>
+    </table>
+</div>
+
+<div class="container">
+    <a href="{% url 'profile' user.id %}" class="btn btn-secondary">Back</a>
+    <a href="{% url 'home' %}" class="btn btn-info">Add Event</a>
+
+</div>
+
+{% endblock %}

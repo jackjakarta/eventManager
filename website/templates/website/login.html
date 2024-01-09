@@ -1,0 +1,31 @@
+{% extends 'website/base.html' %}
+
+{% block title %}
+Login
+{% endblock %}
+
+
+{% block content %}
+<div class="col-md-6 offset-md-3">
+
+<div class="container mt-4">
+    <h2 class="display-7">Login here</h2>
+</div>
+
+<div class="container mt-3">
+    <form action="{% url 'login' %}" method="POST">
+        {% csrf_token %}
+         <div class="mb-3">
+    <input type="email" class="form-control" name="email" placeholder="Email Address" required>
+  </div>
+  <div class="mb-3">
+
+    <input type="password" class="form-control" name="password" placeholder="Password" required>
+  </div>
+        <p class="ft-6 fw-lighter">Don't have an account yet ? You can register <a href="{% url 'register' %}">here</a>.</p>
+  <button type="submit" class="btn btn-secondary">Login</button>
+    </form>
+</div>
+
+</div>
+{% endblock %}

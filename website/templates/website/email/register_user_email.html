@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to EventMngr!</title>
+    <!-- Bootstrap CSS -->
+    <link
+href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+rel="stylesheet">
+    <style>
+        body {
+            background-color: #ffffff;
+            color: #444444;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: auto;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .header {
+            background-color: #767676;
+            color: #ffffff;
+            padding: 20px;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            text-align: center;
+        }
+        .content {
+            padding: 30px;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #f8f8f8;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            font-size: 0.9em;
+        }
+        a.button {
+            background-color: #767676;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a.button:hover {
+            background-color: #424242;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="header">
+            <h1>Welcome to EventMngr App!</h1>
+        </div>
+        <div class="content">
+            <p>Hello, {% if name %}{{ name }}{% else %}{{ email }}{% endif %}</p>
+            <p>Thank you for registering with us. We're thrilled to have you join our
+community!</p>
+            <p>Get started by exploring some of our features:</p>
+            <br/>
+            <p><a href="#" class="button">Visit Website</a></p>
+            <br/>
+            <p>If you have any questions or need assistance, feel free to contact us at
+                <a href="mailto:office@muralconstruct.ro">email@email.com</a>.</p>
+        </div>
+        <div class="footer">
+            <p>Best regards,<br>Event Manager Team</p>
+            <p><small>This email was sent to {{ email }}. If you did not request this,
+please ignore it.</small></p>
+        </div>
+    </div>
+    <!-- Bootstrap JS and its dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script
+src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.0/dist/umd2.0.0/umd/popper.min.js"></script>
+    <script
+src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"></script>
+</body>
+</html>

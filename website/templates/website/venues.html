@@ -1,0 +1,40 @@
+{% extends 'website/base.html' %}
+
+{% block title %}
+Venues
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container mt-4">
+    <h1 class="display-5">Venues</h1>
+</div>
+
+<!--<div class="container mt-3">-->
+<!--    <h2 class="display-7">Venues:</h2>-->
+<!--</div>-->
+
+<div class="container mt-2">
+    <p>Lorem ipsum dolor sit amet.</p>
+</div>
+
+<div class="container mt-2">
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        {% for venue in venues %}
+  <div class="col">
+    <div class="card">
+      <img src="{{ venue.image.url }}" class="card-img-top img-fluid" alt="{{ venue.name }}" style="width: 650px; height: 200px;">
+      <div class="card-body">
+        <h5 class="card-title">{{ venue.name }}</h5>
+        <p class="card-text">{{ venue.city }}</p>
+        <p class="card-text">{{ venue.email }}</p>
+          <a href="{% url 'venue_page' venue.id %}" class="btn btn-dark btn-sm">Venue Page</a> <a href="{% url 'home' %}" class="btn btn-dark btn-sm">View Events</a>
+      </div>
+    </div>
+  </div>
+        {% endfor %}
+</div>
+</div>
+
+{% endblock %}
