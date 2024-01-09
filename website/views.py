@@ -30,7 +30,10 @@ def venue_page(request, pk):
 
 
 def promoters(request):
-    pass
+    promoters_qs = Promoter.objects.all()
+    return render(request, "website/promoters.html", {
+        "promoters": promoters_qs,
+    })
 
 
 def promoter_page(request, pk):
@@ -62,7 +65,12 @@ def add_promoter(request):
             if form.is_valid():
                 form.save()
                 messages.success(request, "You have successfully added a promoter.")
-                return redirect("home")
+                return redirect("promoters")
+            else:
+                messages.error(request, "Your form is not valid.")
+                return render(request, "website/add_promoter.html", {
+                    "form": form,
+                })
         else:
             form = AddPromoterForm()
             return render(request, "website/add_promoter.html", {
@@ -109,7 +117,12 @@ def add_venue(request):
             if form.is_valid():
                 form.save()
                 messages.success(request, "You have successfully added a venue.")
-                return redirect("home")
+                return redirect("venues")
+            else:
+                messages.error(request, "Your form is not valid.")
+                return render(request, "website/add_venue.html", {
+                    "form": form,
+                })
         else:
             form = AddVenueForm()
             return render(request, "website/add_venue.html", {
@@ -123,7 +136,7 @@ def add_venue(request):
 def edit_venue(request, pk):
     if request.user.is_authenticated:
         venues_qs = Venue.objects.get(id=pk)
-        form = AddVenueForm(request.POST or None, instance=venues_qs)
+        form = AddVenueForm(request.POST or None, request.FILES or None, instance=venues_qs)
         if form.is_valid():
             form.save()
             messages.success(request, "Updated successfully!")
@@ -152,11 +165,16 @@ def delete_venue(request, pk):
 def add_event(request):
     if request.user.is_authenticated:
         if request.method == "POST":
-            form = AddEventForm(request.POST, user=request.user)
+            form = AddEventForm(request.POST, request.FILES, user=request.user)
             if form.is_valid():
                 form.save()
                 messages.success(request, "You have successfully added an event.")
                 return redirect("events")
+            else:
+                messages.error(request, "Your form is not valid.")
+                return render(request, "website/add_event.html", {
+                    "form": form,
+                })
         else:
             form = AddEventForm()
             return render(request, "website/add_event.html", {
@@ -170,7 +188,7 @@ def add_event(request):
 def edit_event(request, pk):
     if request.user.is_authenticated:
         events_qs = Event.objects.get(id=pk)
-        form = AddEventForm(request.POST or None, instance=events_qs)
+        form = AddEventForm(request.POST or None, request.FILES or None, instance=events_qs)
         if form.is_valid():
             form.save()
             messages.success(request, "Updated successfully!")
@@ -199,7 +217,7 @@ def delete_event(request, pk):
 def edit_profile(request, pk):
     if request.user.is_authenticated:
         profile = Profile.objects.get(user_id=pk)
-        form = EditProfileForm(request.POST or None, instance=profile)
+        form = EditProfileForm(request.POST or None, request.FILES or None, instance=profile)
         if form.is_valid():
             form.save()
             messages.success(request, "Profile updated successfully.")
