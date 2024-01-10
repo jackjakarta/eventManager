@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Venue, Event, Promoter, Profile, NewsletterSub
+from .models import Venue, Event, Promoter, Profile, NewsletterSub, APIKey
 
 
 @admin.register(Venue)
@@ -31,6 +31,9 @@ class ProfileAdmin(admin.ModelAdmin):
     list_display = ("user", )
     ordering = ("created_at", )
     search_fields = ("user", )
+
+
+admin.site.register(APIKey)
 
 
 @admin.register(NewsletterSub)

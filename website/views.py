@@ -3,11 +3,12 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
-from .models import Profile, Event, Venue, Promoter
-from .serializers import EventSerializer
+from .models import Profile, Event, Venue, Promoter, APIKey
+from .serializers import EventSerializer, VenueSerializer, PromoterSerializer
 from .forms import SignUpForm, AddPromoterForm, AddVenueForm, AddEventForm, EditProfileForm
-from .utils import send_register_user_email
+from .utils import send_register_user_email, generate_api_key
 
 AuthUser = get_user_model()
 
@@ -241,11 +242,13 @@ def user_profile(request, pk):
         events_user = Event.objects.filter(manager_id=pk).order_by('event_date')[:5]
         promoters_user = Promoter.objects.filter(manager_id=pk).order_by('updated_at')[:5]
         venues_user = Venue.objects.filter(manager_id=pk).order_by('updated_at')[:5]
+        api_key = APIKey.objects.get(user_id=pk)
         return render(request, "website/user_profile.html", {
             "profile": profile,
             "events": events_user,
             "promoters": promoters_user,
             "venues": venues_user,
+            "key": api_key,
         })
     else:
         messages.error(request, "You are not logged in!")
@@ -307,7 +310,11 @@ def register_user(request):
         if request.method == "POST":
             form = SignUpForm(request.POST)
             if form.is_valid():
-                form.save()
+                user = form.save()
+
+                # Generate and associate an API key with the user
+                api_key = generate_api_key()
+                APIKey.objects.create(user=user, api_key=api_key)
 
                 first_name = form.cleaned_data["first_name"]
                 email = form.cleaned_data["email"]
@@ -340,8 +347,19 @@ def not_found(request):
 
 
 # API View Sets
-class EventViewSet(viewsets.ModelViewSet):
+class EventsViewSet(viewsets.ModelViewSet):
+    queryset = Event.objects.all()
     serializer_class = EventSerializer
+    permission_classes = (IsAuthenticatedOrReadOnly, )
 
-    def get_queryset(self):
-        return Event.objects.all()
+
+class VenuesViewSet(viewsets.ModelViewSet):
+    queryset = Venue.objects.all()
+    serializer_class = VenueSerializer
+    permission_classes = (IsAuthenticatedOrReadOnly, )
+
+
+class PromotersViewSet(viewsets.ModelViewSet):
+    queryset = Promoter.objects.all()
+    serializer_class = PromoterSerializer
+    permission_classes = (IsAuthenticatedOrReadOnly, )

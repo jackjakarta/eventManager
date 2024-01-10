@@ -7,6 +7,8 @@ Profile - {{ user.first_name }} {{ user.last_name }}
 
 {% block content %}
 
+{% if user == profile.user %}
+
 <div class="container mt-4">
     <h1 class="display-5">My Profile</h1>
 </div>
@@ -123,7 +125,10 @@ Profile - {{ user.first_name }} {{ user.last_name }}
     <div class="col-md-8">
       <div class="card-body">
         <h5 class="card-title">{{ user.first_name }} {{ user.last_name }}</h5>
-          <p class="card-text">Email: {{ user }}</p>
+          <p class="card-text"><strong>Email:</strong> {{ user }}</p>
+          {% if key %}
+          <p class="card-text"><strong>API Key:</strong> {{ key.api_key }}</p>
+          {% endif %}
         <p class="card-text"><small class="text-body-secondary">Last login on {{ user.last_login }}</small></p>
       </div>
     </div>
@@ -137,5 +142,18 @@ Profile - {{ user.first_name }} {{ user.last_name }}
 
 </div>
 </div>
+
+{% else %}
+
+<div class="container mt-4">
+    <h1 class="display-5">Not your profile</h1>
+</div>
+
+<div class="container mt-4">
+    <p>You are not the user of this profile and can't edit it.</p>
+    <p><a href="{% url 'profile' user.id %}" class="btn btn-secondary">Back to your profile</a></p>
+</div>
+
+{% endif %}
 
 {% endblock %}

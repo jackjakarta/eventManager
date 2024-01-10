@@ -67,3 +67,9 @@ class RandomGenerator:
         random_key = "".join(random.choices(char_list, k=self.length))
 
         return random_key
+
+
+def generate_api_key():
+    api_key = RandomGenerator(38).random_string()
+
+    return api_key

@@ -1,8 +1,20 @@
 from rest_framework import serializers
-from .models import Event
+from .models import Event, Venue, Promoter
 
 
 class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
-        exclude = []
+        exclude = ["created_at", "updated_at", ]
+
+
+class VenueSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Venue
+        exclude = ["created_at", "updated_at", ]
+
+
+class PromoterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Promoter
+        exclude = ["created_at", "updated_at", ]
