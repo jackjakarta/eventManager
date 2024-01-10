@@ -23,7 +23,7 @@
     {% else %}
     <div class="container mt-4">
         <p>You are not the manager of this promoter and can't edit it.</p>
-        <p>Contact the event manager: {{ promoter.manager }}</p>
+        <p>Contact the promoter manager: {{ promoter.manager }}</p>
         <p><a href="{% url 'promoters' %}" class="btn btn-secondary">Back</a></p>
     </div>
     {% endif %}

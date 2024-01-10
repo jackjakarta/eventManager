@@ -1,7 +1,7 @@
 {% extends 'website/base.html' %}
 
 {% block title %}
-{{ event.page }}
+{{ event.name }}
 {% endblock %}
 
 {% block content %}
@@ -13,9 +13,26 @@
 </div>
 
 <div class="container mt-3">
-    <ul>
-        <li>{{ event.name }}</li>
-    </ul>
+    <div class="card text bg-dark">
+        <img src="{{ event.event_flyer.url }}" class="card-img img-fluid" alt="{{ event.name }} at {{ event.venue }}"
+             style="height: 500px; max-width: 100%;">
+        <div class="card-img-overlay">
+            <div class="card bg-dark" style="width: 22rem;">
+                <div class="card-body">
+                    <h5 class="card-title" style="color: white;">{{ event.name }}</h5>
+                    <p class="card-text" style="color: white;">{{ event.description }}</p>
+                    <p class="card-text" style="color: white;"><small>Last updated at {{ event.updated_at }}</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+{% if user == event.manager %}
+<div class="container mt-2">
+    <a href="{% url 'edit_event' event.id %}" class="btn btn-outline-secondary">Edit</a>
+    <a href="{% url 'delete_event' event.id %}" class="btn btn-outline-danger">Delete</a>
+</div>
+{% endif %}
 
 {% endblock %}

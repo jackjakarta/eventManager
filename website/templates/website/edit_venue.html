@@ -23,7 +23,7 @@
     {% else %}
     <div class="container mt-4">
         <p>You are not the manager of this venue and can't edit it.</p>
-        <p>Contact the event manager: {{ venue.manager }}</p>
+        <p>Contact the venue manager: {{ venue.manager }}</p>
         <p><a href="{% url 'venues' %}" class="btn btn-secondary">Back</a></p>
     </div>
     {% endif %}

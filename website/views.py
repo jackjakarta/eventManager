@@ -47,7 +47,7 @@ def promoter_page(request, pk):
 
 
 def events(request):
-    events_qs = Event.objects.all().order_by('event_date')
+    events_qs = Event.objects.all().order_by("-event_date")
     return render(request, "website/events.html", {
         "events": events_qs,
     })
@@ -90,7 +90,7 @@ def edit_promoter(request, pk):
         form = AddPromoterForm(request.POST or None, instance=promoter)
         if form.is_valid():
             form.save()
-            messages.success(request, "Venue updated successfully!")
+            messages.success(request, "Promoter updated successfully!")
             return redirect("home")
 
         return render(request, "website/edit_promoter.html", {
@@ -312,20 +312,23 @@ def register_user(request):
             if form.is_valid():
                 user = form.save()
 
-                # Generate and associate an API key with the user
+                # Generate and assign API Key to user
                 api_key = generate_api_key()
                 APIKey.objects.create(user=user, api_key=api_key)
 
+                # Get user data
                 first_name = form.cleaned_data["first_name"]
                 email = form.cleaned_data["email"]
                 password = form.cleaned_data["password1"]
 
-                # Login User
+                # Login user
                 user = authenticate(request, email=email, password=password)
                 login(request, user)
 
-                messages.success(request, "You have successfully registered and have been logged in.")
+                # Send welcome email to user
                 send_register_user_email(first_name, email)
+
+                messages.success(request, "You have successfully registered and have been logged in.")
                 return redirect("home")
         else:
             form = SignUpForm()
