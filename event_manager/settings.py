@@ -15,6 +15,7 @@ from pathlib import Path
 from datetime import timedelta
 from decouple import config
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -47,10 +48,14 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     'rest_framework',
+    # 'rest_framework_api_key',
     'rest_framework_simplejwt',
     'users',
     'website',
 ]
+
+
+#  Rest Framework Settings
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -58,10 +63,15 @@ REST_FRAMEWORK = {
     ]
 }
 
+# API_KEY_CUSTOM_HEADER = "HTTP_X_API_KEY"
+
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
 }
+
+
+# Middleware Configuration
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

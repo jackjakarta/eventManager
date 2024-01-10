@@ -9,6 +9,7 @@ distro==1.9.0
 Django==5.0.1
 django-crispy-forms==2.1
 djangorestframework==3.14.0
+djangorestframework-api-key==3.0.0
 djangorestframework-simplejwt==5.3.1
 h11==0.14.0
 httpcore==1.0.2
@@ -19,6 +20,7 @@ icalevents==0.1.27
 idna==3.6
 mysqlclient==2.2.1
 openai==1.6.1
+packaging==23.2
 pillow==10.2.0
 pydantic==2.5.3
 pydantic_core==2.14.6
