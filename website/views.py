@@ -23,7 +23,7 @@ def app_docs(request):
 
 
 def app_docs_api(request):
-    pass
+    return render(request, "website/docs_api.html", {})
 
 
 def venues(request):

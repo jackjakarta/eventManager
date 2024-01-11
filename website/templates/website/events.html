@@ -1,7 +1,7 @@
 {% extends 'website/base.html' %}
 
 {% block title %}
-All Events
+Upcoming Events
 {% endblock %}
 
 
@@ -10,8 +10,6 @@ All Events
 <div class="container mt-4">
     <h1 class="display-5">Upcoming Events</h1>
 </div>
-
-
 
 <div class="container mt-2">
     <p>Lorem ipsum dolor sit amet.</p>
@@ -32,12 +30,13 @@ All Events
                         <h5 class="card-title">{{ event.name }}</h5>
                         <p class="card-text">{{ event.event_date }}</p>
                         <p class="card-text">{{ event.description }}</p>
-                        <p class="card-text"><small class="text-muted">Last updated: {{ event.updated_at }}</small></p>
+                        <a href="{% url 'event_page' event.id %}" class="btn btn-dark btn-sm">View Event</a>
+                        <p class="card-text mt-2"><small class="text-muted">Last updated: {{ event.updated_at }}</small></p>
                         {% if user.is_authenticated %}
                             {% if user in event.attendees.all %}
-                                <a href="#" class="btn btn-info disabled">Attending</a>
+                                <a href="#" class="btn btn-info btn-sm disabled">Attending</a>
                             {% else %}
-                                <a href="{% url 'event_attend' event.id %}" class="btn btn-info">Attend</a>
+                                <a href="{% url 'event_attend' event.id %}" class="btn btn-outline-info btn-sm">Attend</a>
                             {% endif %}
 
                             {% if user == event.manager %}

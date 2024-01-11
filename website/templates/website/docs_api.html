@@ -1,0 +1,117 @@
+{% extends 'website/base.html' %}
+
+{% block title %}
+Upcoming Events
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <h1 class="display-5">API Documentation</h1>
+</div>
+
+<div class="container mt-2">
+    <div class="card">
+        <div class="card-body">
+
+            <div class="row">
+                <h2 class="display-7 mt-4">
+                    Events Endpoint
+                </h2>
+                <div class="col-md-6 mt-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4>Info</h4>
+                            <p>
+                                <strong>Endpoint:</strong> https://evntmngr.xyz/api/events/<br>
+                                <strong>Description:</strong> Perform operations related to events.<br><br>
+                                <strong>Methods:</strong><br><br>
+                                <strong>GET:</strong> Retrieve a list of events.<br>
+                                <strong>POST:</strong> Create a new event.<br>
+                                <strong>Authentication:</strong> JWT Token required for POST.<br>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col md-6 mt-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4>GET</h4>
+                                <div class="card bg-light">
+                                    <div class="card-body text-light bg-dark">
+                                        GET https://website.com/api/events/
+                                    </div>
+                                </div>
+                            <h4 class="mt-4">POST</h4>
+                                <div class="card bg-light">
+                                    <div class="card-body text-light bg-dark">
+                                        POST https://website.com/api/events/<br>
+                                        Authorization: Bearer your_access_token<br>
+                                        Content-Type: application/json<br><br>
+
+                                        {<br>
+                                            "name": "Event Name",<br>
+                                            "event_date": "2024-01-31",<br>
+                                            "venue": "Venue ID"<br>
+                                            "event_flyer": "event flyer url"<br>
+                                        }<br>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+
+            <div class="row">
+                <h2 class="display-7 mt-4">
+                    Venues Endpoint
+                </h2>
+                <div class="col-md-6 mt-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4>Info</h4>
+                            <p>
+                                <strong>Endpoint:</strong> https://evntmngr.xyz/api/venues/<br>
+                                <strong>Description:</strong> Perform operations related to events.<br><br>
+                                <strong>Methods:</strong><br><br>
+                                <strong>GET:</strong> Retrieve a list of events.<br>
+                                <strong>POST:</strong> Create a new event.<br>
+                                <strong>Authentication:</strong> JWT Token required for POST.<br>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col md-6 mt-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4>GET</h4>
+                                <div class="card bg-light">
+                                    <div class="card-body text-light bg-dark">
+                                        GET https://website.com/api/venues/
+                                    </div>
+                                </div>
+                            <h4 class="mt-4">POST</h4>
+                                <div class="card bg-light">
+                                    <div class="card-body text-light bg-dark">
+                                        POST https://website.com/api/venues/<br>
+                                        Authorization: Bearer your_access_token<br>
+                                        Content-Type: application/json<br><br>
+
+                                        {<br>
+                                          "name": "Event Name",<br>
+                                          "date": "2024-01-31",<br>
+                                          "location": "Event Location"<br>
+                                        }<br>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
