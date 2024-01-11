@@ -60,6 +60,13 @@ def event_page(request, pk):
     })
 
 
+def event_attend(request, pk):
+    event = Event.objects.get(id=pk)
+    event.attendees.add(request.user)
+    messages.success(request, "You are attending this event!")
+    return redirect("events")
+
+
 # Add, Edit, Delete from DB forms
 def add_promoter(request):
     if request.user.is_authenticated:

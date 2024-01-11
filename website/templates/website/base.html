@@ -16,7 +16,7 @@
     {% include 'website/elements/navbar.html' %}
 
     <!--Alert Bar-->
-    <div class="container mt-3">
+    <div class="container-fluid mt-2">
         {% if messages %}
             {% for message in messages %}
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -26,7 +26,6 @@
             {% endfor %}
         {% endif %}
     </div>
-
 
     <!--Body Content-->
     {% block content %}

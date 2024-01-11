@@ -28,11 +28,19 @@
     </div>
 </div>
 
-{% if user == event.manager %}
-<div class="container mt-2">
-    <a href="{% url 'edit_event' event.id %}" class="btn btn-outline-secondary">Edit</a>
-    <a href="{% url 'delete_event' event.id %}" class="btn btn-outline-danger">Delete</a>
-</div>
+{% if user.is_authenticated %}
+    <div class="container mt-2">
+        {% if user in event.attendees.all %}
+            <a href="#" class="btn btn-info disabled">Attending</a>
+        {% else %}
+            <a href="{% url 'event_attend' event.id %}" class="btn btn-info">Attend</a>
+        {% endif %}
+
+        {% if user == event.manager %}
+            <a href="{% url 'edit_event' event.id %}" class="btn btn-outline-secondary">Edit</a>
+            <a href="{% url 'delete_event' event.id %}" class="btn btn-outline-danger">Delete</a>
+        {% endif %}
+    </div>
 {% endif %}
 
 {% endblock %}

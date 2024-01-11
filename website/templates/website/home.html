@@ -7,24 +7,18 @@ Home Page
 
 {% block content %}
 
-<div class="container mt-4">
-    <h1 class="display-5">Home Page</h1>
-</div>
-
-<div class="container mt-3">
-    <h2 class="display-7">Welcome to our website{% if user.is_authenticated %}, {% if user.first_name %}{{ user.first_name }}{% else %}{{ user }}{% endif %}{% endif %}!</h2>
+<!-- Hero Section -->
+<div class="p-5 mb-4 bg-light rounded-3">
+  <div class="container-fluid py-5">
+    <h1 class="display-5 fw-bold">Welcome to EvntMngr{% if user.is_authenticated %}, {% if user.first_name %}{{ user.first_name }}{% else %}{{ user }}{% endif %}{% endif %}</h1>
+    <p class="col-md-8 fs-4">Manage and discover events and venues around you.</p>
+    <a class="btn btn-info btn-lg" href="{% url 'events' %}">Explore Events</a>
+    <a class="btn btn-outline-dark btn-lg" href="{% url 'venues' %}">Explore Venues</a>
+  </div>
 </div>
 
 <div class="container mt-2">
-    <p>EventMngr App in development...</p>
-
-    {% if google_events %}
-        {% for event in google_events %}
-            <ul>
-                <li>{{ event }}</li>
-            </ul>
-        {% endfor %}
-    {% endif %}
+    <p>EvntMngr App in development...</p>
 </div>
 
 {% endblock %}

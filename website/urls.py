@@ -13,6 +13,7 @@ urlpatterns = [
     path('promoters/<int:pk>/', views.promoter_page, name='promoter_page'),
     path('events/', views.events, name='events'),
     path('events/<int:pk>/', views.event_page, name='event_page'),
+    path('events/attend/<int:pk>/', views.event_attend, name='event_attend'),
 
     # User Pages
     path('user/<int:pk>/', views.user_profile, name='profile'),
