@@ -31,7 +31,7 @@
 {% if user.is_authenticated %}
     <div class="container mt-2">
         {% if user in event.attendees.all %}
-            <a href="#" class="btn btn-info disabled">Attending</a>
+            <a href="{% url 'event_unattend' event.id %}" class="btn btn-outline-info">Unattend</a>
         {% else %}
             <a href="{% url 'event_attend' event.id %}" class="btn btn-info">Attend</a>
         {% endif %}

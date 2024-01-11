@@ -21,6 +21,7 @@ urlpatterns = [
     path('events/', views.events, name='events'),
     path('events/<int:pk>/', views.event_page, name='event_page'),
     path('events/attend/<int:pk>/', views.event_attend, name='event_attend'),
+    path('events/unattend/<int:pk>/', views.event_un_attend, name='event_unattend'),
 
     # Add, Edit, Delete from DB forms
     path('edit-profile/<int:pk>/', views.edit_profile, name='edit_profile'),

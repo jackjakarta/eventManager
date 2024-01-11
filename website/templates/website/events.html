@@ -34,9 +34,9 @@ Upcoming Events
                         <p class="card-text mt-2"><small class="text-muted">Last updated: {{ event.updated_at }}</small></p>
                         {% if user.is_authenticated %}
                             {% if user in event.attendees.all %}
-                                <a href="#" class="btn btn-info btn-sm disabled">Attending</a>
+                                <a href="{% url 'event_unattend' event.id %}" class="btn btn-outline-info btn-sm">Unattend</a>
                             {% else %}
-                                <a href="{% url 'event_attend' event.id %}" class="btn btn-outline-info btn-sm">Attend</a>
+                                <a href="{% url 'event_attend' event.id %}" class="btn btn-info btn-sm">Attend</a>
                             {% endif %}
 
                             {% if user == event.manager %}

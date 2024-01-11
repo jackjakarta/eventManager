@@ -70,9 +70,26 @@ def event_page(request, pk):
 
 def event_attend(request, pk):
     event = Event.objects.get(id=pk)
-    event.attendees.add(request.user)
-    messages.success(request, "You are attending this event!")
-    return redirect("events")
+
+    if request.user not in event.attendees.all():
+        event.attendees.add(request.user)
+        messages.success(request, "You are attending this event!")
+    else:
+        messages.error(request, "You are already attending this event!")
+
+    return redirect("event_page", pk=pk)
+
+
+def event_un_attend(request, pk):
+    event = Event.objects.get(id=pk)
+
+    if request.user in event.attendees.all():
+        event.attendees.remove(request.user)
+        messages.success(request, "You have unattended this event.")
+    else:
+        messages.error(request, "You were not attending this event.")
+
+    return redirect("event_page", pk=pk)
 
 
 # Add, Edit, Delete from DB forms
