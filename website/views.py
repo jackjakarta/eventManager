@@ -206,7 +206,7 @@ def add_event(request):
 def edit_event(request, pk):
     if request.user.is_authenticated:
         events_qs = Event.objects.get(id=pk)
-        form = AddEventForm(request.POST or None, request.FILES or None, instance=events_qs)
+        form = AddEventForm(request.POST or None, request.FILES or None, instance=events_qs, user=request.user)
         if form.is_valid():
             form.save()
             messages.success(request, "Updated successfully!")
