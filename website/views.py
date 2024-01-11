@@ -361,7 +361,7 @@ def register_user(request):
                 send_register_user_email(first_name, email)
 
                 messages.success(request, "You have successfully registered and have been logged in.")
-                return redirect("home")
+                return redirect("profile", pk=user.id)
         else:
             form = SignUpForm()
             return render(request, "website/register.html", {
