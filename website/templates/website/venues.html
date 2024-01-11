@@ -37,4 +37,11 @@ All Venues
 </div>
 </div>
 
+<div class="container mt-3">
+    {% if user.is_authenticated %}
+        <a href="{% url 'add_venue' %}" class="btn btn-info">Add Venue</a>
+    {% endif %}
+    <a href="{% url 'home' %}" class="btn btn-secondary">Back</a>
+</div>
+
 {% endblock %}

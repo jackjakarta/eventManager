@@ -46,8 +46,10 @@ All Promoters
 </div>
 
 <div class="container">
+    {% if user.is_authenticated %}
+        <a href="{% url 'add_promoter' %}" class="btn btn-info">Add Promoter</a>
+    {% endif %}
     <a href="{% url 'home' %}" class="btn btn-secondary">Back</a>
-    <a href="{% url 'add_promoter' %}" class="btn btn-info">Add Promoter</a>
 </div>
 
 {% endblock %}
