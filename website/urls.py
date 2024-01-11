@@ -1,25 +1,26 @@
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
+
 from . import views
 
 
 urlpatterns = [
-    # Web Pages
+    # Static Pages
     path('', views.home, name='home'),
+    path('docs/', views.app_docs, name='docs'),  # Not implemented
+    path('docs/api/', views.app_docs_api, name='docs_api'),  # Not implemented
+
+    # Venues, Promoters, Events
     path('venues/', views.venues, name='venues'),
     path('venues/<int:pk>/', views.venue_page, name='venue_page'),
+
     path('promoters/', views.promoters, name='promoters'),
     path('promoters/<int:pk>/', views.promoter_page, name='promoter_page'),
+
     path('events/', views.events, name='events'),
     path('events/<int:pk>/', views.event_page, name='event_page'),
     path('events/attend/<int:pk>/', views.event_attend, name='event_attend'),
-
-    # User Pages
-    path('user/<int:pk>/', views.user_profile, name='profile'),
-    path('user/<int:pk>/promoters/', views.user_promoters, name='user_promoters'),
-    path('user/<int:pk>/events/', views.user_events, name='user_events'),
-    path('user/<int:pk>/venues/', views.user_venues, name='user_venues'),
 
     # Add, Edit, Delete from DB forms
     path('edit-profile/<int:pk>/', views.edit_profile, name='edit_profile'),
@@ -36,11 +37,18 @@ urlpatterns = [
     path('edit-event/<int:pk>/', views.edit_event, name='edit_event'),
     path('delete-event/<int:pk>/', views.delete_event, name='delete_event'),
 
+    # User Pages
+    path('user/<int:pk>/', views.user_profile, name='profile'),
+    path('user/<int:pk>/promoters/', views.user_promoters, name='user_promoters'),
+    path('user/<int:pk>/events/', views.user_events, name='user_events'),
+    path('user/<int:pk>/venues/', views.user_venues, name='user_venues'),
+
     # User Authentication
     path('login/', views.login_user, name='login'),
     path('logout/', views.logout_user, name='logout'),
     path('register/', views.register_user, name='register'),
 ]
+
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

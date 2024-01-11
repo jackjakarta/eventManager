@@ -18,6 +18,14 @@ def home(request):
     return render(request, "website/home.html", {})
 
 
+def app_docs(request):
+    pass
+
+
+def app_docs_api(request):
+    pass
+
+
 def venues(request):
     venues_qs = Venue.objects.all()
     return render(request, "website/venues.html", {
@@ -186,7 +194,7 @@ def add_event(request):
                     "form": form,
                 })
         else:
-            form = AddEventForm()
+            form = AddEventForm(user=request.user)
             return render(request, "website/add_event.html", {
                 "form": form,
             })
