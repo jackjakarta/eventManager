@@ -83,7 +83,7 @@ def add_promoter(request):
             if form.is_valid():
                 form.save()
                 messages.success(request, "You have successfully added a promoter.")
-                return redirect("promoters")
+                return redirect("user_promoters", pk=request.user.id)
             else:
                 messages.error(request, "Your form is not valid.")
                 return render(request, "website/add_promoter.html", {
@@ -106,7 +106,7 @@ def edit_promoter(request, pk):
         if form.is_valid():
             form.save()
             messages.success(request, "Promoter updated successfully!")
-            return redirect("home")
+            return redirect("promoter_page", pk=pk)
 
         return render(request, "website/edit_promoter.html", {
             "promoter": promoter,
@@ -122,7 +122,7 @@ def delete_promoter(request, pk):
         promoter = Promoter.objects.get(id=pk)
         promoter.delete()
         messages.success(request, "Promoter deleted successfully!")
-        return redirect("home")
+        return redirect("user_promoters", pk=request.user.id)
     else:
         messages.error(request, "You have to be logged in to use this feature!")
         return redirect("home")
@@ -135,7 +135,7 @@ def add_venue(request):
             if form.is_valid():
                 form.save()
                 messages.success(request, "You have successfully added a venue.")
-                return redirect("venues")
+                return redirect("user_venues", pk=request.user.id)
             else:
                 messages.error(request, "Your form is not valid.")
                 return render(request, "website/add_venue.html", {
@@ -158,7 +158,7 @@ def edit_venue(request, pk):
         if form.is_valid():
             form.save()
             messages.success(request, "Updated successfully!")
-            return redirect("venues")
+            return redirect("venue_page", pk=pk)
 
         return render(request, "website/edit_venue.html", {
             "venue": venues_qs,
@@ -174,7 +174,7 @@ def delete_venue(request, pk):
         venue = Venue.objects.get(id=pk)
         venue.delete()
         messages.success(request, "Venue deleted successfully!")
-        return redirect("venues")
+        return redirect("user_venues", pk=request.user.id)
     else:
         messages.error(request, "You have to be logged in to use this feature!")
         return redirect("home")
@@ -187,7 +187,7 @@ def add_event(request):
             if form.is_valid():
                 form.save()
                 messages.success(request, "You have successfully added an event.")
-                return redirect("events")
+                return redirect("user_events", pk=request.user.id)
             else:
                 messages.error(request, "Your form is not valid.")
                 return render(request, "website/add_event.html", {
@@ -210,7 +210,7 @@ def edit_event(request, pk):
         if form.is_valid():
             form.save()
             messages.success(request, "Updated successfully!")
-            return redirect("events")
+            return redirect("event_page", pk=pk)
 
         return render(request, "website/edit_event.html", {
             "event": events_qs,
@@ -226,7 +226,7 @@ def delete_event(request, pk):
         event = Event.objects.get(id=pk)
         event.delete()
         messages.success(request, "Event deleted successfully!")
-        return redirect("events")
+        return redirect("user_events", pk=request.user.id)
     else:
         messages.error(request, "You have to be logged in to use this feature!")
         return redirect("home")
@@ -239,7 +239,7 @@ def edit_profile(request, pk):
         if form.is_valid():
             form.save()
             messages.success(request, "Profile updated successfully.")
-            return redirect("home")
+            return redirect("profile", pk=pk)
 
         return render(request, "website/edit_profile.html", {
             "profile": profile,
