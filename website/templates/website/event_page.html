@@ -21,6 +21,7 @@
                 <div class="card-body">
                     <h5 class="card-title" style="color: white;">{{ event.name }}</h5>
                     <p class="card-text" style="color: white;">{{ event.description }}</p>
+                    <p class="card-text" style="color: white;">Persons attending: {{ event.attendees.all.count  }}</p>
                     <p class="card-text" style="color: white;"><small>Last updated at {{ event.updated_at }}</small></p>
                 </div>
             </div>
