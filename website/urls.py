@@ -44,6 +44,7 @@ urlpatterns = [
     path('user/<int:pk>/promoters/', views.user_promoters, name='user_promoters'),
     path('user/<int:pk>/events/', views.user_events, name='user_events'),
     path('user/<int:pk>/venues/', views.user_venues, name='user_venues'),
+    path('user/<int:pk>/events-attending/', views.user_events_attending, name='user_events_attending'),
 
     # User Authentication
     path('login/', views.login_user, name='login'),

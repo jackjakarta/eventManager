@@ -355,6 +355,13 @@ def user_venues(request, pk):
     })
 
 
+def user_events_attending(request, pk):
+    attending_events = Event.objects.filter(attendees=pk)
+    return render(request, "website/user_events_attending.html", {
+        "events": attending_events,
+    })
+
+
 # Authentication Views
 def login_user(request):
     if not request.user.is_authenticated:
