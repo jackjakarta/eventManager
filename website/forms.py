@@ -152,9 +152,18 @@ class DallEImageForm(forms.Form):
 
 class GPTAssistantsApiForm(forms.Form):
     prompt = forms.CharField(
+        max_length=850,
+        widget=forms.TextInput(
+            attrs={"class": "form-control", "placeholder": "Ask our assistant...*"},
+        ),
+        label="",
+        required=True
+    )
+    custom_instructions = forms.CharField(
         max_length=550,
         widget=forms.TextInput(
-            attrs={"class": "form-control", "placeholder": "Ask our assistant..."},
+            attrs={"class": "form-control", "placeholder": "Custom Instructions (eg. 'This user is an audio engineer')"}
         ),
-        label=""
+        label="",
+        required=False
     )

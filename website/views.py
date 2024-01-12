@@ -1,4 +1,5 @@
 import time
+from decouple import config
 
 from django.shortcuts import render, redirect
 from django.conf import settings
@@ -6,7 +7,6 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
-from decouple import config
 
 from .models import Profile, Event, Venue, Promoter, APIKey
 from .serializers import EventSerializer, VenueSerializer, PromoterSerializer
@@ -40,11 +40,12 @@ def ai_assistant(request):
             form = GPTAssistantsApiForm(request.POST)
 
             if form.is_valid():
-                ai.create_thread()
-
                 prompt = form.cleaned_data["prompt"]
+                custom_instructions = form.cleaned_data["custom_instructions"]
+
+                ai.create_thread()
                 ai.create_message(prompt)
-                ai.create_run()
+                ai.create_run(custom_instructions=custom_instructions)
 
                 while True:
                     ai.retrieve_run()
