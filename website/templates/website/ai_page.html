@@ -28,8 +28,8 @@ AI Assistant
         <form action="" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit" class="btn btn-info">Ask Assistant</button>
-            <a href="{% url 'home' %}" class="btn btn-secondary">Back</a>
+            <button type="submit" class="btn btn-info rounded-3">Ask Assistant</button>
+            <a href="{% url 'home' %}" class="btn btn-outline-secondary rounded-3">Back</a>
         </form>
     </div>
 

@@ -32,7 +32,9 @@ My Venues - {{ user.first_name }} {{ user.last_name }}
                         <td>{{ venue.city }}</td>
                         <td>{{ venue.email }}</td>
                         <td>{{ venue.website }}</td>
-                        <td><a href="{% url 'venue_page' venue.id %}" class="btn btn-outline-info btn-sm">View</a> <a href="{% url 'edit_venue' venue.id %}" class="btn btn-outline-secondary btn-sm">Edit</a> <a href="{% url 'delete_venue' venue.id %}" class="btn btn-outline-danger btn-sm">Delete</a></td>
+                        <td><a href="{% url 'venue_page' venue.id %}" class="btn btn-outline-info btn-sm rounded-3">View</a>
+                            <a href="{% url 'edit_venue' venue.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Edit</a>
+                            <a href="{% url 'delete_venue' venue.id %}" class="btn btn-outline-danger btn-sm rounded-3">Delete</a></td>
                     </tr>
                 {% endfor %}
             {% endif %}
@@ -41,8 +43,8 @@ My Venues - {{ user.first_name }} {{ user.last_name }}
 </div>
 
 <div class="container">
-    <a href="{% url 'profile' user.id %}" class="btn btn-secondary">Back</a>
-    <a href="{% url 'add_venue' %}" class="btn btn-info">Add Venue</a>
+    <a href="{% url 'add_venue' %}" class="btn btn-info rounded-3">Add Venue</a>
+    <a href="{% url 'profile' user.id %}" class="btn btn-outline-secondary rounded-3">Back</a>
 </div>
 
 {% endblock %}

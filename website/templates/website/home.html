@@ -12,13 +12,17 @@ Home Page
   <div class="container-fluid py-5">
     <h1 class="display-5 fw-bold">Welcome to EvntMngr{% if user.is_authenticated %}, {% if user.first_name %}{{ user.first_name }}{% else %}{{ user }}{% endif %}{% endif %}</h1>
     <p class="col-md-8 fs-4">Manage and discover events and venues around you.</p>
-    <a class="btn btn-info btn-lg" href="{% url 'events' %}">Explore Events</a>
-    <a class="btn btn-outline-dark btn-lg" href="{% url 'venues' %}">Explore Venues</a>
+    <a class="btn btn-info btn-lg rounded-3" href="{% url 'events' %}">Explore Events</a>
+    <a class="btn btn-outline-dark btn-lg rounded-3" href="{% url 'venues' %}">Explore Venues</a>
   </div>
 </div>
 
 <div class="container mt-2">
-    <p>EvntMngr App in development...</p>
+    <div class="card bg-light rounded-3">
+        <div class="card-body" data-bs-theme="dark">
+            <p>Hello Hello</p>
+        </div>
+    </div>
 </div>
 
 {% endblock %}

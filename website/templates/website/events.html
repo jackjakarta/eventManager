@@ -18,7 +18,7 @@ Upcoming Events
 <div class="container mt-3">
     {% if events %}
         {% for event in events %}
-        <div class="card mb-3">
+        <div class="card mb-3 rounded-3">
             <div class="row g-0">
                 <div class="col-md-4">
                     <!-- Event Flyer Image -->
@@ -30,20 +30,20 @@ Upcoming Events
                         <h5 class="card-title">{{ event.name }}</h5>
                         <p class="card-text">{{ event.event_date }}</p>
                         <p class="card-text">{{ event.description }}</p>
-                        <a href="{% url 'event_page' event.id %}" class="btn btn-dark btn-sm">View Event</a>
+                        <a href="{% url 'event_page' event.id %}" class="btn btn-dark btn-sm rounded-3">View Event</a>
 
                         {% if user.is_authenticated %}
                             {% if user in event.attendees.all %}
-                                <a href="{% url 'event_unattend' event.id %}" class="btn btn-outline-info btn-sm">Unattend</a>
+                                <a href="{% url 'event_unattend' event.id %}" class="btn btn-outline-info btn-sm rounded-3">Unattend</a>
                             {% else %}
-                                <a href="{% url 'event_attend' event.id %}" class="btn btn-info btn-sm">Attend</a>
+                                <a href="{% url 'event_attend' event.id %}" class="btn btn-info btn-sm rounded-3">Attend</a>
                             {% endif %}
 
                         <p class="card-text mt-2"><small class="text-muted">Last updated on {{ event.updated_at }}</small></p>
 
                             {% if user == event.manager %}
-                                <a href="{% url 'edit_event' event.id %}" class="btn btn-outline-secondary btn-sm">Edit</a>
-                                <a href="{% url 'delete_event' event.id %}" class="btn btn-outline-danger btn-sm">Delete</a>
+                                <a href="{% url 'edit_event' event.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Edit</a>
+                                <a href="{% url 'delete_event' event.id %}" class="btn btn-outline-danger btn-sm rounded-3">Delete</a>
                             {% endif %}
                         {% endif %}
                     </div>
@@ -56,9 +56,9 @@ Upcoming Events
 
 <div class="container">
     {% if user.is_authenticated %}
-        <a href="{% url 'add_event' %}" class="btn btn-info">Add Event</a>
+        <a href="{% url 'add_event' %}" class="btn btn-info rounded-3">Add Event</a>
     {% endif %}
-    <a href="{% url 'home' %}" class="btn btn-secondary">Back</a>
+    <a href="{% url 'home' %}" class="btn btn-outline-secondary rounded-3">Back</a>
 </div>
 
 {% endblock %}

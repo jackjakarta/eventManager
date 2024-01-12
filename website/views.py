@@ -17,7 +17,7 @@ from .forms import SignUpForm, AddPromoterForm, AddVenueForm, AddEventForm, Edit
 from .utils import send_register_user_email, generate_api_key
 from .ai import GPTAssistantsApi
 
-GPT_ASSISTANT_ID = config("GPT_ASSISTANT_ID")
+OPENAI_ASSISTANT_ID = config("OPENAI_ASSISTANT_ID")
 
 
 # Website Pages Views
@@ -35,7 +35,7 @@ def app_docs_api(request):
 
 def ai_assistant(request):
     if request.user.is_authenticated:
-        ai = GPTAssistantsApi(GPT_ASSISTANT_ID)
+        ai = GPTAssistantsApi(OPENAI_ASSISTANT_ID)
 
         if request.method == "POST":
             form = GPTAssistantsApiForm(request.POST)
