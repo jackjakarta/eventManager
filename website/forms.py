@@ -153,7 +153,7 @@ class DallEImageForm(forms.Form):
 class GPTAssistantsApiForm(forms.Form):
     prompt = forms.CharField(
         max_length=850,
-        widget=forms.TextInput(
+        widget=forms.Textarea(
             attrs={"class": "form-control", "placeholder": "Ask our assistant...*"},
         ),
         label="",

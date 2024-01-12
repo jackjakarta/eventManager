@@ -395,7 +395,7 @@ def register_user(request):
                 APIKey.objects.create(user=user, api_key=api_key)
 
                 # Get user data
-                first_name = form.cleaned_data["first_name"]
+                # first_name = form.cleaned_data["first_name"]
                 email = form.cleaned_data["email"]
                 password = form.cleaned_data["password1"]
 
@@ -404,7 +404,7 @@ def register_user(request):
                 login(request, user)
 
                 # Send welcome email to user
-                send_register_user_email(first_name, email)
+                # send_register_user_email(first_name, email)
 
                 messages.success(request, "You have successfully registered and have been logged in.")
                 return redirect("profile", pk=user.id)
@@ -425,6 +425,15 @@ def not_found(request):
     if not settings.DEBUG:
         if response.status_code == 404:
             return response
+
+
+def send_test_email(request):
+    first_name = "Alex"
+    email_address = "alex.termure@yahoo.com"
+    send_register_user_email(first_name, email_address)
+
+    messages.success(request, "Email sent!")
+    return redirect("home")
 
 
 # API View Sets

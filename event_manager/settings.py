@@ -174,11 +174,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Email Settings
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = config('EMAIL_HOST_GOOGLE')
-EMAIL_USE_TLS = config('EMAIL_USE_TLS')
-EMAIL_PORT = config('EMAIL_PORT_GOOGLE')
-EMAIL_HOST_USER = config('EMAIL_HOST_USER_GOOGLE')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD_GOOGLE')
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_USE_SSL = config('EMAIL_USE_SSL')
+EMAIL_PORT = config('EMAIL_PORT')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
 
 # Crispy Templates
