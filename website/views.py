@@ -1,14 +1,20 @@
+import time
+
 from django.shortcuts import render, redirect
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from decouple import config
 
 from .models import Profile, Event, Venue, Promoter, APIKey
 from .serializers import EventSerializer, VenueSerializer, PromoterSerializer
-from .forms import SignUpForm, AddPromoterForm, AddVenueForm, AddEventForm, EditProfileForm
+from .forms import SignUpForm, AddPromoterForm, AddVenueForm, AddEventForm, EditProfileForm, GPTAssistantsApiForm
 from .utils import send_register_user_email, generate_api_key
+from .ai import GPTAssistantsApi
+
+GPT_ASSISTANT_ID = config("GPT_ASSISTANT_ID")
 
 AuthUser = get_user_model()
 
@@ -24,6 +30,42 @@ def app_docs(request):
 
 def app_docs_api(request):
     return render(request, "website/docs_api.html", {})
+
+
+def ai_assistant(request):
+    ai = GPTAssistantsApi(GPT_ASSISTANT_ID)
+
+    if request.method == "POST":
+        form = GPTAssistantsApiForm(request.POST)
+
+        if form.is_valid():
+            ai.create_thread()
+
+            prompt = form.cleaned_data["prompt"]
+            ai.create_message(prompt)
+            ai.create_run()
+
+            while True:
+                ai.retrieve_run()
+
+                if ai.run.status == "completed":
+                    ai.list_messages()
+                    response_messages = [f"{x.role}: {x.content[0].text.value}" for x in reversed(ai.messages.data)]
+                    return render(request, "website/ai_page.html", {
+                        # "form": form,
+                        "responses": response_messages,
+                    })
+                elif ai.run.status == "failed":
+                    messages.error(request, "Something went wrong. Please try again...")
+                    return redirect("home")
+                else:
+                    time.sleep(3)
+                    continue
+    else:
+        form = GPTAssistantsApiForm()
+        return render(request, "website/ai_page.html", {
+            "form": form,
+        })
 
 
 def venues(request):

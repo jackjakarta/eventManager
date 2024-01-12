@@ -107,30 +107,6 @@ class AddVenueForm(forms.ModelForm):
         return instance
 
 
-# class AddEventForm(forms.ModelForm):
-#     class Meta:
-#         model = Event
-#         fields = ("name", "event_date", "venue", "promoter", "event_flyer", "description", )
-#
-#     def __init__(self, *args, **kwargs):
-#         self.user = kwargs.pop("user", None)
-#         super(AddEventForm, self).__init__(*args, **kwargs)
-#
-#         if self.user:
-#             # Filter venue choices to only those managed by the user
-#             self.fields['venue'].queryset = Venue.objects.filter(manager=self.user)
-#             # Filter promoter choices to only those managed by the user
-#             self.fields['promoter'].queryset = Promoter.objects.filter(manager=self.user)
-#
-#     def save(self, commit=True):
-#         instance = super(AddEventForm, self).save(commit=False)
-#         if self.user:
-#             instance.manager = self.user
-#         if commit:
-#             instance.save()
-#         return instance
-
-
 class AddEventForm(forms.ModelForm):
     class Meta:
         model = Event
@@ -171,4 +147,14 @@ class DallEImageForm(forms.Form):
     image_prompt = forms.CharField(max_length=1000, widget=forms.TextInput(
         attrs={'placeholder': 'Describe your image...'}),
         label="Image description:"
+    )
+
+
+class GPTAssistantsApiForm(forms.Form):
+    prompt = forms.CharField(
+        max_length=550,
+        widget=forms.TextInput(
+            attrs={"class": "form-control", "placeholder": "Ask our assistant..."},
+        ),
+        label=""
     )

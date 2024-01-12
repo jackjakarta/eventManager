@@ -8,8 +8,9 @@ from . import views
 urlpatterns = [
     # Static Pages
     path('', views.home, name='home'),
+    path('assistant/', views.ai_assistant, name='assistant'),
     path('docs/', views.app_docs, name='docs'),  # Not implemented
-    path('docs/api/', views.app_docs_api, name='docs_api'),  # Not implemented
+    path('docs/api/', views.app_docs_api, name='docs_api'),
 
     # Venues, Promoters, Events
     path('venues/', views.venues, name='venues'),

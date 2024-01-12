@@ -32,9 +32,12 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="{% url 'profile' user.id %}">Profile</a></li>
+                        <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="{% url 'user_events' user.id  %}">My Events</a></li>
                         <li><a class="dropdown-item" href="{% url 'user_promoters' user.id  %}">My Promoters</a></li>
                         <li><a class="dropdown-item" href="{% url 'user_venues' user.id  %}">My Venues</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="{% url 'assistant'  %}">AI Tools</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
                     </ul>

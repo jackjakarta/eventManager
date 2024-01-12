@@ -1,0 +1,38 @@
+{% extends 'website/base.html' %}
+
+{% block title %}
+AI Assistant
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <h2 class="display-7">AI Assistant</h2>
+</div>
+
+{% if responses %}
+
+    {% for response in responses %}
+        <div class="container mt-4">
+            <div class="card">
+                <div class="card-body">
+                    {{ response }}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+{% else %}
+
+    <div class="container mt-4">
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-info">Ask Assistant</button>
+            <a href="{% url 'home' %}" class="btn btn-secondary">Back</a>
+        </form>
+    </div>
+
+{% endif %}
+
+{% endblock %}
