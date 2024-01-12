@@ -1,21 +1,35 @@
 {% extends 'website/base.html' %}
 
 {% block title %}
-{{ venue.page }}
+{{ venue.name }}
 {% endblock %}
 
 {% block content %}
 
 <div class="container mt-4">
     <h1 class="display-5">
-        Venue Page
+        {{ venue.name }}
     </h1>
 </div>
 
 <div class="container mt-3">
-    <ul>
-        <li>{{ venue.name }}</li>
-    </ul>
+    <div class="row">
+        <div class="col-md-6">
+            <!-- Venue Image -->
+            <img src="{{ venue.image.url }}" class="img-fluid" alt="Image of {{ venue.name }}">
+        </div>
+        <div class="col-md-6">
+            <!-- Venue Information in Card -->
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ venue.name }}</h5>
+                    <p class="card-text"><strong>Address:</strong> {{ venue.address }}, {{ venue.zip_code }} {{ venue.city }}</p>
+                    <p class="card-text"><strong>Email:</strong> <a href="mailto:{{ venue.email }}">{{ venue.email }}</a></p>
+                    <p class="card-text"><strong>Website:</strong> <a href="{{ venue.website }}">{{ venue.website }}</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 {% endblock %}

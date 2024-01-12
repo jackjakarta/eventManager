@@ -31,7 +31,7 @@ Upcoming Events
                         <p class="card-text">{{ event.event_date }}</p>
                         <p class="card-text">{{ event.description }}</p>
                         <a href="{% url 'event_page' event.id %}" class="btn btn-dark btn-sm">View Event</a>
-                        <p class="card-text mt-2"><small class="text-muted">Last updated: {{ event.updated_at }}</small></p>
+
                         {% if user.is_authenticated %}
                             {% if user in event.attendees.all %}
                                 <a href="{% url 'event_unattend' event.id %}" class="btn btn-outline-info btn-sm">Unattend</a>
@@ -39,12 +39,11 @@ Upcoming Events
                                 <a href="{% url 'event_attend' event.id %}" class="btn btn-info btn-sm">Attend</a>
                             {% endif %}
 
+                        <p class="card-text mt-2"><small class="text-muted">Last updated on {{ event.updated_at }}</small></p>
+
                             {% if user == event.manager %}
                                 <a href="{% url 'edit_event' event.id %}" class="btn btn-outline-secondary btn-sm">Edit</a>
                                 <a href="{% url 'delete_event' event.id %}" class="btn btn-outline-danger btn-sm">Delete</a>
-                            {% else %}
-                                <a href="" class="btn btn-outline-secondary btn-sm disabled">Edit</a>
-                                <a href="" class="btn btn-outline-danger btn-sm disabled">Delete</a>
                             {% endif %}
                         {% endif %}
                     </div>

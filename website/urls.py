@@ -52,6 +52,7 @@ urlpatterns = [
 
     # Utility Views
     path('send-test-email/', views.send_test_email, name='send_test_email'),
+    path('send-newsletter/', views.send_newsletter_email, name='send_newsletter_email'),
 ]
 
 

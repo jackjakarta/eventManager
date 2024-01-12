@@ -1,10 +1,13 @@
 import time
+import pytz
+
 from decouple import config
+from datetime import datetime, timedelta
 
 from django.shortcuts import render, redirect
 from django.conf import settings
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout, get_user_model
+from django.contrib.auth import authenticate, login, logout
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
@@ -15,8 +18,6 @@ from .utils import send_register_user_email, generate_api_key
 from .ai import GPTAssistantsApi
 
 GPT_ASSISTANT_ID = config("GPT_ASSISTANT_ID")
-
-AuthUser = get_user_model()
 
 
 # Website Pages Views
@@ -363,15 +364,25 @@ def login_user(request):
 
             # Authenticate
             user = authenticate(request, email=email, password=password)
+
             if user is not None:
+                # Check if user hasn't logged in a while.
+                days_ago = datetime.now(pytz.utc) - timedelta(days=2)
+                if user.last_login < days_ago:
+                    send_register_user_email(user.first_name, user.email)  # Change function after test
+                    print("Email sent to user!")
+                else:
+                    print("User logged in 1 day ago.")
+
+                # Login and redirect
                 login(request, user)
                 messages.success(request, "You have logged in.")
-                return redirect("home")
+                return redirect("profile", pk=user.id)
             else:
                 messages.error(request, "There was a problem logging you in.")
                 return redirect("login")
         else:
-            return render(request, "website/login.html")
+            return render(request, "website/login.html", {})
     else:
         messages.error(request, "You are already logged in.")
         return redirect("home")
@@ -394,7 +405,7 @@ def register_user(request):
                 api_key = generate_api_key()
                 APIKey.objects.create(user=user, api_key=api_key)
 
-                # Get user data
+                # Get user data from form
                 # first_name = form.cleaned_data["first_name"]
                 email = form.cleaned_data["email"]
                 password = form.cleaned_data["password1"]
@@ -425,6 +436,10 @@ def not_found(request):
     if not settings.DEBUG:
         if response.status_code == 404:
             return response
+
+
+def send_newsletter_email(request):
+    pass
 
 
 def send_test_email(request):
