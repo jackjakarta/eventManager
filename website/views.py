@@ -33,39 +33,42 @@ def app_docs_api(request):
 
 
 def ai_assistant(request):
-    ai = GPTAssistantsApi(GPT_ASSISTANT_ID)
+    if request.user.is_authenticated:
+        ai = GPTAssistantsApi(GPT_ASSISTANT_ID)
 
-    if request.method == "POST":
-        form = GPTAssistantsApiForm(request.POST)
+        if request.method == "POST":
+            form = GPTAssistantsApiForm(request.POST)
 
-        if form.is_valid():
-            ai.create_thread()
+            if form.is_valid():
+                ai.create_thread()
 
-            prompt = form.cleaned_data["prompt"]
-            ai.create_message(prompt)
-            ai.create_run()
+                prompt = form.cleaned_data["prompt"]
+                ai.create_message(prompt)
+                ai.create_run()
 
-            while True:
-                ai.retrieve_run()
+                while True:
+                    ai.retrieve_run()
 
-                if ai.run.status == "completed":
-                    ai.list_messages()
-                    response_messages = [f"{x.role}: {x.content[0].text.value}" for x in reversed(ai.messages.data)]
-                    return render(request, "website/ai_page.html", {
-                        # "form": form,
-                        "responses": response_messages,
-                    })
-                elif ai.run.status == "failed":
-                    messages.error(request, "Something went wrong. Please try again...")
-                    return redirect("home")
-                else:
-                    time.sleep(3)
-                    continue
+                    if ai.run.status == "completed":
+                        ai.list_messages()
+                        response_messages = [f"{x.role}: {x.content[0].text.value}" for x in reversed(ai.messages.data)]
+                        return render(request, "website/ai_page.html", {
+                            "responses": response_messages,
+                        })
+                    elif ai.run.status == "failed":
+                        messages.error(request, "Something went wrong. Please try again...")
+                        return redirect("home")
+                    else:
+                        time.sleep(3)
+                        continue
+        else:
+            form = GPTAssistantsApiForm()
+            return render(request, "website/ai_page.html", {
+                "form": form,
+            })
     else:
-        form = GPTAssistantsApiForm()
-        return render(request, "website/ai_page.html", {
-            "form": form,
-        })
+        messages.error(request, "You have to be logged in to use this feature!")
+        return redirect("home")
 
 
 def venues(request):
