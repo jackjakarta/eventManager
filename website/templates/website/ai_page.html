@@ -26,12 +26,17 @@ AI Assistant
                 <h4>AI Response: </h4>
                 <p><strong>Event Name: </strong>{{ event_name }}</p>
                 <p><strong>Flyer Suggestion: </strong>{{ event_flyer }}</p>
+                <p><a href="{% url 'assistant_image' %}" class="btn btn-outline-secondary btn-sm">Try Our Flyer Generator</a></p>
                 <p class="card-text" style="color: #CCCCCC;"><small class="text-body-secondary">Try our event flyer generator with this flyer suggestion.
                 Copy the above description and generate your event flyer.</small></p>
-                <p><a href="{% url 'assistant_image' %}" class="btn btn-outline-secondary btn-sm">Try Our Flyer Generator</a></p>
                 <p><strong>Event Description: </strong>{{ event_description }}</p>
             </div>
         </div>
+    </div>
+
+    <div class="container text-center mt-3">
+        <a href="{% url 'assistant' %}" class="btn btn-info btn-sm rounded-3">Another one</a>
+        <a href="{% url 'profile' user.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Back to profile</a>
     </div>
 
 {% else %}
@@ -39,8 +44,8 @@ AI Assistant
     <div class="container mt-3">
         <p>
             Describe what you have in mind for your event. Our Assistant will respond with an event idea providing you
-            with an event name, event description and also suggest an idea for the flyer of your event. The assistant
-            uses our custom trained GPT model from OpenAI.
+            with an event name, event description and also suggest an idea for the flyer of your event. This assistant
+            uses the API for our custom trained GPT model from OpenAI.
         </p>
     </div>
 
@@ -55,7 +60,7 @@ AI Assistant
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit" class="btn btn-info btn-sm rounded-3">Get Event Idea</button>
-            <a href="{% url 'profile' user.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Back</a>
+            <a href="{% url 'profile' user.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Back to profile</a>
         </form>
     </div>
 

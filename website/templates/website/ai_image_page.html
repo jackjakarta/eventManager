@@ -7,7 +7,7 @@ AI Assistant
 {% block content %}
 
 <div class="container mt-4">
-    <h2 class="display-7">AI Flyer Generator</h2>
+    <h1 class="display-5">AI Flyer Generator</h1>
 </div>
 
 {% if image %}
@@ -19,23 +19,33 @@ AI Assistant
     <div class="container mt-2">
         <div class="card">
             <div class="card-body">
-                <img src="{{ image }}" alt="" class="img-fluid">
+                <img src="{{ image }}" alt="Generated DALL-E Image" class="img-fluid">
             </div>
         </div>
     </div>
 
 {% else %}
 
-    <div class="container mt-2">
-        <p>Generate your event flyer with DALL-E.</p>
+    <div class="container mt-3">
+        <p>
+            Describe what you want your event flyer to look like. Our Assistant will generate an event flyer for your
+            event based on your description. The assistant uses the API for the image generation <b>DALL-E 3</b>
+            model from OpenAI.
+        </p>
     </div>
 
-    <div class="container text-center mt-3">
+    <div class="container mt-4">
+        <h2 class="display-7">
+            Event Flyer Description:
+        </h2>
+    </div>
+
+    <div class="container text-center mt-2">
         <form action="" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit" class="btn btn-info btn-sm rounded-3">Get Event Flyer</button>
-            <a href="{% url 'profile' user.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Back</a>
+            <a href="{% url 'profile' user.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Back3</a>
         </form>
     </div>
 

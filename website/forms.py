@@ -145,7 +145,11 @@ class EditProfileForm(forms.ModelForm):
 
 class DallEImageForm(forms.Form):
     image_prompt = forms.CharField(max_length=1000, widget=forms.Textarea(
-        attrs={"class": "form-control", "placeholder": "Describe your event flyer..."}),
+        attrs={
+            "class": "form-control",
+            "placeholder": "A vibrant and captivating image featuring the iconic taj mahal..."
+        }
+    ),
         label=""
     )
 

@@ -21,12 +21,14 @@
                 <div class="card-body">
                     <h5 class="card-title" style="color: white;">{{ event.name }}</h5>
                     <p class="card-text" style="color: white;">{{ event.description }}</p>
-                    <p class="card-text" style="color: white;">
-                        Artists performing:
-                        {% for artist in event.artists.all %}
-                            {{ artist }}{% if event.artists.all.count > 1 %}, {% endif %}
-                        {% endfor %}
-                    </p>
+                    {% if event.artists.all %}
+                        <p class="card-text" style="color: white;">
+                            Artists performing:
+                            {% for artist in event.artists.all %}
+                                {{ artist }}{% if event.artists.all.count > 1 %}, {% endif %}
+                            {% endfor %}
+                        </p>
+                    {% endif %}
                     <p class="card-text" style="color: white;">Persons attending: {{ event.attendees.all.count  }}</p>
                     <p class="card-text" style="color: white;"><small>Last updated on {{ event.updated_at }}</small></p>
                 </div>
