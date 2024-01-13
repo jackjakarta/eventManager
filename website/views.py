@@ -42,11 +42,11 @@ def ai_assistant(request):
 
             if form.is_valid():
                 prompt = form.cleaned_data["prompt"]
-                custom_instructions = form.cleaned_data["custom_instructions"]
+                # custom_instructions = form.cleaned_data["custom_instructions"]
 
                 ai.create_thread()
                 ai.create_message(prompt)
-                ai.create_run(custom_instructions=custom_instructions)
+                ai.create_run()
 
                 while True:
                     ai.retrieve_run()
@@ -87,9 +87,10 @@ def ai_assistant(request):
             })
     else:
         messages.error(request, "You have to be logged in to use this feature!")
-        return redirect("home")
+        return redirect("login")
 
 
+# Events, Venues and Promoters Views
 def venues(request):
     venues_qs = Venue.objects.all()
     return render(request, "website/venues.html", {
@@ -133,27 +134,35 @@ def event_page(request, pk):
 
 
 def event_attend(request, pk):
-    event = Event.objects.get(id=pk)
+    if request.user.is_authenticated:
+        event = Event.objects.get(id=pk)
 
-    if request.user not in event.attendees.all():
-        event.attendees.add(request.user)
-        messages.success(request, "You are attending this event!")
+        if request.user not in event.attendees.all():
+            event.attendees.add(request.user)
+            messages.success(request, "You are attending this event!")
+        else:
+            messages.error(request, "You are already attending this event!")
+
+        return redirect("event_page", pk=pk)
     else:
-        messages.error(request, "You are already attending this event!")
-
-    return redirect("event_page", pk=pk)
+        messages.error(request, "You have to be logged in to use this feature.")
+        return redirect("login")
 
 
 def event_un_attend(request, pk):
-    event = Event.objects.get(id=pk)
+    if request.user.is_authenticated:
+        event = Event.objects.get(id=pk)
 
-    if request.user in event.attendees.all():
-        event.attendees.remove(request.user)
-        messages.success(request, "You have unattended this event.")
+        if request.user in event.attendees.all():
+            event.attendees.remove(request.user)
+            messages.success(request, "You have unattended this event.")
+        else:
+            messages.error(request, "You were not attending this event.")
+
+        return redirect("event_page", pk=pk)
     else:
-        messages.error(request, "You were not attending this event.")
-
-    return redirect("event_page", pk=pk)
+        messages.error(request, "You have to be logged in to use this feature.")
+        return redirect("login")
 
 
 # Add, Edit, Delete from DB forms
@@ -177,7 +186,7 @@ def add_promoter(request):
             })
     else:
         messages.error(request, "You have to be logged in to use this feature!")
-        return redirect("home")
+        return redirect("login")
 
 
 def edit_promoter(request, pk):
@@ -195,7 +204,7 @@ def edit_promoter(request, pk):
         })
     else:
         messages.error(request, "You have to be logged in to use this feature!")
-        return redirect("home")
+        return redirect("login")
 
 
 def delete_promoter(request, pk):
@@ -206,7 +215,7 @@ def delete_promoter(request, pk):
         return redirect("user_promoters", pk=request.user.id)
     else:
         messages.error(request, "You have to be logged in to use this feature!")
-        return redirect("home")
+        return redirect("login")
 
 
 def add_venue(request):
@@ -229,7 +238,7 @@ def add_venue(request):
             })
     else:
         messages.error(request, "You have to be logged in to use this feature!")
-        return redirect("home")
+        return redirect("login")
 
 
 def edit_venue(request, pk):
@@ -247,7 +256,7 @@ def edit_venue(request, pk):
         })
     else:
         messages.error(request, "You have to be logged in to use this feature!")
-        return redirect("home")
+        return redirect("login")
 
 
 def delete_venue(request, pk):
@@ -258,7 +267,7 @@ def delete_venue(request, pk):
         return redirect("user_venues", pk=request.user.id)
     else:
         messages.error(request, "You have to be logged in to use this feature!")
-        return redirect("home")
+        return redirect("login")
 
 
 def add_event(request):
@@ -281,7 +290,7 @@ def add_event(request):
             })
     else:
         messages.error(request, "You have to be logged in to use this feature!")
-        return redirect("home")
+        return redirect("login")
 
 
 def edit_event(request, pk):
@@ -299,7 +308,7 @@ def edit_event(request, pk):
         })
     else:
         messages.error(request, "You have to be logged in to use this feature!")
-        return redirect("home")
+        return redirect("login")
 
 
 def delete_event(request, pk):
@@ -310,7 +319,7 @@ def delete_event(request, pk):
         return redirect("user_events", pk=request.user.id)
     else:
         messages.error(request, "You have to be logged in to use this feature!")
-        return redirect("home")
+        return redirect("login")
 
 
 def edit_profile(request, pk):
@@ -328,7 +337,7 @@ def edit_profile(request, pk):
         })
     else:
         messages.error(request, "You have to be logged in to use this feature!")
-        return redirect("home")
+        return redirect("login")
 
 
 # User Views
@@ -348,35 +357,51 @@ def user_profile(request, pk):
         })
     else:
         messages.error(request, "You are not logged in!")
-        return redirect("home")
+        return redirect("login")
 
 
 def user_events(request, pk):
-    events_user = Event.objects.filter(manager_id=pk)
-    return render(request, "website/user_events.html", {
-        "user_events": events_user,
-    })
+    if request.user.is_authenticated:
+        events_user = Event.objects.filter(manager_id=pk)
+        return render(request, "website/user_events.html", {
+            "user_events": events_user,
+        })
+    else:
+        messages.error(request, "You have to be logged in to see your events.")
+        return redirect("login")
 
 
 def user_promoters(request, pk):
-    promoters_qs = Promoter.objects.filter(manager_id=pk)
-    return render(request, "website/user_promoters.html", {
-        "promoters": promoters_qs,
-    })
+    if request.user.is_authenticated:
+        promoters_qs = Promoter.objects.filter(manager_id=pk)
+        return render(request, "website/user_promoters.html", {
+            "promoters": promoters_qs,
+        })
+    else:
+        messages.error(request, "You have to be logged in to see your promoters.")
+        return redirect("login")
 
 
 def user_venues(request, pk):
-    venues_qs = Venue.objects.filter(manager_id=pk)
-    return render(request, "website/user_venues.html", {
-        "venues": venues_qs,
-    })
+    if request.user.is_authenticated:
+        venues_qs = Venue.objects.filter(manager_id=pk)
+        return render(request, "website/user_venues.html", {
+            "venues": venues_qs,
+        })
+    else:
+        messages.error(request, "You have to be logged in to see your venues.")
+        return redirect("login")
 
 
 def user_events_attending(request, pk):
-    attending_events = Event.objects.filter(attendees=pk)
-    return render(request, "website/user_events_attending.html", {
-        "events": attending_events,
-    })
+    if request.user.is_authenticated:
+        attending_events = Event.objects.filter(attendees=pk)
+        return render(request, "website/user_events_attending.html", {
+            "events": attending_events,
+        })
+    else:
+        messages.error(request, "You are not logged in.")
+        return redirect("login")
 
 
 # Authentication Views

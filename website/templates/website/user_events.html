@@ -34,9 +34,16 @@ My Events - {{ user.first_name }} {{ user.last_name }}
                         <td>{{ event.event_date }}</td>
                         <td>{{ event.venue }}</td>
                         <td>{{ event.venue.city }}</td>
-                        <td><a href="{% url 'event_page' event.id %}" class="btn btn-outline-info btn-sm rounded-3">View</a>
+                        <td>
+                            <a href="{% url 'event_page' event.id %}" class="btn btn-outline-info btn-sm rounded-3">View</a>
+                            {% if user == event.manager %}
                             <a href="{% url 'edit_event' event.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Edit</a>
-                            <a href="{% url 'delete_event' event.id %}" class="btn btn-outline-danger btn-sm rounded-3">Delete</a></td>
+                            <a href="{% url 'delete_event' event.id %}" class="btn btn-outline-danger btn-sm rounded-3">Delete</a>
+                            {% else %}
+                            <a href="#" class="btn btn-outline-secondary btn-sm rounded-3 disabled">Edit</a>
+                            <a href="#" class="btn btn-outline-danger btn-sm rounded-3 disabled">Delete</a>
+                            {% endif %}
+                        </td>
                     </tr>
                 {% endfor %}
             {% endif %}

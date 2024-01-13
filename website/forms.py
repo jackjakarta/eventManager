@@ -159,11 +159,11 @@ class GPTAssistantsApiForm(forms.Form):
         label="",
         required=True
     )
-    custom_instructions = forms.CharField(
-        max_length=550,
-        widget=forms.TextInput(
-            attrs={"class": "form-control", "placeholder": "Custom Instructions (eg. 'This user is an audio engineer')"}
-        ),
-        label="",
-        required=False
-    )
+    # custom_instructions = forms.CharField(
+    #     max_length=550,
+    #     widget=forms.TextInput(
+    #         attrs={"class": "form-control", "placeholder": "Custom Instructions"}
+    #     ),
+    #     label="",
+    #     required=False
+    # )
