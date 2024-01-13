@@ -13,14 +13,15 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from .models import Profile, Event, Venue, Promoter, APIKey
 from .serializers import EventSerializer, VenueSerializer, PromoterSerializer
-from .forms import SignUpForm, AddPromoterForm, AddVenueForm, AddEventForm, EditProfileForm, GPTAssistantsApiForm
+from .forms import SignUpForm, AddPromoterForm, AddVenueForm, AddEventForm, EditProfileForm  # Model Forms
+from .forms import GPTAssistantsApiForm, DallEImageForm
 from .utils import send_register_user_email, generate_api_key
-from .ai import GPTAssistantsApi
+from .ai import GPTAssistantsApi, ImageDallE
 
 OPENAI_ASSISTANT_ID = config("OPENAI_ASSISTANT_ID")
 
 
-# Website Pages Views
+# Static Pages Views
 def home(request):
     return render(request, "website/home.html", {})
 
@@ -33,7 +34,8 @@ def app_docs_api(request):
     return render(request, "website/docs_api.html", {})
 
 
-def ai_assistant(request):
+# AI API Call Views
+def ai_assistant_event(request):
     if request.user.is_authenticated:
         ai = GPTAssistantsApi(OPENAI_ASSISTANT_ID)
 
@@ -88,6 +90,29 @@ def ai_assistant(request):
     else:
         messages.error(request, "You have to be logged in to use this feature!")
         return redirect("login")
+
+
+def ai_assistant_image(request):
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            form = DallEImageForm(request.POST)
+            if form.is_valid():
+                user_prompt = form.cleaned_data["image_prompt"]
+                prompt_for_model = (f"Generate an event flyer based on this description:\n\n{user_prompt}.\n\n"
+                                    f"Follow the description precisely.")
+
+                img_ai = ImageDallE()
+                img_ai.generate_image(prompt_for_model)
+                img_url = img_ai.image_url
+
+                return render(request, "website/ai_image_page.html", {
+                    "image": img_url,
+                })
+        else:
+            form = DallEImageForm()
+            return render(request, "website/ai_image_page.html", {
+                "form": form,
+            })
 
 
 # Events, Venues and Promoters Views

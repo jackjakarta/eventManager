@@ -154,16 +154,11 @@ class GPTAssistantsApiForm(forms.Form):
     prompt = forms.CharField(
         max_length=850,
         widget=forms.Textarea(
-            attrs={"class": "form-control", "placeholder": "Ask our assistant...*"},
+            attrs={
+                "class": "form-control",
+                "placeholder": "A techno party at the lake..."
+            },
         ),
         label="",
         required=True
     )
-    # custom_instructions = forms.CharField(
-    #     max_length=550,
-    #     widget=forms.TextInput(
-    #         attrs={"class": "form-control", "placeholder": "Custom Instructions"}
-    #     ),
-    #     label="",
-    #     required=False
-    # )

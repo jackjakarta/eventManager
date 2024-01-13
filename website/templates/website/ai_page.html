@@ -34,6 +34,14 @@ AI Assistant
 {% else %}
 
     <div class="container mt-4">
+        <p>
+            Describe what you have in mind for your event. Our Assistant will respond with an event idea providing you
+            with an event name, event description and also suggest an idea for the flyer of your event. The assistant
+            uses our custom trained GPT model from OpenAI.
+        </p>
+    </div>
+
+    <div class="container mt-4">
         <form action="" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}

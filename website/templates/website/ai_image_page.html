@@ -1,0 +1,44 @@
+{% extends 'website/base.html' %}
+
+{% block title %}
+AI Assistant
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <h2 class="display-7">AI Assistant</h2>
+</div>
+
+{% if image %}
+
+    <div class="container mt-2">
+        <h2 class="display-7">Your Image:</h2>
+    </div>
+
+    <div class="container mt-2">
+        <div class="card">
+            <div class="card-body">
+                <img src="{{ image }}" alt="" class="img-fluid">
+            </div>
+        </div>
+    </div>
+
+{% else %}
+
+    <div class="container mt-2">
+        <p>Generate your event flyer with DALL-E.</p>
+    </div>
+
+    <div class="container mt-3">
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-info rounded-3">Generate Image</button>
+            <a href="{% url 'profile' user.id %}" class="btn btn-outline-secondary rounded-3">Back</a>
+        </form>
+    </div>
+
+{% endif %}
+
+{% endblock %}
