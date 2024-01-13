@@ -144,9 +144,9 @@ class EditProfileForm(forms.ModelForm):
 
 
 class DallEImageForm(forms.Form):
-    image_prompt = forms.CharField(max_length=1000, widget=forms.TextInput(
-        attrs={'placeholder': 'Describe your image...'}),
-        label="Image description:"
+    image_prompt = forms.CharField(max_length=1000, widget=forms.Textarea(
+        attrs={"class": "form-control", "placeholder": "Describe your image..."}),
+        label=""
     )
 
 
