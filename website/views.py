@@ -53,13 +53,30 @@ def ai_assistant(request):
 
                     if ai.run.status == "completed":
                         ai.list_messages()
-                        response_messages = [f"{x.role}: {x.content[0].text.value}" for x in reversed(ai.messages.data)]
+
+                        m_list = [x.content[0].text.value for x in reversed(ai.messages.data)]
+                        user_prompt = m_list[0]
+                        event_info = m_list[1]
+
+                        # Split the string to extract Event Name, Event Flyer, and Event Description
+                        event_name_start = event_info.find('Event Name: ')
+                        event_flyer_start = event_info.find('Event Flyer: ')
+                        event_description_start = event_info.find('Event Description: ')
+
+                        event_name = event_info[event_name_start + len('Event Name: '):event_flyer_start].strip()
+                        event_flyer = event_info[
+                                      event_flyer_start + len('Event Flyer: '):event_description_start].strip()
+                        event_description = event_info[event_description_start + len('Event Description: '):].strip()
+
                         return render(request, "website/ai_page.html", {
-                            "responses": response_messages,
+                            "user_prompt": user_prompt,
+                            "event_name": event_name,
+                            "event_flyer": event_flyer,
+                            "event_description": event_description,
                         })
                     elif ai.run.status == "failed":
                         messages.error(request, "Something went wrong. Please try again...")
-                        return redirect("home")
+                        return redirect("assistant")
                     else:
                         time.sleep(3)
                         continue

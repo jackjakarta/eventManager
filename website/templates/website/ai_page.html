@@ -10,17 +10,26 @@ AI Assistant
     <h2 class="display-7">AI Assistant</h2>
 </div>
 
-{% if responses %}
-
-    {% for response in responses %}
-        <div class="container mt-4">
-            <div class="card">
-                <div class="card-body">
-                    {{ response }}
-                </div>
+{% if event_name %}
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-body">
+                <h4>Your prompt:</h4>
+                <p>{{ user_prompt }}</p>
             </div>
         </div>
-    {% endfor %}
+    </div>
+
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-body">
+                <h4>AI Response: </h4>
+                <p><strong>Event Name: </strong>{{ event_name }}</p>
+                <p><strong>Flyer Suggestion: </strong>{{ event_flyer }}</p>
+                <p><strong>Event Description: </strong>{{ event_description }}</p>
+            </div>
+        </div>
+    </div>
 
 {% else %}
 
