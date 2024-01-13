@@ -7,7 +7,7 @@ AI Assistant
 {% block content %}
 
 <div class="container mt-4">
-    <h2 class="display-7">AI Assistant</h2>
+    <h1 class="display-5">Event Assistant</h1>
 </div>
 
 {% if event_name %}
@@ -26,6 +26,9 @@ AI Assistant
                 <h4>AI Response: </h4>
                 <p><strong>Event Name: </strong>{{ event_name }}</p>
                 <p><strong>Flyer Suggestion: </strong>{{ event_flyer }}</p>
+                <p class="card-text" style="color: #CCCCCC;"><small class="text-body-secondary">Try our event flyer generator with this flyer suggestion.
+                Copy the above description and generate your event flyer.</small></p>
+                <p><a href="{% url 'assistant_image' %}" class="btn btn-outline-secondary btn-sm">Try Our Flyer Generator</a></p>
                 <p><strong>Event Description: </strong>{{ event_description }}</p>
             </div>
         </div>
@@ -33,7 +36,7 @@ AI Assistant
 
 {% else %}
 
-    <div class="container mt-4">
+    <div class="container mt-3">
         <p>
             Describe what you have in mind for your event. Our Assistant will respond with an event idea providing you
             with an event name, event description and also suggest an idea for the flyer of your event. The assistant
@@ -42,11 +45,17 @@ AI Assistant
     </div>
 
     <div class="container mt-4">
+        <h2 class="display-7">
+            Your thoughts:
+        </h2>
+    </div>
+
+    <div class="container text-center mt-2">
         <form action="" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit" class="btn btn-info rounded-3">Ask Assistant</button>
-            <a href="{% url 'home' %}" class="btn btn-outline-secondary rounded-3">Back</a>
+            <button type="submit" class="btn btn-info btn-sm rounded-3">Get Event Idea</button>
+            <a href="{% url 'profile' user.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Back</a>
         </form>
     </div>
 

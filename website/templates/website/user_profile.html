@@ -92,7 +92,7 @@ Profile - {{ user.first_name }} {{ user.last_name }}
             <tr>
                 <th scope="col">Venue Name</th>
                 <th scope="col">City</th>
-                <th scope="col">Email</th>
+<!--                <th scope="col">Email</th>-->
                 <th scope="col">Manage</th>
             </tr>
         </thead>
@@ -103,7 +103,7 @@ Profile - {{ user.first_name }} {{ user.last_name }}
                     <tr>
                         <td>{{ venue.name }}</td>
                         <td>{{ venue.city }}</td>
-                        <td>{{ venue.email }}</td>
+<!--                        <td>{{ venue.email }}</td>-->
                         <td><a href="{% url 'venue_page' venue.id %}" class="btn btn-outline-info btn-sm rounded-3">View</a>
                             <a href="{% url 'edit_venue' venue.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Edit</a>
                             <a href="{% url 'delete_venue' venue.id %}" class="btn btn-outline-danger btn-sm rounded-3">Delete</a></td>
@@ -119,8 +119,8 @@ Profile - {{ user.first_name }} {{ user.last_name }}
     <!--User Information-->
         <div class="col-md-6">
 
-    <div class="card mb-3" style="max-width: 540px;">
-  <div class="row g-0">
+    <div class="card rounded-5 mb-3" style="max-width: 100%;">
+  <div class="row g-2">
     <div class="col-md-4">
         {% if profile.avatar %}
       <img src="{{ profile.avatar.url }}" class="img-fluid rounded-circle" alt="...">
@@ -140,10 +140,10 @@ Profile - {{ user.first_name }} {{ user.last_name }}
     </div>
   </div>
 </div>
-    <a href="{% url 'add_event' %}" class="btn btn-info rounded-3">Add Event</a>
-    <a href="{% url 'add_promoter' %}" class="btn btn-dark rounded-3">Add Promoter</a>
-    <a href="{% url 'add_venue' %}" class="btn btn-dark rounded-3">Add Venue</a>
-    <a href="{% url 'edit_profile' user.id %}" class="btn btn-outline-secondary rounded-3">Edit Profile</a>
+    <a href="{% url 'add_event' %}" class="btn btn-info btn-sm rounded-3">Add Event</a>
+    <a href="{% url 'add_promoter' %}" class="btn btn-dark btn-sm rounded-3">Add Promoter</a>
+    <a href="{% url 'add_venue' %}" class="btn btn-dark btn-sm rounded-3">Add Venue</a>
+    <a href="{% url 'edit_profile' user.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Edit Profile</a>
 </div>
 
 </div>

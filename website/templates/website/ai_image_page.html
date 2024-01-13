@@ -30,12 +30,12 @@ AI Assistant
         <p>Generate your event flyer with DALL-E.</p>
     </div>
 
-    <div class="container mt-3">
+    <div class="container text-center mt-3">
         <form action="" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit" class="btn btn-info rounded-3">Generate Image</button>
-            <a href="{% url 'profile' user.id %}" class="btn btn-outline-secondary rounded-3">Back</a>
+            <button type="submit" class="btn btn-info btn-sm rounded-3">Get Event Flyer</button>
+            <a href="{% url 'profile' user.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Back</a>
         </form>
     </div>
 
