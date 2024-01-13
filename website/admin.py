@@ -1,5 +1,10 @@
 from django.contrib import admin
-from .models import Venue, Event, Promoter, Profile, NewsletterSub, APIKey, DallEImage
+from .models import Venue, Event, Promoter, Artist, Profile, NewsletterSub, APIKey, DallEImage
+
+
+@admin.register(Artist)
+class ArtistAdmin(admin.ModelAdmin):
+    pass
 
 
 @admin.register(Venue)
