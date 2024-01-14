@@ -8,12 +8,9 @@ from django.shortcuts import render, redirect
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from rest_framework import viewsets
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
-from .models import Profile, Event, Venue, Promoter, APIKey
-from .serializers import EventSerializer, VenueSerializer, PromoterSerializer
-from .forms import SignUpForm, AddPromoterForm, AddVenueForm, AddEventForm, EditProfileForm  # Model Forms
+from .models import Profile, Event, Venue, Promoter, APIKey, NewsletterSub
+from .forms import SignUpForm, AddPromoterForm, AddVenueForm, AddEventForm, EditProfileForm
 from .forms import GPTAssistantsApiForm, DallEImageForm
 from .utils import send_register_user_email, generate_api_key
 from .ai import GPTAssistantsApi, ImageDallE
@@ -365,6 +362,19 @@ def edit_profile(request, pk):
         return redirect("login")
 
 
+def subscribe_newsletter(request):
+    if request.method == "POST":
+        email = request.POST["email"]
+
+        if email is not None:
+            NewsletterSub.objects.create(email=email)
+            messages.success(request, "Thank you for subscribing to our Newsletter.")
+        else:
+            messages.error(request, "Something went wrong, please try again...")
+
+        return redirect("home")
+
+
 # User Views
 def user_profile(request, pk):
     if request.user.is_authenticated:
@@ -480,7 +490,7 @@ def register_user(request):
                 APIKey.objects.create(user=user, api_key=api_key)
 
                 # Get user data from form
-                # first_name = form.cleaned_data["first_name"]
+                first_name = form.cleaned_data["first_name"]
                 email = form.cleaned_data["email"]
                 password = form.cleaned_data["password1"]
 
@@ -489,10 +499,13 @@ def register_user(request):
                 login(request, user)
 
                 # Send welcome email to user
-                # send_register_user_email(first_name, email)
+                send_register_user_email(first_name, email)
 
                 messages.success(request, "You have successfully registered and have been logged in.")
                 return redirect("profile", pk=user.id)
+            else:
+                messages.error(request, "Your form is not valid.")
+                return redirect("register")
         else:
             form = SignUpForm()
             return render(request, "website/register.html", {

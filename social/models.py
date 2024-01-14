@@ -27,6 +27,5 @@ class PostComment(MyModel):
     post = models.ForeignKey(Post, null=False, on_delete=models.CASCADE)
     text = models.TextField("Comment", max_length=350, blank=True)
 
-    # def __str__(self):
-    #     return f"{self.user} - {self.post}"
-    #
+    def __str__(self):
+        return f"{self.user} - {self.post}"

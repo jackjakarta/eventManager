@@ -1,34 +1,52 @@
 <footer class="mt-auto bg-dark text-center text-white">
-            <div class="container mt-3">
-                <section class="mb-4">
-                    <!-- Facebook -->
-                    <a class="btn text-light" href="{% url 'home' %}" >
-                        Home
-                    </a>
-                    <!-- Twitter -->
-                    <a class="btn text-light" href="{% url 'docs' %}" role="button">
-                        Docs
-                    </a>
-                    <!-- Google -->
-                    <a class="btn text-light" href="{% url 'docs_api' %}" role="button">
-                        API
-                    </a>
-                    <!-- Instagram -->
-                    <a class="btn text-light" href="{% url 'home' %}" role="button">
-                        Contact
-                    </a>
-                </section>
+    <div class="container mt-3">
+        <!-- Social Links -->
+        <section class="mb-4">
+            <!-- Home -->
+            <a class="btn text-light" href="{% url 'home' %}">
+                Home
+            </a>
+            <!-- Docs -->
+            <a class="btn text-light" href="{% url 'docs' %}" role="button">
+                Docs
+            </a>
+            <!-- API -->
+            <a class="btn text-light" href="{% url 'docs_api' %}" role="button">
+                API
+            </a>
+            <!-- Contact -->
+            <a class="btn text-light" href="{% url 'home' %}" role="button">
+                Contact
+            </a>
+        </section>
 
-                <!-- Section: Text -->
-<!--                <section class="mb-4">-->
-<!--                    <p>-->
-<!--                        Some text about the company or website, copyright notice, or contact information.-->
-<!--                    </p>-->
-<!--                </section>-->
+        {% if not user.is_authenticated %}
+        <!-- Email Subscription Form -->
+        <section class="mb-4">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-8">
+                    <h5>Subscribe to our Newsletter</h5>
+                    <form action="{% url 'subscribe_newsletter' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="input-group mb-3">
+                            <input type="email" class="form-control rounded-3" placeholder="Email Address" aria-label="Email Address" name="email" style="margin-right: 10px;" required>
+                            <button class="btn btn-outline-info btn-sm rounded-3" type="submit">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
             </div>
+        </section>
+        {% endif %}
+        <!-- Optional Text Section -->
+        <!-- <section class="mb-4">
+            <p>
+                Some text about the company or website, copyright notice, or contact information.
+            </p>
+        </section> -->
+    </div>
 
-            <!-- Copyright -->
-            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-                © 2024 EvntMngr App
-            </div>
-        </footer>
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2024 EvntMngr App
+    </div>
+</footer>

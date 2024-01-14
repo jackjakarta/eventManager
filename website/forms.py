@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
 
-from .models import Promoter, Venue, Event, Profile
+from .models import Promoter, Venue, Event, Profile, NewsletterSub
 
 AuthUser = get_user_model()
 
