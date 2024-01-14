@@ -523,22 +523,3 @@ def send_test_email(request):
 
     messages.success(request, "Email sent!")
     return redirect("home")
-
-
-# API View Sets
-class EventsViewSet(viewsets.ModelViewSet):
-    queryset = Event.objects.all()
-    serializer_class = EventSerializer
-    permission_classes = (IsAuthenticatedOrReadOnly, )
-
-
-class VenuesViewSet(viewsets.ModelViewSet):
-    queryset = Venue.objects.all()
-    serializer_class = VenueSerializer
-    permission_classes = (IsAuthenticatedOrReadOnly, )
-
-
-class PromotersViewSet(viewsets.ModelViewSet):
-    queryset = Promoter.objects.all()
-    serializer_class = PromoterSerializer
-    permission_classes = (IsAuthenticatedOrReadOnly, )

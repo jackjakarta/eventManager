@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 from rest_framework import routers
 from rest_framework_simplejwt import views as jwt_views
 
-import website.views as wb_views
+import website.viewsets as wb_views
 
 router = routers.DefaultRouter()
 router.register(r'events', wb_views.EventsViewSet, 'events')
