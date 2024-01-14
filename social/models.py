@@ -17,3 +17,16 @@ class Post(MyModel):
 
     def __str__(self):
         return self.description
+
+
+class PostComment(MyModel):
+    class Meta:
+        db_table = "posts_comments"
+
+    user = models.ForeignKey(AuthUser, null=False, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, null=False, on_delete=models.CASCADE)
+    text = models.TextField("Comment", max_length=350, blank=True)
+
+    # def __str__(self):
+    #     return f"{self.user} - {self.post}"
+    #
