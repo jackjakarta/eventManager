@@ -16,7 +16,7 @@ router.register(r'promoters', wb_views.PromotersViewSet, 'promoters')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('website.urls')),
-    path('blog/', include('blog.urls')),
+    path('social/', include('social.urls')),
 
     path('api/', include(router.urls)),
     path('api/auth/', jwt_views.TokenObtainPairView.as_view(), name='api_auth'),

@@ -369,9 +369,9 @@ def edit_profile(request, pk):
 def user_profile(request, pk):
     if request.user.is_authenticated:
         profile = Profile.objects.get(user_id=pk)
-        events_user = Event.objects.filter(manager_id=pk).order_by('event_date')[:5]
-        promoters_user = Promoter.objects.filter(manager_id=pk).order_by('updated_at')[:5]
-        venues_user = Venue.objects.filter(manager_id=pk).order_by('updated_at')[:5]
+        events_user = Event.objects.filter(manager_id=pk).order_by('event_date')[:2]
+        promoters_user = Promoter.objects.filter(manager_id=pk).order_by('updated_at')[:2]
+        venues_user = Venue.objects.filter(manager_id=pk).order_by('updated_at')[:2]
         api_key = APIKey.objects.get(user_id=pk)
         return render(request, "website/user_profile.html", {
             "profile": profile,
