@@ -29,7 +29,8 @@ Venues
         <h5 class="card-title">{{ venue.name }}</h5>
         <p class="card-text">{{ venue.city }}</p>
         <p class="card-text">{{ venue.email }}</p>
-          <a href="{% url 'venue_page' venue.id %}" class="btn btn-dark btn-sm rounded-3">Venue Page</a> <a href="{% url 'home' %}" class="btn btn-dark btn-sm rounded-3">View Events</a>
+          <a href="{% url 'venue_page' venue.id %}" class="btn btn-dark btn-sm rounded-3">Venue Page</a>
+          <a href="{% url 'venue_events' venue.id %}" class="btn btn-dark btn-sm rounded-3">View Events</a>
       </div>
     </div>
   </div>

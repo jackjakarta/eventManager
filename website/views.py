@@ -127,6 +127,15 @@ def venue_page(request, pk):
     })
 
 
+def venue_events(request, pk):
+    venue_name = Venue.objects.get(id=pk)
+    events_at_venue = Event.objects.filter(venue_id=pk)
+    return render(request, "website/venue_events.html", {
+        "events": events_at_venue,
+        "venue": venue_name,
+    })
+
+
 def promoters(request):
     promoters_qs = Promoter.objects.all()
     return render(request, "website/promoters.html", {
