@@ -14,3 +14,6 @@ class Post(MyModel):
     description = models.TextField("Post Description", max_length=420, blank=True)
     event = models.ForeignKey(Event, null=True, blank=True, on_delete=models.SET_NULL)
     likes = models.ManyToManyField(AuthUser, related_name="post_likes", blank=True)
+
+    def __str__(self):
+        return self.description
