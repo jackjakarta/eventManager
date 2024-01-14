@@ -70,7 +70,12 @@
             </div>
         {% endif %}
     {% endif %}
-    <a href="{% url 'events' %}" class="btn btn-outline-secondary rounded-3">Back</a>
+
+    {% if user == event.manager %}
+        <a href="{% url 'user_events' user.id %}" class="btn btn-outline-secondary rounded-3">Back</a>
+    {% else %}
+        <a href="{% url 'events' %}" class="btn btn-outline-secondary rounded-3">Back</a>
+    {% endif %}
 </div>
 
 {% endblock %}

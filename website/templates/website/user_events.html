@@ -38,27 +38,6 @@ My Events - {{ user.first_name }} {{ user.last_name }}
                             <a href="{% url 'event_page' event.id %}" class="btn btn-outline-info btn-sm rounded-3">View</a>
                             {% if user == event.manager %}
                             <a href="{% url 'edit_event' event.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Edit</a>
-                            <button type="button" class="btn btn-outline-danger btn-sm rounded-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                Delete
-                            </button>
-                            <!--Modal-->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                              <div class="modal-dialog">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Are you sure ?</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                  </div>
-                                  <div class="modal-body">
-                                    Please confirm if you want to delete event.
-                                  </div>
-                                  <div class="modal-footer">
-                                      <a href="{% url 'delete_event' event.id %}" class="btn btn-danger btn-sm rounded-3">Delete</a>
-                                    <button type="button" class="btn btn-outline-secondary btn-sm rounded-3" data-bs-dismiss="modal">Close</button>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
                             {% else %}
                             <a href="#" class="btn btn-outline-secondary btn-sm rounded-3 disabled">Edit</a>
                             <a href="#" class="btn btn-outline-danger btn-sm rounded-3 disabled">Delete</a>
