@@ -26,7 +26,39 @@
                     <p class="card-text"><strong>Address:</strong> {{ venue.address }}, {{ venue.zip_code }} {{ venue.city }}</p>
                     <p class="card-text"><strong>Email:</strong> <a href="mailto:{{ venue.email }}">{{ venue.email }}</a></p>
                     <p class="card-text"><strong>Website:</strong> <a href="{{ venue.website }}">{{ venue.website }}</a></p>
+                    {% if user == venue.manager %}
+                        <a href="{% url 'edit_venue' venue.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Edit</a>
+                        <button type="button" class="btn btn-outline-danger btn-sm rounded-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            Delete
+                        </button>
+
+                        <!--Modal-->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Are you sure ?</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                  </div>
+                                  <div class="modal-body">
+                                    Please confirm if you want to delete venue.
+                                  </div>
+                                  <div class="modal-footer">
+                                      <a href="{% url 'delete_venue' venue.id %}" class="btn btn-danger btn-sm rounded-3">Delete</a>
+                                    <button type="button" class="btn btn-outline-secondary btn-sm rounded-3" data-bs-dismiss="modal">Close</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                    {% endif %}
                 </div>
+            </div>
+            <div class="container text-center mt-2">
+                {% if user == venue.manager %}
+                    <a href="{% url 'user_venues' user.id %}" class="btn btn-outline-secondary rounded-3">Back</a>
+                {% else %}
+                    <a href="{% url 'home' %}" class="btn btn-outline-secondary rounded-3">Back</a>
+                {% endif %}
             </div>
         </div>
     </div>
