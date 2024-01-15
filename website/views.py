@@ -9,10 +9,10 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 
-from .models import Profile, Event, Venue, Promoter, APIKey, NewsletterSub
+from .models import Profile, Event, Venue, Promoter, NewsletterSub
 from .forms import SignUpForm, AddPromoterForm, AddVenueForm, AddEventForm, EditProfileForm
 from .forms import GPTAssistantsApiForm, DallEImageForm
-from .utils import send_register_user_email, send_login_user_email, generate_api_key
+from .utils import send_register_user_email, send_login_user_email
 from .ai import GPTAssistantsApi, ImageDallE
 
 OPENAI_ASSISTANT_ID = config("OPENAI_ASSISTANT_ID")
@@ -391,13 +391,11 @@ def user_profile(request, pk):
         events_user = Event.objects.filter(manager_id=pk).order_by('event_date')[:2]
         promoters_user = Promoter.objects.filter(manager_id=pk).order_by('updated_at')[:2]
         venues_user = Venue.objects.filter(manager_id=pk).order_by('updated_at')[:2]
-        api_key = APIKey.objects.get(user_id=pk)
         return render(request, "website/user_profile.html", {
             "profile": profile,
             "events": events_user,
             "promoters": promoters_user,
             "venues": venues_user,
-            "key": api_key,
         })
     else:
         messages.error(request, "You are not logged in!")
@@ -493,10 +491,6 @@ def register_user(request):
             form = SignUpForm(request.POST)
             if form.is_valid():
                 form.save()
-
-                # Generate and assign API Key to user
-                # api_key = generate_api_key()
-                # APIKey.objects.create(user=user, api_key=api_key)
 
                 # Get user data from form
                 first_name = form.cleaned_data["first_name"]

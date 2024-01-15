@@ -1,9 +1,8 @@
 {% extends 'website/base.html' %}
 
 {% block title %}
-Profile - {{ user.first_name }} {{ user.last_name }}
+Profile{% if user.first_name %} - {{ user.first_name }} {{ user.last_name }}{% else %} - {{ user }}{% endif %}
 {% endblock %}
-
 
 {% block content %}
 
@@ -150,9 +149,9 @@ Profile - {{ user.first_name }} {{ user.last_name }}
       <div class="card-body">
         <h5 class="card-title">{{ user.first_name }} {{ user.last_name }}</h5>
           <p class="card-text"><strong>Email:</strong> {{ user }}</p>
-          {% if key %}
-          <p class="card-text"><strong>API Key:</strong> {{ key.api_key }}</p>
-          {% endif %}
+
+          <p class="card-text"><strong>API Key:</strong> api-key-here-4hd73hd</p>
+
         <p class="card-text"><small class="text-body-secondary">Last login on {{ user.last_login }}</small></p>
       </div>
     </div>
