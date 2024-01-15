@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
 
-from .models import Promoter, Venue, Event, Profile, NewsletterSub
+from .models import Promoter, Venue, Event, Profile, Artist
 
 AuthUser = get_user_model()
 
@@ -110,7 +110,7 @@ class AddVenueForm(forms.ModelForm):
 class AddEventForm(forms.ModelForm):
     class Meta:
         model = Event
-        fields = ("name", "event_date", "venue", "promoter", "event_flyer", "description", )
+        fields = ("name", "event_date", "venue", "promoter", "artists", "event_flyer", "description", )
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop("user", None)
@@ -119,6 +119,7 @@ class AddEventForm(forms.ModelForm):
         if self.user:
             self.fields['venue'].queryset = Venue.objects.filter(manager=self.user)
             self.fields['promoter'].queryset = Promoter.objects.filter(manager=self.user)
+            self.fields['artists'].queryset = Artist.objects.filter(manager=self.user)
 
     def save(self, commit=True):
         instance = super(AddEventForm, self).save(commit=False)
