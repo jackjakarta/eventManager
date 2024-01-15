@@ -12,7 +12,7 @@ from django.contrib.auth import authenticate, login, logout
 from .models import Profile, Event, Venue, Promoter, APIKey, NewsletterSub
 from .forms import SignUpForm, AddPromoterForm, AddVenueForm, AddEventForm, EditProfileForm
 from .forms import GPTAssistantsApiForm, DallEImageForm
-from .utils import send_register_user_email, generate_api_key
+from .utils import send_register_user_email, send_login_user_email, generate_api_key
 from .ai import GPTAssistantsApi, ImageDallE
 
 OPENAI_ASSISTANT_ID = config("OPENAI_ASSISTANT_ID")
@@ -462,7 +462,7 @@ def login_user(request):
                 # Check if user hasn't logged in a while.
                 days_ago = datetime.now(pytz.utc) - timedelta(days=2)
                 if user.last_login < days_ago:
-                    send_register_user_email(user.first_name, user.email)  # Change function after test
+                    send_login_user_email(user.first_name, user.email)  # Change function after test
                     print("Email sent to user!")
                 else:
                     print("User logged in 1 day ago.")
@@ -492,11 +492,11 @@ def register_user(request):
         if request.method == "POST":
             form = SignUpForm(request.POST)
             if form.is_valid():
-                user = form.save()
+                form.save()
 
                 # Generate and assign API Key to user
-                api_key = generate_api_key()
-                APIKey.objects.create(user=user, api_key=api_key)
+                # api_key = generate_api_key()
+                # APIKey.objects.create(user=user, api_key=api_key)
 
                 # Get user data from form
                 first_name = form.cleaned_data["first_name"]
