@@ -6,11 +6,14 @@ from rest_framework import routers
 from rest_framework_simplejwt import views as jwt_views
 
 import website.viewsets as wb_views
+import social.viewsets as scl_views
 
 router = routers.DefaultRouter()
 router.register(r'events', wb_views.EventsViewSet, 'events')
 router.register(r'venues', wb_views.VenuesViewSet, 'venues')
 router.register(r'promoters', wb_views.PromotersViewSet, 'promoters')
+router.register(r'posts', scl_views.PostsViewSet, 'posts')
+router.register(r'post-comments', scl_views.PostCommentsViewSet, 'post-comments')
 
 
 urlpatterns = [
