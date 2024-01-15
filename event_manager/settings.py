@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 import os
+import django_heroku
+import dj_database_url
+
 from pathlib import Path
 from datetime import timedelta
 from decouple import config
@@ -64,8 +67,6 @@ REST_FRAMEWORK = {
     ]
 }
 
-# API_KEY_CUSTOM_HEADER = "HTTP_X_API_KEY"
-
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
@@ -82,6 +83,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'event_manager.urls'
@@ -109,16 +111,15 @@ WSGI_APPLICATION = 'event_manager.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'HOST': config('DB_HOST'),
-            'PORT': config('DB_PORT'),
-            'NAME': config('DB_NAME'),
-            'USER': config('DB_USER'),
-            'PASSWORD': config('DB_PASSWORD')
-        }
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'HOST': config('DB_HOST'),
+        'PORT': config('DB_PORT'),
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD')
     }
-
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -166,6 +167,11 @@ MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
+# Static files for production
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
@@ -191,3 +197,5 @@ CRISPY_TEMPLATE_PACK = 'bootstrap5'
 # Custom User Model
 
 AUTH_USER_MODEL = 'users.AuthUser'
+
+django_heroku.settings(locals())

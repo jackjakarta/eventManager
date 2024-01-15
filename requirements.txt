@@ -5,11 +5,14 @@ certifi==2023.11.17
 charset-normalizer==3.3.2
 crispy-bootstrap5==2023.10
 distro==1.9.0
+dj-database-url==2.1.0
 Django==5.0.1
 django-crispy-forms==2.1
+django-heroku==0.3.1
 djangorestframework==3.14.0
 djangorestframework-api-key==3.0.0
 djangorestframework-simplejwt==5.3.1
+gunicorn==21.2.0
 h11==0.14.0
 httpcore==1.0.2
 httplib2==0.20.4
@@ -19,6 +22,7 @@ mysqlclient==2.2.1
 openai==1.6.1
 packaging==23.2
 pillow==10.2.0
+psycopg2==2.9.9
 pydantic==2.5.3
 pydantic_core==2.14.6
 PyJWT==2.8.0
@@ -33,4 +37,5 @@ sqlparse==0.4.4
 tqdm==4.66.1
 typing_extensions==4.9.0
 urllib3==2.1.0
+whitenoise==6.6.0
 zope.interface==6.1
