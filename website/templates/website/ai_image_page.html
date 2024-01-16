@@ -45,7 +45,7 @@ AI Assistant
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit" class="btn btn-info btn-sm rounded-3">Get Event Flyer</button>
-            <a href="{% url 'profile' user.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Back to profile</a>
+            <a href="{% url 'website:user_profile:profile' user.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Back to profile</a>
         </form>
     </div>
 

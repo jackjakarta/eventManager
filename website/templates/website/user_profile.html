@@ -38,8 +38,8 @@ Profile{% if user.first_name %} - {{ user.first_name }} {{ user.last_name }}{% e
                         <td>{{ event.name }}</td>
                         <td>{{ event.event_date }}</td>
                         <td>{{ event.venue }}</td>
-                        <td><a href="{% url 'event_page' event.id %}" class="btn btn-outline-info btn-sm rounded-3">View</a>
-                            <a href="{% url 'edit_event' event.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Edit</a>
+                        <td><a href="{% url 'website:model_pages:event_page' event.id %}" class="btn btn-outline-info btn-sm rounded-3">View</a>
+                            <a href="{% url 'website:update_db:edit_event' event.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Edit</a>
                             <button type="button" class="btn btn-outline-danger btn-sm rounded-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 Delete
                             </button>
@@ -55,7 +55,7 @@ Profile{% if user.first_name %} - {{ user.first_name }} {{ user.last_name }}{% e
                                     Please confirm if you want to delete event.
                                   </div>
                                   <div class="modal-footer">
-                                      <a href="{% url 'delete_event' event.id %}" class="btn btn-danger btn-sm rounded-3">Delete</a>
+                                      <a href="{% url 'website:update_db:delete_event' event.id %}" class="btn btn-danger btn-sm rounded-3">Delete</a>
                                     <button type="button" class="btn btn-outline-secondary btn-sm rounded-3" data-bs-dismiss="modal">Close</button>
                                   </div>
                                 </div>
@@ -66,7 +66,7 @@ Profile{% if user.first_name %} - {{ user.first_name }} {{ user.last_name }}{% e
             {% endif %}
         </tbody>
     </table>
-        <a href="{% url 'user_events' user.id %}" class="btn btn-outline-secondary rounded-3">View All</a>
+        <a href="{% url 'website:user_profile:user_events' user.id %}" class="btn btn-outline-secondary rounded-3">View All</a>
 
         <br/>
         <br/>
@@ -89,15 +89,15 @@ Profile{% if user.first_name %} - {{ user.first_name }} {{ user.last_name }}{% e
                     <tr>
                         <td>{{ promoter.name }}</td>
                         <td>{{ promoter.city }}</td>
-                        <td><a href="{% url 'promoter_page' promoter.id %}" class="btn btn-outline-info btn-sm rounded-3">View</a>
-                            <a href="{% url 'edit_promoter' promoter.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Edit</a>
-                            <a href="{% url 'delete_promoter' promoter.id %}" class="btn btn-outline-danger btn-sm rounded-3">Delete</a></td>
+                        <td><a href="{% url 'website:model_pages:promoter_page' promoter.id %}" class="btn btn-outline-info btn-sm rounded-3">View</a>
+                            <a href="{% url 'website:update_db:edit_promoter' promoter.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Edit</a>
+                            <a href="{% url 'website:update_db:delete_promoter' promoter.id %}" class="btn btn-outline-danger btn-sm rounded-3">Delete</a></td>
                     </tr>
                 {% endfor %}
             {% endif %}
         </tbody>
     </table>
-        <a href="{% url 'user_promoters' user.id %}" class="btn btn-outline-secondary rounded-3">View All</a>
+        <a href="{% url 'website:user_profile:user_promoters' user.id %}" class="btn btn-outline-secondary rounded-3">View All</a>
 
 
         <br/>
@@ -121,15 +121,15 @@ Profile{% if user.first_name %} - {{ user.first_name }} {{ user.last_name }}{% e
                     <tr>
                         <td>{{ venue.name }}</td>
                         <td>{{ venue.city }}</td>
-                        <td><a href="{% url 'venue_page' venue.id %}" class="btn btn-outline-info btn-sm rounded-3">View</a>
-                            <a href="{% url 'edit_venue' venue.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Edit</a>
-                            <a href="{% url 'delete_venue' venue.id %}" class="btn btn-outline-danger btn-sm rounded-3">Delete</a></td>
+                        <td><a href="{% url 'website:model_pages:venue_page' venue.id %}" class="btn btn-outline-info btn-sm rounded-3">View</a>
+                            <a href="{% url 'website:update_db:edit_venue' venue.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Edit</a>
+                            <a href="{% url 'website:update_db:delete_venue' venue.id %}" class="btn btn-outline-danger btn-sm rounded-3">Delete</a></td>
                     </tr>
                 {% endfor %}
             {% endif %}
         </tbody>
     </table>
-        <a href="{% url 'user_venues' user.id %}" class="btn btn-outline-secondary rounded-3">View All</a>
+        <a href="{% url 'website:user_profile:user_venues' user.id %}" class="btn btn-outline-secondary rounded-3">View All</a>
 
     </div>
 
@@ -157,11 +157,11 @@ Profile{% if user.first_name %} - {{ user.first_name }} {{ user.last_name }}{% e
     </div>
   </div>
 </div>
-    <a href="{% url 'add_event' %}" class="btn btn-info btn-sm rounded-3">Add Event</a>
+    <a href="{% url 'website:update_db:add_event' %}" class="btn btn-info btn-sm rounded-3">Add Event</a>
     <a href="#" class="btn btn-dark btn-sm rounded-3">Add Artist</a>
-    <a href="{% url 'add_promoter' %}" class="btn btn-dark btn-sm rounded-3">Add Promoter</a>
-    <a href="{% url 'add_venue' %}" class="btn btn-dark btn-sm rounded-3">Add Venue</a>
-    <a href="{% url 'edit_profile' user.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Edit Profile</a>
+    <a href="{% url 'website:update_db:add_promoter' %}" class="btn btn-dark btn-sm rounded-3">Add Promoter</a>
+    <a href="{% url 'website:update_db:add_venue' %}" class="btn btn-dark btn-sm rounded-3">Add Venue</a>
+    <a href="{% url 'website:user_profile:edit_profile' user.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Edit Profile</a>
 </div>
 
 </div>
@@ -175,7 +175,7 @@ Profile{% if user.first_name %} - {{ user.first_name }} {{ user.last_name }}{% e
 
 <div class="container mt-4">
     <p>This is not your profile, you can't access it.</p>
-    <p><a href="{% url 'profile' user.id %}" class="btn btn-secondary btn-sm rounded-3">Back to my profile</a></p>
+    <p><a href="{% url 'website:user_profile:profile' user.id %}" class="btn btn-secondary btn-sm rounded-3">Back to my profile</a></p>
 </div>
 
 {% endif %}

@@ -31,7 +31,7 @@
             Please confirm if you want to delete promoter.
           </div>
           <div class="modal-footer">
-              <a href="{% url 'delete_promoter' promoter.id %}" class="btn btn-danger btn-sm rounded-3">Delete</a>
+              <a href="{% url 'website:update_db:delete_promoter' promoter.id %}" class="btn btn-danger btn-sm rounded-3">Delete</a>
             <button type="button" class="btn btn-outline-secondary btn-sm rounded-3" data-bs-dismiss="modal">Close</button>
           </div>
         </div>

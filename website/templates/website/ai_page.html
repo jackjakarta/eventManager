@@ -26,7 +26,7 @@ AI Assistant
                 <h4>AI Response: </h4>
                 <p><strong>Event Name: </strong>{{ event_name }}</p>
                 <p><strong>Flyer Suggestion: </strong>{{ event_flyer }}</p>
-                <p><a href="{% url 'assistant_image' %}" class="btn btn-outline-secondary btn-sm">Try Our Flyer Generator</a></p>
+                <p><a href="{% url 'website:api_calls:assistant_image' %}" class="btn btn-outline-secondary btn-sm">Try Our Flyer Generator</a></p>
                 <p class="card-text" style="color: #CCCCCC;"><small class="text-body-secondary">Try our event flyer generator with this flyer suggestion.
                 Copy the above description and generate your event flyer.</small></p>
                 <p><strong>Event Description: </strong>{{ event_description }}</p>

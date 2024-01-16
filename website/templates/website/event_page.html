@@ -40,13 +40,13 @@
 <div class="container mt-2">
     {% if user.is_authenticated %}
         {% if user in event.attendees.all %}
-            <a href="{% url 'event_unattend' event.id %}" class="btn btn-outline-info rounded-3">Unattend</a>
+            <a href="{% url 'website:model_pages:event_unattend' event.id %}" class="btn btn-outline-info rounded-3">Unattend</a>
         {% else %}
-            <a href="{% url 'event_attend' event.id %}" class="btn btn-info rounded-3">Attend</a>
+            <a href="{% url 'website:model_pages:event_attend' event.id %}" class="btn btn-info rounded-3">Attend</a>
         {% endif %}
 
         {% if user == event.manager %}
-            <a href="{% url 'edit_event' event.id %}" class="btn btn-outline-secondary rounded-3">Edit</a>
+            <a href="{% url 'website:update_db:edit_event' event.id %}" class="btn btn-outline-secondary rounded-3">Edit</a>
             <button type="button" class="btn btn-outline-danger rounded-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Delete
             </button>
@@ -62,7 +62,7 @@
                     Please confirm if you want to delete event.
                   </div>
                   <div class="modal-footer">
-                      <a href="{% url 'delete_event' event.id %}" class="btn btn-danger btn-sm rounded-3">Delete</a>
+                      <a href="{% url 'website:update_db:delete_event' event.id %}" class="btn btn-danger btn-sm rounded-3">Delete</a>
                     <button type="button" class="btn btn-outline-secondary btn-sm rounded-3" data-bs-dismiss="modal">Close</button>
                   </div>
                 </div>
@@ -72,9 +72,9 @@
     {% endif %}
 
     {% if user == event.manager %}
-        <a href="{% url 'user_events' user.id %}" class="btn btn-outline-secondary rounded-3">Back</a>
+        <a href="{% url 'website:user_profile:user_events' user.id %}" class="btn btn-outline-secondary rounded-3">Back</a>
     {% else %}
-        <a href="{% url 'events' %}" class="btn btn-outline-secondary rounded-3">Back</a>
+        <a href="{% url 'website:model_pages:events' %}" class="btn btn-outline-secondary rounded-3">Back</a>
     {% endif %}
 </div>
 
