@@ -26,7 +26,7 @@
             <div class="row justify-content-center">
                 <div class="col-lg-6 col-md-8">
                     <h5>Subscribe to our Newsletter</h5>
-                    <form action="{% url 'subscribe_newsletter' %}" method="POST">
+                    <form action="{% url 'website:utility:subscribe_newsletter' %}" method="POST">
                         {% csrf_token %}
                         <div class="input-group mb-3">
                             <input type="email" class="form-control rounded-3" placeholder="Email Address" aria-label="Email Address" name="email" style="margin-right: 10px;" required>

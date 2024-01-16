@@ -1,7 +1,7 @@
 from django.urls import path
 
-from website.views import user_profile, edit_profile
-from website.views import user_events, user_promoters, user_venues, user_events_attending
+from website.views.profile import user_profile, edit_profile
+from website.views.profile import user_events, user_promoters, user_venues, user_events_attending
 
 
 app_name = 'user_profile'

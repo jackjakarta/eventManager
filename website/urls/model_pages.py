@@ -1,8 +1,8 @@
 from django.urls import path
 
-from website.views import venues, events, promoters
-from website.views import venue_page, event_page, promoter_page
-from website.views import venue_events, event_attend, event_un_attend
+from website.views.model import venues, events, promoters
+from website.views.model import venue_page, event_page, promoter_page
+from website.views.model import venue_events, event_attend, event_un_attend
 
 
 app_name = 'model_pages'

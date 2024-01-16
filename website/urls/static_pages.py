@@ -1,5 +1,5 @@
 from django.urls import path
-from website.views import home, app_docs, app_docs_api
+from website.views.static import home, app_docs, app_docs_api
 
 app_name = 'static_pages'
 

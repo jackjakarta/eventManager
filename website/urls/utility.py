@@ -1,5 +1,5 @@
 from django.urls import path
-from website.views import send_test_email, send_newsletter_email, subscribe_newsletter
+from website.views.utillity import send_test_email, send_newsletter_email, subscribe_newsletter
 
 
 app_name = 'utility'

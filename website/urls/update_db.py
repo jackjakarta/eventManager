@@ -1,7 +1,7 @@
 from django.urls import path
-from website .views import add_event, edit_event, delete_event
-from website.views import add_promoter, edit_promoter, delete_promoter
-from website.views import add_venue, edit_venue, delete_venue
+from website.views.update import add_event, edit_event, delete_event
+from website.views.update import add_promoter, edit_promoter, delete_promoter
+from website.views.update import add_venue, edit_venue, delete_venue
 
 app_name = 'update_db'
 

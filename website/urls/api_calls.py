@@ -1,5 +1,5 @@
 from django.urls import path
-from website.views import ai_assistant_event, ai_assistant_image
+from website.views.apis import ai_assistant_event, ai_assistant_image
 
 
 app_name = 'api_calls'
