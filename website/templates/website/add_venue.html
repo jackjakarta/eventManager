@@ -16,7 +16,7 @@ Add Venue
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit" class="btn btn-info rounded-3">Add Venue</button>
-            <a href="{% url 'user_venues' user.id %}" class="btn btn-outline-secondary rounded-3">Back</a>
+            <a href="{% url 'website:user_profile:user_venues' user.id %}" class="btn btn-outline-secondary rounded-3">Back</a>
         </form>
     </div>
 

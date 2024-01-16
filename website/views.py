@@ -75,7 +75,7 @@ def ai_assistant_event(request):
                         })
                     elif ai.run.status == "failed":
                         messages.error(request, "Something went wrong. Please try again...")
-                        return redirect("assistant")
+                        return redirect("website:api_calls:assistant")
                     else:
                         time.sleep(3)
                         continue
@@ -86,7 +86,7 @@ def ai_assistant_event(request):
             })
     else:
         messages.error(request, "You have to be logged in to use this feature!")
-        return redirect("login")
+        return redirect("website:user_auth:login")
 
 
 def ai_assistant_image(request):
@@ -174,10 +174,10 @@ def event_attend(request, pk):
         else:
             messages.error(request, "You are already attending this event!")
 
-        return redirect("event_page", pk=pk)
+        return redirect("website:model_pages:event_page", pk=pk)
     else:
         messages.error(request, "You have to be logged in to use this feature.")
-        return redirect("login")
+        return redirect("website:user_auth:login")
 
 
 def event_un_attend(request, pk):
@@ -190,10 +190,10 @@ def event_un_attend(request, pk):
         else:
             messages.error(request, "You were not attending this event.")
 
-        return redirect("event_page", pk=pk)
+        return redirect("website:model_pages:event_page", pk=pk)
     else:
         messages.error(request, "You have to be logged in to use this feature.")
-        return redirect("login")
+        return redirect("website:user_auth:login")
 
 
 # Add, Edit, Delete from DB forms
@@ -204,7 +204,7 @@ def add_promoter(request):
             if form.is_valid():
                 form.save()
                 messages.success(request, "You have successfully added a promoter.")
-                return redirect("user_promoters", pk=request.user.id)
+                return redirect("website:user_profile:user_promoters", pk=request.user.id)
             else:
                 messages.error(request, "Your form is not valid.")
                 return render(request, "website/add_promoter.html", {
@@ -217,7 +217,7 @@ def add_promoter(request):
             })
     else:
         messages.error(request, "You have to be logged in to use this feature!")
-        return redirect("login")
+        return redirect("website:user_auth:login")
 
 
 def edit_promoter(request, pk):
@@ -227,7 +227,7 @@ def edit_promoter(request, pk):
         if form.is_valid():
             form.save()
             messages.success(request, "Promoter updated successfully!")
-            return redirect("promoter_page", pk=pk)
+            return redirect("website:model_pages:promoter_page", pk=pk)
 
         return render(request, "website/edit_promoter.html", {
             "promoter": promoter,
@@ -235,7 +235,7 @@ def edit_promoter(request, pk):
         })
     else:
         messages.error(request, "You have to be logged in to use this feature!")
-        return redirect("login")
+        return redirect("website:user_auth:login")
 
 
 def delete_promoter(request, pk):
@@ -243,10 +243,10 @@ def delete_promoter(request, pk):
         promoter = Promoter.objects.get(id=pk)
         promoter.delete()
         messages.success(request, "Promoter deleted successfully!")
-        return redirect("user_promoters", pk=request.user.id)
+        return redirect("website:user_profile:user_promoters", pk=request.user.id)
     else:
         messages.error(request, "You have to be logged in to use this feature!")
-        return redirect("login")
+        return redirect("website:user_auth:login")
 
 
 def add_venue(request):
@@ -256,7 +256,7 @@ def add_venue(request):
             if form.is_valid():
                 form.save()
                 messages.success(request, "You have successfully added a venue.")
-                return redirect("user_venues", pk=request.user.id)
+                return redirect("website:user_profile:user_venues", pk=request.user.id)
             else:
                 messages.error(request, "Your form is not valid.")
                 return render(request, "website/add_venue.html", {
@@ -269,7 +269,7 @@ def add_venue(request):
             })
     else:
         messages.error(request, "You have to be logged in to use this feature!")
-        return redirect("login")
+        return redirect("website:user_auth:login")
 
 
 def edit_venue(request, pk):
@@ -279,7 +279,7 @@ def edit_venue(request, pk):
         if form.is_valid():
             form.save()
             messages.success(request, "Updated successfully!")
-            return redirect("venue_page", pk=pk)
+            return redirect("website:model_pages:venue_page", pk=pk)
 
         return render(request, "website/edit_venue.html", {
             "venue": venues_qs,
@@ -287,7 +287,7 @@ def edit_venue(request, pk):
         })
     else:
         messages.error(request, "You have to be logged in to use this feature!")
-        return redirect("login")
+        return redirect("website:user_auth:login")
 
 
 def delete_venue(request, pk):
@@ -295,10 +295,10 @@ def delete_venue(request, pk):
         venue = Venue.objects.get(id=pk)
         venue.delete()
         messages.success(request, "Venue deleted successfully!")
-        return redirect("user_venues", pk=request.user.id)
+        return redirect("website:user_profile:user_venues", pk=request.user.id)
     else:
         messages.error(request, "You have to be logged in to use this feature!")
-        return redirect("login")
+        return redirect("website:user_auth:login")
 
 
 def add_event(request):
@@ -308,7 +308,7 @@ def add_event(request):
             if form.is_valid():
                 form.save()
                 messages.success(request, "You have successfully added an event.")
-                return redirect("user_events", pk=request.user.id)
+                return redirect("website:user_profile:user_events", pk=request.user.id)
             else:
                 messages.error(request, "Your form is not valid.")
                 return render(request, "website/add_event.html", {
@@ -321,7 +321,7 @@ def add_event(request):
             })
     else:
         messages.error(request, "You have to be logged in to use this feature!")
-        return redirect("login")
+        return redirect("website:user_auth:login")
 
 
 def edit_event(request, pk):
@@ -331,7 +331,7 @@ def edit_event(request, pk):
         if form.is_valid():
             form.save()
             messages.success(request, "Updated successfully!")
-            return redirect("event_page", pk=pk)
+            return redirect("website:model_pages:event_page", pk=pk)
 
         return render(request, "website/edit_event.html", {
             "event": events_qs,
@@ -339,7 +339,7 @@ def edit_event(request, pk):
         })
     else:
         messages.error(request, "You have to be logged in to use this feature!")
-        return redirect("login")
+        return redirect("website:user_auth:login")
 
 
 def delete_event(request, pk):
@@ -347,10 +347,10 @@ def delete_event(request, pk):
         event = Event.objects.get(id=pk)
         event.delete()
         messages.success(request, "Event deleted successfully!")
-        return redirect("user_events", pk=request.user.id)
+        return redirect("website:user_profile:user_events", pk=request.user.id)
     else:
         messages.error(request, "You have to be logged in to use this feature!")
-        return redirect("login")
+        return redirect("website:user_auth:login")
 
 
 def edit_profile(request, pk):
@@ -360,7 +360,7 @@ def edit_profile(request, pk):
         if form.is_valid():
             form.save()
             messages.success(request, "Profile updated successfully.")
-            return redirect("profile", pk=pk)
+            return redirect("website:user_profile:profile", pk=pk)
 
         return render(request, "website/edit_profile.html", {
             "profile": profile,
@@ -368,7 +368,7 @@ def edit_profile(request, pk):
         })
     else:
         messages.error(request, "You have to be logged in to use this feature!")
-        return redirect("login")
+        return redirect("website:user_auth:login")
 
 
 def subscribe_newsletter(request):
@@ -381,7 +381,7 @@ def subscribe_newsletter(request):
         else:
             messages.error(request, "Something went wrong, please try again...")
 
-        return redirect("home")
+        return redirect("website:static_pages:home")
 
 
 # User Views
@@ -399,7 +399,7 @@ def user_profile(request, pk):
         })
     else:
         messages.error(request, "You are not logged in!")
-        return redirect("login")
+        return redirect("website:user_auth:login")
 
 
 def user_events(request, pk):
@@ -410,7 +410,7 @@ def user_events(request, pk):
         })
     else:
         messages.error(request, "You have to be logged in to see your events.")
-        return redirect("login")
+        return redirect("website:user_auth:login")
 
 
 def user_promoters(request, pk):
@@ -421,7 +421,7 @@ def user_promoters(request, pk):
         })
     else:
         messages.error(request, "You have to be logged in to see your promoters.")
-        return redirect("login")
+        return redirect("website:user_auth:login")
 
 
 def user_venues(request, pk):
@@ -432,7 +432,7 @@ def user_venues(request, pk):
         })
     else:
         messages.error(request, "You have to be logged in to see your venues.")
-        return redirect("login")
+        return redirect("website:user_auth:login")
 
 
 def user_events_attending(request, pk):
@@ -443,7 +443,7 @@ def user_events_attending(request, pk):
         })
     else:
         messages.error(request, "You are not logged in.")
-        return redirect("login")
+        return redirect("website:user_auth:login")
 
 
 # Authentication Views
@@ -468,21 +468,21 @@ def login_user(request):
                 # Login and redirect
                 login(request, user)
                 messages.success(request, "You have logged in.")
-                return redirect("profile", pk=user.id)
+                return redirect("website:user_profile:profile", pk=user.id)
             else:
                 messages.error(request, "There was a problem logging you in.")
-                return redirect("login")
+                return redirect("website:user_auth:login")
         else:
             return render(request, "website/login.html", {})
     else:
         messages.error(request, "You are already logged in.")
-        return redirect("home")
+        return redirect("website:static_pages:home")
 
 
 def logout_user(request):
     logout(request)
     messages.success(request, "You have been logged out.")
-    return redirect("home")
+    return redirect("website:static_pages:home")
 
 
 def register_user(request):
@@ -505,10 +505,10 @@ def register_user(request):
                 send_register_user_email(first_name, email)
 
                 messages.success(request, "You have successfully registered and have been logged in.")
-                return redirect("profile", pk=user.id)
+                return redirect("website:user_profile:profile", pk=user.id)
             else:
                 messages.error(request, "Your form is not valid.")
-                return redirect("register")
+                return redirect("website:user_auth:register")
         else:
             form = SignUpForm()
             return render(request, "website/register.html", {
@@ -516,7 +516,7 @@ def register_user(request):
             })
     else:
         messages.error(request, "You are already registered.")
-        return redirect("home")
+        return redirect("website:static_pages:home")
 
 
 # Utility Views
@@ -538,4 +538,4 @@ def send_test_email(request):
     send_register_user_email(first_name, email_address)
 
     messages.success(request, "Email sent!")
-    return redirect("home")
+    return redirect("website:static_pages:home")

@@ -13,7 +13,7 @@ Register
 </div>
 
 <div class="container mt-4">
-    <form action="{% url 'register' %}" method="POST" enctype="multipart/form-data">
+    <form action="{% url 'website:user_auth:register' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
             {% if form.errors %}
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -28,7 +28,7 @@ Register
             {% endif %}
         {{ form.as_p }}
         <button type="submit" class="btn btn-info rounded-3">Register</button>
-        <a href="{% url 'home' %}" class="btn btn-outline-secondary btn-sm rounded-3">Back</a>
+        <a href="{% url 'website:static_pages:home' %}" class="btn btn-outline-secondary btn-sm rounded-3">Back</a>
     </form>
 </div>
 
