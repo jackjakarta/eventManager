@@ -34,7 +34,7 @@ My Venues - {{ user.first_name }} {{ user.last_name }}
                         <td>{{ venue.website }}</td>
                         <td><a href="{% url 'website:model_pages:venue_page' venue.id %}" class="btn btn-outline-info btn-sm rounded-3">View</a>
                             <a href="{% url 'website:update_db:edit_venue' venue.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Edit</a>
-                            <a href="{% url 'website:update_db:delete_venue' venue.id %}" class="btn btn-outline-danger btn-sm rounded-3">Delete</a></td>
+<!--                            <a href="{% url 'website:update_db:delete_venue' venue.id %}" class="btn btn-outline-danger btn-sm rounded-3">Delete</a></td>-->
                     </tr>
                 {% endfor %}
             {% endif %}

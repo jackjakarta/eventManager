@@ -34,7 +34,6 @@ My Promoters - {{ user.first_name }} {{ user.last_name }}
                         <td>{{ promoter.website }}</td>
                         <td><a href="{% url 'website:model_pages:promoter_page' promoter.id %}" class="btn btn-outline-info btn-sm rounded-3">View</a>
                             <a href="{% url 'website:update_db:edit_promoter' promoter.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Edit</a>
-                            <a href="{% url 'website:update_db:delete_promoter' promoter.id %}" class="btn btn-outline-danger btn-sm rounded-3">Delete</a></td>
                     </tr>
                 {% endfor %}
             {% endif %}

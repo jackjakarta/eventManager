@@ -12,7 +12,7 @@
     </div>
 
     {% if user == profile.user %}
-    <div class="container mt-4">
+    <div class="container text-center mt-4">
         <form action="" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
@@ -23,7 +23,7 @@
 
     {% else %}
 
-    <div class="container mt-4">
+    <div class="container text-center mt-4">
         <h3>You are not the user of this profile.</h3>
         <a href="{% url 'website:user_profile:profile' user.id %}" class="btn btn-secondary btn-sm rounded-3 mt-3">Back to my profile</a>
     </div>
