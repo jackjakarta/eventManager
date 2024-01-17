@@ -12,8 +12,11 @@ def subscribe_newsletter(request):
         email = request.POST["email"]
 
         if email is not None:
-            NewsletterSub.objects.create(email=email)
-            messages.success(request, "Thank you for subscribing to our Newsletter.")
+            if not NewsletterSub.objects.filter(email=email).exists():
+                NewsletterSub.objects.create(email=email)
+                messages.success(request, "Thank you for subscribing to our Newsletter.")
+            else:
+                messages.error(request, "You are already subscribed to the newsletter.")
         else:
             messages.error(request, "Something went wrong, please try again...")
 
