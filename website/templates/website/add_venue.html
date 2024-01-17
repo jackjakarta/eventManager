@@ -5,9 +5,10 @@ Add Venue
 {% endblock %}
 
 {% block content %}
+
 <div class="col-md-6 offset-md-3">
 
-    <div class="container mt-4">
+    <div class="container text-center mt-4">
         <h2 class="display-7">Add Venue</h2>
     </div>
 
@@ -15,10 +16,13 @@ Add Venue
         <form action="" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit" class="btn btn-info rounded-3">Add Venue</button>
-            <a href="{% url 'website:user_profile:user_venues' user.id %}" class="btn btn-outline-secondary rounded-3">Back</a>
+            <div class="container text-center mt-4">
+                <button type="submit" class="btn btn-info btn-sm rounded-3">Add Venue</button>
+                <a href="{% url 'website:user_profile:user_venues' user.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Back</a>
+            </div>
         </form>
     </div>
 
 </div>
+
 {% endblock %}
