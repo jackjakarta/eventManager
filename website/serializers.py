@@ -6,6 +6,7 @@ class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
         exclude = ["created_at", "updated_at", ]
+        depth = 1
 
 
 class VenueSerializer(serializers.ModelSerializer):

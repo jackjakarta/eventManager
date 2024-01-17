@@ -9,20 +9,47 @@ Home Page
 
 <!-- Hero Section -->
 <div class="p-5 mb-4 bg-light rounded-3">
-  <div class="container-fluid py-5">
-    <h1 class="display-5 fw-bold">Welcome to EvntMngr{% if user.is_authenticated %}, {% if user.first_name %}{{ user.first_name }}{% else %}{{ user }}{% endif %}{% endif %}</h1>
-    <p class="col-md-8 fs-4">Manage and discover events and venues around you.</p>
-    <a class="btn btn-info btn-lg rounded-3" href="{% url 'website:model_pages:events' %}">Explore Events</a>
-    <a class="btn btn-outline-dark btn-lg rounded-3" href="{% url 'website:model_pages:venues' %}">Explore Venues</a>
-  </div>
+    <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">Welcome to EvntMngr{% if user.is_authenticated %}, {% if user.first_name %}{{ user.first_name }}{% else %}{{ user }}{% endif %}{% endif %}</h1>
+        <p class="col-md-8 fs-4">Manage and discover events and venues around you.</p>
+        <a class="btn btn-info btn-lg rounded-3" href="{% url 'website:model_pages:events' %}">Explore Events</a>
+        <a class="btn btn-outline-dark btn-lg rounded-3" href="{% url 'website:model_pages:venues' %}">Explore Venues</a>
+    </div>
 </div>
 
-<!--<div class="container mt-2">-->
-<!--    <div class="card bg-light rounded-3">-->
-<!--        <div class="card-body" data-bs-theme="dark">-->
-<!--            <p>Hello Hello</p>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
+<div class="container mt-4">
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" placeholder="Search events or venues" aria-label="Search events or venues" aria-describedby="button-addon2">
+      <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
+    </div>
+</div>
+
+{% if events %}
+    <div class="container mt-4">
+        <div id="upcomingEventsCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+          {% for event in events %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}" style="height: 300px; overflow: hidden;">
+                <a href="{% url 'website:model_pages:event_page' event.id %}"><img src="{{ event.event_flyer.url }}" class="d-block w-100" alt="{{ event.name }}" style="object-fit: cover;"></a>
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>{{ event.name }}</h5>
+                    <p>{{ event.description | truncatewords:20 }}</p>
+                    <a href="{% url 'website:model_pages:event_page' event.id %}" class="btn btn-dark btn-sm rounded-3">View Event</a>
+              </div>
+            </div>
+          {% endfor %}
+        <!-- Add more items here -->
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#upcomingEventsCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#upcomingEventsCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+    </div>
+{% endif %}
 
 {% endblock %}
