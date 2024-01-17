@@ -36,7 +36,7 @@ def login_user(request):
                 messages.error(request, "There was a problem logging you in.")
                 return redirect("website:user_auth:login")
         else:
-            return render(request, "website/login.html", {})
+            return render(request, "website/auth/login.html", {})
     else:
         messages.error(request, "You are already logged in.")
         return redirect("website:static_pages:home")
@@ -74,7 +74,7 @@ def register_user(request):
                 return redirect("website:user_auth:register")
         else:
             form = SignUpForm()
-            return render(request, "website/register.html", {
+            return render(request, "website/auth/register.html", {
                 "form": form
             })
     else:

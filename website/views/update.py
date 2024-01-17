@@ -16,12 +16,12 @@ def add_promoter(request):
                 return redirect("website:user_profile:user_promoters", pk=request.user.id)
             else:
                 messages.error(request, "Your form is not valid.")
-                return render(request, "website/add_promoter.html", {
+                return render(request, "website/forms/add_promoter.html", {
                     "form": form,
                 })
         else:
             form = AddPromoterForm()
-            return render(request, "website/add_promoter.html", {
+            return render(request, "website/forms/add_promoter.html", {
                 "form": form,
             })
     else:
@@ -38,7 +38,7 @@ def edit_promoter(request, pk):
             messages.success(request, "Promoter updated successfully!")
             return redirect("website:model_pages:promoter_page", pk=pk)
 
-        return render(request, "website/edit_promoter.html", {
+        return render(request, "website/forms/edit_promoter.html", {
             "promoter": promoter,
             "form": form,
         })
@@ -68,12 +68,12 @@ def add_venue(request):
                 return redirect("website:user_profile:user_venues", pk=request.user.id)
             else:
                 messages.error(request, "Your form is not valid.")
-                return render(request, "website/add_venue.html", {
+                return render(request, "website/forms/add_venue.html", {
                     "form": form,
                 })
         else:
             form = AddVenueForm()
-            return render(request, "website/add_venue.html", {
+            return render(request, "website/forms/add_venue.html", {
                 "form": form,
             })
     else:
@@ -90,7 +90,7 @@ def edit_venue(request, pk):
             messages.success(request, "Updated successfully!")
             return redirect("website:model_pages:venue_page", pk=pk)
 
-        return render(request, "website/edit_venue.html", {
+        return render(request, "website/forms/edit_venue.html", {
             "venue": venues_qs,
             "form": form,
         })
@@ -120,12 +120,12 @@ def add_event(request):
                 return redirect("website:user_profile:user_events", pk=request.user.id)
             else:
                 messages.error(request, "Your form is not valid.")
-                return render(request, "website/add_event.html", {
+                return render(request, "website/forms/add_event.html", {
                     "form": form,
                 })
         else:
             form = AddEventForm(user=request.user)
-            return render(request, "website/add_event.html", {
+            return render(request, "website/forms/add_event.html", {
                 "form": form,
             })
     else:
@@ -142,7 +142,7 @@ def edit_event(request, pk):
             messages.success(request, "Updated successfully!")
             return redirect("website:model_pages:event_page", pk=pk)
 
-        return render(request, "website/edit_event.html", {
+        return render(request, "website/forms/edit_event.html", {
             "event": events_qs,
             "form": form,
         })
