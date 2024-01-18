@@ -1,24 +1,69 @@
 {% extends 'website/base.html' %}
 
+{% block title %}
+Feed
+{% endblock %}
+
 {% block content %}
 
-<div class="container mt-4">
-    <p>Post</p>
-</div>
-{% if posts %}
-    {% for post in posts %}
-        <div class="container mt-2">
-            <img src="{{ post.image.url }}" alt="" class="img-fluid">
-            <p><strong>Likes: </strong>{{ post.likes.all.count }}</p>
-            <p class="mt-2">
-                <strong>Author: </strong>{{ post.user.first_name }} {{ post.user.last_name }}
-            </p>
+<div class="col-md-6 offset-md-3">
 
-                <div class="mt-2">
-                    {{ post.description }}
-                </div>
+    {% if posts %}
+
+        <div class="container mt-4">
+            <h1 class="display-5">Recent Posts</h1>
         </div>
-    {% endfor %}
-{% endif %}
+
+        <div class="container mt-4">
+            <a href="{% url 'add_post' %}" class="btn btn-info btn-sm rounded-3">Create Post</a>
+        </div>
+
+        {% for post in posts %}
+            <div class="container mt-4">
+                <div class="card">
+                    <h5 class="card-header">
+                        <img src="{{ post.user.profile.avatar.url }}" alt="" class="img-fluid rounded-circle" style="width: 45px; height: 45px">
+                         {{ post.user.first_name }} {{ post.user.last_name }}
+                    </h5>
+                    <div class="card-body">
+                        <img src="{{ post.image.url }}" alt="{{ post.image.url }}" class="img-fluid" style="max-width: 100%;">
+                        <p class="mt-2"><strong>
+                            {% if post.likes.all.count == 1 %}
+                                {{ post.likes.all.count }} Like
+                            {% else %}
+                                {{ post.likes.all.count }} Likes
+                            {% endif %}
+
+                        </strong></p>
+                        <h5 class="card-title">{{ post.description | truncatewords:2 }}</h5>
+                        <p class="card-text">{{ post.description | truncatewords:20 }}</p>
+
+                        <p>
+                            {% if user not in post.likes.all %}
+                                <a href="{% url 'add_like' post.id %}" class="btn btn-outline-info btn-sm rounded-3">Like</a>
+                            {% else %}
+                                <a href="{% url 'delete_like' post.id %}" class="btn btn-info btn-sm rounded-3">Liked</a>
+                            {% endif %}
+                            <a href="#" class="btn btn-outline-secondary btn-sm rounded-3">Comment</a>
+                        </p>
+                        <p class="mt-3">{{ post.created_at }}{% if post.event.name %} at {{ post.event.name }}{% endif %}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+    {% else %}
+
+        <div class="container text-center mt-4">
+            <h1 class="display-7">Feed</h1>
+        </div>
+
+        <div class="container text-center mt-4">
+            <h4>There are no posts at the moment.</h4>
+        </div>
+
+    {% endif %}
+
+</div>
 
 {% endblock %}
