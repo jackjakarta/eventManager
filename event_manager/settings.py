@@ -173,7 +173,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Static files for production
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 # Default primary key field type
