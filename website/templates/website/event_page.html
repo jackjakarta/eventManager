@@ -40,14 +40,14 @@
 <div class="container mt-2">
     {% if user.is_authenticated %}
         {% if user in event.attendees.all %}
-            <a href="{% url 'website:model_pages:event_unattend' event.id %}" class="btn btn-outline-info rounded-3">Unattend</a>
+            <a href="{% url 'website:model_pages:event_unattend' event.id %}" class="btn btn-outline-info btn-sm rounded-3">Unattend</a>
         {% else %}
-            <a href="{% url 'website:model_pages:event_attend' event.id %}" class="btn btn-info rounded-3">Attend</a>
+            <a href="{% url 'website:model_pages:event_attend' event.id %}" class="btn btn-info btn-sm rounded-3">Attend</a>
         {% endif %}
 
         {% if user == event.manager %}
-            <a href="{% url 'website:update_db:edit_event' event.id %}" class="btn btn-outline-secondary rounded-3">Edit</a>
-            <button type="button" class="btn btn-outline-danger rounded-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <a href="{% url 'website:update_db:edit_event' event.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Edit</a>
+            <button type="button" class="btn btn-outline-danger btn-sm rounded-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Delete
             </button>
             <!--Modal-->
@@ -72,9 +72,9 @@
     {% endif %}
 
     {% if user == event.manager %}
-        <a href="{% url 'website:user_profile:user_events' user.id %}" class="btn btn-outline-secondary rounded-3">Back</a>
+        <a href="{% url 'website:user_profile:user_events' user.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Back</a>
     {% else %}
-        <a href="{% url 'website:model_pages:events' %}" class="btn btn-outline-secondary rounded-3">Back</a>
+        <a href="{% url 'website:model_pages:events' %}" class="btn btn-outline-secondary btn-sm rounded-3">Back</a>
     {% endif %}
 </div>
 

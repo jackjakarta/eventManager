@@ -42,8 +42,8 @@ My Promoters - {{ user.first_name }} {{ user.last_name }}
 </div>
 
 <div class="container">
-    <a href="{% url 'website:update_db:add_promoter' %}" class="btn btn-info rounded-3">Add Promoter</a>
-    <a href="{% url 'website:user_profile:profile' user.id %}" class="btn btn-outline-secondary rounded-3">Back</a>
+    <a href="{% url 'website:update_db:add_promoter' %}" class="btn btn-info btn-sm rounded-3">Add Promoter</a>
+    <a href="{% url 'website:user_profile:profile' user.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Back</a>
 </div>
 
 {% endblock %}
