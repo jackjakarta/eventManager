@@ -1,9 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.http import HttpResponseRedirect
 from .models import Post, PostComment
 
-from .forms import PostForm
+from .forms import PostForm, PostCommentForm
 
 
 def posts_feed(request):
@@ -13,8 +12,16 @@ def posts_feed(request):
     })
 
 
-def post_page(request):
-    pass
+def post_page(request, pk):
+    post = Post.objects.get(id=pk)
+    post_comments = PostComment.objects.filter(post_id=pk)
+    form = PostCommentForm()
+
+    return render(request, "social/post_page.html", {
+        "post": post,
+        "comments": post_comments,
+        "form": form,
+    })
 
 
 def user_posts(request, pk):
@@ -70,7 +77,7 @@ def add_like(request, pk):
         else:
             messages.error(request, "You already like this post!")
 
-        return redirect("posts_feed")
+        return redirect("post_page", pk=pk)
 
     else:
         messages.error(request, "You have to be logged in to use this feature!")
@@ -87,14 +94,23 @@ def delete_like(request, pk):
         else:
             messages.error(request, "You already like this post!")
 
-        return redirect("posts_feed")
+        return redirect("post_page", pk=pk)
     else:
         messages.error(request, "You have to be logged in to use this feature!")
         return redirect("website:static_pages:home")
 
 
-def add_comment(request):
-    pass
+def add_comment(request, pk):
+    if request.method == "POST":
+        post = Post.objects.get(pk=pk)
+        form = PostCommentForm(request.POST, post=post, user=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "You have added a comment.")
+            return redirect("post_page", pk=pk)
+        else:
+            messages.error(request, "There was a problem adding the comment...")
+            return redirect("post_page", pk=pk)
 
 
 def delete_comment(request):
