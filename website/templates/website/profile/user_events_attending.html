@@ -37,7 +37,7 @@ Attending Events - {{ user.first_name }} {{ user.last_name }}
                             </div>
                         </div>
                         <p class="card-text">{{ event.event_date }}</p>
-                        <p class="card-text">{{ event.description }}</p>
+                        <p class="card-text">{{ event.description | truncatewords:30 }}</p>
                         <a href="{% url 'website:model_pages:event_page' event.id %}" class="btn btn-dark btn-sm rounded-3">View Event</a>
 
                         {% if user.is_authenticated %}

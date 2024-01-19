@@ -17,6 +17,7 @@ Home Page
     </div>
 </div>
 
+<!-- Search Bar -->
 <div class="container mt-3">
     <form action="{% url 'website:model_pages:events_search' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
@@ -28,6 +29,7 @@ Home Page
     </form>
 </div>
 
+<!-- Carousel -->
 {% if events %}
     <div class="container mt-4">
         <div id="upcomingEventsCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -42,7 +44,6 @@ Home Page
               </div>
             </div>
           {% endfor %}
-        <!-- Add more items here -->
       </div>
       <button class="carousel-control-prev" type="button" data-bs-target="#upcomingEventsCarousel" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
