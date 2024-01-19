@@ -10,8 +10,7 @@ Welcome to the Event Manager Web App! This web application is designed to help u
 - [API Endpoints](#api-endpoints)
 - [Usage](#usage)
 - [Technologies Used](#technologies-used)
-- [Contributing](#contributing)
-- [License](#license)
+
 
 ## Features
 
@@ -80,13 +79,13 @@ pip3 install -r requirements.txt
 
 5. **Database Setup:**
 - Configure your database settings in `settings.py`.
-- Migrate the table to your new db:
+- Migrate the tables to your new db:
   ```bash
   python3 manage.py migrate
   ```
 
 6. **Configure ENV variables:**
-- Setup your enviroment variables using the tamplate at *.env.default*
+- Setup your enviroment variables using the template at *.env.default*
 
 7. **Run the Development Server:**
 

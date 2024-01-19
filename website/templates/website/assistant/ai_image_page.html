@@ -24,6 +24,13 @@ AI Flyer Generator
         </div>
     </div>
 
+    <div class="container text-center mt-2">
+        <button type="submit" class="btn btn-info btn-sm rounded-3">Get Another Flyer</button>
+        <a href="{{ image }}" class="btn btn-outline-dark btn-sm rounded-3">Download</a>
+        <a href="{% url 'website:user_profile:profile' user.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Back to profile</a>
+    </div>
+
+
 {% else %}
 
     <div class="container mt-3">

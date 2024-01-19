@@ -25,11 +25,25 @@ def post_page(request, pk):
 
 
 def user_posts(request, pk):
-    pass
+    if request.user.is_authenticated:
+        posts = Post.objects.filter(user_id=pk)
+        return render(request, "social/user_posts.html", {
+            "posts": posts,
+        })
+    else:
+        messages.error(request, "You have to be logged in to use this feature!")
+        return redirect("website:auth:login")
 
 
 def liked_posts(request, pk):
-    pass
+    if request.user.is_authenticated:
+        posts = Post.objects.filter(likes=pk)
+        return render(request, "social/user_liked_posts.html", {
+            "posts": posts,
+        })
+    else:
+        messages.error(request, "You have to be logged in to use this feature!")
+        return redirect("website:auth:login")
 
 
 def add_post(request):
