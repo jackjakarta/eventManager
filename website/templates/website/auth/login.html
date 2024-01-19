@@ -4,28 +4,37 @@
 Login
 {% endblock %}
 
-
 {% block content %}
-<div class="col-md-6 offset-md-3">
-
-<div class="container mt-4">
-    <h2 class="display-7">Login</h2>
-</div>
-
-<div class="container mt-4">
-    <form action="{% url 'website:user_auth:login' %}" method="POST">
-        {% csrf_token %}
-         <div class="mb-3">
-    <input type="email" class="form-control" name="email" placeholder="Email Address" required>
-  </div>
-  <div class="mb-3">
-
-    <input type="password" class="form-control" name="password" placeholder="Password" required>
-  </div>
-        <p class="ft-6 fw-lighter">Don't have an account yet ? You can register <a href="{% url 'website:user_auth:register' %}">here</a>.</p>
-  <button type="submit" class="btn btn-secondary rounded-3">Login</button>
-    </form>
-</div>
-
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+<!--            <h3 class="text-center mb-4">Login to use all our features</h3>-->
+            <div class="card">
+                <div class="card-header text-center">
+                    <h2 class="display-7">Login</h2>
+                </div>
+                <div class="card-body">
+                    <form action="{% url 'website:user_auth:login' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Email Address" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                        </div>
+                        <p class="ft-6 fw-lighter">
+                            Don't have an account yet? You can register <a href="{% url 'website:user_auth:register' %}">here</a>.
+                        </p>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-info btn-sm rounded-3">Login</button>
+                            <a href="{% url 'website:static_pages:home' %}" class="btn btn-outline-secondary btn-sm rounded-3">Back</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
