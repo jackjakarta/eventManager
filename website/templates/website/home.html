@@ -18,10 +18,14 @@ Home Page
 </div>
 
 <div class="container mt-3">
-    <div class="input-group mb-3">
-      <input type="text" class="form-control" placeholder="Search events or venues" aria-label="Search events or venues" aria-describedby="button-addon2">
-      <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
-    </div>
+    <form action="{% url 'website:model_pages:events_search' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" name="searched" placeholder="Search events or venues"
+            aria-describedby="button-addon2">
+            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Search</button>
+        </div>
+    </form>
 </div>
 
 {% if events %}

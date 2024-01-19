@@ -46,7 +46,7 @@ def ai_assistant_event(request):
                                       event_flyer_start + len('Event Flyer: '):event_description_start].strip()
                         event_description = event_info[event_description_start + len('Event Description: '):].strip()
 
-                        return render(request, "website/ai_page.html", {
+                        return render(request, "website/assistant/ai_page.html", {
                             "user_prompt": user_prompt,
                             "event_name": event_name,
                             "event_flyer": event_flyer,
@@ -60,7 +60,7 @@ def ai_assistant_event(request):
                         continue
         else:
             form = GPTAssistantsApiForm()
-            return render(request, "website/ai_page.html", {
+            return render(request, "website/assistant/ai_page.html", {
                 "form": form,
             })
     else:
@@ -81,11 +81,11 @@ def ai_assistant_image(request):
                 img_ai.generate_image(prompt_for_model)
                 img_url = img_ai.image_url
 
-                return render(request, "website/ai_image_page.html", {
+                return render(request, "website/assistant/ai_image_page.html", {
                     "image": img_url,
                 })
         else:
             form = DallEImageForm()
-            return render(request, "website/ai_image_page.html", {
+            return render(request, "website/assistant/ai_image_page.html", {
                 "form": form,
             })

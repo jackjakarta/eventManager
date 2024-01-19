@@ -15,4 +15,4 @@ def app_docs(request):
 
 
 def app_docs_api(request):
-    return render(request, "website/docs_api.html", {})
+    return render(request, "website/docs/docs_api.html", {})

@@ -1,21 +1,20 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 
-from website.forms import AddPromoterForm, AddVenueForm, AddEventForm
 from website.models import Event, Venue, Promoter
 
 
 # Events, Venues and Promoters Views
 def venues(request):
     venues_qs = Venue.objects.all()
-    return render(request, "website/venues.html", {
+    return render(request, "website/venues/venues.html", {
         "venues": venues_qs,
     })
 
 
 def venue_page(request, pk):
     venue = Venue.objects.get(id=pk)
-    return render(request, "website/venue_page.html", {
+    return render(request, "website/venues/venue_page.html", {
         "venue": venue,
     })
 
@@ -23,7 +22,7 @@ def venue_page(request, pk):
 def venue_events(request, pk):
     venue_name = Venue.objects.get(id=pk)
     events_at_venue = Event.objects.filter(venue_id=pk)
-    return render(request, "website/venue_events.html", {
+    return render(request, "website/venues/venue_events.html", {
         "events": events_at_venue,
         "venue": venue_name,
     })
@@ -31,28 +30,28 @@ def venue_events(request, pk):
 
 def promoters(request):
     promoters_qs = Promoter.objects.all()
-    return render(request, "website/promoters.html", {
+    return render(request, "website/promoters/promoters.html", {
         "promoters": promoters_qs,
     })
 
 
 def promoter_page(request, pk):
     promoter = Promoter.objects.get(id=pk)
-    return render(request, "website/promoter_page.html", {
+    return render(request, "website/promoters/promoter_page.html", {
         "promoter": promoter,
     })
 
 
 def events(request):
     events_qs = Event.objects.all().order_by("-event_date")
-    return render(request, "website/events.html", {
+    return render(request, "website/events/events.html", {
         "events": events_qs,
     })
 
 
 def event_page(request, pk):
     event = Event.objects.get(id=pk)
-    return render(request, "website/event_page.html", {
+    return render(request, "website/events/event_page.html", {
         "event": event,
     })
 
@@ -89,3 +88,12 @@ def event_un_attend(request, pk):
         return redirect("website:user_auth:login")
 
 
+def events_search(request):
+    if request.method == "POST":
+        searched = request.POST["searched"]
+        events_qs = Event.objects.filter(name__contains=searched)
+
+        return render(request, "website/events/events_search.html", {
+            "searched": searched,
+            "events": events_qs,
+        })
