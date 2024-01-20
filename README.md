@@ -54,10 +54,6 @@ To get started with the Event Manager Web App, follow these steps:
 
 1. **Python and Django**:
    - Make sure you have Python installed. This project was developed with Python 3.11.+ and Django 5.1.
-   - Install Django using: 
-   ```bash
-   pip3 install django
-   ```
 
 2. **Clone the Repository**:
 

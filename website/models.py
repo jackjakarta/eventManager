@@ -70,8 +70,8 @@ class Event(MyModel):
     promoter = models.ForeignKey(Promoter, blank=True, null=True, on_delete=models.CASCADE)
     artists = models.ManyToManyField(Artist, related_name="event_artists", blank=True)
     manager = models.ForeignKey(AuthUser, null=True, on_delete=models.SET_NULL)
-    event_flyer = models.ImageField("Event Flyer", upload_to="event_flyers/", default=None, null=True)
-    description = models.TextField(blank=True)
+    event_flyer = models.ImageField("Event Flyer", upload_to="event_flyers/", default=None, null=False)
+    description = models.TextField(max_length=350, blank=True)
     attendees = models.ManyToManyField(AuthUser, related_name="attended_events", blank=True)
 
     def __str__(self):
