@@ -11,12 +11,10 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 import os
-import django_heroku
-import dj_database_url
 
-from pathlib import Path
 from datetime import timedelta
 from decouple import config
+from pathlib import Path
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -84,10 +82,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'event_manager.urls'
+
+
+# Templates Settings
 
 TEMPLATES = [
     {
@@ -108,7 +108,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'event_manager.wsgi.application'
 
 
-# Database
+# Database Settings
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
@@ -121,6 +121,7 @@ DATABASES = {
         'PASSWORD': config('DB_PASSWORD')
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -213,5 +214,3 @@ CRISPY_TEMPLATE_PACK = 'bootstrap5'
 # Custom User Model
 
 AUTH_USER_MODEL = 'users.AuthUser'
-
-# django_heroku.settings(locals())
