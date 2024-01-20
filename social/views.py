@@ -115,16 +115,20 @@ def delete_like(request, pk):
 
 
 def add_comment(request, pk):
-    if request.method == "POST":
-        post = Post.objects.get(pk=pk)
-        form = PostCommentForm(request.POST, post=post, user=request.user)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "You have added a comment.")
-            return redirect("post_page", pk=pk)
-        else:
-            messages.error(request, "There was a problem adding the comment...")
-            return redirect("post_page", pk=pk)
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            post = Post.objects.get(pk=pk)
+            form = PostCommentForm(request.POST, post=post, user=request.user)
+            if form.is_valid():
+                form.save()
+                messages.success(request, "You have added a comment.")
+                return redirect("post_page", pk=pk)
+            else:
+                messages.error(request, "There was a problem adding the comment...")
+                return redirect("post_page", pk=pk)
+    else:
+        messages.error(request, "You have to be logged in to use this feature!")
+        return redirect("website:static_pages:home")
 
 
 def delete_comment(request):

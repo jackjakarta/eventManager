@@ -61,7 +61,7 @@ To get started with the Event Manager Web App, follow these steps:
 git clone https://github.com/jackjakarta/eventManager
 ```
 
-3. **Create and activate a new python enviroment to install your dependencies:**
+3. **Create and activate a new python environment to install your dependencies:**
 ```bash
 python3 -m venv env
 source env/bin/activate
@@ -81,7 +81,7 @@ pip3 install -r requirements.txt
   ```
 
 6. **Configure ENV variables:**
-- Setup your enviroment variables using the template at *.env.default*
+- Setup your environment variables using the template at *.env.default*
 
 7. **Run the Development Server:**
 

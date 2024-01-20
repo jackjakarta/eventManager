@@ -9,7 +9,8 @@ Liked Posts - {{ user.first_name }} {{ user.last_name }}
 <div class="col-md-6 offset-md-3">
 
     {% if posts %}
-
+        {% for post in posts %}
+            {% if user in post.likes.all %}
         <div class="container mt-4">
             <h1 class="display-5">Liked Posts</h1>
         </div>
@@ -18,8 +19,6 @@ Liked Posts - {{ user.first_name }} {{ user.last_name }}
             <a href="{% url 'add_post' %}" class="btn btn-info btn-sm rounded-3">Create Post</a>
         </div>
 
-    {% for post in posts %}
-        {% if user == post.user %}
             <div class="container mt-4">
                 <div class="card">
                     <h5 class="card-header">
@@ -51,33 +50,45 @@ Liked Posts - {{ user.first_name }} {{ user.last_name }}
                     </div>
                 </div>
             </div>
-        {% else %}
+                {% else %}
+                    <div class="container text-center mt-4">
+                        <h1 class="display-7">Liked Posts</h1>
+                    </div>
+
+                    <div class="container text-center mt-4">
+                        <h4>This is not your profile and can't see the liked posts.</h4>
+                    </div>
+
+                    <div class="container text-center mt-4">
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'posts_feed' %}" class="btn btn-info btn-sm rounded-3">View Feed</a>
+                        {% endif %}
+                        <a href="{% url 'website:user_profile:profile' user.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Back to my profile</a>
+                    </div>
+
+            {% endif %}
+        {% endfor %}
 
             <div class="container mt-4">
-                <h2 class="display-5"></h2>
-                <p>This is not your profile and can't see the liked posts.</p>
-                <a href="{ url 'website:user_profile:profile' user.id }" class="btn btn-secondary btn-sm rounded-3"></a>
+                <a href="{% url 'website:user_profile:profile' user.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Back to my profile</a>
             </div>
-        {% endif %}
-    {% endfor %}
 
     {% else %}
 
         <div class="container text-center mt-4">
-            <h1 class="display-7">My Posts</h1>
+            <h1 class="display-7">Liked Posts</h1>
         </div>
 
         <div class="container text-center mt-4">
-            <h4>You have liked posts at the moment. Like your first post.</h4>
+            <h4>You haven't liked any posts at the moment. Like your first post.</h4>
         </div>
 
-        <div class="container mt-4">
+        <div class="container text-center mt-4">
             {% if user.is_authenticated %}
                 <a href="{% url 'posts_feed' %}" class="btn btn-info btn-sm rounded-3">View Feed</a>
             {% endif %}
             <a href="{% url 'website:user_profile:profile' user.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Back to my profile</a>
         </div>
-
 
     {% endif %}
 
