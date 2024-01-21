@@ -86,6 +86,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'event_manager.urls'
 
+API_KEY_CUSTOM_HEADER = "HTTP_X_API_KEY"
+
 
 # Templates Settings
 
