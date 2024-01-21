@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 
 from website.forms import SignUpForm
-from website.utils import send_register_user_email, send_login_user_email
+from website.utils import send_login_user_email
 
 
 # Authentication Views
@@ -21,9 +21,9 @@ def login_user(request):
 
             if user is not None:
                 # Check if user hasn't logged in a while.
-                days_ago = datetime.now(pytz.utc) - timedelta(days=2)
+                days_ago = datetime.now(pytz.utc) - timedelta(days=15)
                 if user.last_login < days_ago:
-                    send_login_user_email(user.first_name, user.email)  # Change function after test
+                    send_login_user_email(user.first_name, user.email)
                     print("Email sent to user!")
                 else:
                     print("User logged in 1 day ago.")
@@ -56,16 +56,12 @@ def register_user(request):
                 form.save()
 
                 # Get user data from form
-                first_name = form.cleaned_data["first_name"]
                 email = form.cleaned_data["email"]
                 password = form.cleaned_data["password1"]
 
                 # Login user
                 user = authenticate(request, email=email, password=password)
                 login(request, user)
-
-                # Send welcome email to user
-                send_register_user_email(first_name, email)
 
                 messages.success(request, "You have successfully registered and have been logged in.")
                 return redirect("website:user_profile:profile", pk=user.id)
