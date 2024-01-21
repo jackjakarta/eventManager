@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 
 from website.forms import EditProfileForm
-from website.models import Profile, Event, Venue, Promoter
+from website.models import Profile, Event, Venue, Promoter, Artist
 
 
 # User Views
@@ -39,6 +39,14 @@ def edit_profile(request, pk):
     else:
         messages.error(request, "You have to be logged in to use this feature!")
         return redirect("website:user_auth:login")
+
+
+def user_artists(request, pk):
+    if request.user.is_authenticated:
+        artists_user = Artist.objects.filter(manager_id=pk)
+        return render(request, "website/profile/user_artists.html", {
+            "user_artists": artists_user,
+        })
 
 
 def user_events(request, pk):

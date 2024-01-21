@@ -1,0 +1,61 @@
+{% extends 'website/base.html' %}
+
+{% block title %}
+Artists
+{% endblock %}
+
+{% block content %}
+
+{% if artists %}
+
+<div class="container mt-4">
+    <h1 class="display-5">Artists</h1>
+</div>
+
+<div class="container mt-3">
+    <a href="#" class="btn btn-info btn-sm rounded-3">Add Artist</a>
+</div>
+
+{% for artist in artists %}
+    <div class="container mt-3">
+        <div class="col-md-4">
+            <div class="card">
+                <img src="{{ artist.image.url }}" class="card-img-top" alt="{{ artist.name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ artist.name }}</h5>
+                    <p class="card-text">{{ artist.city }}, {{ artist.country }}</p>
+                    <a href="{% url 'website:model_pages:artist_page' artist.id %}" class="btn btn-info btn-sm rounded-3">Artist Page</a>
+                    {% if artist.website %}
+                        <a href="{{ artist.website }}" class="btn btn-secondary btn-sm rounded-3">Visit Website</a>
+                    {% endif %}
+                    {% if artist.email %}
+                        <a href="mailto:{{ artist.email }}" class="btn btn-outline-secondary btn-sm rounded-3">Contact</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
+<div class="container mt-3">
+    <a href="{% url 'website:model_pages:artists' %}" class="btn btn-outline-secondary btn-sm rounded-3">Back</a>
+</div>
+
+{% else %}
+
+    <div class="container text-center mt-4">
+            <h1 class="display-7">Artists</h1>
+    </div>
+
+    <div class="container text-center mt-4">
+        <h4>There are no artists at the moment. Add the first Artist.</h4>
+    </div>
+
+    <div class="container text-center mt-4">
+        <a href="#" class="btn btn-info btn-sm rounded-3">Add Artist</a>
+        <a href="{% url 'website:static_pages:home' %}" class="btn btn-outline-secondary btn-sm rounded-3">Back to home</a>
+    </div>
+
+{% endif %}
+
+{% endblock %}

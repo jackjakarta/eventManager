@@ -1,10 +1,33 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 
-from website.models import Event, Venue, Promoter
+from website.models import Event, Venue, Promoter, Artist
 
 
-# Events, Venues and Promoters Views
+# Events, Artists, Venues and Promoters Views
+def artists(request):
+    artists_qs = Artist.objects.all()
+    return render(request, "website/artists/artists.html", {
+        "artists": artists_qs,
+    })
+
+
+def artist_page(request, pk):
+    artist_qs = Artist.objects.get(id=pk)
+    return render(request, "website/artists/artist_page.html", {
+        "artist": artist_qs,
+    })
+
+
+def artist_events(request, pk):
+    artist_name = Artist.objects.get(id=pk)
+    events_with_artist = Event.objects.filter(artists=pk)
+    return render(request, "website/artists/artist_events.html", {
+        "artist": artist_name,
+        "events": events_with_artist,
+    })
+
+
 def venues(request):
     venues_qs = Venue.objects.all()
     return render(request, "website/venues/venues.html", {

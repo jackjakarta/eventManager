@@ -73,27 +73,28 @@ class RandomGenerator:
     """Random String Generator. Default length is 10 characters."""
     def __init__(self, length=10):
         self.length = length
+        self.random_key = None
 
     def random_string(self):
         char_list = string.ascii_lowercase + string.digits
-        random_key = "".join(random.choices(char_list, k=self.length))
+        self.random_key = "".join(random.choices(char_list, k=self.length))
 
-        return random_key
+        return self.random_key
 
     def random_digits(self):
         char_list = string.digits
-        random_key = "".join(random.choices(char_list, k=self.length))
+        self.random_key = "".join(random.choices(char_list, k=self.length))
 
-        return random_key
+        return self.random_key
 
     def random_letters(self):
         char_list = string.ascii_letters
-        random_key = "".join(random.choices(char_list, k=self.length))
+        self.random_key = "".join(random.choices(char_list, k=self.length))
 
-        return random_key
+        return self.random_key
 
+    def random_chars(self):
+        char_list = string.ascii_letters + string.digits + string.punctuation
+        self.random_key = "".join(random.choices(char_list, k=self.length))
 
-def generate_api_key():
-    api_key = RandomGenerator(38).random_string()
-
-    return api_key
+        return self.random_key

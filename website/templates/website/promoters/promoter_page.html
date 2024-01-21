@@ -16,6 +16,7 @@
     <ul>
         <li>{{ promoter.name }}</li>
     </ul>
+    {% if user.is_authenticated %}
     <button type="button" class="btn btn-outline-danger btn-sm rounded-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Delete
     </button>
@@ -28,7 +29,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            Please confirm if you want to delete promoter.
+              Please confirm if you want to delete: <strong>{{ promoter.name }}</strong>
           </div>
           <div class="modal-footer">
               <a href="{% url 'website:update_db:delete_promoter' promoter.id %}" class="btn btn-danger btn-sm rounded-3">Delete</a>
@@ -37,6 +38,7 @@
         </div>
       </div>
     </div>
+    {% endif %}
 </div>
 
 {% endblock %}

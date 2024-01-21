@@ -23,6 +23,9 @@
                     <a class="nav-link" href="{% url 'website:model_pages:events' %}"><strong>Events</strong></a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="{% url 'website:model_pages:artists' %}"><strong>Artists</strong></a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="{% url 'website:model_pages:venues' %}"><strong>Venues</strong></a>
                 </li>
                 <li class="nav-item">
@@ -40,6 +43,7 @@
                         <li><a class="dropdown-item" href="{% url 'website:user_profile:user_events_attending' user.id %}">Events Attending</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="{% url 'website:user_profile:user_events' user.id  %}">My Events</a></li>
+                        <li><a class="dropdown-item" href="#">My Artists</a></li>
                         <li><a class="dropdown-item" href="{% url 'website:user_profile:user_promoters' user.id  %}">My Promoters</a></li>
                         <li><a class="dropdown-item" href="{% url 'website:user_profile:user_venues' user.id  %}">My Venues</a></li>
                         <li><hr class="dropdown-divider"></li>

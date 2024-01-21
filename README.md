@@ -10,7 +10,7 @@ Welcome to the Event Manager Web App! This web application is designed to help u
 - [API Endpoints](#api-endpoints)
 - [Usage](#usage)
 - [Technologies Used](#technologies-used)
-
+- [Visit Demo App](https://evntmngr.xyz)
 
 ## Features
 
@@ -81,7 +81,7 @@ pip3 install -r requirements.txt
   ```
 
 6. **Configure ENV variables:**
-- Setup your environment variables using the template at *.env.default*
+- Set up your environment variables using the template at `.env.default`
 
 7. **Run the Development Server:**
 

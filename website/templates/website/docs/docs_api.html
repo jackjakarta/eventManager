@@ -14,6 +14,7 @@ Upcoming Events
     <div class="card bg-light">
         <div class="card-body" data-bs-theme="dark">
 
+        <!--EVENTS ENDPOINT-->
             <div class="row">
                 <h2 class="display-7 mt-4">
                     Events Endpoint
@@ -28,7 +29,9 @@ Upcoming Events
                                 <strong>Methods:</strong><br><br>
                                 <strong>GET:</strong> Retrieve a list of events<br>
                                 <strong>POST:</strong> Create a new event<br>
-                                <strong>Authentication:</strong> JWT Token required for POST<br>
+                                <strong>PUT:</strong> Update event details<br>
+                                <strong>DELETE:</strong> Delete an event<br>
+                                <strong>Authentication:</strong> API Key or JWT Token required for POST, PUT, DELETE<br>
                             </p>
                         </div>
                     </div>
@@ -47,8 +50,8 @@ Upcoming Events
                                 <div class="card bg-dark">
                                     <div class="card-body" data-bs-theme="dark" style="color: #cccccc;">
                                         POST https://evntmngr.xyz/api/events/<br>
-                                        Authorization: Bearer your_access_token<br>
-                                        Content-Type: application/json<br><br>
+                                        Content-Type: application/json<br>
+                                        X-Api-Key: your-api-key<br><br>
 
                                         {<br>
                                             "name": "Event Name",<br>
@@ -58,10 +61,35 @@ Upcoming Events
                                         }<br>
                                     </div>
                                 </div>
+                            <h4 class="mt-4">PUT</h4>
+                                <div class="card bg-dark">
+                                    <div class="card-body" data-bs-theme="dark" style="color: #cccccc;">
+                                        POST https://evntmngr.xyz/api/events/event_id/<br>
+                                        Content-Type: application/json<br>
+                                        X-Api-Key: your-api-key<br><br>
+
+                                        {<br>
+                                            "name": "Event Name",<br>
+                                            "event_date": "2024-01-31",<br>
+                                            "venue": "Venue ID"<br>
+                                            "event_flyer": "event flyer url"<br>
+                                        }<br>
+                                    </div>
+                                </div>
+                            <h4 class="mt-4">DELETE</h4>
+                                <div class="card bg-dark">
+                                    <div class="card-body" data-bs-theme="dark" style="color: #cccccc;">
+                                        POST https://evntmngr.xyz/api/events/event_id/<br>
+                                        Content-Type: application/json<br>
+                                        X-Api-Key: your-api-key<br>
+                                    </div>
+                                </div>
                         </div>
                     </div>
                 </div>
 
+
+            <!--VENUES ENDPOINT-->
             <div class="row">
                 <h2 class="display-7 mt-4">
                     Venues Endpoint
@@ -76,7 +104,9 @@ Upcoming Events
                                 <strong>Methods:</strong><br><br>
                                 <strong>GET:</strong> Retrieve a list of venues<br>
                                 <strong>POST:</strong> Create a new venue<br>
-                                <strong>Authentication:</strong> JWT Token required for POST<br>
+                                <strong>PUT:</strong> Update venue details<br>
+                                <strong>DELETE:</strong> Delete a venue<br><br>
+                                <strong>Authentication:</strong> API Key or JWT Token required for POST, PUT, DELETE<br>
                             </p>
                         </div>
                     </div>
@@ -95,13 +125,166 @@ Upcoming Events
                                 <div class="card bg-dark">
                                     <div class="card-body" data-bs-theme="dark" style="color: #cccccc;">
                                         POST https://evntmngr.xyz/api/venues/<br>
-                                        Authorization: Bearer your_access_token<br>
+                                        Content-Type: application/json<br>
+                                        X-Api-Key: your-api-key<br><br>
+
+                                        {<br>
+                                          "name": "Bao Bar",<br>
+                                          "city": "Vienna",<br>
+                                        }<br>
+                                    </div>
+                                </div>
+                            <h4 class="mt-4">PUT</h4>
+                                <div class="card bg-dark">
+                                    <div class="card-body" data-bs-theme="dark" style="color: #cccccc;">
+                                        POST https://evntmngr.xyz/api/venues/venue_id/<br>
+                                        Content-Type: application/json<br>
+                                        X-Api-Key: your-api-key<br><br>
+
+                                        {<br>
+                                          "name": "Bao Bar",<br>
+                                          "city": "Vienna",<br>
+                                        }<br>
+                                    </div>
+                                </div>
+                            <h4 class="mt-4">DELETE</h4>
+                                <div class="card bg-dark">
+                                    <div class="card-body" data-bs-theme="dark" style="color: #cccccc;">
+                                        POST https://evntmngr.xyz/api/venues/venue_id/<br>
+                                        Content-Type: application/json<br>
+                                        X-Api-Key: your-api-key<br>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--PROMOTERS ENDPOINT-->
+            <div class="row">
+                <h2 class="display-7 mt-4">
+                    Promoters Endpoint
+                </h2>
+                <div class="col-md-6 mt-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4>Info</h4>
+                            <p>
+                                <strong>Endpoint:</strong> https://evntmngr.xyz/api/promoters/<br>
+                                <strong>Description:</strong> Perform operations related to promoters<br><br>
+                                <strong>Methods:</strong><br><br>
+                                <strong>GET:</strong> Retrieve a list of promoters<br>
+                                <strong>POST:</strong> Create a new promoter<br>
+                                <strong>PUT:</strong> Update promoter details<br>
+                                <strong>DELETE:</strong> Delete a promoter<br><br>
+                                <strong>Authentication:</strong> API Key or JWT Token required for POST, PUT, DELETE<br>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col md-6 mt-2">
+                    <div class="card">
+                        <div class="card-body" data-bs-theme="dark">
+                            <h4>GET</h4>
+                                <div class="card bg-dark">
+                                    <div class="card-body" data-bs-theme="dark" style="color: #cccccc;">
+                                        GET https://evntmngr.xyz.com/api/promoters/
+                                    </div>
+                                </div>
+                            <h4 class="mt-4">POST</h4>
+                                <div class="card bg-dark">
+                                    <div class="card-body" data-bs-theme="dark" style="color: #cccccc;">
+                                        POST https://evntmngr.xyz/api/promoters/<br>
+                                        Content-Type: application/json<br>
+                                        X-Api-Key: your-api-key<br><br>
+
+                                        {<br>
+                                            "name": "Promoter Name",<br>
+                                            "city": "Vienna",<br>
+                                            "email": "email@promoter.com"<br>
+                                            "website": "https://promoter.com"<br>
+                                        }<br>
+                                    </div>
+                                </div>
+                            <h4 class="mt-4">PUT</h4>
+                                <div class="card bg-dark">
+                                    <div class="card-body" data-bs-theme="dark" style="color: #cccccc;">
+                                        PUT https://evntmngr.xyz/api/promoters/promoter-id/<br>
+                                        Content-Type: application/json<br>
+                                        X-Api-Key: your-api-key<br><br>
+
+                                        {<br>
+                                            "name": "Promoter Name",<br>
+                                            "city": "Vienna",<br>
+                                            "email": "email@promoter.com"<br>
+                                            "website": "https://promoter.com"<br>
+                                        }<br>
+                                    </div>
+                                </div>
+                            <h4 class="mt-4">DELETE</h4>
+                                <div class="card bg-dark">
+                                    <div class="card-body" data-bs-theme="dark" style="color: #cccccc;">
+                                        DELETE https://evntmngr.xyz/api/promoters/promoter-id/<br>
+                                        X-Api-Key: your-api-key<br>
+                                        Content-Type: application/json<br>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--JWT TOKEN ENDPOINT-->
+            <div class="row">
+                <h2 class="display-7 mt-4">
+                    JWT Token Endpoint
+                </h2>
+                <div class="col-md-6 mt-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4>Info</h4>
+                            <p>
+                                <p>Alternatively you can generate JWT Token Pairs with your user credentials to use
+                                instead of an API Key for authentication.</p><br>
+                                <strong class="mt-4">Token Generate Endpoint:</strong> https://evntmngr.xyz/api/auth/<br>
+                                <strong>Token Refresh Endpoint:</strong> https://evntmngr.xyz/api/auth/refresh/<br><br>
+<!--                                <strong>Description:</strong> Generate or Refresh JWT Tokens<br><br>-->
+                                <h4 class="mb-4">Methods</h4>
+                                <strong>POST:</strong> Generate a JWT Token Pair or Refresh JWT Access Token <br>
+                                <strong>Authentication:</strong> Pass your user credentials in the headers<br><br>
+
+                                The Access Token is valid for <strong>30 mins</strong> and the <strong>Refresh Token</strong>
+                                is valid for <strong>24 hours</strong>.
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col md-6 mt-2">
+                    <div class="card">
+                        <div class="card-body" data-bs-theme="dark">
+                            <h4 class="mt-4">POST - Auth</h4>
+                                <div class="card bg-dark">
+                                    <div class="card-body" data-bs-theme="dark" style="color: #cccccc;">
+                                        POST https://evntmngr.xyz/api/auth/<br>
                                         Content-Type: application/json<br><br>
 
                                         {<br>
-                                          "name": "Event Name",<br>
-                                          "date": "2024-01-31",<br>
-                                          "location": "Event Location"<br>
+                                          "email": "your-email",<br>
+                                          "password": "your-password"<br>
+                                        }<br>
+                                    </div>
+                                </div>
+                            <h4 class="mt-4">POST - Refresh</h4>
+                                <div class="card bg-dark">
+                                    <div class="card-body" data-bs-theme="dark" style="color: #cccccc;">
+                                        POST https://evntmngr.xyz/api/auth/refresh/<br>
+                                        Content-Type: application/json<br><br>
+
+                                        {<br>
+                                          "refresh": "your-refresh-token"<br>
                                         }<br>
                                     </div>
                                 </div>

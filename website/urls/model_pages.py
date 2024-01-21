@@ -1,15 +1,19 @@
 from django.urls import path
 
-from website.views.model import venues, events, promoters
-from website.views.model import venue_page, event_page, promoter_page
-from website.views.model import venue_events, event_attend, event_un_attend
+from website.views.model import artists, events, promoters, venues
+from website.views.model import artist_page, event_page, promoter_page, venue_page
+from website.views.model import artist_events, venue_events, event_attend, event_un_attend
 from website.views.model import events_search
 
 
 app_name = 'model_pages'
 
 urlpatterns = [
-    # Venues, Promoters, Events
+    # Artists, Venues, Promoters, Events
+    path('artists/', artists, name='artists'),
+    path('artists/<int:pk>/', artist_page, name='artist_page'),
+    path('artists/<int:pk>/events/', artist_events, name='artist_events'),
+
     path('venues/', venues, name='venues'),
     path('venues/<int:pk>/', venue_page, name='venue_page'),
     path('venues/<int:pk>/events/', venue_events, name='venue_events'),

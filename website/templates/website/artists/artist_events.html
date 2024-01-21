@@ -1,0 +1,85 @@
+{% extends 'website/base.html' %}
+
+{% block title %}
+{{ artist.name }} - Events
+{% endblock %}
+
+{% block content %}
+
+{% if events %}
+
+    <div class="container mt-4">
+        <h1 class="display-5">Events with {{ artist.name }}</h1>
+    </div>
+
+    <div class="container mt-2">
+        <p>Events featuring {{ artist.name }}</p>
+    </div>
+
+    <div class="container mt-3">
+        <a href="{% url 'website:update_db:add_event' %}" class="btn btn-info btn-sm rounded-3">Add Event</a>
+            <a href="{% url 'website:model_pages:artists' %}" class="btn btn-outline-secondary btn-sm rounded-3">Back</a>
+    </div>
+
+    <div class="container mt-3">
+        {% for event in events %}
+        <div class="card mb-3 rounded-3">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <!-- Event Flyer Image -->
+                    <img src="{{ event.event_flyer.url }}" class="img-fluid rounded-start" alt="Event Flyer"
+                         style="height: 250px; width: 300px;">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ event.name }}</h5>
+                        <p class="card-text">{{ event.event_date }}</p>
+                        <p class="card-text">{{ event.description | truncatewords:30 }}</p>
+                        <a href="{% url 'website:model_pages:event_page' event.id %}" class="btn btn-dark btn-sm rounded-3">View Event</a>
+                        <a href="{% url 'website:model_pages:artist_page' artist.id %}" class="btn btn-dark btn-sm rounded-3">Artist Page</a>
+
+                        {% if user.is_authenticated %}
+                            {% if user in event.attendees.all %}
+                                <a href="{% url 'website:model_pages:event_unattend' event.id %}" class="btn btn-outline-info btn-sm rounded-3">Unattend</a>
+                            {% else %}
+                                <a href="{% url 'website:model_pages:event_attend' event.id %}" class="btn btn-info btn-sm rounded-3">Attend</a>
+                            {% endif %}
+                            {% if user == event.manager %}
+                                <a href="{% url 'website:update_db:edit_event' event.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Edit</a>
+                            {% endif %}
+                        {% endif %}
+                        <p class="card-text mt-2"><small class="text-muted">Last updated on {{ event.updated_at }}</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="container">
+        <a href="{% url 'website:update_db:add_event' %}" class="btn btn-info btn-sm rounded-3">Add Event</a>
+        <a href="{% url 'website:model_pages:artists' %}" class="btn btn-outline-secondary btn-sm rounded-3">Back</a>
+    </div>
+
+{% else %}
+
+    <div class="container text-center mt-4">
+        <h1 class="display-5">Events with {{ artist.name }}</h1>
+    </div>
+
+    <div class="container text-center mt-2">
+        <h3>There are no events featuring {{ artist.name }} at the moment.</h3>
+    </div>
+
+    <div class="container text-center mt-3">
+        {% if user.is_authenticated %}
+            <a href="{% url 'website:update_db:add_event' %}" class="btn btn-info btn-sm rounded-3">Add Event</a>
+        {% endif %}
+        <a href="{% url 'website:model_pages:artists' %}" class="btn btn-outline-secondary btn-sm rounded-3">Back to artists</a>
+    </div>
+{% endif %}
+
+
+
+
+{% endblock %}
