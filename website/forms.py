@@ -41,6 +41,40 @@ class SignUpForm(UserCreationForm):
                                       'for verification.</small></span>')
 
 
+class AddArtistForm(forms.ModelForm):
+    class Meta:
+        model = Artist
+        fields = ("name", "email", "website", "city", "country", "image", )
+        labels = {
+            "name": "",
+            "email": "",
+            "website": "",
+            "city": "",
+            "country": "",
+            "image": "Artist Image:"
+        }
+        widgets = {
+            "name": forms.TextInput(attrs={"class": "form-control", "placeholder": "Artist/Band Name"}),
+            "email": forms.TextInput(attrs={"class": "form-control", "placeholder": "Booking Email"}),
+            "website": forms.TextInput(attrs={"class": "form-control", "placeholder": "Social Link"}),
+            "city": forms.TextInput(attrs={"class": "form-control", "placeholder": "City"}),
+            "country": forms.TextInput(attrs={"class": "form-control", "placeholder": "Country"}),
+            "image": forms.ClearableFileInput(attrs={"class": "form-control", "placeholder": "Artist Image"}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop("user", None)
+        super(AddArtistForm, self).__init__(*args, **kwargs)
+
+    def save(self, commit=True):
+        instance = super(AddArtistForm, self).save(commit=False)
+        if self.user:
+            instance.manager = self.user
+        if commit:
+            instance.save()
+        return instance
+
+
 class AddPromoterForm(forms.ModelForm):
     class Meta:
         model = Promoter

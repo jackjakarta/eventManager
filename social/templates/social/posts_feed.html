@@ -35,10 +35,10 @@ Feed
                             {% endif %}
 
                         </strong></p>
-                        <h5 class="card-title">{{ post.description | truncatewords:2 }}</h5>
-                        <p class="card-text">{{ post.description | truncatewords:20 }}</p>
+                        <h5 class="card-title">{{ post.description | truncatewords:20 }}</h5>
+<!--                        <p class="card-text">{{ post.description | truncatewords:20 }}</p>-->
 
-                        <p>
+                        <p class="mt-3">
                             {% if user not in post.likes.all %}
                                 <a href="{% url 'add_like' post.id %}" class="btn btn-outline-info btn-sm rounded-3">Like</a>
                             {% else %}
@@ -46,7 +46,7 @@ Feed
                             {% endif %}
                             <a href="{% url 'post_page' post.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Comment</a>
                         </p>
-                        <p class="mt-3">{{ post.created_at }}{% if post.event.name %} at {{ post.event.name }}{% endif %}</p>
+                        <p class="mt-3">{{ post.created_at }}{% if post.event.name %} at <a href="{% url 'website:model_pages:event_page' post.event.id %}">{{ post.event }}</a>{% endif %}</p>
                     </div>
                 </div>
             </div>

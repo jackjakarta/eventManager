@@ -43,17 +43,20 @@ def edit_profile(request, pk):
 
 def user_artists(request, pk):
     if request.user.is_authenticated:
-        artists_user = Artist.objects.filter(manager_id=pk)
+        artists_qs = Artist.objects.filter(manager_id=pk)
         return render(request, "website/profile/user_artists.html", {
-            "user_artists": artists_user,
+            "artists": artists_qs,
         })
+    else:
+        messages.error(request, "You have to be logged in to see your events.")
+        return redirect("website:user_auth:login")
 
 
 def user_events(request, pk):
     if request.user.is_authenticated:
-        events_user = Event.objects.filter(manager_id=pk)
+        events_qs = Event.objects.filter(manager_id=pk)
         return render(request, "website/profile/user_events.html", {
-            "user_events": events_user,
+            "events": events_qs,
         })
     else:
         messages.error(request, "You have to be logged in to see your events.")

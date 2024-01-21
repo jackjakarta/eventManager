@@ -1,11 +1,42 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 
-from website.forms import AddPromoterForm, AddVenueForm, AddEventForm
+from website.forms import AddArtistForm, AddPromoterForm, AddVenueForm, AddEventForm
 from website.models import Event, Venue, Promoter
 
 
 # Add, Edit, Delete from DB forms
+def add_artist(request):
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            form = AddArtistForm(request.POST, request.FILES, user=request.user)
+            if form.is_valid():
+                form.save()
+                messages.success(request, "You have successfully added an artist.")
+                return redirect("website:user_profile:user_artists", pk=request.user.id)
+            else:
+                messages.error(request, "Your form is not valid.")
+                return render(request, "website/forms/add_artist.html", {
+                    "form": form,
+                })
+        else:
+            form = AddArtistForm()
+            return render(request, "website/forms/add_artist.html", {
+                "form": form,
+            })
+    else:
+        messages.error(request, "You have to be logged in to use this feature!")
+        return redirect("website:user_auth:login")
+
+
+def edit_artist(request, pk):
+    pass
+
+
+def delete_artist(request, pk):
+    pass
+
+
 def add_promoter(request):
     if request.user.is_authenticated:
         if request.method == "POST":

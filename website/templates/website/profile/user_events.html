@@ -27,8 +27,8 @@ My Events - {{ user.first_name }} {{ user.last_name }}
         </thead>
 
         <tbody>
-            {% if user_events %}
-                {% for event in user_events %}
+            {% if events %}
+                {% for event in events %}
                     <tr>
                         <td>{{ event.name }}</td>
                         <td>{{ event.event_date }}</td>
