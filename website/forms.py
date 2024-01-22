@@ -44,9 +44,10 @@ class SignUpForm(UserCreationForm):
 class AddArtistForm(forms.ModelForm):
     class Meta:
         model = Artist
-        fields = ("name", "email", "website", "city", "country", "image", )
+        fields = ("name", "bio", "image", "email", "website", "city", "country", )
         labels = {
             "name": "",
+            "bio": "",
             "email": "",
             "website": "",
             "city": "",
@@ -55,6 +56,7 @@ class AddArtistForm(forms.ModelForm):
         }
         widgets = {
             "name": forms.TextInput(attrs={"class": "form-control", "placeholder": "Artist/Band Name"}),
+            "bio": forms.Textarea(attrs={"class": "form-control", "placeholder": "Artist Bio"}),
             "email": forms.TextInput(attrs={"class": "form-control", "placeholder": "Booking Email"}),
             "website": forms.TextInput(attrs={"class": "form-control", "placeholder": "Social Link"}),
             "city": forms.TextInput(attrs={"class": "form-control", "placeholder": "City"}),
