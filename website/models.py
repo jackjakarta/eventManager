@@ -17,6 +17,7 @@ class Artist(MyModel):
         db_table = "artists"
 
     name = models.CharField("Artist/Band Name", max_length=120, null=False)
+    bio = models.TextField("Artist Bio", max_length=700, blank=True)
     email = models.EmailField("Booking Email", max_length=250, blank=True)
     website = models.URLField("Artist Link", blank=True)
     city = models.CharField("Artist City", max_length=120, blank=True)

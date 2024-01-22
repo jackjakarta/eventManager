@@ -1,10 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'website/base.html' %}
 
-</body>
-</html>
+{% block title %}
+{{ artist.name }} - Edit Artist
+{% endblock %}
+
+{% block content %}
+<div class="col-md-6 offset-md-3">
+
+    {% if user == artist.manager %}
+    <div class="container mt-4">
+        <h2 class="display-7 text-center mt-4">Edit Artist</h2>
+        <form class="mt-4" action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-info btn-sm rounded-3">Update</button>
+                <button type="button" class="btn btn-outline-danger btn-sm rounded-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                Delete
+                </button>
+
+                <!--Modal-->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Delete this artist ?</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        Please confirm if you want to delete: <b>{{ artist.name }}</b>
+                      </div>
+                      <div class="modal-footer">
+                          <a href="{% url 'website:update_db:delete_artist' artist.id %}" class="btn btn-danger btn-sm rounded-3">Delete</a>
+                        <button type="button" class="btn btn-outline-secondary btn-sm rounded-3" data-bs-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <a href="{% url 'website:user_profile:user_artists' user.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Back</a>
+            </div>
+        </form>
+    </div>
+    {% else %}
+    <div class="container text-center mt-4">
+        <h2 class="display-7 mt-4">Sorry...</h2>
+        <p class="mt-4">You are not the manager of this artist and can't edit it.</p>
+        <p>Contact the artist manager: {{ artist.manager }}</p>
+        <p class="mt-4"><a href="{% url 'website:user_profile:user_artists' user.id %}" class="btn btn-secondary rounded-3">Back to my artists</a></p>
+    </div>
+    {% endif %}
+
+</div>
+{% endblock %}

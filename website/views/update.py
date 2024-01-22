@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 
 from website.forms import AddArtistForm, AddPromoterForm, AddVenueForm, AddEventForm
-from website.models import Event, Venue, Promoter
+from website.models import Event, Artist, Venue, Promoter
 
 
 # Add, Edit, Delete from DB forms
@@ -30,11 +30,36 @@ def add_artist(request):
 
 
 def edit_artist(request, pk):
-    pass
+    if request.user.is_authenticated:
+        artist = Artist.objects.get(id=pk)
+        form = AddArtistForm(request.POST or None, request.FILES or None, instance=artist)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Artist updated successfully!")
+            return redirect("website:model_pages:artist_page", pk=pk)
+
+        return render(request, "website/forms/edit_artist.html", {
+            "artist": artist,
+            "form": form,
+        })
+    else:
+        messages.error(request, "You have to be logged in to use this feature!")
+        return redirect("website:user_auth:login")
 
 
 def delete_artist(request, pk):
-    pass
+    if request.user.is_authenticated:
+        artist = Artist.objects.get(id=pk)
+        if request.user == artist.manager:
+            artist.delete()
+            messages.success(request, "Artist deleted successfully!")
+            return redirect("website:user_profile:user_artists", pk=request.user.id)
+        else:
+            messages.error(request, "You can't delete this event!")
+            return redirect("website:user_profile:user_profile", pk=request.user.id)
+    else:
+        messages.error(request, "You have to be logged in to use this feature!")
+        return redirect("website:user_auth:login")
 
 
 def add_promoter(request):
@@ -81,9 +106,13 @@ def edit_promoter(request, pk):
 def delete_promoter(request, pk):
     if request.user.is_authenticated:
         promoter = Promoter.objects.get(id=pk)
-        promoter.delete()
-        messages.success(request, "Promoter deleted successfully!")
-        return redirect("website:user_profile:user_promoters", pk=request.user.id)
+        if request.user == promoter.manager:
+            promoter.delete()
+            messages.success(request, "Promoter deleted successfully!")
+            return redirect("website:user_profile:user_promoters", pk=request.user.id)
+        else:
+            messages.error(request, "You can't delete this promoter!")
+            return redirect("website:user_profile:user_profile", pk=request.user.id)
     else:
         messages.error(request, "You have to be logged in to use this feature!")
         return redirect("website:user_auth:login")
@@ -133,9 +162,13 @@ def edit_venue(request, pk):
 def delete_venue(request, pk):
     if request.user.is_authenticated:
         venue = Venue.objects.get(id=pk)
-        venue.delete()
-        messages.success(request, "Venue deleted successfully!")
-        return redirect("website:user_profile:user_venues", pk=request.user.id)
+        if request.user == venue.manager:
+            venue.delete()
+            messages.success(request, "Venue deleted successfully!")
+            return redirect("website:user_profile:user_venues", pk=request.user.id)
+        else:
+            messages.error(request, "You can't delete this venue!")
+            return redirect("website:user_profile:user_profile", pk=request.user.id)
     else:
         messages.error(request, "You have to be logged in to use this feature!")
         return redirect("website:user_auth:login")
@@ -185,9 +218,13 @@ def edit_event(request, pk):
 def delete_event(request, pk):
     if request.user.is_authenticated:
         event = Event.objects.get(id=pk)
-        event.delete()
-        messages.success(request, "Event deleted successfully!")
-        return redirect("website:user_profile:user_events", pk=request.user.id)
+        if request.user == event.manager:
+            event.delete()
+            messages.success(request, "Event deleted successfully!")
+            return redirect("website:user_profile:user_events", pk=request.user.id)
+        else:
+            messages.error(request, "You can't delete this event!")
+            return redirect("website:user_profile:user_profile", pk=request.user.id)
     else:
         messages.error(request, "You have to be logged in to use this feature!")
         return redirect("website:user_auth:login")

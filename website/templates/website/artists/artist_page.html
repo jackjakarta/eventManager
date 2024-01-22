@@ -1,0 +1,37 @@
+{% extends 'website/base.html' %}
+
+{% block title %}
+{{ artist.name }}
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <h1 class="display-5">{{ artist.name }}</h1>
+</div>
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <img src="{{ artist.image.url }}" class="img-fluid" alt="{{ artist.name }}">
+        </div>
+        <div class="col-md-6 mb-3">
+            <h2>About the Artist</h2>
+            <p>{{ artist.bio }}</p>
+            <p><strong>Location:</strong> {{ artist.city }}, {{ artist.country }}</p>
+            {% if artist.website %}
+                <a href="{{ artist.website }}" class="btn btn-secondary btn-sm rounded-3">Visit Website</a>
+            {% endif %}
+            {% if artist.email %}
+                <a href="mailto:{{ artist.email }}" class="btn btn-outline-secondary btn-sm rounded-3">Contact</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="container mt-3">
+        <a href="{% url 'website:model_pages:artists' %}" class="btn btn-outline-secondary btn-sm rounded-3">Back to Artists</a>
+    </div>
+
+</div>
+
+{% endblock %}
