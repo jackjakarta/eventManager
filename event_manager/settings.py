@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crispy_forms',
@@ -53,6 +54,8 @@ INSTALLED_APPS = [
     'social',
     'storages',
 ]
+
+SITE_ID = 1
 
 
 #  Rest Framework Settings
