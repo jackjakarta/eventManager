@@ -1,12 +1,8 @@
-import pytz
-from datetime import datetime, timedelta
-
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 
 from website.forms import SignUpForm
-from website.utils import send_login_user_email
 
 
 # Authentication Views
@@ -20,15 +16,6 @@ def login_user(request):
             user = authenticate(request, email=email, password=password)
 
             if user is not None:
-                # Check if user hasn't logged in a while.
-                days_ago = datetime.now(pytz.utc) - timedelta(days=15)
-                if user.last_login < days_ago:
-                    send_login_user_email(user.first_name, user.email)
-                    print("Email sent to user!")
-                else:
-                    print("User logged in 1 day ago.")
-
-                # Login and redirect
                 login(request, user)
                 messages.success(request, "You have logged in.")
                 return redirect("website:user_profile:profile", pk=user.id)
@@ -55,16 +42,9 @@ def register_user(request):
             if form.is_valid():
                 form.save()
 
-                # Get user data from form
-                email = form.cleaned_data["email"]
-                password = form.cleaned_data["password1"]
-
-                # Login user
-                user = authenticate(request, email=email, password=password)
-                login(request, user)
-
-                messages.success(request, "You have successfully registered and have been logged in.")
-                return redirect("website:user_profile:profile", pk=user.id)
+                messages.success(request, "You have successfully registered. Check your email to activate"
+                                          "your account.")
+                return redirect("website:static_pages:home")
             else:
                 messages.error(request, "Your form is not valid.")
                 return redirect("website:user_auth:register")
