@@ -42,7 +42,7 @@ def register_user(request):
             if form.is_valid():
                 form.save()
 
-                messages.success(request, "You have successfully registered. Check your email to activate"
+                messages.success(request, "You have successfully registered. Check your email to activate "
                                           "your account.")
                 return redirect("website:static_pages:home")
             else:
