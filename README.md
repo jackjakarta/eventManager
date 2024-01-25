@@ -38,6 +38,7 @@ Welcome to the Event Manager Web App! This web application is designed to help u
 ### User Accounts
 - User registration and authentication.
 - User profiles with customizable information.
+- User activation system
 - Permission-based access control for managing events, promoters, and venues.
 
 ## Getting Started
@@ -97,7 +98,7 @@ The Event Manager Web App provides a set of API endpoints to interact with its f
 
 ### Authentication
 
-Authentication is required for accessing various endpoints in the Event Manager Web App's API. While **GET** requests to most endpoints are public and do not require authentication, other HTTP methods like **POST**, **PUT**, and **DELETE** require either an ***API Key*** or ***JWT (JSON Web Token)*** authentication.
+Authentication is required for accessing various endpoints in the Event Manager Web App's API. While **GET** requests to some endpoints are public and do not require authentication, other HTTP methods like **POST**, **PUT**, and **DELETE** require either an ***API Key*** or ***JWT (JSON Web Token)*** authentication.
 
 To obtain a JWT token pair for authentication, users can visit the `/auth` endpoint, which provides a way to generate tokens securely. Additionally, in case of token expiration or security concerns, users can reset their JWT tokens at the `/auth/reset` endpoint.
 

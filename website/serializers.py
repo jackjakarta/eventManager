@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Event, Venue, Promoter
+from .models import Event, Venue, Promoter, Artist
 from django.contrib.auth import get_user_model
 
 AuthUser = get_user_model()
@@ -13,9 +13,20 @@ class UserSerializer(serializers.ModelSerializer):
             "password",
             "is_superuser",
             "is_staff",
+            "is_active",
+            "date_joined",
             "groups",
             "user_permissions",
         ]
+
+
+class ArtistSerializer(serializers.ModelSerializer):
+    manager = UserSerializer()
+
+    class Meta:
+        model = Artist
+        exclude = ["created_at", "updated_at", ]
+        depth = 1
 
 
 class VenueSerializer(serializers.ModelSerializer):
@@ -38,8 +49,10 @@ class PromoterSerializer(serializers.ModelSerializer):
 
 class EventSerializer(serializers.ModelSerializer):
     venue = VenueSerializer()
+    artists = ArtistSerializer(many=True, read_only=True)
     promoter = PromoterSerializer()
     manager = UserSerializer()
+    attendees = UserSerializer(many=True, read_only=True)
 
     class Meta:
         model = Event

@@ -11,6 +11,7 @@ import social.viewsets as scl_views
 router = routers.DefaultRouter()
 
 # Events, Venues, Artists, Promoters API Routes
+router.register(r'artists', wb_views.ArtistsViewSet, 'artists')
 router.register(r'events', wb_views.EventsViewSet, 'events')
 router.register(r'venues', wb_views.VenuesViewSet, 'venues')
 router.register(r'promoters', wb_views.PromotersViewSet, 'promoters')

@@ -2,8 +2,15 @@ from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework_api_key.permissions import HasAPIKey
 from rest_framework_simplejwt.authentication import JWTAuthentication
-from .models import Event, Venue, Promoter
-from .serializers import EventSerializer, VenueSerializer, PromoterSerializer
+from .models import Event, Venue, Promoter, Artist
+from .serializers import EventSerializer, VenueSerializer, PromoterSerializer, ArtistSerializer
+
+
+class ArtistsViewSet(viewsets.ModelViewSet):
+    queryset = Artist.objects.all()
+    serializer_class = ArtistSerializer
+    permission_classes = [HasAPIKey | IsAuthenticatedOrReadOnly]
+    authentication_classes = (JWTAuthentication, )
 
 
 class EventsViewSet(viewsets.ModelViewSet):
@@ -23,5 +30,5 @@ class VenuesViewSet(viewsets.ModelViewSet):
 class PromotersViewSet(viewsets.ModelViewSet):
     queryset = Promoter.objects.all()
     serializer_class = PromoterSerializer
-    permission_classes = [HasAPIKey | IsAuthenticatedOrReadOnly]
+    permission_classes = [HasAPIKey | IsAuthenticated]
     authentication_classes = (JWTAuthentication, )

@@ -128,6 +128,9 @@ class AddEventForm(forms.ModelForm):
     class Meta:
         model = Event
         fields = ("name", "event_date", "venue", "promoter", "artists", "event_flyer", "description", )
+        widgets = {
+            "event_date": forms.DateTimeInput(attrs={"type": "datetime-local"}),
+        }
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop("user", None)
@@ -165,7 +168,7 @@ class DallEImageForm(forms.Form):
     image_prompt = forms.CharField(max_length=1000, widget=forms.Textarea(
         attrs={
             "class": "form-control",
-            "placeholder": "A vibrant and captivating image featuring the iconic taj mahal..."
+            "placeholder": "A vibrant and captivating image featuring the iconic Taj Mahal..."
         }
     ),
         label=""
