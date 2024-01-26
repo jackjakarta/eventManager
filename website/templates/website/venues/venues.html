@@ -11,48 +11,50 @@ Venues
     <h1 class="display-5">Venues</h1>
 </div>
 
-<!--<div class="container mt-3">-->
-<!--    <h2 class="display-7">Venues:</h2>-->
-<!--</div>-->
-
 <div class="container mt-2">
     <p>Lorem ipsum dolor sit amet.</p>
 </div>
 
-<div class="container mt-2">
-    <div class="row row-cols-1 row-cols-md-2 g-4">
-        {% for venue in venues %}
-            <div class="col">
-                <div class="card rounded-3">
-                    <img src="{{ venue.image.url }}" class="card-img-top img-fluid" alt="{{ venue.name }}" style="width: 650px; height: 200px;">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ venue.name }}</h5>
-                        <p class="card-text">{{ venue.city }}</p>
-                        <p class="card-text">{{ venue.email }}</p>
+{% if venues %}
 
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <a href="{% url 'website:model_pages:venue_page' venue.id %}" class="btn btn-dark btn-sm rounded-3">Venue Page</a>
-                                <a href="{% url 'website:model_pages:venue_events' venue.id %}" class="btn btn-dark btn-sm rounded-3">View Events</a>
+    <div class="container mt-3">
+        <a href="{% url 'website:update_db:add_venue' %}" class="btn btn-info btn-sm rounded-3">Add Venue</a>
+    </div>
+
+    <div class="container mt-3">
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            {% for venue in venues %}
+                <div class="col">
+                    <div class="card rounded-3">
+                        <img src="{{ venue.image.url }}" class="card-img-top img-fluid" alt="{{ venue.name }}" style="width: 650px; height: 200px;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ venue.name }}</h5>
+                            <p class="card-text">{{ venue.city }}</p>
+                            <p class="card-text">{{ venue.email }}</p>
+
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <a href="{% url 'website:model_pages:venue_page' venue.id %}" class="btn btn-info btn-sm rounded-3">Venue Page</a>
+                                    <a href="{% url 'website:model_pages:venue_events' venue.id %}" class="btn btn-secondary btn-sm rounded-3">View Events</a>
+                                </div>
+
+                                {% if user == venue.manager %}
+                                    <a href="{% url 'website:update_db:edit_venue' venue.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Edit</a>
+                                {% endif %}
                             </div>
-
-                            {% if user == venue.manager %}
-                                <a href="{% url 'website:update_db:edit_venue' venue.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Edit</a>
-                            {% endif %}
                         </div>
                     </div>
                 </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
-</div>
 
 
-<div class="container mt-3">
-    {% if user.is_authenticated %}
-        <a href="{% url 'website:update_db:add_venue' %}" class="btn btn-info rounded-3">Add Venue</a>
-    {% endif %}
-    <a href="{% url 'website:static_pages:home' %}" class="btn btn-outline-secondary rounded-3">Back</a>
-</div>
+    <div class="container text-center mt-3">
+        <a href="{% url 'website:update_db:add_venue' %}" class="btn btn-info btn-sm rounded-3">Add Venue</a>
+        <a href="{% url 'website:static_pages:home' %}" class="btn btn-outline-secondary btn-sm rounded-3">Back</a>
+    </div>
+
+{% endif %}
 
 {% endblock %}

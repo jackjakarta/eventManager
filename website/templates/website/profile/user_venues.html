@@ -4,47 +4,57 @@
 My Venues - {{ user.first_name }} {{ user.last_name }}
 {% endblock %}
 
+
 {% block content %}
 
 <div class="container mt-4">
-    <h1 class="display-5">
-        My Venues
-    </h1>
+    <h1 class="display-5">My Venues</h1>
 </div>
 
-<div class="container mt-3">
-    <table class="table table-striped table-hover table-bordered">
-        <thead class="table-light">
-            <tr>
-                <th scope="col">Venue Name</th>
-                <th scope="col">Location</th>
-                <th scope="col">Email</th>
-                <th scope="col">Website</th>
-                <th scope="col">Manage</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            {% if venues %}
-                {% for venue in venues %}
-                    <tr>
-                        <td>{{ venue.name }}</td>
-                        <td>{{ venue.city }}</td>
-                        <td>{{ venue.email }}</td>
-                        <td>{{ venue.website }}</td>
-                        <td><a href="{% url 'website:model_pages:venue_page' venue.id %}" class="btn btn-outline-info btn-sm rounded-3">View</a>
-                            <a href="{% url 'website:update_db:edit_venue' venue.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Edit</a>
-<!--                            <a href="{% url 'website:update_db:delete_venue' venue.id %}" class="btn btn-outline-danger btn-sm rounded-3">Delete</a></td>-->
-                    </tr>
-                {% endfor %}
-            {% endif %}
-        </tbody>
-    </table>
+<div class="container mt-2">
+    <p>Lorem ipsum dolor sit amet.</p>
 </div>
 
-<div class="container">
-    <a href="{% url 'website:update_db:add_venue' %}" class="btn btn-info rounded-3">Add Venue</a>
-    <a href="{% url 'website:user_profile:profile' user.id %}" class="btn btn-outline-secondary rounded-3">Back</a>
-</div>
+{% if venues %}
+
+    <div class="container mt-3">
+        <a href="{% url 'website:update_db:add_venue' %}" class="btn btn-info btn-sm rounded-3">Add Venue</a>
+    </div>
+
+    <div class="container mt-3">
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            {% for venue in venues %}
+                <div class="col">
+                    <div class="card rounded-3">
+                        <img src="{{ venue.image.url }}" class="card-img-top img-fluid" alt="{{ venue.name }}" style="width: 650px; height: 200px;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ venue.name }}</h5>
+                            <p class="card-text">{{ venue.city }}</p>
+                            <p class="card-text">{{ venue.email }}</p>
+
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <a href="{% url 'website:model_pages:venue_page' venue.id %}" class="btn btn-info btn-sm rounded-3">Venue Page</a>
+                                    <a href="{% url 'website:model_pages:venue_events' venue.id %}" class="btn btn-secondary btn-sm rounded-3">View Events</a>
+                                </div>
+                                <div>
+                                    <a href="{% url 'website:update_db:edit_venue' venue.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Edit</a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+    <div class="container text-center mt-3">
+        <a href="{% url 'website:update_db:add_venue' %}" class="btn btn-info btn-sm rounded-3">Add Venue</a>
+        <a href="{% url 'website:static_pages:home' %}" class="btn btn-outline-secondary btn-sm rounded-3">Back</a>
+    </div>
+
+{% endif %}
 
 {% endblock %}

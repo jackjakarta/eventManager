@@ -12,40 +12,52 @@ Promoters
 </div>
 
 <div class="container mt-2">
-    <p>Lorem ipsum dolor sit amet.</p>
+    <p>List of all the promoters.</p>
 </div>
 
-<div class="container">
-    <table class="table table-striped table-hover table-bordered">
-        <thead class="table-light">
-            <tr>
-                <th scope="col">Promoter Name</th>
-                <th scope="col">Promoter City</th>
-                <th scope="col">Promoter Email</th>
-                <th scope="col">Promoter Website</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            {% if promoters %}
-                {% for promoter in promoters %}
-                    <tr>
-                        <td><a href="{% url 'website:model_pages:promoter_page' promoter.id %}">{{ promoter.name }}</a></td>
-                        <td>{{ promoter.city }}</td>
-                        <td>{{ promoter.email }}</td>
-                        <td>{{ promoter.website }}</td>
-                    </tr>
-                {% endfor %}
-            {% endif %}
-        </tbody>
-    </table>
+<div class="container mt-3">
+    <a href="{% url 'website:update_db:add_promoter' %}" class="btn btn-info btn-sm rounded-3">Add Promoter</a>
 </div>
 
-<div class="container">
-    {% if user.is_authenticated %}
-        <a href="{% url 'website:update_db:add_promoter' %}" class="btn btn-info rounded-3">Add Promoter</a>
-    {% endif %}
-    <a href="{% url 'website:static_pages:home' %}" class="btn btn-outline-secondary rounded-3">Back</a>
+<div class="container my-4">
+    <div class="row">
+        <!-- Card -->
+        {% if promoters %}
+            {% for promoter in promoters %}
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        {% if promoter.image %}
+                            <img src="{{ promoter.image.url }}" class="card-img-top" alt="Promoter">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ promoter.name }}</h5>
+                            <p class="card-text">{{ promoter.city }}</p>
+                            <p class="card-text"><strong>Contact: </strong>{{ promoter.email }}</p>
+
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <a href="{% url 'website:model_pages:promoter_page' promoter.id %}" class="btn btn-info btn-sm rounded-3">Promoter Page</a>
+                                    <a href="{{ promoter.website }}" class="btn btn-secondary btn-sm rounded-3">Vist Website</a>
+                                </div>
+
+                                <div>
+                                    {% if user == promoter.manager %}
+                                        <a href="{% url 'website:update_db:edit_promoter' promoter.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Edit</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+        <!-- End Card -->
+    </div>
+</div>
+
+<div class="container text-center">
+    <a href="{% url 'website:update_db:add_promoter' %}" class="btn btn-info btn-sm rounded-3">Add Promoter</a>
+    <a href="{% url 'website:static_pages:home' %}" class="btn btn-outline-secondary btn-sm rounded-3">Back</a>
 </div>
 
 {% endblock %}

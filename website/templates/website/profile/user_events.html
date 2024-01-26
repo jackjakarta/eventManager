@@ -40,7 +40,6 @@ My Events - {{ user.first_name }} {{ user.last_name }}
                             <a href="{% url 'website:update_db:edit_event' event.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Edit</a>
                             {% else %}
                             <a href="#" class="btn btn-outline-secondary btn-sm rounded-3 disabled">Edit</a>
-                            <a href="#" class="btn btn-outline-danger btn-sm rounded-3 disabled">Delete</a>
                             {% endif %}
                         </td>
                     </tr>

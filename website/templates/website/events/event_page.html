@@ -38,7 +38,7 @@
 </div>
 
 <div class="container mt-2">
-    {% if user.is_authenticated %}
+
         {% if user in event.attendees.all %}
             <a href="{% url 'website:model_pages:event_unattend' event.id %}" class="btn btn-outline-info btn-sm rounded-3">Unattend</a>
         {% else %}
@@ -69,7 +69,6 @@
               </div>
             </div>
         {% endif %}
-    {% endif %}
 
     {% if user == event.manager %}
         <a href="{% url 'website:user_profile:user_events' user.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Back</a>
