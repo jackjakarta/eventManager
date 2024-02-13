@@ -1,11 +1,12 @@
 import secrets
-from django.utils import timezone
 
-from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.db import models
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
-from .managers import AuthUserManager
+from rest_framework_api_key.models import AbstractAPIKey
 
+from .managers import AuthUserManager
 from .utils.constants import ACTIVATION_AVAILABILITY
 
 
@@ -53,3 +54,11 @@ class Activation(models.Model):
             self.token = secrets.token_hex(32)
             self.expires_at = timezone.now() + timezone.timedelta(**AVAILABILITY)
         super().save(*args, **kwargs)
+
+
+class UserAPIKey(AbstractAPIKey):
+    user = models.ForeignKey(
+        AuthUser,
+        on_delete=models.CASCADE,
+        related_name="api_keys"
+    )
