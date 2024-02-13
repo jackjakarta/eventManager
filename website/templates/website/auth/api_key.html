@@ -1,0 +1,28 @@
+{% extends 'website/base.html' %}
+
+{% block title %}
+API Key - {{ user.first_name }} {{ user.last_name }}
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+<!--            <h3 class="text-center mb-4">Your API Key</h3>-->
+            <div class="card">
+                <div class="card-header text-center">
+                    <h2 class="display-7">Your API Key</h2>
+                </div>
+                <div class="card-body">
+                    {% if api_key %}
+                        <p class="card-text">{{ api_key }}</p>
+                        <p class="card-text">Save the key. It will only be shown once.</p>
+                    {% else %}
+                        <p class="card-text">Something went wrong.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
