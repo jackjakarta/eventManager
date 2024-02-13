@@ -1,7 +1,9 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.utils.translation import gettext_lazy as _
-from .models import AuthUser
+from rest_framework_api_key.admin import APIKeyModelAdmin
+
+from .models import AuthUser, UserAPIKey
 
 
 @admin.register(AuthUser)
@@ -36,3 +38,9 @@ class AuthUserAdmin(BaseUserAdmin):
             },
         ),
     )
+
+
+@admin.register(UserAPIKey)
+class UserAPIKeyModelAdmin(APIKeyModelAdmin):
+    list_display = [*APIKeyModelAdmin.list_display, "user"]
+    search_fields = [*APIKeyModelAdmin.search_fields, "user__email"]

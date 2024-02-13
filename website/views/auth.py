@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import render, redirect
 
+from users.models import UserAPIKey
 from website.forms import SignUpForm
 
 
@@ -55,4 +56,17 @@ def register_user(request):
             })
     else:
         messages.error(request, "You are already registered.")
+        return redirect("website:static_pages:home")
+
+
+def generate_api_key(request):
+    if request.user.is_authenticated:
+        api_key, key = UserAPIKey.objects.create_key(name="my-remote-service", user=request.user)
+        api_key.save()
+
+        return render(request, "website/auth/api_key.html", {
+          "api_key": key
+        })
+    else:
+        messages.error(request, "You have to be logged in to use this feature.")
         return redirect("website:static_pages:home")
