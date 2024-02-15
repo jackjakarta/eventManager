@@ -61,7 +61,12 @@ def register_user(request):
 
 def generate_api_key(request):
     if request.user.is_authenticated:
-        api_key, key = UserAPIKey.objects.create_key(name="my-remote-service", user=request.user)
+        if request.user.first_name:
+            api_key_name = f"{request.user.first_name} {request.user.last_name}"
+        else:
+            api_key_name = f"User: {request.user}"
+
+        api_key, key = UserAPIKey.objects.create_key(name=api_key_name, user=request.user)
         api_key.save()
 
         return render(request, "website/auth/api_key.html", {

@@ -1,4 +1,4 @@
 ACTIVATION_AVAILABILITY = {
-    "value": 10,
+    "value": 25,
     "unit": "minutes",
 }
