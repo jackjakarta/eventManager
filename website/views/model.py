@@ -114,7 +114,7 @@ def event_un_attend(request, pk):
 def events_search(request):
     if request.method == "POST":
         searched = request.POST["searched"]
-        events_qs = Event.objects.filter(name__contains=searched)
+        events_qs = Event.objects.filter(name__contains=searched.title())
 
         return render(request, "website/events/events_search.html", {
             "searched": searched,
