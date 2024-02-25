@@ -3,9 +3,9 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework_api_key.permissions import HasAPIKey
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
+from api.serializers.social import PostSerializer, PostCommentSerializer
+from social.models import Post, PostComment
 from users.utils.apikey_auth import UserHasAPIKey
-from .models import Post, PostComment
-from .serializers import PostSerializer, PostCommentSerializer
 
 
 class PostsViewSet(viewsets.ModelViewSet):

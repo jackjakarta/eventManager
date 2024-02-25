@@ -1,6 +1,7 @@
-from rest_framework import serializers
-from .models import Event, Venue, Promoter, Artist
 from django.contrib.auth import get_user_model
+from rest_framework import serializers
+
+from website.models import Event, Venue, Promoter, Artist
 
 AuthUser = get_user_model()
 

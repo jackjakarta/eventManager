@@ -1,6 +1,7 @@
 from rest_framework import serializers
-from .models import Post, PostComment
-from website.serializers import UserSerializer
+
+from api.serializers.website import UserSerializer
+from social.models import Post, PostComment
 
 
 class PostSerializer(serializers.ModelSerializer):

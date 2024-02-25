@@ -36,6 +36,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    # Django Apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,6 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Installed Apps
     'crispy_forms',
     'crispy_bootstrap5',
     'rest_framework',
@@ -51,6 +54,7 @@ INSTALLED_APPS = [
     'users',
     'website',
     'social',
+    'api',
     'storages',
 ]
 

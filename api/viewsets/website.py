@@ -3,9 +3,9 @@ from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnl
 from rest_framework_api_key.permissions import HasAPIKey
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
+from api.serializers.website import EventSerializer, VenueSerializer, PromoterSerializer, ArtistSerializer
 from users.utils.apikey_auth import UserHasAPIKey
-from .models import Event, Venue, Promoter, Artist
-from .serializers import EventSerializer, VenueSerializer, PromoterSerializer, ArtistSerializer
+from website.models import Event, Venue, Promoter, Artist
 
 
 class ArtistsViewSet(viewsets.ModelViewSet):
