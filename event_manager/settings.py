@@ -28,7 +28,7 @@ SECRET_KEY = config('DJANGO_SECRET_KEY', default=secrets.token_urlsafe())
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = config('DEBUG', default=False)
 
 ALLOWED_HOSTS = ['*']
 
@@ -62,6 +62,8 @@ SITE_ID = 1
 # REST_FRAMEWORK = {
 #     "DEFAULT_PERMISSION_CLASSES": [
 #         "rest_framework_api_key.permissions.HasAPIKey",
+#         "users.utils.apikey_auth.UserHasAPIKey",
+#         "rest_framework.permissions.IsAuthenticated",
 #     ],
 #     'DEFAULT_AUTHENTICATION_CLASSES': [
 #         'rest_framework_simplejwt.authentication.JWTAuthentication',
