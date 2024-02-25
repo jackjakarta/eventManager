@@ -12,33 +12,50 @@
     </h1>
 </div>
 
-<div class="container mt-3">
-    <ul>
-        <li>{{ promoter.name }}</li>
-    </ul>
-    {% if user.is_authenticated %}
-    <button type="button" class="btn btn-outline-danger btn-sm rounded-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Delete
-    </button>
-    <!--Modal-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Are you sure ?</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-              Please confirm if you want to delete: <strong>{{ promoter.name }}</strong>
-          </div>
-          <div class="modal-footer">
-              <a href="{% url 'website:update_db:delete_promoter' promoter.id %}" class="btn btn-danger btn-sm rounded-3">Delete</a>
-            <button type="button" class="btn btn-outline-secondary btn-sm rounded-3" data-bs-dismiss="modal">Close</button>
+<div class="container my-5">
+  <div class="row">
+    <!-- Promoter Image -->
+    <div class="col-md-4">
+      <img src="{% if promoter.image %}{{ promoter.image.url }}{% endif %}" class="img-fluid rounded-start" alt="{{ promoter.name }}">
+    </div>
+
+    <!-- Promoter Details -->
+    <div class="col-md-8">
+      <div class="card-body">
+        <h1 class="card-title">{{ promoter.name }}</h1>
+        <p class="card-text"><strong>Contact Information:</strong></p>
+        <ul>
+          <li>Email: <a href="mailto:{{ promoter.email }}">{{ promoter.email }}</a></li>
+          <li>Website: <a href="{{ promoter.website }}">{{ promoter.website }}</a></li>
+        </ul>
+        {% if user == promoter.manager %}
+          <p class="card-text"><strong>Management:</strong></p>
+          <a href="{% url 'website:update_db:edit_promoter' promoter.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Edit</a>
+          <button type="button" class="btn btn-outline-danger btn-sm rounded-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Delete
+          </button>
+          <!--Modal-->
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Are you sure ?</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Please confirm if you want to delete: <strong>{{ promoter.name }}</strong>
+            </div>
+            <div class="modal-footer">
+                <a href="{% url 'website:update_db:delete_promoter' promoter.id %}" class="btn btn-danger btn-sm rounded-3">Delete</a>
+              <button type="button" class="btn btn-outline-secondary btn-sm rounded-3" data-bs-dismiss="modal">Close</button>
+            </div>
           </div>
         </div>
       </div>
+        {% endif %}
+      </div>
     </div>
-    {% endif %}
+  </div>
 </div>
 
 {% endblock %}

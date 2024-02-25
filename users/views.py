@@ -1,14 +1,14 @@
-from django.shortcuts import render, redirect, HttpResponse, reverse, get_object_or_404
 from django.contrib import messages
 from django.contrib.sites.models import Site
 from django.core.mail import EmailMultiAlternatives
+from django.shortcuts import render, redirect, HttpResponse, reverse, get_object_or_404
 from django.template.loader import get_template
 from django.utils import timezone
 from django.utils.decorators import decorator_from_middleware
 
 from .forms import PasswordForm
-from .models import Activation, AVAILABILITY
 from .middlewares.activation_middleware import ActivationMiddleware
+from .models import Activation, AVAILABILITY
 from .utils.constants import ACTIVATION_AVAILABILITY
 
 
@@ -79,6 +79,3 @@ def send_activation_email(user):
 
     mail.content_subtype = "html"
     mail.send()
-
-
-# CHECK WITH PIZZA CODE
