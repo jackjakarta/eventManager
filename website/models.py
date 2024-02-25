@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 
+from .utils.constants import MUSIC_GENRES_CHOICES
+
 AuthUser = get_user_model()
 
 
@@ -84,6 +86,13 @@ class Profile(MyModel):
         db_table = "user_profiles"
 
     user = models.OneToOneField(AuthUser, on_delete=models.CASCADE)
+    fav_genre = models.CharField(
+        "Favorite Music Genre",
+        max_length=120,
+        choices=MUSIC_GENRES_CHOICES,
+        default=None,
+        blank=True
+    )
     avatar = models.ImageField(upload_to="avatars/", default=None, blank=True)
 
     def __str__(self):

@@ -153,14 +153,16 @@ class AddEventForm(forms.ModelForm):
 class EditProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ("avatar", )
+        fields = ("avatar", "fav_genre", )
 
         labels = {
             "avatar": "Avatar",
+            "fav_genre": "Favorite Music Genre"
         }
 
         widgets = {
-            "avatar": forms.ClearableFileInput(attrs={"class": "form-control"})
+            "avatar": forms.ClearableFileInput(attrs={"class": "form-control"}),
+            "fav_genre": forms.Select(attrs={"class": "form-control"}),
         }
 
 

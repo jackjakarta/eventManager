@@ -15,14 +15,6 @@ def create_profile(sender, instance, created, **kwargs):
         print("Created profile successfully!")
 
 
-# @receiver(post_save, sender=AuthUser)
-# def send_registered_user_email(sender, instance, created, **kwargs):
-#     print("\nSignal post_save was caught!")
-#     if created:
-#         send_register_user_email(user_name=instance.first_name, user_email=instance.email)
-#         print("Email sent successfully!")
-
-
 @receiver(post_save, sender=AuthUser)
 def add_newsletter(sender, instance, created, **kwargs):
     print("\nSignals post_save was caught!")

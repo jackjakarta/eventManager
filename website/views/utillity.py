@@ -3,7 +3,7 @@ from django.conf import settings
 from django.contrib import messages
 
 from website.models import NewsletterSub
-from website.utils import send_register_user_email
+from website.utils.email import send_register_user_email
 
 
 # Utility Views
