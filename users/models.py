@@ -41,8 +41,8 @@ class Activation(models.Model):
     token = models.CharField(
         max_length=64,
         null=True,
-        unique=True,  # new
-        default=None,  # new
+        unique=True,
+        default=None,
     )
     expires_at = models.DateTimeField(
         default=None
@@ -54,6 +54,12 @@ class Activation(models.Model):
             self.token = secrets.token_hex(32)
             self.expires_at = timezone.now() + timezone.timedelta(**AVAILABILITY)
         super().save(*args, **kwargs)
+
+    def __str__(self):
+        return str(self.user)
+
+    def __repr__(self):
+        return f"{self.user} - {self.token}"
 
 
 class UserAPIKey(AbstractAPIKey):

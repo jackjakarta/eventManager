@@ -3,7 +3,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.utils.translation import gettext_lazy as _
 from rest_framework_api_key.admin import APIKeyModelAdmin
 
-from .models import AuthUser, UserAPIKey
+from .models import AuthUser, UserAPIKey, Activation
 
 
 @admin.register(AuthUser)
@@ -44,3 +44,14 @@ class AuthUserAdmin(BaseUserAdmin):
 class UserAPIKeyModelAdmin(APIKeyModelAdmin):
     list_display = [*APIKeyModelAdmin.list_display, "user"]
     search_fields = [*APIKeyModelAdmin.search_fields, "user__email"]
+
+
+@admin.register(Activation)
+class ActivationAdmin(admin.ModelAdmin):
+    list_display = ("user", "token", "expires_at", "activated_at", )
+    ordering = ("user", )
+    readonly_fields = ("user", "token", "expires_at", "activated_at", )
+
+    fieldsets = (
+        (_("Activation Information"), {"fields": ("user", "token", "expires_at", "activated_at", )}),
+    )

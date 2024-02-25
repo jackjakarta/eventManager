@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 
-from .utils.constants import MUSIC_GENRES_CHOICES, EVENT_TYPE_CHOICES
+from .utils.constants import MUSIC_GENRES_CHOICES, EVENT_TYPE_CHOICES, COUNTRY_CHOICES
 
 AuthUser = get_user_model()
 
@@ -23,7 +23,7 @@ class Artist(MyModel):
     email = models.EmailField("Booking Email", max_length=250, blank=True)
     website = models.URLField("Artist Link", blank=True)
     city = models.CharField("Artist City", max_length=120, blank=True)
-    country = models.CharField("Artist Country", max_length=120)
+    country = models.CharField("Artist Country", choices=COUNTRY_CHOICES, max_length=120, default=None)
     image = models.ImageField("Artist Image", upload_to="artist_images/", default=None)
     manager = models.ForeignKey(AuthUser, blank=True, null=True, on_delete=models.SET_NULL)
 
@@ -38,6 +38,7 @@ class Venue(MyModel):
     name = models.CharField("Venue Name", max_length=120, unique=True, null=False)
     address = models.CharField("Venue Address", max_length=250, null=True)
     city = models.CharField("Venue City", max_length=120, null=True)
+    country = models.CharField("Venue Country", choices=COUNTRY_CHOICES, max_length=120, default=None)
     zip_code = models.CharField("Zip Code", max_length=20)
     website = models.URLField("Venue Website", blank=True)
     email = models.EmailField("Venue Email", blank=True)
@@ -46,6 +47,9 @@ class Venue(MyModel):
 
     def __str__(self):
         return self.name
+
+    def __repr__(self):
+        return self.__str__()
 
 
 class Promoter(MyModel):

@@ -41,7 +41,7 @@ class AddArtistForm(forms.ModelForm):
             "email": forms.TextInput(attrs={"class": "form-control", "placeholder": "Booking Email"}),
             "website": forms.TextInput(attrs={"class": "form-control", "placeholder": "Social Link"}),
             "city": forms.TextInput(attrs={"class": "form-control", "placeholder": "City"}),
-            "country": forms.TextInput(attrs={"class": "form-control", "placeholder": "Country"}),
+            "country": forms.Select(attrs={"class": "form-control"}),
             "image": forms.ClearableFileInput(attrs={"class": "form-control", "placeholder": "Artist Image"}),
         }
 

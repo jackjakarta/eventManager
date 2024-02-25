@@ -7,29 +7,66 @@ from .models import Venue, Event, Promoter, Artist, Profile, NewsletterSub
 
 @admin.register(Artist)
 class ArtistAdmin(admin.ModelAdmin):
-    pass
+    list_display = ("name", "email", "country", "website", "manager", "created_at", )
+    list_filter = ("country", )
+    ordering = ("name", "country", "manager", "created_at", )
+    search_fields = ("name", "country", "city", )
+    readonly_fields = ("get_artist_image", )
+
+    fieldsets = (
+        (_("Artist Image"), {"fields": ("get_artist_image", "image", )}),
+        (_("Artist Contact"), {"fields": ("name", "email", "website", )}),
+        (_("Artist Bio"), {"fields": ("city", "country", "bio", )})
+    )
+
+    def get_artist_image(self, obj):
+        if obj.image:
+            return format_html('<img src="%s" width="250px" />' % obj.image.url)
+
+    get_artist_image.short_description = "Current Artist Image"
 
 
 @admin.register(Venue)
 class VenueAdmin(admin.ModelAdmin):
-    list_display = ("name", "address", "zip_code", "city", "website", "email", "created_at", )
-    list_filter = ("city", )
+    list_display = ("name", "address", "zip_code", "city", "country", "website", "email", "created_at", )
+    list_filter = ("city", "country", )
     ordering = ("created_at", "name", )
-    search_fields = ("name", "city", )
+    search_fields = ("name", "city", "country", )
+    readonly_fields = ("get_venue_image", "updated_at", )
+
+    fieldsets = (
+        (_("Venue Image"), {"fields": ("get_venue_image", "image", )}),
+        (_("Venue Contact Information"), {"fields": (
+            "name",
+            "address",
+            "zip_code",
+            "city",
+            "country",
+            "email",
+            "website",
+        )}),
+        (_("Venue Management"), {"fields": ("manager", "updated_at", )})
+    )
+
+    def get_venue_image(self, obj):
+        if obj.image:
+            return format_html('<img src="%s" width="250px" />' % obj.image.url)
+
+    get_venue_image.short_description = "Current Venue Image"
 
 
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
     list_display = ("name", "event_date", "venue", "event_type", "manager", "get_event_flyer", "created_at", )
-    list_filter = ("venue", "promoter", "artists", "event_type", "genre", )
+    list_filter = ("event_type", "venue", "promoter", "artists", "genre", )
     ordering = ("created_at", "name", "venue", "event_type", "manager", "event_date", )
     search_fields = ("name", "venue", "manager", "event_type",)
-    readonly_fields = ("get_event_flyer", "attendees", )
+    readonly_fields = ("get_event_flyer", "get_event_flyer_big", "attendees", )
 
     fieldsets = (
+        (_("Event Flyer"), {"fields": ("get_event_flyer_big", "event_flyer",)}),
         (_("Event Information"), {"fields": ("name", "event_date", "description", "event_type", "genre", )}),
-        (_("User Details"), {"fields": ("manager", "venue", "promoter", "artists", )}),
-        (_("Event Flyer"), {"fields": ("get_event_flyer", "event_flyer", )}),
+        (_("Event Management"), {"fields": ("manager", "venue", "promoter", "artists", )}),
         (_("Event Attendees"), {"fields": ("attendees", )}),
     )
 
@@ -38,6 +75,12 @@ class EventAdmin(admin.ModelAdmin):
             return format_html('<img src="%s" width="50px" />' % obj.event_flyer.url)
 
     get_event_flyer.short_description = "Current Event Flyer"
+
+    def get_event_flyer_big(self, obj):
+        if obj.event_flyer:
+            return format_html('<img src="%s" width="250px" />' % obj.event_flyer.url)
+
+    get_event_flyer_big.short_description = "Current Event Flyer"
 
 
 @admin.register(Promoter)
@@ -54,10 +97,10 @@ class ProfileAdmin(admin.ModelAdmin):
     list_filter = ("fav_genre", "fav_artist", )
     ordering = ("user", "fav_genre", "created_at", )
     search_fields = ("fav_genre", )
-    readonly_fields = ("display_avatar", "user", "user_name", )
+    readonly_fields = ("display_avatar", "display_avatar_big", "user", "user_name", )
 
     fieldsets = (
-        (_("Avatar"), {"fields": ("display_avatar", "avatar",)}),
+        (_("Avatar"), {"fields": ("display_avatar_big", "avatar",)}),
         (_("Contact Information"), {"fields": ("user_name", "user", )}),
         (_("Profile Information"), {"fields": ("fav_genre", "fav_artist", )}),
     )
@@ -73,6 +116,12 @@ class ProfileAdmin(admin.ModelAdmin):
             return format_html('<img src="%s" width="50px" />' % obj.avatar.url)
 
     display_avatar.short_description = "Current Avatar"
+
+    def display_avatar_big(self, obj):
+        if obj.avatar:
+            return format_html('<img src="%s" width="250px" />' % obj.avatar.url)
+
+    display_avatar_big.short_description = "Current Avatar"
 
 
 # @admin.register(DallEImage)
