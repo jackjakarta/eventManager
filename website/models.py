@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 
-from .utils.constants import MUSIC_GENRES_CHOICES
+from .utils.constants import MUSIC_GENRES_CHOICES, EVENT_TYPE_CHOICES
 
 AuthUser = get_user_model()
 
@@ -73,12 +73,17 @@ class Event(MyModel):
     promoter = models.ForeignKey(Promoter, blank=True, null=True, on_delete=models.CASCADE)
     artists = models.ManyToManyField(Artist, related_name="event_artists", blank=True)
     manager = models.ForeignKey(AuthUser, null=True, on_delete=models.SET_NULL)
+    event_type = models.CharField("Event Type", max_length=120, choices=EVENT_TYPE_CHOICES, default=None, blank=True)
+    genre = models.CharField("Genre", max_length=120, choices=MUSIC_GENRES_CHOICES, default=None, blank=True)
     event_flyer = models.ImageField("Event Flyer", upload_to="event_flyers/", default=None, null=False)
     description = models.TextField(max_length=350, blank=True)
     attendees = models.ManyToManyField(AuthUser, related_name="attended_events", blank=True)
 
     def __str__(self):
         return self.name
+
+    def __repr__(self):
+        return self.__str__()
 
 
 class Profile(MyModel):
@@ -93,10 +98,21 @@ class Profile(MyModel):
         default=None,
         blank=True
     )
+    fav_artist = models.ForeignKey(
+        Artist,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        default=None,
+        verbose_name="Favorite Artist"
+    )
     avatar = models.ImageField(upload_to="avatars/", default=None, blank=True)
 
     def __str__(self):
         return str(self.user)
+
+    def __repr__(self):
+        return self.__str__()
 
 
 class NewsletterSub(MyModel):

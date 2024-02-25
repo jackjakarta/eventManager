@@ -127,7 +127,17 @@ class AddVenueForm(forms.ModelForm):
 class AddEventForm(forms.ModelForm):
     class Meta:
         model = Event
-        fields = ("name", "event_date", "venue", "promoter", "artists", "event_flyer", "description", )
+        fields = (
+            "name",
+            "event_date",
+            "venue",
+            "promoter",
+            "artists",
+            "event_type",
+            "genre",
+            "event_flyer",
+            "description",
+        )
         widgets = {
             "event_date": forms.DateTimeInput(attrs={"type": "datetime-local"}),
         }
@@ -153,16 +163,18 @@ class AddEventForm(forms.ModelForm):
 class EditProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ("avatar", "fav_genre", )
+        fields = ("avatar", "fav_genre", "fav_artist", )
 
         labels = {
             "avatar": "Avatar",
-            "fav_genre": "Favorite Music Genre"
+            "fav_genre": "Favorite Music Genre",
+            "fav_artist": "Favorite Artist",
         }
 
         widgets = {
             "avatar": forms.ClearableFileInput(attrs={"class": "form-control"}),
             "fav_genre": forms.Select(attrs={"class": "form-control"}),
+            "fav_artist": forms.Select(attrs={"class": "form-control"}),
         }
 
 

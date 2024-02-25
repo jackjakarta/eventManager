@@ -25,3 +25,12 @@ MUSIC_GENRES_CHOICES = [
     ("dancehall", "Dancehall"),
     ("opera", "Opera"),
 ]
+
+
+EVENT_TYPE_CHOICES = [
+    ("concert", "Concert"),
+    ("show", "Show"),
+    ("conference", "Conference"),
+    ("party", "Party"),
+    ("other", "Other"),
+]

@@ -133,6 +133,8 @@ Profile{% if user.first_name %} - {{ user.first_name }} {{ user.last_name }}{% e
       <div class="card-body">
         <h5 class="card-title">{{ user.first_name }} {{ user.last_name }}</h5>
           <p class="card-text"><strong>Email:</strong> {{ user }}</p>
+          <p class="card-text"><strong>Favorite Genre:</strong> {{ profile.fav_genre.title }}</p>
+          <p class="card-text"><strong>Favorite Artist:</strong> {{ profile.fav_artist }}</p>
 
         <a href="{% url 'website:user_auth:generate_api_key' %}" class="btn btn-outline-danger btn-sm rounded-3">Generate API Key</a>
         <p class="card-text mt-3"><small class="text-body-secondary">Last login on {{ user.last_login }}</small></p>

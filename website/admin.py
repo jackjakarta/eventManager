@@ -1,7 +1,8 @@
 from django.contrib import admin
-from .models import Venue, Event, Promoter, Artist, Profile, NewsletterSub, DallEImage
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
+
+from .models import Venue, Event, Promoter, Artist, Profile, NewsletterSub
 
 
 @admin.register(Artist)
@@ -19,10 +20,24 @@ class VenueAdmin(admin.ModelAdmin):
 
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
-    list_display = ("name", "event_date", "venue", "manager", "created_at", )
-    list_filter = ("venue", "manager", )
-    ordering = ("created_at", "name", "venue", "manager", "event_date", )
-    search_fields = ("name", "venue", "manager", )
+    list_display = ("name", "event_date", "venue", "event_type", "manager", "get_event_flyer", "created_at", )
+    list_filter = ("venue", "promoter", "artists", "event_type", "genre", )
+    ordering = ("created_at", "name", "venue", "event_type", "manager", "event_date", )
+    search_fields = ("name", "venue", "manager", "event_type",)
+    readonly_fields = ("get_event_flyer", "attendees", )
+
+    fieldsets = (
+        (_("Event Information"), {"fields": ("name", "event_date", "description", "event_type", "genre", )}),
+        (_("User Details"), {"fields": ("manager", "venue", "promoter", "artists", )}),
+        (_("Event Flyer"), {"fields": ("get_event_flyer", "event_flyer", )}),
+        (_("Event Attendees"), {"fields": ("attendees", )}),
+    )
+
+    def get_event_flyer(self, obj):
+        if obj.event_flyer:
+            return format_html('<img src="%s" width="50px" />' % obj.event_flyer.url)
+
+    get_event_flyer.short_description = "Current Event Flyer"
 
 
 @admin.register(Promoter)
@@ -35,8 +50,8 @@ class PromoterAdmin(admin.ModelAdmin):
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ("user", "display_avatar", "fav_genre", "created_at", )
-    list_filter = ("fav_genre", )
+    list_display = ("user", "display_avatar", "fav_genre", "fav_artist", "created_at", )
+    list_filter = ("fav_genre", "fav_artist", )
     ordering = ("user", "fav_genre", "created_at", )
     search_fields = ("fav_genre", )
     readonly_fields = ("display_avatar", "user", "user_name", )
@@ -44,7 +59,7 @@ class ProfileAdmin(admin.ModelAdmin):
     fieldsets = (
         (_("Avatar"), {"fields": ("display_avatar", "avatar",)}),
         (_("Contact Information"), {"fields": ("user_name", "user", )}),
-        (_("Profile Information"), {"fields": ("fav_genre", )}),
+        (_("Profile Information"), {"fields": ("fav_genre", "fav_artist", )}),
     )
 
     def user_name(self, obj):
