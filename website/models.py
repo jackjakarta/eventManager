@@ -100,7 +100,8 @@ class Profile(MyModel):
         max_length=120,
         choices=MUSIC_GENRES_CHOICES,
         default=None,
-        blank=True
+        blank=True,
+        null=True
     )
     fav_artist = models.ForeignKey(
         Artist,
