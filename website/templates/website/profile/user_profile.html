@@ -1,4 +1,5 @@
 {% extends 'website/base.html' %}
+{% load static %}
 
 {% block title %}
 Profile{% if user.first_name %} - {{ user.first_name }} {{ user.last_name }}{% else %} - {{ user }}{% endif %}
@@ -123,11 +124,9 @@ Profile{% if user.first_name %} - {{ user.first_name }} {{ user.last_name }}{% e
     <div class="card rounded-5 mb-3" style="max-width: 100%;">
   <div class="row g-2">
     <div class="col-md-4">
-        {% if profile.avatar %}
-      <img src="{{ profile.avatar.url }}" class="img-fluid rounded-circle" alt="...">
-        {% else %}
-        <img src="#" class="img-fluid rounded-start" alt="...">
-        {% endif %}
+
+      <img src="{% if profile.avatar %}{{ profile.avatar.url }}{% else %}{% static 'website/img/default-avatar.png' %}{% endif %}" class="img-fluid rounded-circle" alt="...">
+
     </div>
     <div class="col-md-8">
       <div class="card-body">
