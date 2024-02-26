@@ -1,4 +1,4 @@
-import secrets
+from secrets import token_urlsafe
 
 from django.contrib.auth.models import AbstractUser
 from django.db import models
@@ -51,7 +51,7 @@ class Activation(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.token:
-            self.token = secrets.token_hex(32)
+            self.token = token_urlsafe(32)
             self.expires_at = timezone.now() + timezone.timedelta(**AVAILABILITY)
         super().save(*args, **kwargs)
 
