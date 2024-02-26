@@ -11,7 +11,7 @@ def home(request):
 
 
 def app_docs(request):
-    pass
+    return render(request, "404.html", {})
 
 
 def app_docs_api(request):

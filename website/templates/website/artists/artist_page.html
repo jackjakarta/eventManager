@@ -26,6 +26,32 @@
             {% if artist.website %}
                 <a href="{{ artist.website }}" class="btn btn-secondary btn-sm rounded-3 mt-3">Visit Website</a>
             {% endif %}
+
+            {% if user == artist.manager %}
+                <a href="{% url 'website:update_db:edit_artist' artist.id %}" class="btn btn-outline-secondary btn-sm rounded-3 mt-3">Edit</a>
+                <button type="button" class="btn btn-outline-danger btn-sm rounded-3 mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Delete
+                </button>
+
+                <!--Modal-->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Are you sure ?</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                  </div>
+                                  <div class="modal-body">
+                                      Please confirm if you want to delete: <strong>{{ artist.name }}</strong>
+                                  </div>
+                                  <div class="modal-footer">
+                                      <a href="{% url 'website:update_db:delete_artist' artist.id %}" class="btn btn-danger btn-sm rounded-3">Delete</a>
+                                    <button type="button" class="btn btn-outline-secondary btn-sm rounded-3" data-bs-dismiss="modal">Close</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+            {% endif %}
         </div>
 
         <div class="container text-center mt-3">

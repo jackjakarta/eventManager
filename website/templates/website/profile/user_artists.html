@@ -6,15 +6,21 @@ My Artists - {{ user.first_name }} {{ user.last_name }}
 
 {% block content %}
 
+<div class="container mt-4">
+    <h1 class="display-5">Artists</h1>
+</div>
+
+<div class="container mt-2">
+    <p>Lorem ipsum dolor sit amet.</p>
+</div>
+
 {% if artists %}
 
-    <div class="container mt-4">
-        <h1 class="display-5">My Artists</h1>
+    <div class="container">
         <a href="{% url 'website:update_db:add_artist' %}" class="btn btn-info btn-sm rounded-3 mt-3">Add Artist</a>
     </div>
 
     <div class="container mt-3">
-
         <div class="row">
             {% for artist in artists %}
                 <div class="col-md-4 mb-3">
@@ -23,29 +29,41 @@ My Artists - {{ user.first_name }} {{ user.last_name }}
                         <div class="card-body">
                             <h5 class="card-title">{{ artist.name }}</h5>
                             <p class="card-text">{{ artist.city }}, {{ artist.country }}</p>
-                            <a href="{% url 'website:model_pages:artist_page' artist.id %}" class="btn btn-info btn-sm rounded-3">Artist Page</a>
-                            {% if artist.website %}
-                                <a href="{{ artist.website }}" class="btn btn-secondary btn-sm rounded-3">Visit Website</a>
-                            {% endif %}
                             {% if artist.email %}
-                                <a href="mailto:{{ artist.email }}" class="btn btn-outline-secondary btn-sm rounded-3">Contact</a>
+                                <p class="card-text"><strong>Contact: </strong>{{ artist.email }}</p>
                             {% endif %}
+
+                            {% if artist.website %}
+                                <p class="card-text"><strong>Website: </strong>{{ artist.website }}</p>
+                            {% endif %}
+
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <a href="{% url 'website:model_pages:artist_page' artist.id %}" class="btn btn-info btn-sm rounded-3">Artist Page</a>
+                                    <a href="{% url 'website:model_pages:artist_events' artist.id %}" class="btn btn-secondary btn-sm rounded-3">Artist Events</a>
+                                </div>
+
+                                <div>
+                                    <a href="{% url 'website:update_db:edit_artist' artist.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Edit</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="container">
-                    <a href="{% url 'website:user_profile:profile' user.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Back</a>
                 </div>
             {% endfor %}
         </div>
     </div>
 
+    <div class="container text-center">
+        <a href="{% url 'website:update_db:add_artist' %}" class="btn btn-info btn-sm rounded-3">Add Artist</a>
+        <a href="{% url 'website:model_pages:artists' %}" class="btn btn-outline-secondary btn-sm rounded-3">Back</a>
+    </div>
 
 {% else %}
 
     <div class="container text-center mt-4">
         <h1 class="display-7">Artists</h1>
-        <h4>You have no artists at the moment. Add your first Artist.</h4>
+        <h4>There are no artists at the moment. Add the first Artist.</h4>
         <a href="{% url 'website:update_db:add_artist' %}" class="btn btn-info btn-sm rounded-3">Add Artist</a>
         <a href="{% url 'website:static_pages:home' %}" class="btn btn-outline-secondary btn-sm rounded-3">Back to home</a>
     </div>
