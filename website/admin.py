@@ -11,12 +11,13 @@ class ArtistAdmin(admin.ModelAdmin):
     list_filter = ("country", )
     ordering = ("name", "country", "manager", "created_at", )
     search_fields = ("name", "country", "city", )
-    readonly_fields = ("get_artist_image", )
+    readonly_fields = ("get_artist_image", "created_at", )
 
     fieldsets = (
         (_("Artist Image"), {"fields": ("get_artist_image", "image", )}),
         (_("Artist Contact"), {"fields": ("name", "email", "website", )}),
-        (_("Artist Bio"), {"fields": ("city", "country", "bio", )})
+        (_("Artist Bio"), {"fields": ("city", "country", "bio", )}),
+        (_("Artist Management"), {"fields": ("manager", "created_at", )})
     )
 
     def get_artist_image(self, obj):
