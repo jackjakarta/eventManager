@@ -20,11 +20,11 @@ API Documentation
                             <div class="card-body">
                                 <h4>Info</h4>
                                 <p>
-                                    <p>Welcome to the EvntMngr API documentation! Our API endpoints provide streamlined interactions with the core features of the EvntMngr App, including <b>Events</b>, <b>Artists</b>, <b>Promoters</b>, and <b>Venues</b>. With our endpoints, you can  <b>add</b>, <b>remove</b>, <b>edit</b>, or <b>retrieve</b> information about these entities, empowering you to manage your event-related data efficiently and effectively. Whether you're creating event listings, showcasing artists, partnering with promoters, or managing venues, our API simplifies the process, allowing you to focus on delivering exceptional experiences to your users.
+                                    <p>Welcome to the EvntMngr API documentation! Our API endpoints provide streamlined interactions with the core features of the EvntMngr App, including <b>Events</b>, <b>Artists</b>, <b>Promoters</b> and <b>Venues</b>. With our endpoints, you can  <b>add</b>, <b>remove</b>, <b>edit</b> or <b>retrieve</b> information about these entities, empowering you to manage your event-related data efficiently and effectively. Whether you're creating event listings, showcasing artists, partnering with promoters or managing venues, our API simplifies the process, allowing you to focus on delivering exceptional experiences to your users.
                                     </p>
                                 <h4 class="mt-4">Authentication</h4>
 
-                                <p>Authentication is required for accessing various endpoints in the EvntMngr Web App's API. While <b>GET</b> requests to some endpoints are public and do not require authentication, other HTTP methods like <b>POST</b>, <b>PUT</b>, and <b>DELETE</b> require either an <b>API Key</b> or <b>JWT (JSON Web Token)</b> authentication.</p>
+                                <p>Authentication is required for accessing various endpoints in the EvntMngr Web App's API. While <b>GET</b> requests to some endpoints are public and do not require authentication, other HTTP methods like <b>POST</b>, <b>PUT</b>, and <b>DELETE</b> require either an <b>API Key</b> or <b>JWT (JSON Web Token)</b> authentication for all endpoints.</p>
 
                                 <h4 class="mt-4">API Key</h4>
 
@@ -190,7 +190,7 @@ API Documentation
                                     <strong>PUT:</strong> Update artist details<br>
                                     <strong>DELETE:</strong> Delete an artist<br><br>
                                     <strong>Authentication:</strong><br><br>
-                                    <strong>API Key</strong> or <strong>JWT Token</strong> required for <strong>GET</strong>, <strong>POST</strong>, <strong>PUT</strong>, and <strong>DELETE</strong><br>
+                                    <strong>API Key</strong> or <strong>JWT Token</strong> required for <strong>POST</strong>, <strong>PUT</strong>, and <strong>DELETE</strong><br>
                                 </p>
                             </div>
                         </div>
@@ -203,16 +203,16 @@ API Documentation
                                 <div class="card bg-dark">
                                     <div class="card-body" data-bs-theme="dark" style="color: #cccccc;">
                                         GET https://evntmngr.xyz/api/artists/<br>
-                                        Content-Type: application/json<br>
-                                        X-Api-Key: your-api-key
+<!--                                        Content-Type: application/json<br>-->
+<!--                                        X-Api-Key: your-api-key-->
                                     </div>
                                 </div>
                                 <h4 class="mt-4">GET - Individual</h4>
                                 <div class="card bg-dark">
                                     <div class="card-body" data-bs-theme="dark" style="color: #cccccc;">
                                         GET https://evntmngr.xyz/api/artists/artist_id/<br>
-                                        Content-Type: application/json<br>
-                                        X-Api-Key: your-api-key
+<!--                                        Content-Type: application/json<br>-->
+<!--                                        X-Api-Key: your-api-key-->
                                     </div>
                                 </div>
                                 <h4 class="mt-4">POST</h4>
