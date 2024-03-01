@@ -60,7 +60,7 @@ rel="stylesheet">
             <h1>Welcome to EventMngr!</h1>
         </div>
         <div class="content">
-            <p>Hello, {% if name %}{{ name }}{% else %}{{ email }}{% endif %}</p>
+            <p>Hello, {% if first_name %}{{ first_name }} {{ last_name }}{% else %}{{ email }}{% endif %}</p>
             <p>Thank you for registering with us. We're thrilled to have you join our
 community!</p>
             <p>Get started by exploring some of our features:</p>

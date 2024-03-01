@@ -5,15 +5,15 @@ from django.contrib.auth import get_user_model
 
 from .models import Activation
 from .views import send_activation_email
+from website.utils.email import send_register_user_email
 
 AuthUserModel = get_user_model()
 
 
 @receiver(pre_save, sender=AuthUserModel)
-def inactivate_user(sender, instance, **kwargs):
-    print("\nSignal pre_save was triggerd!\n")
-
-    if not instance.pk:
+def inactivate_user(instance, **kwargs):
+    is_social_user = hasattr(instance, 'is_social_auth') and instance.is_social_auth is True
+    if not instance.pk and not is_social_user:
         instance.is_active = False
         instance.password = None
 
@@ -23,8 +23,17 @@ def create_activation(sender, instance, created, **kwargs):
     print("\nSignal post_save was triggerd!\n")
     try:
         with transaction.atomic():
-            if created:
-                Activation(user=instance).save()
-                send_activation_email(instance)
+            is_social_user = hasattr(instance, 'is_social_auth') and instance.is_social_auth is True
+            if not instance.pk and not is_social_user:
+                if created:
+                    Activation(user=instance).save()
+                    send_activation_email(instance)
+            else:
+                if created:
+                    send_register_user_email(
+                        first_name=instance.first_name,
+                        last_name=instance.last_name,
+                        to_email=instance.email
+                    )
     except ValueError:
         AuthUserModel.objects.get(pk=instance.id).delete()
