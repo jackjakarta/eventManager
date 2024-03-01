@@ -16,7 +16,10 @@ class Post(MyModel):
     likes = models.ManyToManyField(AuthUser, related_name="post_likes", blank=True)
 
     def __str__(self):
-        return self.description
+        return f"{self.user} - Post ID: {self.id}"
+
+    def __repr__(self):
+        return self.__str__()
 
 
 class PostComment(MyModel):
@@ -28,4 +31,7 @@ class PostComment(MyModel):
     text = models.TextField("Comment", max_length=350, blank=True)
 
     def __str__(self):
-        return f"{self.user} - {self.post}"
+        return f"{self.user} - Post ID: {self.post.id}"
+
+    def __repr__(self):
+        return self.__str__()
