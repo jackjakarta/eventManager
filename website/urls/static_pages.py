@@ -1,5 +1,5 @@
 from django.urls import path
-from website.views.static import home, app_docs, app_docs_api
+from website.views.static import home, app_docs, app_docs_api, privacy_policy
 
 app_name = 'static_pages'
 
@@ -9,4 +9,5 @@ urlpatterns = [
     path('', home, name='home'),
     path('docs/', app_docs, name='docs'),  # Not implemented
     path('docs/api/', app_docs_api, name='docs_api'),
+    path('privacy-policy/', privacy_policy, name='privacy_policy'),
 ]
