@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.core.mail import EmailMultiAlternatives
+from django.core.mail import EmailMultiAlternatives, send_mail
 from django.template.loader import get_template
 
 
@@ -41,3 +41,11 @@ def send_register_user_email(first_name, last_name, to_email):
     )
     mail.content_subtype = "html"
     mail.send()
+
+
+# Sends an email to self when contact form is filled
+def send_contact_mail(name, message, reply_to):
+    subject = f"New Contact Form Entry ({reply_to})"
+    email_from = settings.EMAIL_HOST_USER
+    user_message = f"Reply To: {reply_to}\nName: {name}\n\n{message}"
+    send_mail(subject=subject, message=user_message, from_email=email_from, recipient_list=["al.termure@gmail.com"])
