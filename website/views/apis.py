@@ -93,4 +93,4 @@ def ai_assistant_image(request):
             })
     else:
         messages.error(request, "You have to be logged in to use this feature!")
-        return redirect("website:static_pages:home")
+        return redirect("website:user_auth:login")
