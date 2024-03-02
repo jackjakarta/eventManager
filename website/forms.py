@@ -41,7 +41,7 @@ class AddArtistForm(forms.ModelForm):
             "email": forms.TextInput(attrs={"class": "form-control", "placeholder": "Booking Email"}),
             "website": forms.TextInput(attrs={"class": "form-control", "placeholder": "Social Link"}),
             "city": forms.TextInput(attrs={"class": "form-control", "placeholder": "City"}),
-            "country": forms.Select(attrs={"class": "form-control"}),
+            "country": forms.Select(attrs={"class": "form-select"}),
             "image": forms.ClearableFileInput(attrs={"class": "form-control", "placeholder": "Artist Image"}),
         }
 
@@ -91,11 +91,12 @@ class AddPromoterForm(forms.ModelForm):
 class AddVenueForm(forms.ModelForm):
     class Meta:
         model = Venue
-        fields = ("name", "address", "city", "zip_code", "website", "email", "image", )
+        fields = ("name", "address", "city", "country", "zip_code", "website", "email", "image", )
         labels = {
             "name": "",
             "address": "",
             "city": "",
+            "country": "Choose country:",
             "zip_code": "",
             "website": "",
             "email": "",
@@ -105,6 +106,7 @@ class AddVenueForm(forms.ModelForm):
             "name": forms.TextInput(attrs={"class": "form-control", "placeholder": "Venue Name"}),
             "address": forms.TextInput(attrs={"class": "form-control", "placeholder": "Address"}),
             "city": forms.TextInput(attrs={"class": "form-control", "placeholder": "City"}),
+            "country": forms.Select(attrs={"class": "form-select", "placeholder": "Country"}),
             "zip_code": forms.TextInput(attrs={"class": "form-control", "placeholder": "Zip Code"}),
             "website": forms.TextInput(attrs={"class": "form-control", "placeholder": "Website"}),
             "email": forms.TextInput(attrs={"class": "form-control", "placeholder": "Email"}),
@@ -173,8 +175,8 @@ class EditProfileForm(forms.ModelForm):
 
         widgets = {
             "avatar": forms.ClearableFileInput(attrs={"class": "form-control"}),
-            "fav_genre": forms.Select(attrs={"class": "form-control"}),
-            "fav_artist": forms.Select(attrs={"class": "form-control"}),
+            "fav_genre": forms.Select(attrs={"class": "form-select"}),
+            "fav_artist": forms.Select(attrs={"class": "form-select"}),
         }
 
 
