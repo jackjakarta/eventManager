@@ -50,8 +50,10 @@
                         <li><a class="dropdown-item" href="{% url 'user_posts' user.id %}">Posts</a></li>
                         <li><a class="dropdown-item" href="{% url 'liked_posts' user.id %}">Liked Posts</a></li>
                         <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="{% url 'website:user_profile:user_generated_images' user.id %}">Generated Flyers</a></li>
                         <li><a class="dropdown-item" href="{% url 'website:api_calls:assistant'  %}">AI Event Assistant</a></li>
                         <li><a class="dropdown-item" href="{% url 'website:api_calls:assistant_image'  %}">AI Flyer Generator</a></li>
+
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="{% url 'website:user_auth:logout' %}">Logout</a></li>
                     </ul>

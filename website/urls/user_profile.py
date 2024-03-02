@@ -2,6 +2,7 @@ from django.urls import path
 
 from website.views.profile import user_profile, edit_profile
 from website.views.profile import user_artists, user_events, user_promoters, user_venues, user_events_attending
+from website.views.profile import user_generated_images
 
 
 app_name = 'user_profile'
@@ -15,4 +16,5 @@ urlpatterns = [
     path('user/<int:pk>/events/', user_events, name='user_events'),
     path('user/<int:pk>/venues/', user_venues, name='user_venues'),
     path('user/<int:pk>/events-attending/', user_events_attending, name='user_events_attending'),
+    path('user/<int:pk>/generated-flyers/', user_generated_images, name='user_generated_images'),
 ]

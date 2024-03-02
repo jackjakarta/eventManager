@@ -6,6 +6,7 @@ from django.contrib import messages
 
 from website.forms import GPTAssistantsApiForm, DallEImageForm
 from website.ai import GPTAssistantsApi, ImageDallE
+from website.utils.images import save_image_to_db
 
 OPENAI_ASSISTANT_ID = config("OPENAI_ASSISTANT_ID")
 
@@ -80,6 +81,7 @@ def ai_assistant_image(request):
                 img_ai = ImageDallE()
                 img_ai.generate_image(prompt_for_model)
                 img_url = img_ai.image_url
+                save_image_to_db(ai_user=request.user, image_url=img_url)
 
                 return render(request, "website/assistant/ai_image_page.html", {
                     "image": img_url,
@@ -89,3 +91,6 @@ def ai_assistant_image(request):
             return render(request, "website/assistant/ai_image_page.html", {
                 "form": form,
             })
+    else:
+        messages.error(request, "You have to be logged in to use this feature!")
+        return redirect("website:static_pages:home")

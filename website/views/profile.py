@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 
 from website.forms import EditProfileForm
-from website.models import Profile, Event, Venue, Promoter, Artist
+from website.models import Profile, Event, Venue, Promoter, Artist, UserGeneratedImage
+
 
 
 # User Views
@@ -12,11 +13,13 @@ def user_profile(request, pk):
         events_user = Event.objects.filter(manager_id=pk).order_by('event_date')[:2]
         promoters_user = Promoter.objects.filter(manager_id=pk).order_by('updated_at')[:2]
         venues_user = Venue.objects.filter(manager_id=pk).order_by('updated_at')[:2]
+        artists_user = Artist.objects.filter(manager_id=pk).order_by('updated_at')[:2]
         return render(request, "website/profile/user_profile.html", {
             "profile": profile,
             "events": events_user,
             "promoters": promoters_user,
             "venues": venues_user,
+            "artists": artists_user,
         })
     else:
         messages.error(request, "You are not logged in!")
@@ -111,6 +114,21 @@ def user_events_attending(request, pk):
             attending_events = Event.objects.filter(attendees=pk)
             return render(request, "website/profile/user_events_attending.html", {
                 "events": attending_events,
+            })
+        else:
+            messages.error(request, "You are not authorized to view this page.")
+            return redirect("website:static_pages:home")
+    else:
+        messages.error(request, "You are not logged in.")
+        return redirect("website:user_auth:login")
+
+
+def user_generated_images(request, pk):
+    if request.user.is_authenticated:
+        if request.user.id == pk:
+            user_images = UserGeneratedImage.objects.filter(manager_id=pk)
+            return render(request, "website/profile/user_event_flyers.html", {
+                "user_images": user_images,
             })
         else:
             messages.error(request, "You are not authorized to view this page.")

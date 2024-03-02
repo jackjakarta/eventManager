@@ -125,13 +125,6 @@ class ProfileAdmin(admin.ModelAdmin):
     display_avatar_big.short_description = "Current Avatar"
 
 
-# @admin.register(DallEImage)
-# class DallEImageAdmin(admin.ModelAdmin):
-#     list_display = ("manager", "created_at", )
-#     ordering = ("manager", "created_at", )
-#     search_fields = ("manager", )
-
-
 @admin.register(NewsletterSub)
 class NewsletterSubAdmin(admin.ModelAdmin):
     list_display = ("email", "created_at",)

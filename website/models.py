@@ -130,13 +130,13 @@ class NewsletterSub(MyModel):
         return self.email
 
 
-class DallEImage(MyModel):
+class UserGeneratedImage(MyModel):
     class Meta:
-        db_table = "dall_e_generated_images"
+        db_table = "user_generated_images"
 
-    title = models.CharField("Image Title", max_length=120, blank=True)
-    image = models.ImageField("Generated Image", upload_to="generated_images/")
-    manager = models.ForeignKey(AuthUser, null=True, on_delete=models.SET_NULL)
+    title = models.CharField("Image Title", max_length=120)
+    image = models.ImageField("Generated Image", upload_to="user_generated_images/")
+    manager = models.ForeignKey(AuthUser, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title

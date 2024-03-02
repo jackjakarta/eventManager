@@ -1,0 +1,44 @@
+{% extends 'website/base.html' %}
+
+{% block title %}
+Generated Event Flyers - {{ user.first_name }} {{ user.last_name }}
+{% endblock %}
+
+{% block content %}
+
+{% if user_images %}
+
+    <div class="container my-4">
+        <h2 class="display-7 text-center mb-4">
+            Your Event Flyers
+        </h2>
+        <div class="row">
+            {% for image in user_images %}
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <img src="{{ image.image.url }}" class="card-img-top" alt="Generated Image">
+                        <a href="{{ image.image.url }}" class="btn btn-outline-secondary btn-sm rounded-3">Download</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-2">
+            <a href="{% url 'website:api_calls:assistant_image' %}" class="btn btn-info btn-sm rounded-3">Generate New Flyer</a>
+        </div>
+    </div>
+
+{% else %}
+
+    <div class="container text-center mt-5">
+        <h2 class="display-7">
+            No images yet
+        </h2>
+        <p>
+            You don't have any generated images yet.
+        </p>
+        <a href="{% url 'website:api_calls:assistant_image' %}" class="btn btn-info btn-sm rounded-3">Try our Flyer Generator</a>
+    </div>
+
+{% endif %}
+
+{% endblock %}
