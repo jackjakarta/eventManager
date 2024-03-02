@@ -1,14 +1,20 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from website.models import Event
+from website.models import Event, Artist, Promoter, Venue
 from website.utils.email import send_contact_mail
 
 
 # Static Pages Views
 def home(request):
     events_qs = Event.objects.all().order_by("event_date")[:5]
+    artists_qs = Artist.objects.all().order_by("updated_at")[:3]
+    promoters_qs = Promoter.objects.all().order_by("updated_at")[:2]
+    venues_qs = Venue.objects.all().order_by("updated_at")[:2]
     return render(request, "website/home.html", {
         "events": events_qs,
+        "artists": artists_qs,
+        "promoters": promoters_qs,
+        "venues": venues_qs,
     })
 
 

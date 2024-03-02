@@ -6,15 +6,16 @@ Artists
 
 {% block content %}
 
-<div class="container mt-4">
-    <h1 class="display-5">Artists</h1>
-</div>
-
-<div class="container mt-2">
-    <p>Lorem ipsum dolor sit amet.</p>
-</div>
 
 {% if artists %}
+
+    <div class="container mt-4">
+        <h1 class="display-5">Artists</h1>
+    </div>
+
+    <div class="container mt-2">
+        <p>Featured artists.</p>
+    </div>
 
     <div class="container">
         <a href="{% url 'website:update_db:add_artist' %}" class="btn btn-info btn-sm rounded-3 mt-3">Add Artist</a>
@@ -58,7 +59,7 @@ Artists
 
     <div class="container text-center">
         <a href="{% url 'website:update_db:add_artist' %}" class="btn btn-info btn-sm rounded-3">Add Artist</a>
-        <a href="{% url 'website:model_pages:artists' %}" class="btn btn-outline-secondary btn-sm rounded-3">Back</a>
+        <a href="{% url 'website:static_pages:home' %}" class="btn btn-outline-secondary btn-sm rounded-3">Back</a>
     </div>
 
 {% else %}

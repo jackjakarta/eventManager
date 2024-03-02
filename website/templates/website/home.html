@@ -37,11 +37,12 @@ Home Page
     </form>
 </div>
 
-<!-- Carousel -->
-{% if events %}
+    <!-- Carousel -->
     <div class="container mt-4">
+        <h2 class="text-center mb-5">Upcoming Events</h2>
         <div id="upcomingEventsCarousel" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
+      {% if events %}
           {% for event in events %}
             <div class="carousel-item {% if forloop.first %}active{% endif %}" style="height: 300px; overflow: hidden;">
                 <a href="{% url 'website:model_pages:event_page' event.id %}"><img src="{{ event.event_flyer.url }}" class="d-block w-100" alt="{{ event.name }}" style="object-fit: cover;"></a>
@@ -52,6 +53,7 @@ Home Page
               </div>
             </div>
           {% endfor %}
+      {% endif %}
       </div>
       <button class="carousel-control-prev" type="button" data-bs-target="#upcomingEventsCarousel" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -63,6 +65,70 @@ Home Page
       </button>
     </div>
     </div>
-{% endif %}
+
+
+<!--Artists Section-->
+<div class="container py-5">
+    <h2 class="text-center mb-5">Featured Artists</h2>
+    <div class="row">
+        {% for artist in artists %}
+        <div class="col-md-4">
+            <div class="card">
+                <img src="{{ artist.image.url }}" class="card-img-top" alt="Artist 1" height="250">
+                <div class="card-body">
+                    <h5 class="card-title">{{ artist.name }}</h5>
+                    <p class="card-text">{{ artist.bio }}</p>
+                    <div class="text-center">
+                        <a href="{% url 'website:model_pages:artist_page' artist.id %}" class="btn btn-outline-info btn-sm rounded-3">Artist Page</a>
+                        <a href="{% url 'website:model_pages:artist_events' artist.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Artist Events</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<!--End Artist Section-->
+
+<!--Venue Section-->
+<div class="container py-5">
+    <h2 class="text-center mb-5">Featured Venues</h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for venue in venues %}
+            <div class="col">
+                <div class="card h-100">
+                    <img src="{{ venue.image.url }}" class="card-img-top" alt="Venue 1">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ venue.name }}</h5>
+                        <p class="card-text">{{ venue.address }}, {{ venue.zip_code }} {{ venue.city }}, {{ venue.country }}</p>
+                        <div class="text-center">
+                            <a href="{% url 'website:model_pages:venue_page' venue.id %}" class="btn btn-outline-info btn-sm rounded-3">Venue Page</a>
+                            <a href="{% url 'website:model_pages:venue_events' venue.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Venue Events</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<!--End Venue Section-->
+
+<!--Promoter Section-->
+<div class="container py-5">
+    <h2 class="text-center mb-5">Featured Promoters</h2>
+    <div class="row">
+        {% for promoter in promoters %}
+            <div class="col-lg-6 text-center">
+                <h3>{{ promoter.name }}</h3>
+                <p>{{ promoter.city }}</p>
+                <div class="text-center">
+                    <a href="{% url 'website:model_pages:promoter_page' promoter.id %}" class="btn btn-outline-info btn-sm rounded-3">Promoter Page</a>
+                    <a href="mailto:{{ promoter.email }}" class="btn btn-outline-secondary btn-sm rounded-3">Contact Promoter</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<!--End Promoter Section-->
 
 {% endblock %}
