@@ -7,12 +7,13 @@ OPENAI_API_KEY = config("OPENAI_API_KEY")
 class ImageDallE:
     """Image Generation with the OpenAI DALL-E model."""
 
-    def __init__(self, model="dall-e-3"):
+    def __init__(self, model="dall-e-3", user_id=None):
         self.client = OpenAI(api_key=OPENAI_API_KEY)
         self.model = model
         self.prompt = None
         self.response = None
         self.image_url = None
+        self.user_id = user_id
 
     def generate_image(self, prompt):
         self.prompt = prompt
@@ -21,7 +22,9 @@ class ImageDallE:
             prompt=self.prompt,
             size="1792x1024",
             quality="standard",
+            style="vivid",
             n=1,
+            user=self.user_id,
         )
         self.image_url = self.response.data[0].url
 

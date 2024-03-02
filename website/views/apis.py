@@ -78,7 +78,7 @@ def ai_assistant_image(request):
                 prompt_for_model = (f"Generate an event flyer based on this description:\n\n{user_prompt}.\n\n"
                                     f"Follow the description precisely.")
 
-                img_ai = ImageDallE()
+                img_ai = ImageDallE(user_id=str(request.user.id))
                 img_ai.generate_image(prompt_for_model)
                 img_url = img_ai.image_url
                 save_image_to_db(ai_user=request.user, image_url=img_url)
