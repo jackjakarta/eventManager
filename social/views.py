@@ -6,22 +6,30 @@ from .forms import PostForm, PostCommentForm
 
 
 def posts_feed(request):
-    posts = Post.objects.all().order_by("-created_at")[:10]
-    return render(request, "social/posts_feed.html", {
-        "posts": posts,
-    })
+    if request.user.is_authenticated:
+        posts = Post.objects.all().order_by("-created_at")[:10]
+        return render(request, "social/posts_feed.html", {
+            "posts": posts,
+        })
+    else:
+        messages.error(request, "You have to be logged in to use this feature!")
+        return redirect("website:static_pages:home")
 
 
 def post_page(request, pk):
-    post = Post.objects.get(id=pk)
-    post_comments = PostComment.objects.filter(post_id=pk)
-    form = PostCommentForm()
+    if request.user.is_authenticated:
+        post = Post.objects.get(id=pk)
+        post_comments = PostComment.objects.filter(post_id=pk)
+        form = PostCommentForm()
 
-    return render(request, "social/post_page.html", {
-        "post": post,
-        "comments": post_comments,
-        "form": form,
-    })
+        return render(request, "social/post_page.html", {
+            "post": post,
+            "comments": post_comments,
+            "form": form,
+        })
+    else:
+        messages.error(request, "You have to be logged in to use this feature!")
+        return redirect("website:static_pages:home")
 
 
 def user_posts(request, pk):
