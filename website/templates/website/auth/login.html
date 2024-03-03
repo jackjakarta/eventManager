@@ -34,12 +34,9 @@ Login
                             <button type="submit" class="btn btn-info btn-sm rounded-3">Login</button>
                             <a href="{% url 'website:static_pages:home' %}" class="btn btn-outline-secondary btn-sm rounded-3">Back</a>
                         </div>
-                        <div class="text-center mt-2">
-                            <a href="{% url 'website:user_auth:social:begin' 'facebook' %}">
-                                <img src="{% static 'website/img/facebook-auth.png' %}" alt="FacebookAuth" width="30" height="30">
-                            </a><a href="{% url 'website:user_auth:social:begin' 'google-oauth2' %}">
-                                <img src="{% static 'website/img/google-auth-2.png' %}" alt="GoogleAuth" width="30" height="30">
-                            </a>
+                        <div class="text-center mt-3">
+                            <a href="{% url 'website:user_auth:social:begin' 'facebook' %}" class="btn btn-outline-secondary btn-sm rounded-3"><img src="{% static 'website/img/facebook-auth.png' %}" width="20" height="20" alt="Facebook Login"></a>
+                            <a href="{% url 'website:user_auth:social:begin' 'google-oauth2' %}" class="btn btn-outline-secondary btn-sm rounded-3"><img src="{% static 'website/img/google-auth-2.png' %}" width="20" height="20" alt="Google Login"></a>
                         </div>
                     </form>
                 </div>
