@@ -25,7 +25,7 @@ httplib2==0.20.4
 httpx==0.26.0
 idna==3.6
 jmespath==1.0.1
-mysqlclient==2.2.1
+mysqlclient==2.2.4
 oauthlib==3.2.2
 openai==1.6.1
 packaging==23.2
