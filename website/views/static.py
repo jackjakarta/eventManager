@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.shortcuts import render, redirect
+
 from website.models import Event, Artist, Promoter, Venue
-from website.utils.email import send_contact_mail
+from website.utils.email import send_contact_mail, send_contact_confirm_mail
 
 
 # Static Pages Views
@@ -28,6 +29,12 @@ def contact(request):
             name=name,
             message=message,
             reply_to=email
+        )
+
+        send_contact_confirm_mail(
+            name=name,
+            email=email,
+            message=message
         )
 
         messages.success(request, f"Thank you, {name}. We'll get back to you as soon as possible!")

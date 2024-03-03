@@ -4,8 +4,8 @@ from django.db import transaction
 from django.contrib.auth import get_user_model
 
 from .models import Activation
-from .views import send_activation_email
-from website.utils.email import send_register_user_email
+from .utils.email import send_activation_email, send_register_user_email
+
 
 AuthUserModel = get_user_model()
 
@@ -30,10 +30,6 @@ def create_activation(sender, instance, created, **kwargs):
                     send_activation_email(instance)
             else:
                 if created:
-                    send_register_user_email(
-                        first_name=instance.first_name,
-                        last_name=instance.last_name,
-                        to_email=instance.email
-                    )
+                    send_register_user_email(instance)
     except ValueError:
         AuthUserModel.objects.get(pk=instance.id).delete()

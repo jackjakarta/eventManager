@@ -1,15 +1,12 @@
 from django.contrib import messages
-from django.contrib.sites.models import Site
-from django.core.mail import EmailMultiAlternatives
-from django.shortcuts import render, redirect, HttpResponse, reverse, get_object_or_404
-from django.template.loader import get_template
+from django.shortcuts import render, redirect, HttpResponse, get_object_or_404
 from django.utils import timezone
 from django.utils.decorators import decorator_from_middleware
 
 from .forms import PasswordForm
 from .middlewares.activation_middleware import ActivationMiddleware
 from .models import Activation, AVAILABILITY
-from .utils.constants import ACTIVATION_AVAILABILITY
+from .utils.email import send_activation_email
 
 
 @decorator_from_middleware(ActivationMiddleware)
@@ -53,29 +50,3 @@ def reset_token(request, token):
 
     return HttpResponse('Token has been reset,'
                         'Please follow the instructions received on your email')
-
-
-def send_activation_email(user):
-    domain = Site.objects.get_current().domain
-    url = reverse("activate", args=(user.activation.token, ))
-    activation_url = f"{domain}{url}"
-    print(activation_url)
-
-    context = {
-        "first_name": user.first_name,
-        "last_name": user.last_name,
-        "activation_url": activation_url,
-        "availability": ACTIVATION_AVAILABILITY,
-    }
-
-    template = get_template("users/email/activation_email.html")
-    content = template.render(context)
-    mail = EmailMultiAlternatives(
-        subject="Your account has been created.",
-        body=content,
-        from_email="no-reply@evntmngr.xyz",
-        to=[user.email]
-    )
-
-    mail.content_subtype = "html"
-    mail.send()
