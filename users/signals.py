@@ -20,16 +20,16 @@ def inactivate_user(instance, **kwargs):
 
 @receiver(post_save, sender=AuthUserModel)
 def create_activation(sender, instance, created, **kwargs):
-    print("\nSignal post_save was triggerd!\n")
+    print('!!! Signal post_save was triggered!')
+    is_social_user = hasattr(instance, 'is_social_auth') and instance.is_social_auth is True
     try:
         with transaction.atomic():
-            is_social_user = hasattr(instance, 'is_social_auth') and instance.is_social_auth is True
-            if not instance.pk and not is_social_user:
-                if created:
+            if created:
+                if not is_social_user:
                     Activation(user=instance).save()
                     send_activation_email(instance)
-            else:
-                if created:
+                else:
                     send_register_user_email(instance)
+                    print(f"Sending welcome email to: {instance.email}")
     except ValueError:
         AuthUserModel.objects.get(pk=instance.id).delete()
