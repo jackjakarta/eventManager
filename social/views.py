@@ -13,7 +13,7 @@ def posts_feed(request):
         })
     else:
         messages.error(request, "You have to be logged in to use this feature!")
-        return redirect("website:static_pages:home")
+        return redirect("website:user_auth:login")
 
 
 def post_page(request, pk):
@@ -29,7 +29,7 @@ def post_page(request, pk):
         })
     else:
         messages.error(request, "You have to be logged in to use this feature!")
-        return redirect("website:static_pages:home")
+        return redirect("website:user_auth:login")
 
 
 def user_posts(request, pk):
@@ -40,7 +40,7 @@ def user_posts(request, pk):
         })
     else:
         messages.error(request, "You have to be logged in to use this feature!")
-        return redirect("website:auth:login")
+        return redirect("website:user_auth:login")
 
 
 def liked_posts(request, pk):
@@ -51,7 +51,7 @@ def liked_posts(request, pk):
         })
     else:
         messages.error(request, "You have to be logged in to use this feature!")
-        return redirect("website:auth:login")
+        return redirect("website:user_auth:login")
 
 
 def add_post(request):
@@ -72,6 +72,9 @@ def add_post(request):
             return render(request, "social/add_post.html", {
                 "form": form,
             })
+    else:
+        messages.error(request, "You have to be logged in to use this feature!")
+        return redirect("website:user_auth:login")
 
 
 def delete_post(request, pk):
@@ -86,7 +89,7 @@ def delete_post(request, pk):
             return redirect("website:static_pages:home")
     else:
         messages.error(request, "You have to be logged in to use this feature!")
-        return redirect("posts_feed")
+        return redirect("website:user_auth:login")
 
 
 def add_like(request, pk):
@@ -103,7 +106,7 @@ def add_like(request, pk):
 
     else:
         messages.error(request, "You have to be logged in to use this feature!")
-        return redirect("website:static_pages:home")
+        return redirect("website:user_auth:login")
 
 
 def delete_like(request, pk):
@@ -119,7 +122,7 @@ def delete_like(request, pk):
         return redirect("post_page", pk=pk)
     else:
         messages.error(request, "You have to be logged in to use this feature!")
-        return redirect("website:static_pages:home")
+        return redirect("website:user_auth:login")
 
 
 def add_comment(request, pk):
@@ -136,7 +139,7 @@ def add_comment(request, pk):
                 return redirect("post_page", pk=pk)
     else:
         messages.error(request, "You have to be logged in to use this feature!")
-        return redirect("website:static_pages:home")
+        return redirect("website:user_auth:login")
 
 
 def delete_comment(request):

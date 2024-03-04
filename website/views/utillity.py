@@ -8,7 +8,7 @@ from website.utils.email import send_register_newsletter_email
 # Utility Views
 def subscribe_newsletter(request):
     if request.method == "POST":
-        email = request.POST["email"]
+        email = request.POST.get("email")
 
         if email is not None:
             if not NewsletterSub.objects.filter(email=email).exists():
