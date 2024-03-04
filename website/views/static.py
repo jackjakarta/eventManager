@@ -10,7 +10,7 @@ def home(request):
     events_qs = Event.objects.all().order_by("event_date")[:5]
     artists_qs = Artist.objects.all().order_by("updated_at")[:3]
     promoters_qs = Promoter.objects.all().order_by("updated_at")[:2]
-    venues_qs = Venue.objects.all().order_by("updated_at")[:2]
+    venues_qs = Venue.objects.all().order_by("updated_at")[:3]
     return render(request, "website/home.html", {
         "events": events_qs,
         "artists": artists_qs,
