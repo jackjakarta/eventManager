@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.http import Http404
 from django.shortcuts import render, redirect
 
 from website.models import Event, Artist, Promoter, Venue
@@ -44,7 +45,7 @@ def contact(request):
 
 
 def app_docs(request):
-    return render(request, "404.html", {})
+    raise Http404("Not found")
 
 
 def app_docs_api(request):
