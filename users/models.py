@@ -18,6 +18,13 @@ class AuthUser(AbstractUser):
         unique=True
     )
     password = models.CharField(_("password"), max_length=128, null=True, blank=False)
+    is_newsletter_sub = models.BooleanField(
+        verbose_name="Newsletter Sub",
+        default=False,
+        help_text=_(
+            "Check box if you want to subscribe to the newsletter."
+        )
+    )
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []

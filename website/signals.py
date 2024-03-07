@@ -16,9 +16,37 @@ def create_profile(sender, instance, created, **kwargs):
 
 
 @receiver(post_save, sender=AuthUser)
-def add_newsletter(sender, instance, created, **kwargs):
+def register_user_newsletter(sender, instance, created, **kwargs):
     print("\nSignals post_save was caught!")
     if created:
+        if instance.is_newsletter_sub:
+            if not NewsletterSub.objects.filter(email=instance).exists():
+                NewsletterSub(email=instance).save()
+                print("User added to newsletter list!")
+
+
+@receiver(post_save, sender=AuthUser)
+def add_user_to_newsletter(sender, instance, **kwargs):
+    print("\nSignals post_save was caught!")
+    if instance.is_newsletter_sub:
         if not NewsletterSub.objects.filter(email=instance).exists():
             NewsletterSub(email=instance).save()
-            print("User added to newsletter list!")
+            print("User added to newsletter list.")
+
+
+# @receiver(post_save, sender=AuthUser)
+# def remove_user_from_newsletter(sender, instance, **kwargs):
+#     print("\nSignals post_save was caught!")
+#     if not instance.is_newsletter_sub:
+#         if NewsletterSub.objects.filter(email=instance).exists():
+#             NewsletterSub(email=instance).delete()
+#             print("User removed from newsletter list.")
+
+@receiver(post_save, sender=AuthUser)
+def remove_user_from_newsletter(sender, instance, **kwargs):
+    print("\nSignals post_save was caught!")
+    if not instance.is_newsletter_sub:
+        newsletter_subs = NewsletterSub.objects.filter(email=instance)
+        if newsletter_subs.exists():
+            newsletter_subs.delete()
+            print("User removed from newsletter list.")

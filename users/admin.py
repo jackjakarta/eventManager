@@ -20,6 +20,7 @@ class AuthUserAdmin(BaseUserAdmin):
             {
                 "fields": (
                     "is_active",
+                    "is_newsletter_sub",
                     "is_staff",
                     "is_superuser",
                     "groups",

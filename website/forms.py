@@ -9,16 +9,18 @@ AuthUser = get_user_model()
 class SignUpForm(forms.ModelForm):
     class Meta:
         model = AuthUser
-        fields = ("email", "first_name", "last_name", )
+        fields = ("email", "first_name", "last_name", "is_newsletter_sub", )
         labels = {
             "email": "",
             "first_name": "",
             "last_name": "",
+            "is_newsletter_sub": ""
         }
         widgets = {
             "email": forms.TextInput(attrs={"class": "form-control", "placeholder": "Email Address"}),
             "first_name": forms.TextInput(attrs={"class": "form-control", "placeholder": "First Name"}),
             "last_name": forms.TextInput(attrs={"class": "form-control", "placeholder": "Last Name"}),
+            "is_newsletter_sub": forms.CheckboxInput(attrs={"class": "form-check-input"}),
         }
 
 
@@ -178,6 +180,14 @@ class EditProfileForm(forms.ModelForm):
             "fav_genre": forms.Select(attrs={"class": "form-select"}),
             "fav_artist": forms.Select(attrs={"class": "form-select"}),
         }
+
+
+class NewsletterCheckBoxForm(forms.ModelForm):
+    class Meta:
+        model = AuthUser
+        fields = ("is_newsletter_sub", )
+
+        labels = {"is_newsletter_sub": "Newsletter"}
 
 
 class DallEImageForm(forms.Form):

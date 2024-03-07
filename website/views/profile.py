@@ -1,9 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 
-from website.forms import EditProfileForm
+from website.forms import EditProfileForm, NewsletterCheckBoxForm
 from website.models import Profile, Event, Venue, Promoter, Artist, UserGeneratedImage
-
 
 
 # User Views
@@ -31,14 +30,18 @@ def edit_profile(request, pk):
         profile = Profile.objects.get(user_id=pk)
         if request.user == profile.user:
             form = EditProfileForm(request.POST or None, request.FILES or None, instance=profile)
-            if form.is_valid():
+            newsletter_check = NewsletterCheckBoxForm(request.POST or None, instance=request.user)
+
+            if form.is_valid() and newsletter_check.is_valid():
                 form.save()
-                messages.success(request, "Profile updated successfully.")
+                newsletter_check.save()
+                messages.success(request, "You have successfully edited your profile.")
                 return redirect("website:user_profile:profile", pk=pk)
 
             return render(request, "website/profile/edit_profile.html", {
                 "profile": profile,
                 "form": form,
+                "checkbox": newsletter_check,
             })
         else:
             messages.error(request, "You are not authorized to view this page.")
