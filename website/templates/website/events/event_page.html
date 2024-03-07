@@ -42,7 +42,7 @@
         {% if user in event.attendees.all %}
             <a href="{% url 'website:model_pages:event_unattend' event.id %}" class="btn btn-outline-info btn-sm rounded-3">Unattend</a>
         {% else %}
-            <a href="{% url 'website:model_pages:event_attend' event.id %}" class="btn btn-info btn-sm rounded-3">Attend</a>
+            <a href="{% url 'website:model_pages:event_attend' event.id %}" class="btn btn-dark btn-sm rounded-3">Attend</a>
         {% endif %}
 
         {% if user == event.manager %}

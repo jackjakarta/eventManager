@@ -44,7 +44,7 @@ Attending Events - {{ user.first_name }} {{ user.last_name }}
                             {% if user in event.attendees.all %}
                                 <a href="{% url 'website:model_pages:event_unattend' event.id %}" class="btn btn-outline-info btn-sm rounded-3">Unattend</a>
                             {% else %}
-                                <a href="{% url 'website:model_pages:event_attend' event.id %}" class="btn btn-info btn-sm rounded-3">Attend</a>
+                                <a href="{% url 'website:model_pages:event_attend' event.id %}" class="btn btn-dark btn-sm rounded-3">Attend</a>
                             {% endif %}
 
                         <p class="card-text mt-2"><small class="text-muted">Last updated on {{ event.updated_at }}</small></p>
@@ -59,7 +59,7 @@ Attending Events - {{ user.first_name }} {{ user.last_name }}
 </div>
 
 <div class="container text-center">
-    <a href="{% url 'website:update_db:add_event' %}" class="btn btn-info btn-sm rounded-3">Add Event</a>
+    <a href="{% url 'website:update_db:add_event' %}" class="btn btn-dark btn-sm rounded-3">Add Event</a>
     <a href="{% url 'website:static_pages:home' %}" class="btn btn-outline-secondary btn-sm rounded-3">Back</a>
 </div>
 

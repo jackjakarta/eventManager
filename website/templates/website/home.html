@@ -18,10 +18,10 @@ Home Page
 </style>
 <div class="p-5 mb-4 rounded-3 hero-background">
     <div class="container-fluid py-5">
-        <h1 class="display-5 fw-bold">Welcome to EvntMngr{% if user.is_authenticated %}, {% if user.first_name %}{{ user.first_name }}{% else %}{{ user }}{% endif %}{% endif %}</h1>
-        <p class="col-md-8 fs-4">Manage and discover events and venues around you.</p>
-        <a class="btn btn-info btn-lg rounded-3" href="{% url 'website:model_pages:events' %}">Explore Events</a>
-        <a class="btn btn-outline-dark btn-lg rounded-3" href="{% url 'website:model_pages:venues' %}">Explore Venues</a>
+        <h1 class="display-5 fw-bold text-black">Welcome to EvntMngr{% if user.is_authenticated %}, {% if user.first_name %}{{ user.first_name }}{% else %}{{ user }}{% endif %}{% endif %}</h1>
+        <p class="col-md-8 fs-4 text-dark">Manage and discover events and venues around you.</p>
+        <a class="btn btn-dark btn-lg rounded-3" href="{% url 'website:model_pages:events' %}">Explore Events</a>
+        <a class="btn btn-light btn-lg rounded-3" href="{% url 'website:model_pages:venues' %}">Explore Venues</a>
     </div>
 </div>
 
@@ -47,8 +47,8 @@ Home Page
             <div class="carousel-item {% if forloop.first %}active{% endif %}" style="height: 300px; overflow: hidden;">
                 <a href="{% url 'website:model_pages:event_page' event.id %}"><img src="{{ event.event_flyer.url }}" class="d-block w-100" alt="{{ event.name }}" style="object-fit: cover;"></a>
                 <div class="carousel-caption d-none d-md-block">
-                    <h5>{{ event.name }}</h5>
-                    <p>{{ event.description | truncatewords:20 }}</p>
+                    <h5 class="text-light">{{ event.name }}</h5>
+                    <p class="text-light">{{ event.description | truncatewords:20 }}</p>
                     <a href="{% url 'website:model_pages:event_page' event.id %}" class="btn btn-dark btn-sm rounded-3">View Event</a>
               </div>
             </div>
@@ -79,7 +79,7 @@ Home Page
                     <h5 class="card-title">{{ artist.name }}</h5>
                     <p class="card-text">{{ artist.bio | truncatewords:20 }}</p>
                     <div class="text-center">
-                        <a href="{% url 'website:model_pages:artist_page' artist.id %}" class="btn btn-outline-info btn-sm rounded-3">Artist Page</a>
+                        <a href="{% url 'website:model_pages:artist_page' artist.id %}" class="btn btn-dark btn-sm rounded-3">Artist Page</a>
                         <a href="{% url 'website:model_pages:artist_events' artist.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Artist Events</a>
                     </div>
                 </div>
@@ -102,7 +102,7 @@ Home Page
                         <h5 class="card-title">{{ venue.name }}</h5>
                         <p class="card-text">{{ venue.address }}, {{ venue.zip_code }} {{ venue.city }}, {{ venue.country }}</p>
                         <div class="text-center">
-                            <a href="{% url 'website:model_pages:venue_page' venue.id %}" class="btn btn-outline-info btn-sm rounded-3">Venue Page</a>
+                            <a href="{% url 'website:model_pages:venue_page' venue.id %}" class="btn btn-dark btn-sm rounded-3">Venue Page</a>
                             <a href="{% url 'website:model_pages:venue_events' venue.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Venue Events</a>
                         </div>
                     </div>
@@ -122,7 +122,7 @@ Home Page
                 <h3>{{ promoter.name }}</h3>
                 <p>{{ promoter.city }}</p>
                 <div class="text-center">
-                    <a href="{% url 'website:model_pages:promoter_page' promoter.id %}" class="btn btn-outline-info btn-sm rounded-3">View Page</a>
+                    <a href="{% url 'website:model_pages:promoter_page' promoter.id %}" class="btn btn-dark btn-sm rounded-3">View Page</a>
                     <a href="mailto:{{ promoter.email }}" class="btn btn-outline-secondary btn-sm rounded-3">Contact</a>
                 </div>
             </div>

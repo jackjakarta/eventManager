@@ -15,7 +15,7 @@ Feed
         </div>
 
         <div class="container mt-4">
-            <a href="{% url 'add_post' %}" class="btn btn-info btn-sm rounded-3">Create Post</a>
+            <a href="{% url 'add_post' %}" class="btn btn-dark btn-sm rounded-3">Create Post</a>
         </div>
 
         {% for post in posts %}
@@ -60,7 +60,7 @@ Feed
 
         <div class="container text-center mt-4">
             <h4>There are no posts at the moment.</h4>
-            <a href="{% url 'add_post' %}" class="btn btn-info btn-sm rounded-3">Create Post</a>
+            <a href="{% url 'add_post' %}" class="btn btn-dark btn-sm rounded-3">Create Post</a>
             <a href="{% url 'website:static_pages:home' %}" class="btn btn-outline-secondary btn-sm rounded-3">Back</a>
         </div>
 

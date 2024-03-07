@@ -15,7 +15,7 @@
 </div>
 
 <div class="container mt-3">
-    <a href="{% url 'website:update_db:add_event' %}" class="btn btn-info btn-sm rounded-3">Add Event</a>
+    <a href="{% url 'website:update_db:add_event' %}" class="btn btn-dark btn-sm rounded-3">Add Event</a>
 </div>
 
 <div class="container mt-3">
@@ -35,9 +35,9 @@
                         <p class="card-text">{{ event.description | truncatewords:30 }}</p>
 
                         {% if user in event.attendees.all %}
-                            <a href="{% url 'website:model_pages:event_unattend' event.id %}" class="btn btn-outline-info btn-sm rounded-3">Unattend</a>
+                            <a href="{% url 'website:model_pages:event_unattend' event.id %}" class="btn btn-light btn-sm rounded-3">Unattend</a>
                         {% else %}
-                            <a href="{% url 'website:model_pages:event_attend' event.id %}" class="btn btn-info btn-sm rounded-3">Attend</a>
+                            <a href="{% url 'website:model_pages:event_attend' event.id %}" class="btn btn-outline-light btn-sm rounded-3">Attend</a>
                         {% endif %}
 
                         <a href="{% url 'website:model_pages:event_page' event.id %}" class="btn btn-dark btn-sm rounded-3">View Event</a>
@@ -56,7 +56,7 @@
 </div>
 
 <div class="container text-center">
-    <a href="{% url 'website:update_db:add_event' %}" class="btn btn-info btn-sm rounded-3">Add Event</a>
+    <a href="{% url 'website:update_db:add_event' %}" class="btn btn-dark btn-sm rounded-3">Add Event</a>
     <a href="{% url 'website:model_pages:venues' %}" class="btn btn-outline-secondary btn-sm rounded-3">Back</a>
 </div>
 

@@ -35,7 +35,7 @@ AI Event Assistant
     </div>
 
     <div class="container text-center mt-3">
-        <a href="{% url 'website:api_calls:assistant' %}" class="btn btn-info btn-sm rounded-3">Another one</a>
+        <a href="{% url 'website:api_calls:assistant' %}" class="btn btn-dark btn-sm rounded-3">Another one</a>
         <a href="{% url 'website:user_profile:profile' user.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Back to profile</a>
     </div>
 
@@ -59,7 +59,7 @@ AI Event Assistant
         <form action="" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit" class="btn btn-info btn-sm rounded-3">Get Event Idea</button>
+            <button type="submit" class="btn btn-dark btn-sm rounded-3">Get Event Idea</button>
             <a href="{% url 'website:user_profile:profile' user.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Back to profile</a>
         </form>
     </div>
