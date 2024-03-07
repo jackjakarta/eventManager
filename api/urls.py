@@ -3,7 +3,7 @@ from rest_framework import routers
 from rest_framework_simplejwt import views as jwt_views
 
 from .viewsets.social import PostsViewSet, PostCommentsViewSet
-from .viewsets.website import ArtistsViewSet, EventsViewSet, VenuesViewSet, PromotersViewSet
+from .viewsets.website import ArtistsViewSet, EventsViewSet, VenuesViewSet, PromotersViewSet, get_newsletter_subs
 
 router = routers.DefaultRouter()
 
@@ -22,4 +22,6 @@ urlpatterns = [
     path('', include(router.urls)),
     path('auth/', jwt_views.TokenObtainPairView.as_view(), name='api_auth'),
     path('auth/refresh/', jwt_views.TokenRefreshView.as_view(), name='api_auth_refresh'),
+
+    path('newsletter-list/', get_newsletter_subs, name='get_newsletter_list'),
 ]

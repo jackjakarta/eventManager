@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
-from website.models import Event, Venue, Promoter, Artist
+from website.models import Event, Venue, Promoter, Artist, NewsletterSub
 
 AuthUser = get_user_model()
 
@@ -59,3 +59,9 @@ class EventSerializer(serializers.ModelSerializer):
         model = Event
         exclude = []
         depth = 1
+
+
+class NewsletterSubSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = NewsletterSub
+        exclude = ["created_at", "updated_at", "id", ]
