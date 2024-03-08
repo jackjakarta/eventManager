@@ -26,7 +26,8 @@ Home Page
 </div>
 
 <!-- Search Bar -->
-<div class="container mt-3">
+<div class="container mt-5">
+<!--    <h2 class="text-center mb-5 mt-5">Search Events</h2>-->
     <form action="{% url 'website:model_pages:events_search' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="input-group mb-3">
@@ -39,7 +40,7 @@ Home Page
 
     <!-- Carousel -->
     <div class="container mt-4">
-        <h2 class="text-center mb-5">Upcoming Events</h2>
+        <h2 class="text-center mb-5 mt-5">Upcoming Events</h2>
         <div id="upcomingEventsCarousel" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
       {% if events %}
@@ -68,7 +69,7 @@ Home Page
 
 
 <!--Artists Section-->
-<div class="container py-5">
+<div class="container py-5 mt-3">
     <h2 class="text-center mb-5">Featured Artists</h2>
     <div class="row">
         {% for artist in artists %}
@@ -91,7 +92,7 @@ Home Page
 <!--End Artist Section-->
 
 <!--Venue Section-->
-<div class="container py-5">
+<div class="container py-5 mt-3">
     <h2 class="text-center mb-5">Featured Venues</h2>
     <div class="row row-cols-1 row-cols-md-3 g-4">
         {% for venue in venues %}
@@ -114,11 +115,11 @@ Home Page
 <!--End Venue Section-->
 
 <!--Promoter Section-->
-<div class="container py-5">
+<div class="container py-5 mt-3">
     <h2 class="text-center mb-5">Featured Promoters</h2>
     <div class="row">
         {% for promoter in promoters %}
-            <div class="col-lg-6 text-center">
+            <div class="col-lg-6 text-center mt-4">
                 <h3>{{ promoter.name }}</h3>
                 <p>{{ promoter.city }}</p>
                 <div class="text-center">

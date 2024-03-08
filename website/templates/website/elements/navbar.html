@@ -40,6 +40,7 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="{% url 'website:user_profile:profile' user.id %}">Profile</a></li>
+                        <li><a class="dropdown-item" href="{% url 'website:user_profile:edit_profile' user.id %}">Edit Profile</a></li>
                         <li><a class="dropdown-item" href="{% url 'website:user_profile:user_events_attending' user.id %}">Events Attending</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="{% url 'website:user_profile:user_events' user.id  %}">My Events</a></li>

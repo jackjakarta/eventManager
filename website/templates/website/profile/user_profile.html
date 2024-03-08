@@ -69,7 +69,6 @@ Profile{% if user.first_name %} - {{ user.first_name }} {{ user.last_name }}{% e
                 <tr>
                     <th scope="col">Promoter</th>
                     <th scope="col">City</th>
-                    <th scope="col">Email</th>
                     <th scope="col">Manage</th>
                 </tr>
             </thead>
@@ -80,7 +79,6 @@ Profile{% if user.first_name %} - {{ user.first_name }} {{ user.last_name }}{% e
                         <tr>
                             <td>{{ promoter.name }}</td>
                             <td>{{ promoter.city }}</td>
-                            <td>{{ promoter.email }}</td>
                             <td>
                                 <div class="dropdown">
                                   <button class="btn btn-secondary btn-sm rounded-3 dropdown-toggle" type="button"
@@ -218,7 +216,9 @@ Profile{% if user.first_name %} - {{ user.first_name }} {{ user.last_name }}{% e
         <a href="{% url 'website:update_db:add_artist' %}" class="btn btn-dark btn-sm rounded-3">Add Artist</a>
         <a href="{% url 'website:update_db:add_promoter' %}" class="btn btn-dark btn-sm rounded-3">Add Promoter</a>
         <a href="{% url 'website:update_db:add_venue' %}" class="btn btn-dark btn-sm rounded-3">Add Venue</a>
-        <a href="{% url 'website:user_profile:edit_profile' user.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Edit Profile</a>
+        {% if not profile.avatar %}
+            <a href="{% url 'website:user_profile:edit_profile' user.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Set an avatar</a>
+        {% endif %}
     </div>
 
     </div>
