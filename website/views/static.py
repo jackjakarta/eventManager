@@ -1,9 +1,13 @@
+import requests
+from decouple import config
 from django.contrib import messages
 from django.http import Http404
 from django.shortcuts import render, redirect
 
 from website.models import Event, Artist, Promoter, Venue
 from website.utils.email import send_contact_mail, send_contact_confirm_mail
+
+MAIL_WEBHOOK_URL = config("MAIL_WEBHOOK_URL", default=None)
 
 
 # Static Pages Views
@@ -26,11 +30,19 @@ def contact(request):
         email = request.POST.get("email")
         message = request.POST.get("message")
 
-        send_contact_mail(
-            name=name,
-            message=message,
-            reply_to=email
-        )
+        if MAIL_WEBHOOK_URL:
+            data = {
+                "name": name,
+                "email": email,
+                "message": message
+            }
+            requests.post(MAIL_WEBHOOK_URL, json=data)
+        else:
+            send_contact_mail(
+                name=name,
+                message=message,
+                reply_to=email,
+            )
 
         send_contact_confirm_mail(
             name=name,

@@ -15,6 +15,7 @@ class UserSerializer(serializers.ModelSerializer):
             "is_superuser",
             "is_staff",
             "is_active",
+            "is_newsletter_sub",
             "date_joined",
             "groups",
             "user_permissions",
