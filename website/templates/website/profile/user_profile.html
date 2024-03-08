@@ -39,8 +39,17 @@ Profile{% if user.first_name %} - {{ user.first_name }} {{ user.last_name }}{% e
                             <td>{{ event.name }}</td>
                             <td>{{ event.event_date }}</td>
                             <td>{{ event.venue }}</td>
-                            <td><a href="{% url 'website:model_pages:event_page' event.id %}" class="btn btn-dark btn-sm rounded-3">View</a>
-                                <a href="{% url 'website:update_db:edit_event' event.id %}" class="btn btn-secondary btn-sm rounded-3">Edit</a>
+                            <td>
+                                <div class="dropdown">
+                                  <button class="btn btn-secondary btn-sm rounded-3 dropdown-toggle" type="button"
+                                   data-bs-toggle="dropdown" aria-expanded="false">More</button>
+                                  <ul class="dropdown-menu">
+                                    <li>
+                                      <a class="dropdown-item" href="{% url 'website:model_pages:event_page' event.id %}">View</a>
+                                        <a class="dropdown-item" href="{% url 'website:update_db:edit_event' event.id %}">Edit</a>
+                                    </li>
+                                  </ul>
+                                </div>
                             </td>
                         </tr>
                     {% endfor %}
@@ -72,8 +81,17 @@ Profile{% if user.first_name %} - {{ user.first_name }} {{ user.last_name }}{% e
                             <td>{{ promoter.name }}</td>
                             <td>{{ promoter.city }}</td>
                             <td>{{ promoter.email }}</td>
-                            <td><a href="{% url 'website:model_pages:promoter_page' promoter.id %}" class="btn btn-dark btn-sm rounded-3">View</a>
-                                <a href="{% url 'website:update_db:edit_promoter' promoter.id %}" class="btn btn-secondary btn-sm rounded-3">Edit</a>
+                            <td>
+                                <div class="dropdown">
+                                  <button class="btn btn-secondary btn-sm rounded-3 dropdown-toggle" type="button"
+                                   data-bs-toggle="dropdown" aria-expanded="false">More</button>
+                                  <ul class="dropdown-menu">
+                                    <li>
+                                      <a class="dropdown-item" href="{% url 'website:model_pages:promoter_page' promoter.id %}">View</a>
+                                        <a class="dropdown-item" href="{% url 'website:update_db:edit_promoter' promoter.id %}">Edit</a>
+                                    </li>
+                                  </ul>
+                                </div>
                             </td>
                         </tr>
                     {% endfor %}
@@ -106,8 +124,17 @@ Profile{% if user.first_name %} - {{ user.first_name }} {{ user.last_name }}{% e
                             <td>{{ venue.name }}</td>
                             <td>{{ venue.address }}</td>
                             <td>{{ venue.city }}</td>
-                            <td><a href="{% url 'website:model_pages:venue_page' venue.id %}" class="btn btn-dark btn-sm rounded-3">View</a>
-                                <a href="{% url 'website:update_db:edit_venue' venue.id %}" class="btn btn-secondary btn-sm rounded-3">Edit</a>
+                            <td>
+                                <div class="dropdown">
+                                  <button class="btn btn-secondary btn-sm rounded-3 dropdown-toggle" type="button"
+                                   data-bs-toggle="dropdown" aria-expanded="false">More</button>
+                                  <ul class="dropdown-menu">
+                                    <li>
+                                      <a class="dropdown-item" href="{% url 'website:model_pages:venue_page' venue.id %}">View</a>
+                                        <a class="dropdown-item" href="{% url 'website:update_db:edit_venue' venue.id %}">Edit</a>
+                                    </li>
+                                  </ul>
+                                </div>
                             </td>
                         </tr>
                     {% endfor %}
@@ -139,8 +166,17 @@ Profile{% if user.first_name %} - {{ user.first_name }} {{ user.last_name }}{% e
                             <td>{{ artist.name }}</td>
                             <td>{{ artist.email }}</td>
                             <td>{{ artist.city }}</td>
-                            <td><a href="{% url 'website:model_pages:artist_page' artist.id %}" class="btn btn-dark btn-sm rounded-3">View</a>
-                                <a href="{% url 'website:update_db:edit_artist' artist.id %}" class="btn btn-secondary btn-sm rounded-3">Edit</a>
+                            <td>
+                                <div class="dropdown">
+                                  <button class="btn btn-secondary btn-sm rounded-3 dropdown-toggle" type="button"
+                                   data-bs-toggle="dropdown" aria-expanded="false">More</button>
+                                  <ul class="dropdown-menu">
+                                    <li>
+                                      <a class="dropdown-item" href="{% url 'website:model_pages:artist_page' artist.id %}">View</a>
+                                        <a class="dropdown-item" href="{% url 'website:update_db:edit_artist' artist.id %}">Edit</a>
+                                    </li>
+                                  </ul>
+                                </div>
                             </td>
                         </tr>
                     {% endfor %}
