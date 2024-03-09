@@ -89,7 +89,7 @@ My Posts - {{ user.first_name }} {{ user.last_name }}
             {% if user.is_authenticated %}
                 <a href="{% url 'add_post' %}" class="btn btn-dark btn-sm rounded-3">Create Post</a>
             {% endif %}
-            <a href="{% url 'website:user_profile:profile' user.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Back to my profile</a>
+            <a href="{% url 'website:user_profile:profile' user.id %}" class="btn btn-secondary btn-sm rounded-3">Back to my profile</a>
         </div>
 
 
