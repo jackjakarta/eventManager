@@ -1,5 +1,6 @@
 {% extends 'website/base.html' %}
 {% load crispy_forms_tags %}
+{% load static %}
 
 {% block title %}
 {{ post.description | truncatewords:4 }} - {{ post.user.first_name }} {{ post.user.last_name }}
@@ -23,7 +24,11 @@
             <!-- Venue Information in Card -->
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">{{ post.user.first_name }} {{ post.user.last_name }}</h5>
+
+                    <h5 class="card-title">
+                        <img src="{% if post.user.profile.avatar %}{{ post.user.profile.avatar.url }}{% else %}{% static 'website/img/default-avatar.png' %}{% endif %}" alt="User Profile" class="avatar">
+                        {{ post.user.first_name }} {{ post.user.last_name }}
+                    </h5>
                     {% if post.event %}<p class="card-text">At <a href="{% url 'website:model_pages:event_page' post.event.id %}">{{ post.event }}</a></p>{% endif %}
                     <p>
                         <strong>

@@ -1,4 +1,5 @@
 {% extends 'website/base.html' %}
+{% load static %}
 
 {% block title %}
 Liked Posts - {{ user.first_name }} {{ user.last_name }}
@@ -22,7 +23,7 @@ Liked Posts - {{ user.first_name }} {{ user.last_name }}
             <div class="container mt-4">
                 <div class="card">
                     <h5 class="card-header">
-                        <img src="{{ post.user.profile.avatar.url }}" alt="" class="img-fluid rounded-circle" style="width: 45px; height: 45px">
+                        <img src="{% if post.user.profile.avatar %}{{ post.user.profile.avatar.url }}{% else %}{% static 'website/img/default-avatar.png' %}{% endif %}" alt="User Profile" class="avatar">
                          {{ post.user.first_name }} {{ post.user.last_name }}
                     </h5>
                     <div class="card-body">

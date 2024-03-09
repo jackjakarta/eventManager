@@ -23,8 +23,8 @@ Feed
             <div class="container mt-4">
                 <div class="card">
                     <h5 class="card-header">
-                        <img src="{% if post.user.profile.avatar %}{{ post.user.profile.avatar.url }}{% else %}{% static 'website/img/default-avatar.png' %}{% endif %}" alt="" class="img-fluid rounded-circle" style="width: 45px; height: 45px">
-                         {{ post.user.first_name }} {{ post.user.last_name }}
+                        <img src="{% if post.user.profile.avatar %}{{ post.user.profile.avatar.url }}{% else %}{% static 'website/img/default-avatar.png' %}{% endif %}" alt="User Profile" class="avatar">
+                        {{ post.user.first_name }} {{ post.user.last_name }}
                     </h5>
                     <div class="card-body">
                         <img src="{{ post.image.url }}" alt="{{ post.image.url }}" class="img-fluid" style="width: 1000px;">
