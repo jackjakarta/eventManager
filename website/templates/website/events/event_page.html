@@ -38,43 +38,61 @@
 </div>
 
 <div class="container mt-2">
+<!--    <div class="row g-0">-->
+<!--        <div class="col-md-4">-->
+<!--            <h5 class="card-title">{{ event.name }}</h5>-->
+<!--        </div>-->
+<!--        <div class="col-md-8">-->
+<!--            {% if user == event.manager %}-->
+<!--                <a href="{% url 'website:update_db:edit_event' event.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Edit</a>-->
+<!--            {% endif %}-->
+<!--        </div>-->
+<!--    </div>-->
+    <div class="row g-0">
 
-        {% if user in event.attendees.all %}
-            <a href="{% url 'website:model_pages:event_unattend' event.id %}" class="btn btn-outline-info btn-sm rounded-3">Unattend</a>
-        {% else %}
-            <a href="{% url 'website:model_pages:event_attend' event.id %}" class="btn btn-dark btn-sm rounded-3">Attend</a>
-        {% endif %}
+        <div class="col-md-6 d-flex justify-content-start">
+            {% if user in event.attendees.all %}
+                <a href="{% url 'website:model_pages:event_unattend' event.id %}" class="btn btn-light btn-sm rounded-3 me-1">Unattend</a>
+            {% else %}
+                <a href="{% url 'website:model_pages:event_attend' event.id %}" class="btn btn-outline-light btn-sm rounded-3 me-1">Attend</a>
+            {% endif %}
 
-        {% if user == event.manager %}
-            <a href="{% url 'website:update_db:edit_event' event.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Edit</a>
-            <button type="button" class="btn btn-outline-danger btn-sm rounded-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Delete
-            </button>
-            <!--Modal-->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Are you sure ?</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    Please confirm if you want to delete event.
-                  </div>
-                  <div class="modal-footer">
-                      <a href="{% url 'website:update_db:delete_event' event.id %}" class="btn btn-danger btn-sm rounded-3">Delete</a>
-                    <button type="button" class="btn btn-outline-secondary btn-sm rounded-3" data-bs-dismiss="modal">Close</button>
+            {% if user == event.manager %}
+                <a href="{% url 'website:user_profile:user_events' user.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Back</a>
+            {% else %}
+                <a href="{% url 'website:model_pages:events' %}" class="btn btn-outline-secondary btn-sm rounded-3">Back</a>
+            {% endif %}
+        </div>
+
+        <div class="col-md-6 d-flex justify-content-end">
+            {% if user == event.manager %}
+                <a href="{% url 'website:update_db:edit_event' event.id %}" class="btn btn-outline-secondary btn-sm rounded-3 me-1">Edit</a>
+                <button type="button" class="btn btn-outline-danger btn-sm rounded-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Delete
+                </button>
+                <!--Modal-->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Are you sure ?</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        Please confirm if you want to delete event.
+                      </div>
+                      <div class="modal-footer">
+                          <a href="{% url 'website:update_db:delete_event' event.id %}" class="btn btn-danger btn-sm rounded-3">Delete</a>
+                        <button type="button" class="btn btn-outline-secondary btn-sm rounded-3" data-bs-dismiss="modal">Close</button>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
-        {% endif %}
+            {% endif %}
 
-    {% if user == event.manager %}
-        <a href="{% url 'website:user_profile:user_events' user.id %}" class="btn btn-outline-secondary btn-sm rounded-3">Back</a>
-    {% else %}
-        <a href="{% url 'website:model_pages:events' %}" class="btn btn-outline-secondary btn-sm rounded-3">Back</a>
-    {% endif %}
+        </div>
+
+    </div>
 </div>
 
 {% endblock %}

@@ -17,6 +17,13 @@ Login
                     <h2 class="display-7">Login</h2>
                 </div>
                 <div class="card-body">
+                    <div class="text-center mb-3">
+                        <a href="{% url 'website:user_auth:social:begin' 'google-oauth2' %}" class="btn btn-light rounded-pill"><img src="{% static 'website/img/google-auth-2.png' %}" width="20" height="20" alt="Google Login">  Sign In with Google</a>
+                    </div>
+<!--                    <div class="text-center mt-3">-->
+<!--                        <a href="{% url 'website:user_auth:social:begin' 'facebook' %}" class="btn btn-primary btn-sm rounded-pill"><img src="{% static 'website/img/facebook-auth.png' %}" width="20" height="20" alt="Facebook Login"> Sign in with Facebook</a>-->
+<!--                    </div>-->
+
                     <form action="{% url 'website:user_auth:login' %}" method="POST">
                         {% csrf_token %}
                         <div class="mb-3">
@@ -33,10 +40,6 @@ Login
                         <div class="text-center">
                             <button type="submit" class="btn btn-dark btn-sm rounded-3">Login</button>
                             <a href="{% url 'website:static_pages:home' %}" class="btn btn-outline-secondary btn-sm rounded-3">Back</a>
-                        </div>
-                        <div class="text-center mt-3">
-                            <a href="{% url 'website:user_auth:social:begin' 'facebook' %}" class="btn btn-outline-secondary btn-sm rounded-3"><img src="{% static 'website/img/facebook-auth.png' %}" width="20" height="20" alt="Facebook Login"></a>
-                            <a href="{% url 'website:user_auth:social:begin' 'google-oauth2' %}" class="btn btn-outline-secondary btn-sm rounded-3"><img src="{% static 'website/img/google-auth-2.png' %}" width="20" height="20" alt="Google Login"></a>
                         </div>
                     </form>
                 </div>
