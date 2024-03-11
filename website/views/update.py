@@ -10,12 +10,12 @@ def add_artist(request):
     if request.user.is_authenticated:
         if request.method == "POST":
             form = AddArtistForm(request.POST, request.FILES, user=request.user)
-            if form.is_valid():
+            if form.is_valid() and form.check_for_moderation():
                 form.save()
                 messages.success(request, "You have successfully added an artist.")
                 return redirect("website:user_profile:user_artists", pk=request.user.id)
             else:
-                messages.error(request, "Your form is not valid.")
+                messages.error(request, "Your form is not valid or contains harmful language.")
                 return render(request, "website/forms/add_artist.html", {
                     "form": form,
                 })
@@ -33,7 +33,7 @@ def edit_artist(request, pk):
     if request.user.is_authenticated:
         artist = Artist.objects.get(id=pk)
         form = AddArtistForm(request.POST or None, request.FILES or None, instance=artist)
-        if form.is_valid():
+        if form.is_valid() and form.check_for_moderation():
             form.save()
             messages.success(request, "Artist updated successfully!")
             return redirect("website:model_pages:artist_page", pk=pk)
@@ -66,12 +66,12 @@ def add_promoter(request):
     if request.user.is_authenticated:
         if request.method == "POST":
             form = AddPromoterForm(request.POST, user=request.user)
-            if form.is_valid():
+            if form.is_valid() and form.check_for_moderation():
                 form.save()
                 messages.success(request, "You have successfully added a promoter.")
                 return redirect("website:user_profile:user_promoters", pk=request.user.id)
             else:
-                messages.error(request, "Your form is not valid.")
+                messages.error(request, "Your form is not valid or contains harmful language.")
                 return render(request, "website/forms/add_promoter.html", {
                     "form": form,
                 })
@@ -89,7 +89,7 @@ def edit_promoter(request, pk):
     if request.user.is_authenticated:
         promoter = Promoter.objects.get(id=pk)
         form = AddPromoterForm(request.POST or None, instance=promoter)
-        if form.is_valid():
+        if form.is_valid() and form.check_for_moderation():
             form.save()
             messages.success(request, "Promoter updated successfully!")
             return redirect("website:model_pages:promoter_page", pk=pk)
@@ -122,12 +122,12 @@ def add_venue(request):
     if request.user.is_authenticated:
         if request.method == "POST":
             form = AddVenueForm(request.POST, request.FILES, user=request.user)
-            if form.is_valid():
+            if form.is_valid() and form.check_for_moderation():
                 form.save()
                 messages.success(request, "You have successfully added a venue.")
                 return redirect("website:user_profile:user_venues", pk=request.user.id)
             else:
-                messages.error(request, "Your form is not valid.")
+                messages.error(request, "Your form is not valid or contains harmful language.")
                 return render(request, "website/forms/add_venue.html", {
                     "form": form,
                 })
@@ -145,7 +145,7 @@ def edit_venue(request, pk):
     if request.user.is_authenticated:
         venues_qs = Venue.objects.get(id=pk)
         form = AddVenueForm(request.POST or None, request.FILES or None, instance=venues_qs)
-        if form.is_valid():
+        if form.is_valid() and form.check_for_moderation():
             form.save()
             messages.success(request, "Updated successfully!")
             return redirect("website:model_pages:venue_page", pk=pk)
@@ -178,12 +178,12 @@ def add_event(request):
     if request.user.is_authenticated:
         if request.method == "POST":
             form = AddEventForm(request.POST, request.FILES, user=request.user)
-            if form.is_valid():
+            if form.is_valid() and form.check_for_moderation():
                 form.save()
                 messages.success(request, "You have successfully added an event.")
                 return redirect("website:user_profile:user_events", pk=request.user.id)
             else:
-                messages.error(request, "Your form is not valid.")
+                messages.error(request, "Your form is not valid or contains harmful language.")
                 return render(request, "website/forms/add_event.html", {
                     "form": form,
                 })
@@ -201,7 +201,7 @@ def edit_event(request, pk):
     if request.user.is_authenticated:
         events_qs = Event.objects.get(id=pk)
         form = AddEventForm(request.POST or None, request.FILES or None, instance=events_qs, user=request.user)
-        if form.is_valid():
+        if form.is_valid() and form.check_for_moderation():
             form.save()
             messages.success(request, "Updated successfully!")
             return redirect("website:model_pages:event_page", pk=pk)

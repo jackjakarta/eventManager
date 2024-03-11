@@ -1,5 +1,6 @@
 from django import forms
 from .models import Post, PostComment
+from website.utils.moderation import check_moderate
 
 
 class PostForm(forms.ModelForm):
@@ -10,6 +11,11 @@ class PostForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop("user", None)
         super(PostForm, self).__init__(*args, **kwargs)
+
+    def check_for_moderation(self):
+        if not check_moderate(self.cleaned_data.get("description")):
+            return True
+        return False
 
     def save(self, commit=True):
         instance = super(PostForm, self).save(commit=False)
@@ -29,6 +35,11 @@ class PostCommentForm(forms.ModelForm):
         self.user = kwargs.pop("user", None)
         self.post = kwargs.pop("post", None)
         super(PostCommentForm, self).__init__(*args, **kwargs)
+
+    def check_for_moderation(self):
+        if not check_moderate(self.cleaned_data.get("text")):
+            return True
+        return False
 
     def save(self, commit=True):
         instance = super(PostCommentForm, self).save(commit=False)
