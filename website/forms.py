@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth import get_user_model
 
+from website.utils.moderation import check_moderate
 from .models import Promoter, Venue, Event, Profile, Artist
 
 AuthUser = get_user_model()
@@ -51,6 +52,11 @@ class AddArtistForm(forms.ModelForm):
         self.user = kwargs.pop("user", None)
         super(AddArtistForm, self).__init__(*args, **kwargs)
 
+    def check_for_moderation(self):
+        if not check_moderate(self.cleaned_data.get("bio")):
+            return True
+        return False
+
     def save(self, commit=True):
         instance = super(AddArtistForm, self).save(commit=False)
         if self.user:
@@ -80,6 +86,11 @@ class AddPromoterForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop("user", None)
         super(AddPromoterForm, self).__init__(*args, **kwargs)
+
+    def check_for_moderation(self):
+        if not check_moderate(self.cleaned_data.get("name")):
+            return True
+        return False
 
     def save(self, commit=True):
         instance = super(AddPromoterForm, self).save(commit=False)
@@ -119,6 +130,11 @@ class AddVenueForm(forms.ModelForm):
         self.user = kwargs.pop("user", None)
         super(AddVenueForm, self).__init__(*args, **kwargs)
 
+    def check_for_moderation(self):
+        if not check_moderate(self.cleaned_data.get("name")):
+            return True
+        return False
+
     def save(self, commit=True):
         instance = super(AddVenueForm, self).save(commit=False)
         if self.user:
@@ -154,6 +170,11 @@ class AddEventForm(forms.ModelForm):
             self.fields['venue'].queryset = Venue.objects.filter(manager=self.user)
             self.fields['promoter'].queryset = Promoter.objects.filter(manager=self.user)
             self.fields['artists'].queryset = Artist.objects.filter(manager=self.user)
+
+    def check_for_moderation(self):
+        if not check_moderate(self.cleaned_data.get("description")):
+            return True
+        return False
 
     def save(self, commit=True):
         instance = super(AddEventForm, self).save(commit=False)

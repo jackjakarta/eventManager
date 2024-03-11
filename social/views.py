@@ -58,12 +58,12 @@ def add_post(request):
     if request.user.is_authenticated:
         if request.method == "POST":
             form = PostForm(request.POST, request.FILES, user=request.user)
-            if form.is_valid():
+            if form.is_valid() and form.check_for_moderation():
                 form.save()
                 messages.success(request, "You've created the post successfully.")
                 return redirect("posts_feed")
             else:
-                messages.error(request, "Your form is not valid.")
+                messages.error(request, "Your form is not valid or contains harmful language.")
                 return render(request, "social/add_post.html", {
                     "form": form,
                 })
@@ -130,12 +130,12 @@ def add_comment(request, pk):
         if request.method == "POST":
             post = Post.objects.get(pk=pk)
             form = PostCommentForm(request.POST, post=post, user=request.user)
-            if form.is_valid():
+            if form.is_valid() and form.check_for_moderation():
                 form.save()
                 messages.success(request, "You have added a comment.")
                 return redirect("post_page", pk=pk)
             else:
-                messages.error(request, "There was a problem adding the comment...")
+                messages.error(request, "Your form is not valid or contains harmful language.")
                 return redirect("post_page", pk=pk)
     else:
         messages.error(request, "You have to be logged in to use this feature!")
