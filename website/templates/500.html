@@ -1,0 +1,25 @@
+{% extends 'website/base.html' %}
+
+{% block title %}
+We are sorry...
+{% endblock %}
+
+
+{% block content %}
+<div class="col-md-6 offset-md-3">
+
+<div class="container text-center mt-5">
+    <h2 class="display-7">Oops...</h2>
+</div>
+
+<div class="container text-center mt-4">
+    <p>
+        The service you are trying to access might be down at the moment. We are very sorry...
+    </p>
+    <p>
+        <a href="{% url 'website:static_pages:home' %}" class="btn btn-secondary btn-sm rounded-3">Back to Home Page</a>
+    </p>
+</div>
+
+</div>
+{% endblock %}
