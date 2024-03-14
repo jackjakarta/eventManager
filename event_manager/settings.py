@@ -11,11 +11,11 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 import os
-from datetime import timedelta
 from pathlib import Path
 from secrets import token_urlsafe
 
 from decouple import config
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -50,7 +50,6 @@ INSTALLED_APPS = [
     'social_django',
     'rest_framework',
     'rest_framework_api_key',
-    'rest_framework_simplejwt',
     'users',
     'website',
     'social',
@@ -58,25 +57,21 @@ INSTALLED_APPS = [
     'storages',
 ]
 
+
+# Django Sites
+
 SITE_ID = 1
 
 
 #  Rest Framework Settings
 
-# REST_FRAMEWORK = {
-#     "DEFAULT_PERMISSION_CLASSES": [
-#         "rest_framework_api_key.permissions.HasAPIKey",
-#         "users.utils.apikey_auth.UserHasAPIKey",
-#         "rest_framework.permissions.IsAuthenticated",
-#     ],
-#     'DEFAULT_AUTHENTICATION_CLASSES': [
-#         'rest_framework_simplejwt.authentication.JWTAuthentication',
-#     ]
-# }
-
-SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'users.utils.apikey_auth.UserHasAPIKey',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'users.utils.apikey_auth.APIKeyAuthentication',
+    ]
 }
 
 API_KEY_CUSTOM_HEADER = 'HTTP_X_API_KEY'

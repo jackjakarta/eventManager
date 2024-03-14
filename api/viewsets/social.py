@@ -1,22 +1,21 @@
-from rest_framework import viewsets
-from rest_framework.permissions import IsAuthenticated
-from rest_framework_api_key.permissions import HasAPIKey
-from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
 from api.serializers.social import PostSerializer, PostCommentSerializer
 from social.models import Post, PostComment
-from users.utils.apikey_auth import UserHasAPIKey
 
 
-class PostsViewSet(viewsets.ModelViewSet):
-    queryset = Post.objects.all()
-    serializer_class = PostSerializer
-    permission_classes = [HasAPIKey | UserHasAPIKey | IsAuthenticated]
-    authentication_classes = (JWTAuthentication, )
+@api_view(["GET"])
+def get_posts(request):
+    posts = Post.objects.all()
+    serializer = PostSerializer(posts, many=True)
+
+    return Response(serializer.data)
 
 
-class PostCommentsViewSet(viewsets.ModelViewSet):
-    queryset = PostComment.objects.all()
-    serializer_class = PostCommentSerializer
-    permission_classes = [HasAPIKey | UserHasAPIKey | IsAuthenticated]
-    authentication_classes = (JWTAuthentication, )
+@api_view(["GET"])
+def get_post_comments(request, post_id):
+    post_comments = PostComment.objects.filter(post_id=post_id)
+    serializer = PostCommentSerializer(post_comments, many=True)
+
+    return Response(serializer.data)
