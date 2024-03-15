@@ -38,6 +38,45 @@ API Documentation
                     </div>
                 </div>
 
+                <!-- PUBLIC ENDPOINTS -->
+                <div class="row">
+                    <h2 class="display-7 mt-4">Public Endpoints</h2>
+                    <div class="mt-2">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <p class="mt-3"><strong>GET Events List</strong></p>
+                                <div class="card bg-dark">
+                                    <div class="card-body" data-bs-theme="dark" style="color: #cccccc;">
+                                        <strong class="text-success">GET </strong><a style="color: #cccccc;" href="{% url 'api:get_events' %}">{{ domain_url }}/api/list/events/</a>
+                                    </div>
+                                </div>
+
+                                <p class="mt-3"><strong>GET Artists List</strong></p>
+                                <div class="card bg-dark">
+                                    <div class="card-body" data-bs-theme="dark" style="color: #cccccc;">
+                                        <strong class="text-success">GET </strong><a style="color: #cccccc;" href="{% url 'api:get_artists' %}">{{ domain_url }}/api/list/artists/</a>
+                                    </div>
+                                </div>
+
+                                <p class="mt-3"><strong>GET Venues List</strong></p>
+                                <div class="card bg-dark">
+                                    <div class="card-body" data-bs-theme="dark" style="color: #cccccc;">
+                                        <strong class="text-success">GET </strong><a style="color: #cccccc;" href="{% url 'api:get_venues' %}">{{ domain_url }}/api/list/venues/</a>
+                                    </div>
+                                </div>
+
+                                <p class="mt-3"><strong>GET Promoters List</strong></p>
+                                <div class="card bg-dark">
+                                    <div class="card-body" data-bs-theme="dark" style="color: #cccccc;">
+                                        <strong class="text-success">GET </strong><a style="color: #cccccc;" href="{% url 'api:get_events' %}">{{ domain_url }}/api/list/promoters/</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- EVENTS ENDPOINT -->
                 <div class="row">
                     <h2 class="display-7 mt-4">Events Endpoint</h2>
@@ -49,10 +88,10 @@ API Documentation
                                     <strong>Endpoint:</strong> https://evntmngr.xyz/api/events/<br>
                                     <strong>Description:</strong> Perform operations related to your events<br><br>
                                     <strong>Methods:</strong><br><br>
-                                    <strong>GET:</strong> Retrieve a list of events or information about a specific event<br>
-                                    <strong>POST:</strong> Create a new event<br>
-                                    <strong>PUT:</strong> Update event details<br>
-                                    <strong>DELETE:</strong> Delete an event<br><br>
+                                    <strong class="text-success">GET:</strong> Retrieve a list of events or information about a specific event<br>
+                                    <strong class="text-warning">POST:</strong> Create a new event<br>
+                                    <strong class="text-discovery">PUT:</strong> Update event details<br>
+                                    <strong class="text-danger">DELETE:</strong> Delete an event<br><br>
                                     <strong>Authentication:</strong><br><br>
                                     <strong>API Key</strong> required for <strong>GET</strong>, <strong>POST</strong>, <strong>PUT</strong>, and <strong>DELETE</strong><br>
                                 </p>
@@ -66,7 +105,7 @@ API Documentation
                                 <h4>GET - List</h4>
                                 <div class="card bg-dark">
                                     <div class="card-body" data-bs-theme="dark" style="color: #cccccc;">
-                                        GET https://evntmngr.xyz/api/events/<br>
+                                        <strong class="text-success">GET </strong>{{ domain_url }}/api/events/<br>
                                         Content-Type: application/json<br>
                                         X-Api-Key: your-api-key
                                     </div>
@@ -74,7 +113,7 @@ API Documentation
                                 <h4 class="mt-4">GET - Individual</h4>
                                 <div class="card bg-dark">
                                     <div class="card-body" data-bs-theme="dark" style="color: #cccccc;">
-                                        GET https://evntmngr.xyz/api/events/event_id/<br>
+                                        <strong class="text-success">GET </strong>https://evntmngr.xyz/api/events/event_id/<br>
                                         Content-Type: application/json<br>
                                         X-Api-Key: your-api-key
                                     </div>
@@ -82,7 +121,7 @@ API Documentation
                                 <h4 class="mt-4">POST</h4>
                                 <div class="card bg-dark">
                                     <div class="card-body" data-bs-theme="dark" style="color: #cccccc;">
-                                        POST https://evntmngr.xyz/api/events/<br>
+                                        <strong class="text-warning">POST </strong> https://evntmngr.xyz/api/events/<br>
                                         Content-Type: application/json<br>
                                         X-Api-Key: your-api-key<br><br>
 
@@ -97,7 +136,7 @@ API Documentation
                                 <h4 class="mt-4">PUT</h4>
                                 <div class="card bg-dark">
                                     <div class="card-body" data-bs-theme="dark" style="color: #cccccc;">
-                                        POST https://evntmngr.xyz/api/events/event_id/<br>
+                                        <strong class="text-discovery">PUT </strong>https://evntmngr.xyz/api/events/event_id/<br>
                                         Content-Type: application/json<br>
                                         X-Api-Key: your-api-key<br><br>
 
@@ -112,7 +151,7 @@ API Documentation
                                 <h4 class="mt-4">DELETE</h4>
                                 <div class="card bg-dark">
                                     <div class="card-body" data-bs-theme="dark" style="color: #cccccc;">
-                                        POST https://evntmngr.xyz/api/events/event_id/<br>
+                                        <strong class="text-danger">DELETE </strong>https://evntmngr.xyz/api/events/event_id/<br>
                                         Content-Type: application/json<br>
                                         X-Api-Key: your-api-key<br>
                                     </div>
@@ -131,12 +170,12 @@ API Documentation
                                 <h4>Info</h4>
                                 <p>
                                     <strong>Endpoint:</strong> https://evntmngr.xyz/api/artists/<br>
-                                    <strong>Description:</strong> Perform operations related your to artists<br><br>
+                                    <strong>Description:</strong> Perform operations related to your artists<br><br>
                                     <strong>Methods:</strong><br><br>
-                                    <strong>GET:</strong> Retrieve a list of artists or information about a specific artist<br>
-                                    <strong>POST:</strong> Create a new artist<br>
-                                    <strong>PUT:</strong> Update artist details<br>
-                                    <strong>DELETE:</strong> Delete an artist<br><br>
+                                    <strong class="text-success">GET:</strong> Retrieve a list of artists or information about a specific artist<br>
+                                    <strong class="text-warning">POST:</strong> Create a new artist<br>
+                                    <strong class="text-discovery">PUT:</strong> Update artist details<br>
+                                    <strong class="text-danger">DELETE:</strong> Delete an artist<br><br>
                                     <strong>Authentication:</strong><br><br>
                                     <strong>API Key</strong> required for <strong>GET</strong>, <strong>POST</strong>, <strong>PUT</strong>, and <strong>DELETE</strong><br>
                                 </p>
@@ -150,23 +189,23 @@ API Documentation
                                 <h4>GET - List</h4>
                                 <div class="card bg-dark">
                                     <div class="card-body" data-bs-theme="dark" style="color: #cccccc;">
-                                        GET https://evntmngr.xyz/api/artists/<br>
-<!--                                        Content-Type: application/json<br>-->
-<!--                                        X-Api-Key: your-api-key-->
+                                        <strong class="text-success">GET </strong>https://evntmngr.xyz/api/artists/<br>
+                                        Content-Type: application/json<br>
+                                        X-Api-Key: your-api-key<br><br>
                                     </div>
                                 </div>
                                 <h4 class="mt-4">GET - Individual</h4>
                                 <div class="card bg-dark">
                                     <div class="card-body" data-bs-theme="dark" style="color: #cccccc;">
-                                        GET https://evntmngr.xyz/api/artists/artist_id/<br>
-<!--                                        Content-Type: application/json<br>-->
-<!--                                        X-Api-Key: your-api-key-->
+                                        <strong class="text-success">GET </strong>https://evntmngr.xyz/api/artists/artist_id/<br>
+                                        Content-Type: application/json<br>
+                                        X-Api-Key: your-api-key<br><br>
                                     </div>
                                 </div>
                                 <h4 class="mt-4">POST</h4>
                                 <div class="card bg-dark">
                                     <div class="card-body" data-bs-theme="dark" style="color: #cccccc;">
-                                        POST https://evntmngr.xyz/api/artists/<br>
+                                        <strong class="text-warning">POST </strong>https://evntmngr.xyz/api/artists/<br>
                                         Content-Type: application/json<br>
                                         X-Api-Key: your-api-key<br><br>
 
@@ -182,7 +221,7 @@ API Documentation
                                 <h4 class="mt-4">PUT</h4>
                                 <div class="card bg-dark">
                                     <div class="card-body" data-bs-theme="dark" style="color: #cccccc;">
-                                        POST https://evntmngr.xyz/api/artists/artist_id/<br>
+                                        <strong class="text-discovery">PUT </strong>https://evntmngr.xyz/api/artists/artist_id/<br>
                                         Content-Type: application/json<br>
                                         X-Api-Key: your-api-key<br><br>
 
@@ -198,7 +237,7 @@ API Documentation
                                 <h4 class="mt-4">DELETE</h4>
                                 <div class="card bg-dark">
                                     <div class="card-body" data-bs-theme="dark" style="color: #cccccc;">
-                                        POST https://evntmngr.xyz/api/artists/artist_id/<br>
+                                        <strong class="text-danger">DELETE </strong>https://evntmngr.xyz/api/artists/artist_id/<br>
                                         Content-Type: application/json<br>
                                         X-Api-Key: your-api-key<br>
                                     </div>
@@ -219,10 +258,10 @@ API Documentation
                                     <strong>Endpoint:</strong> https://evntmngr.xyz/api/venues/<br>
                                     <strong>Description:</strong> Perform operations related your to venues<br><br>
                                     <strong>Methods:</strong><br><br>
-                                    <strong>GET:</strong> Retrieve a list of venues or information about a specific venue<br>
-                                    <strong>POST:</strong> Create a new venue<br>
-                                    <strong>PUT:</strong> Update venue details<br>
-                                    <strong>DELETE:</strong> Delete a venue<br><br>
+                                    <strong class="text-success">GET:</strong> Retrieve a list of venues or information about a specific venue<br>
+                                    <strong class="text-warning">POST:</strong> Create a new venue<br>
+                                    <strong class="text-discovery">PUT:</strong> Update venue details<br>
+                                    <strong class="text-danger">DELETE:</strong> Delete a venue<br><br>
                                     <strong>Authentication:</strong><br><br>
                                     <strong>API Key</strong> required for <strong>GET</strong>, <strong>POST</strong>, <strong>PUT</strong>, and <strong>DELETE</strong><br>
                                 </p>
@@ -236,7 +275,7 @@ API Documentation
                                 <h4>GET - List</h4>
                                 <div class="card bg-dark">
                                     <div class="card-body" data-bs-theme="dark" style="color: #cccccc;">
-                                        GET https://evntmngr.xyz.com/api/venues/<br>
+                                        <strong class="text-success">GET </strong>https://evntmngr.xyz.com/api/venues/<br>
                                         Content-Type: application/json<br>
                                         X-Api-Key: your-api-key
                                     </div>
@@ -244,7 +283,7 @@ API Documentation
                                 <h4 class="mt-4">GET - Individual</h4>
                                 <div class="card bg-dark">
                                     <div class="card-body" data-bs-theme="dark" style="color: #cccccc;">
-                                        GET https://evntmngr.xyz.com/api/venues/venue_id/<br>
+                                        <strong class="text-success">GET </strong>https://evntmngr.xyz.com/api/venues/venue_id/<br>
                                         Content-Type: application/json<br>
                                         X-Api-Key: your-api-key
                                     </div>
@@ -252,7 +291,7 @@ API Documentation
                                 <h4 class="mt-4">POST</h4>
                                 <div class="card bg-dark">
                                     <div class="card-body" data-bs-theme="dark" style="color: #cccccc;">
-                                        POST https://evntmngr.xyz/api/venues/<br>
+                                        <strong class="text-warning">POST </strong> https://evntmngr.xyz/api/venues/<br>
                                         Content-Type: application/json<br>
                                         X-Api-Key: your-api-key<br><br>
 
@@ -265,7 +304,7 @@ API Documentation
                                 <h4 class="mt-4">PUT</h4>
                                 <div class="card bg-dark">
                                     <div class="card-body" data-bs-theme="dark" style="color: #cccccc;">
-                                        POST https://evntmngr.xyz/api/venues/venue_id/<br>
+                                        <strong class="text-discovery">PUT </strong> https://evntmngr.xyz/api/venues/venue_id/<br>
                                         Content-Type: application/json<br>
                                         X-Api-Key: your-api-key<br><br>
 
@@ -278,7 +317,7 @@ API Documentation
                                 <h4 class="mt-4">DELETE</h4>
                                 <div class="card bg-dark">
                                     <div class="card-body" data-bs-theme="dark" style="color: #cccccc;">
-                                        POST https://evntmngr.xyz/api/venues/venue_id/<br>
+                                        <strong class="text-danger">DELETE </strong>https://evntmngr.xyz/api/venues/venue_id/<br>
                                         Content-Type: application/json<br>
                                         X-Api-Key: your-api-key<br>
                                     </div>
@@ -299,10 +338,10 @@ API Documentation
                                     <strong>Endpoint:</strong> https://evntmngr.xyz/api/promoters/<br>
                                     <strong>Description:</strong> Perform operations related to your promoters<br><br>
                                     <strong>Methods:</strong><br><br>
-                                    <strong>GET:</strong> Retrieve a list of promoters or information about a specific promoter<br>
-                                    <strong>POST:</strong> Create a new promoter<br>
-                                    <strong>PUT:</strong> Update promoter details<br>
-                                    <strong>DELETE:</strong> Delete a promoter<br><br>
+                                    <strong class="text-success">GET </strong>Retrieve a list of promoters or information about a specific promoter<br>
+                                    <strong class="text-warning">POST </strong>Create a new promoter<br>
+                                    <strong class="text-discovery">PUT </strong>Update promoter details<br>
+                                    <strong class="text-danger">DELETE </strong>Delete a promoter<br><br>
                                     <strong>Authentication:</strong><br><br>
                                     <strong>API Key</strong> required for <strong>GET</strong>, <strong>POST</strong>, <strong>PUT</strong>, and <strong>DELETE</strong><br>
                                 </p>
@@ -316,7 +355,7 @@ API Documentation
                                 <h4>GET - List</h4>
                                 <div class="card bg-dark">
                                     <div class="card-body" data-bs-theme="dark" style="color: #cccccc;">
-                                        GET https://evntmngr.xyz.com/api/promoters/<br>
+                                        <strong class="text-success">GET </strong>https://evntmngr.xyz.com/api/promoters/<br>
                                         Content-Type: application/json<br>
                                         X-Api-Key: your-api-key
                                     </div>
@@ -324,7 +363,7 @@ API Documentation
                                 <h4 class="mt-4">GET - Individual</h4>
                                 <div class="card bg-dark">
                                     <div class="card-body" data-bs-theme="dark" style="color: #cccccc;">
-                                        GET https://evntmngr.xyz.com/api/promoters/promoter_id/<br>
+                                        <strong class="text-success">GET </strong>https://evntmngr.xyz.com/api/promoters/promoter_id/<br>
                                         Content-Type: application/json<br>
                                         X-Api-Key: your-api-key
                                     </div>
@@ -332,7 +371,7 @@ API Documentation
                                 <h4 class="mt-4">POST</h4>
                                 <div class="card bg-dark">
                                     <div class="card-body" data-bs-theme="dark" style="color: #cccccc;">
-                                        POST https://evntmngr.xyz/api/promoters/<br>
+                                        <strong class="text-warning">POST </strong>https://evntmngr.xyz/api/promoters/<br>
                                         Content-Type: application/json<br>
                                         X-Api-Key: your-api-key<br><br>
 
@@ -347,7 +386,7 @@ API Documentation
                                 <h4 class="mt-4">PUT</h4>
                                 <div class="card bg-dark">
                                     <div class="card-body" data-bs-theme="dark" style="color: #cccccc;">
-                                        PUT https://evntmngr.xyz/api/promoters/promoter-id/<br>
+                                        <strong class="text-discovery">PUT </strong>https://evntmngr.xyz/api/promoters/promoter-id/<br>
                                         Content-Type: application/json<br>
                                         X-Api-Key: your-api-key<br><br>
 
@@ -362,7 +401,7 @@ API Documentation
                                 <h4 class="mt-4">DELETE</h4>
                                 <div class="card bg-dark">
                                     <div class="card-body" data-bs-theme="dark" style="color: #cccccc;">
-                                        DELETE https://evntmngr.xyz/api/promoters/promoter-id/<br>
+                                        <strong class="text-danger">DELETE </strong>https://evntmngr.xyz/api/promoters/promoter-id/<br>
                                         X-Api-Key: your-api-key<br>
                                         Content-Type: application/json<br>
                                     </div>

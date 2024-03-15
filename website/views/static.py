@@ -3,7 +3,7 @@ from decouple import config
 from django.contrib import messages
 from django.http import Http404
 from django.shortcuts import render, redirect
-
+from django.contrib.sites.models import Site
 from website.models import Event, Artist, Promoter, Venue
 from website.utils.email import send_contact_mail, send_contact_confirm_mail
 
@@ -61,7 +61,10 @@ def app_docs(request):
 
 
 def app_docs_api(request):
-    return render(request, "website/docs/docs_api.html", {})
+    domain_url = Site.objects.get_current().domain
+    return render(request, "website/docs/docs_api.html", {
+        "domain_url": domain_url,
+    })
 
 
 def privacy_policy(request):

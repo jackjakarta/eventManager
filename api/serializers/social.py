@@ -13,6 +13,14 @@ class PostSerializer(serializers.ModelSerializer):
         model = Post
         exclude = ["updated_at", ]
 
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation["user"] = instance.user.email
+        representation["likes"] = instance.likes.count()
+        representation["event"] = instance.event.name if instance.event else "No Event"
+
+        return representation
+
 
 class PostCommentSerializer(serializers.ModelSerializer):
     user = UserSerializer()
