@@ -98,37 +98,43 @@ The Event Manager Web App provides a set of API endpoints to interact with its f
 
 ### Authentication
 
-Authentication is required for accessing various endpoints in the Event Manager Web App's API. While **GET** requests to some endpoints are public and do not require authentication, other HTTP methods like **POST**, **PUT**, and **DELETE** require either an ***API Key*** or ***JWT (JSON Web Token)*** authentication.
-
-To obtain a JWT token pair for authentication, users can visit the `/auth` endpoint, which provides a way to generate tokens securely. Additionally, in case of token expiration or security concerns, users can reset their JWT tokens at the `/auth/reset` endpoint.
+Authentication is required for accessing various endpoints in the Event Manager Web App's API. While **GET** requests to some endpoints are public and do not require authentication, other HTTP methods like **POST**, **PUT**, and **DELETE** require an ***API Key*** authentication.
 
 Authentication ensures that only authorized users have access to create, modify, or delete data through the API, enhancing the security and control of the Event Manager Web App.
 
 Here are some of the available API endpoints:
 
+### Public (No Auth)
+- **List All Events:** `GET /api/list/events/` - Retrieve a list of all events.
+- **List All Artists:** `GET /api/list/artists/` - Retrieve a list of all artists.
+- **List All Venues:** `GET /api/list/venues/` - Retrieve a list of all venues.
+- **List All Promoters:** `GET /api/list/promoters/` - Retrieve a list of all promoters.
+
+## API Key Auth Endpoints
+
 ### Events
-- **List Events:** `GET /api/events/` - Retrieve a list of all events.
+- **List Events:** `GET /api/events/` - Retrieve a list of all your events.
 - **Create Event:** `POST /api/events/` - Create a new event.
 - **Retrieve Event:** `GET /api/events/{event_id}/` - Retrieve details of a specific event.
 - **Update Event:** `PUT /api/events/{event_id}/` - Update event details.
 - **Delete Event:** `DELETE /api/events/{event_id}/` - Delete a specific event.
 
 ### Promoters
-- **List Promoters:** `GET /api/promoters/` - Retrieve a list of all promoters.
+- **List Promoters:** `GET /api/promoters/` - Retrieve a list of all your promoters.
 - **Create Promoter:** `POST /api/promoters/` - Create a new promoter.
 - **Retrieve Promoter:** `GET /api/promoters/{promoter_id}/` - Retrieve details of a specific promoter.
 - **Update Promoter:** `PUT /api/promoters/{promoter_id}/` - Update promoter details.
 - **Delete Promoter:** `DELETE /api/promoters/{promoter_id}/` - Delete a specific promoter.
 
 ### Venues
-- **List Venues:** `GET /api/venues/` - Retrieve a list of all venues.
+- **List Venues:** `GET /api/venues/` - Retrieve a list of all your venues.
 - **Create Venue:** `POST /api/venues/` - Create a new venue.
 - **Retrieve Venue:** `GET /api/venues/{venue_id}/` - Retrieve details of a specific venue.
 - **Update Venue:** `PUT /api/venues/{venue_id}/` - Update venue details.
 - **Delete Venue:** `DELETE /api/venues/{venue_id}/` - Delete a specific venue.
 
 ### Artists
-- **List Artists:** `GET /api/artists/` - Retrieve a list of all artists.
+- **List Artists:** `GET /api/artists/` - Retrieve a list of all your artists.
 - **Create Artist:** `POST /api/artists/` - Create a new artist.
 - **Retrieve Artist:** `GET /api/artists/{artist_id}/` - Retrieve details of a specific artist.
 - **Update Artist:** `PUT /api/artists/{artist_id}/` - Update artist details.

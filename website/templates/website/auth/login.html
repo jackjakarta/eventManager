@@ -35,12 +35,13 @@ Login
                             <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
                         </div>
                         <p class="ft-6 fw-lighter">
-                            Don't have an account yet? Register <a href="{% url 'website:user_auth:register' %}">here</a>.
+                             Register <a href="{% url 'website:user_auth:register' %}">here</a> if you don't have an account yet. <a
+                                href="{% url 'reset_password' %}">Forgot password ?</a>
                         </p>
                         <div class="text-center">
                             <button type="submit" class="btn btn-secondary rounded-3">Login</button>
-<!--                            <a href="{% url 'website:static_pages:home' %}" class="btn btn-outline-secondary btn-sm rounded-3">Back</a>-->
                         </div>
+
                     </form>
                 </div>
             </div>
