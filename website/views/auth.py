@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 
 from users.models import UserAPIKey
+from users.utils.decorators import user_is_authenticated
 from website.forms import SignUpForm
 
 
@@ -59,19 +60,16 @@ def register_user(request):
         return redirect("website:static_pages:home")
 
 
+@user_is_authenticated
 def generate_api_key(request):
-    if request.user.is_authenticated:
-        if request.user.first_name:
-            api_key_name = f"{request.user.first_name} {request.user.last_name}"
-        else:
-            api_key_name = f"User: {request.user}"
-
-        api_key, key = UserAPIKey.objects.create_key(name=api_key_name, user=request.user)
-        api_key.save()
-
-        return render(request, "website/auth/api_key.html", {
-          "api_key": key
-        })
+    if request.user.first_name:
+        api_key_name = f"{request.user.first_name} {request.user.last_name}"
     else:
-        messages.error(request, "You have to be logged in to use this feature.")
-        return redirect("website:static_pages:home")
+        api_key_name = f"User: {request.user}"
+
+    api_key, key = UserAPIKey.objects.create_key(name=api_key_name, user=request.user)
+    api_key.save()
+
+    return render(request, "website/auth/api_key.html", {
+      "api_key": key
+    })

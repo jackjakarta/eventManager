@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 
 from website.models import Event, Venue, Promoter, Artist
+from users.utils.decorators import user_is_authenticated
 
 
 # Events, Artists, Venues and Promoters Views
@@ -79,36 +80,30 @@ def event_page(request, pk):
     })
 
 
+@user_is_authenticated
 def event_attend(request, pk):
-    if request.user.is_authenticated:
-        event = Event.objects.get(id=pk)
+    event = get_object_or_404(Event, id=pk)
 
-        if request.user not in event.attendees.all():
-            event.attendees.add(request.user)
-            messages.success(request, "You are attending this event!")
-        else:
-            messages.error(request, "You are already attending this event!")
-
-        return redirect("website:model_pages:event_page", pk=pk)
+    if request.user not in event.attendees.all():
+        event.attendees.add(request.user)
+        messages.success(request, "You are attending this event!")
     else:
-        messages.error(request, "You have to be logged in to use this feature.")
-        return redirect("website:user_auth:login")
+        messages.error(request, "You are already attending this event!")
+
+    return redirect("website:model_pages:event_page", pk=pk)
 
 
+@user_is_authenticated
 def event_un_attend(request, pk):
-    if request.user.is_authenticated:
-        event = Event.objects.get(id=pk)
+    event = get_object_or_404(Event, id=pk)
 
-        if request.user in event.attendees.all():
-            event.attendees.remove(request.user)
-            messages.success(request, "You have unattended this event.")
-        else:
-            messages.error(request, "You were not attending this event.")
-
-        return redirect("website:model_pages:event_page", pk=pk)
+    if request.user in event.attendees.all():
+        event.attendees.remove(request.user)
+        messages.success(request, "You have unattended this event.")
     else:
-        messages.error(request, "You have to be logged in to use this feature.")
-        return redirect("website:user_auth:login")
+        messages.error(request, "You were not attending this event.")
+
+    return redirect("website:model_pages:event_page", pk=pk)
 
 
 def events_search(request):
