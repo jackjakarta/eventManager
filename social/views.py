@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.core.paginator import Paginator
 from django.shortcuts import render, redirect, get_object_or_404
 
 from users.utils.decorators import user_is_authenticated
@@ -8,9 +9,12 @@ from .models import Post, PostComment
 
 @user_is_authenticated
 def posts_feed(request):
-    posts = Post.objects.all().order_by("-created_at")[:10]
+    posts = Post.objects.all().order_by("-created_at")
+    paginator = Paginator(posts, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     return render(request, "social/posts_feed.html", {
-        "posts": posts,
+        "page_obj": page_obj,
     })
 
 
@@ -29,17 +33,23 @@ def post_page(request, pk):
 
 @user_is_authenticated
 def user_posts(request, pk):
-    posts = Post.objects.filter(user_id=pk)
+    posts = Post.objects.filter(user_id=pk).order_by("-created_at")
+    paginator = Paginator(posts, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     return render(request, "social/user_posts.html", {
-        "posts": posts,
+        "page_obj": page_obj,
     })
 
 
 @user_is_authenticated
 def liked_posts(request, pk):
-    posts = Post.objects.filter(likes=pk)
+    posts = Post.objects.filter(likes=pk).order_by("-updated_at")
+    paginator = Paginator(posts, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     return render(request, "social/user_liked_posts.html", {
-        "posts": posts,
+        "page_obj": page_obj,
     })
 
 
