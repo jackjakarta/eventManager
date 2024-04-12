@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
+from django.core.paginator import Paginator
 
 from website.models import Event, Venue, Promoter, Artist
 from users.utils.decorators import user_is_authenticated
@@ -15,8 +16,11 @@ def artists(request):
 
 def artist_page(request, pk):
     artist_qs = Artist.objects.get(id=pk)
+    paginator = Paginator(artist_qs, 9)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     return render(request, "website/artists/artist_page.html", {
-        "artist": artist_qs,
+        "page_obj": page_obj,
     })
 
 
@@ -30,9 +34,12 @@ def artist_events(request, pk):
 
 
 def venues(request):
-    venues_qs = Venue.objects.all()
+    venues_qs = Venue.objects.all().order_by("-updated_at")
+    paginator = Paginator(venues_qs, 8)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     return render(request, "website/venues/venues.html", {
-        "venues": venues_qs,
+        "page_obj": page_obj,
     })
 
 
@@ -53,9 +60,12 @@ def venue_events(request, pk):
 
 
 def promoters(request):
-    promoters_qs = Promoter.objects.all()
+    promoters_qs = Promoter.objects.all().order_by("-updated_at")
+    paginator = Paginator(promoters_qs, 9)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     return render(request, "website/promoters/promoters.html", {
-        "promoters": promoters_qs,
+        "page_obj": page_obj,
     })
 
 
@@ -68,8 +78,12 @@ def promoter_page(request, pk):
 
 def events(request):
     events_qs = Event.objects.all().order_by("-event_date")
+    paginator = Paginator(events_qs, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     return render(request, "website/events/events.html", {
-        "events": events_qs,
+        "page_obj": page_obj,
     })
 
 
@@ -110,8 +124,11 @@ def events_search(request):
     if request.method == "POST":
         searched = request.POST["searched"]
         events_qs = Event.objects.filter(name__contains=searched.title())
+        paginator = Paginator(events_qs, 10)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
 
         return render(request, "website/events/events_search.html", {
             "searched": searched,
-            "events": events_qs,
+            "page_obj": page_obj,
         })
