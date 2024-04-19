@@ -9,23 +9,24 @@ from users.utils.decorators import user_is_authenticated
 # Events, Artists, Venues and Promoters Views
 def artists(request):
     artists_qs = Artist.objects.all()
-    return render(request, "website/artists/artists.html", {
-        "artists": artists_qs,
-    })
-
-
-def artist_page(request, pk):
-    artist_qs = Artist.objects.get(id=pk)
-    paginator = Paginator(artist_qs, 9)
+    paginator = Paginator(artists_qs, 9)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    return render(request, "website/artists/artist_page.html", {
+
+    return render(request, "website/artists/artists.html", {
         "page_obj": page_obj,
     })
 
 
+def artist_page(request, pk):
+    artist_qs = get_object_or_404(Artist, id=pk)
+    return render(request, "website/artists/artist_page.html", {
+        "artist": artist_qs,
+    })
+
+
 def artist_events(request, pk):
-    artist_name = Artist.objects.get(id=pk)
+    artist_name = get_object_or_404(Artist, id=pk)
     events_with_artist = Event.objects.filter(artists=pk)
     return render(request, "website/artists/artist_events.html", {
         "artist": artist_name,
@@ -44,14 +45,14 @@ def venues(request):
 
 
 def venue_page(request, pk):
-    venue = Venue.objects.get(id=pk)
+    venue = get_object_or_404(Venue, id=pk)
     return render(request, "website/venues/venue_page.html", {
         "venue": venue,
     })
 
 
 def venue_events(request, pk):
-    venue_name = Venue.objects.get(id=pk)
+    venue_name = get_object_or_404(Venue, id=pk)
     events_at_venue = Event.objects.filter(venue_id=pk)
     return render(request, "website/venues/venue_events.html", {
         "events": events_at_venue,
@@ -70,14 +71,14 @@ def promoters(request):
 
 
 def promoter_page(request, pk):
-    promoter = Promoter.objects.get(id=pk)
+    promoter = get_object_or_404(Promoter, id=pk)
     return render(request, "website/promoters/promoter_page.html", {
         "promoter": promoter,
     })
 
 
 def events(request):
-    events_qs = Event.objects.all().order_by("-event_date")
+    events_qs = Event.objects.all().order_by("event_date")
     paginator = Paginator(events_qs, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -88,7 +89,7 @@ def events(request):
 
 
 def event_page(request, pk):
-    event = Event.objects.get(id=pk)
+    event = get_object_or_404(Event, id=pk)
     return render(request, "website/events/event_page.html", {
         "event": event,
     })
