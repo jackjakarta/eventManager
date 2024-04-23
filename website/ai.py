@@ -1,14 +1,12 @@
+from django.conf import settings
 from openai import OpenAI
-from decouple import config
-
-OPENAI_API_KEY = config("OPENAI_API_KEY")
 
 
 class ImageDallE:
-    """Image Generation with the OpenAI DALL-E model."""
+    """Image Generation with the OpenAI DALL-E 3 model."""
 
     def __init__(self, model="dall-e-3", user_id=None):
-        self.client = OpenAI(api_key=OPENAI_API_KEY)
+        self.client = OpenAI(api_key=settings.OPENAI_API_KEY)
         self.model = model
         self.prompt = None
         self.response = None
@@ -35,7 +33,7 @@ class GPTAssistantsApi:
     """OpenAI Assistants API Class"""
 
     def __init__(self, assistant_id):
-        self.client = OpenAI(api_key=OPENAI_API_KEY)
+        self.client = OpenAI(api_key=settings.OPENAI_API_KEY)
         self.assistant_id = assistant_id
         self.thread = None
         self.prompt = None

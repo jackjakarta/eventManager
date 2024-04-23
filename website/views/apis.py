@@ -1,6 +1,7 @@
 import time
 
 from decouple import config
+from django.conf import settings
 from django.contrib import messages
 from django.shortcuts import render, redirect
 
@@ -9,13 +10,11 @@ from website.forms import GPTAssistantsApiForm, DallEImageForm
 from website.utils.images import save_image_to_db
 from users.utils.decorators import user_is_authenticated
 
-OPENAI_ASSISTANT_ID = config("OPENAI_ASSISTANT_ID")
-
 
 # AI API Call Views
 @user_is_authenticated
 def ai_assistant_event(request):
-    ai = GPTAssistantsApi(OPENAI_ASSISTANT_ID)
+    ai = GPTAssistantsApi(settings.OPENAI_ASSISTANT_ID)
 
     if request.method == "POST":
         form = GPTAssistantsApiForm(request.POST)
