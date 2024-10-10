@@ -16,6 +16,7 @@ import os
 from pathlib import Path
 from secrets import token_urlsafe
 
+import dj_database_url
 from decouple import config
 
 
@@ -133,16 +134,13 @@ WSGI_APPLICATION = 'event_manager.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'HOST': config('DB_HOST'),
-        'PORT': config('DB_PORT', default=3306, cast=int),
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASSWORD')
-    }
+    'default': dj_database_url.config(
+        default=config(
+            'DATABASE_URL', 
+            default="postgresql://postgres:h4yuasd6@127.0.0.1:5432/local-django"
+        )
+    )
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
