@@ -6,11 +6,11 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('website', '0033_alter_profile_fav_genre'),
+        ("website", "0033_alter_profile_fav_genre"),
     ]
 
     operations = [
         migrations.DeleteModel(
-            name='DallEImage',
+            name="DallEImage",
         ),
     ]

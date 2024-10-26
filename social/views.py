@@ -11,11 +11,15 @@ from .models import Post, PostComment
 def posts_feed(request):
     posts = Post.objects.all().order_by("-created_at")
     paginator = Paginator(posts, 10)
-    page_number = request.GET.get('page')
+    page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
-    return render(request, "social/posts_feed.html", {
-        "page_obj": page_obj,
-    })
+    return render(
+        request,
+        "social/posts_feed.html",
+        {
+            "page_obj": page_obj,
+        },
+    )
 
 
 @user_is_authenticated
@@ -24,33 +28,45 @@ def post_page(request, pk):
     post_comments = PostComment.objects.filter(post_id=pk)
     form = PostCommentForm()
 
-    return render(request, "social/post_page.html", {
-        "post": post,
-        "comments": post_comments,
-        "form": form,
-    })
+    return render(
+        request,
+        "social/post_page.html",
+        {
+            "post": post,
+            "comments": post_comments,
+            "form": form,
+        },
+    )
 
 
 @user_is_authenticated
 def user_posts(request, pk):
     posts = Post.objects.filter(user_id=pk).order_by("-created_at")
     paginator = Paginator(posts, 10)
-    page_number = request.GET.get('page')
+    page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
-    return render(request, "social/user_posts.html", {
-        "page_obj": page_obj,
-    })
+    return render(
+        request,
+        "social/user_posts.html",
+        {
+            "page_obj": page_obj,
+        },
+    )
 
 
 @user_is_authenticated
 def liked_posts(request, pk):
     posts = Post.objects.filter(likes=pk).order_by("-updated_at")
     paginator = Paginator(posts, 10)
-    page_number = request.GET.get('page')
+    page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
-    return render(request, "social/user_liked_posts.html", {
-        "page_obj": page_obj,
-    })
+    return render(
+        request,
+        "social/user_liked_posts.html",
+        {
+            "page_obj": page_obj,
+        },
+    )
 
 
 @user_is_authenticated
@@ -63,15 +79,25 @@ def add_post(request):
             messages.success(request, "You've created the post successfully.")
             return redirect("posts_feed")
         else:
-            messages.error(request, "Your form is not valid or contains harmful language.")
-            return render(request, "social/add_post.html", {
-                "form": form,
-            })
+            messages.error(
+                request, "Your form is not valid or contains harmful language."
+            )
+            return render(
+                request,
+                "social/add_post.html",
+                {
+                    "form": form,
+                },
+            )
     else:
         form = PostForm()
-        return render(request, "social/add_post.html", {
-            "form": form,
-        })
+        return render(
+            request,
+            "social/add_post.html",
+            {
+                "form": form,
+            },
+        )
 
 
 @user_is_authenticated
@@ -124,7 +150,9 @@ def add_comment(request, pk):
             messages.success(request, "You have added a comment.")
             return redirect("post_page", pk=pk)
         else:
-            messages.error(request, "Your form is not valid or contains harmful language.")
+            messages.error(
+                request, "Your form is not valid or contains harmful language."
+            )
             return redirect("post_page", pk=pk)
 
 

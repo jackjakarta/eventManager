@@ -11,7 +11,9 @@ class PostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        exclude = ["updated_at", ]
+        exclude = [
+            "updated_at",
+        ]
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
@@ -27,4 +29,6 @@ class PostCommentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = PostComment
-        exclude = ["updated_at", ]
+        exclude = [
+            "updated_at",
+        ]

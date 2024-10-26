@@ -6,18 +6,62 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('website', '0026_profile_fav_genre'),
+        ("website", "0026_profile_fav_genre"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='event',
-            name='event_type',
-            field=models.CharField(blank=True, choices=[('concert', 'Concert'), ('show', 'Show'), ('conference', 'Conference'), ('party', 'Party'), ('other', 'Other')], default=None, max_length=120, verbose_name='Event Type'),
+            model_name="event",
+            name="event_type",
+            field=models.CharField(
+                blank=True,
+                choices=[
+                    ("concert", "Concert"),
+                    ("show", "Show"),
+                    ("conference", "Conference"),
+                    ("party", "Party"),
+                    ("other", "Other"),
+                ],
+                default=None,
+                max_length=120,
+                verbose_name="Event Type",
+            ),
         ),
         migrations.AddField(
-            model_name='event',
-            name='genre',
-            field=models.CharField(blank=True, choices=[('rock', 'Rock'), ('pop', 'Pop'), ('hip_hop', 'Hip Hop'), ('electronic', 'Electronic'), ('jazz', 'Jazz'), ('blues', 'Blues'), ('country', 'Country'), ('classical', 'Classical'), ('reggae', 'Reggae'), ('metal', 'Metal'), ('folk', 'Folk'), ('rnb', 'R&B'), ('indie', 'Indie'), ('punk', 'Punk'), ('soul', 'Soul'), ('funk', 'Funk'), ('techno', 'Techno'), ('disco', 'Disco'), ('ambient', 'Ambient'), ('reggaeton', 'Reggaeton'), ('ska', 'Ska'), ('gospel', 'Gospel'), ('trance', 'Trance'), ('dancehall', 'Dancehall'), ('opera', 'Opera')], default=None, max_length=120, verbose_name='Genre'),
+            model_name="event",
+            name="genre",
+            field=models.CharField(
+                blank=True,
+                choices=[
+                    ("rock", "Rock"),
+                    ("pop", "Pop"),
+                    ("hip_hop", "Hip Hop"),
+                    ("electronic", "Electronic"),
+                    ("jazz", "Jazz"),
+                    ("blues", "Blues"),
+                    ("country", "Country"),
+                    ("classical", "Classical"),
+                    ("reggae", "Reggae"),
+                    ("metal", "Metal"),
+                    ("folk", "Folk"),
+                    ("rnb", "R&B"),
+                    ("indie", "Indie"),
+                    ("punk", "Punk"),
+                    ("soul", "Soul"),
+                    ("funk", "Funk"),
+                    ("techno", "Techno"),
+                    ("disco", "Disco"),
+                    ("ambient", "Ambient"),
+                    ("reggaeton", "Reggaeton"),
+                    ("ska", "Ska"),
+                    ("gospel", "Gospel"),
+                    ("trance", "Trance"),
+                    ("dancehall", "Dancehall"),
+                    ("opera", "Opera"),
+                ],
+                default=None,
+                max_length=120,
+                verbose_name="Genre",
+            ),
         ),
     ]

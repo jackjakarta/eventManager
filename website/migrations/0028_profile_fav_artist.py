@@ -7,13 +7,19 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('website', '0027_event_event_type_event_genre'),
+        ("website", "0027_event_event_type_event_genre"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='profile',
-            name='fav_artist',
-            field=models.ForeignKey(blank=True, default=None, null=True, on_delete=django.db.models.deletion.SET_NULL, to='website.artist'),
+            model_name="profile",
+            name="fav_artist",
+            field=models.ForeignKey(
+                blank=True,
+                default=None,
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                to="website.artist",
+            ),
         ),
     ]

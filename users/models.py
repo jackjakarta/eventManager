@@ -12,18 +12,12 @@ from .utils.constants import ACTIVATION_AVAILABILITY
 
 class AuthUser(AbstractUser):
     username = None
-    email = models.EmailField(
-        verbose_name="email",
-        max_length=255,
-        unique=True
-    )
+    email = models.EmailField(verbose_name="email", max_length=255, unique=True)
     password = models.CharField(_("password"), max_length=128, null=True, blank=False)
     is_newsletter_sub = models.BooleanField(
         verbose_name="Newsletter Sub",
         default=False,
-        help_text=_(
-            "Check box if you want to subscribe to the newsletter."
-        )
+        help_text=_("Check box if you want to subscribe to the newsletter."),
     )
 
     USERNAME_FIELD = "email"
@@ -38,22 +32,20 @@ class AuthUser(AbstractUser):
         return self.__str__()
 
 
-AVAILABILITY = {
-    ACTIVATION_AVAILABILITY["unit"]: ACTIVATION_AVAILABILITY["value"]
-}
+AVAILABILITY = {ACTIVATION_AVAILABILITY["unit"]: ACTIVATION_AVAILABILITY["value"]}
 
 
 class Activation(models.Model):
-    user = models.OneToOneField(AuthUser, related_name="activation", on_delete=models.CASCADE)
+    user = models.OneToOneField(
+        AuthUser, related_name="activation", on_delete=models.CASCADE
+    )
     token = models.CharField(
         max_length=64,
         null=True,
         unique=True,
         default=None,
     )
-    expires_at = models.DateTimeField(
-        default=None
-    )
+    expires_at = models.DateTimeField(default=None)
     activated_at = models.DateTimeField(default=None, null=True)
 
     def save(self, *args, **kwargs):
@@ -71,7 +63,5 @@ class Activation(models.Model):
 
 class UserAPIKey(AbstractAPIKey):
     user = models.ForeignKey(
-        AuthUser,
-        on_delete=models.CASCADE,
-        related_name="api_keys"
+        AuthUser, on_delete=models.CASCADE, related_name="api_keys"
     )

@@ -1,10 +1,19 @@
 from django.contrib.auth.models import AnonymousUser
 from rest_framework import viewsets, status
-from rest_framework.decorators import api_view, permission_classes, authentication_classes
+from rest_framework.decorators import (
+    api_view,
+    permission_classes,
+    authentication_classes,
+)
 from rest_framework.response import Response
 from rest_framework_api_key.permissions import HasAPIKey
 
-from api.serializers.website import EventSerializer, VenueSerializer, PromoterSerializer, ArtistSerializer
+from api.serializers.website import (
+    EventSerializer,
+    VenueSerializer,
+    PromoterSerializer,
+    ArtistSerializer,
+)
 from api.serializers.website import NewsletterSubSerializer
 from website.models import Event, Venue, Promoter, Artist, NewsletterSub
 
@@ -24,7 +33,9 @@ class ArtistsViewSet(viewsets.ModelViewSet):
         if serializer.is_valid():
             self.perform_create(serializer)
             headers = self.get_success_headers(serializer.data)
-            return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+            return Response(
+                serializer.data, status=status.HTTP_201_CREATED, headers=headers
+            )
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -33,7 +44,7 @@ class ArtistsViewSet(viewsets.ModelViewSet):
 
     def get_success_headers(self, data):
         try:
-            return {'Location': "Yes Yes"}
+            return {"Location": "Yes Yes"}
         except (TypeError, KeyError):
             return {}
 
@@ -53,7 +64,9 @@ class EventsViewSet(viewsets.ModelViewSet):
         if serializer.is_valid():
             self.perform_create(serializer)
             headers = self.get_success_headers(serializer.data)
-            return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+            return Response(
+                serializer.data, status=status.HTTP_201_CREATED, headers=headers
+            )
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -62,7 +75,7 @@ class EventsViewSet(viewsets.ModelViewSet):
 
     def get_success_headers(self, data):
         try:
-            return {'Location': "Yes Yes"}
+            return {"Location": "Yes Yes"}
         except (TypeError, KeyError):
             return {}
 
@@ -82,7 +95,9 @@ class VenuesViewSet(viewsets.ModelViewSet):
         if serializer.is_valid():
             self.perform_create(serializer)
             headers = self.get_success_headers(serializer.data)
-            return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+            return Response(
+                serializer.data, status=status.HTTP_201_CREATED, headers=headers
+            )
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -91,7 +106,7 @@ class VenuesViewSet(viewsets.ModelViewSet):
 
     def get_success_headers(self, data):
         try:
-            return {'Location': "Yes Yes"}
+            return {"Location": "Yes Yes"}
         except (TypeError, KeyError):
             return {}
 
@@ -111,7 +126,9 @@ class PromotersViewSet(viewsets.ModelViewSet):
         if serializer.is_valid():
             self.perform_create(serializer)
             headers = self.get_success_headers(serializer.data)
-            return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+            return Response(
+                serializer.data, status=status.HTTP_201_CREATED, headers=headers
+            )
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -120,7 +137,7 @@ class PromotersViewSet(viewsets.ModelViewSet):
 
     def get_success_headers(self, data):
         try:
-            return {'Location': "Yes Yes"}
+            return {"Location": "Yes Yes"}
         except (TypeError, KeyError):
             return {}
 

@@ -17,15 +17,25 @@ def add_artist(request):
             messages.success(request, "You have successfully added an artist.")
             return redirect("website:user_profile:user_artists", pk=request.user.id)
         else:
-            messages.error(request, "Your form is not valid or contains harmful language.")
-            return render(request, "website/forms/add_artist.html", {
-                "form": form,
-            })
+            messages.error(
+                request, "Your form is not valid or contains harmful language."
+            )
+            return render(
+                request,
+                "website/forms/add_artist.html",
+                {
+                    "form": form,
+                },
+            )
     else:
         form = AddArtistForm()
-        return render(request, "website/forms/add_artist.html", {
-            "form": form,
-        })
+        return render(
+            request,
+            "website/forms/add_artist.html",
+            {
+                "form": form,
+            },
+        )
 
 
 @user_is_authenticated
@@ -38,10 +48,14 @@ def edit_artist(request, pk):
         messages.success(request, "Artist updated successfully!")
         return redirect("website:model_pages:artist_page", pk=pk)
 
-    return render(request, "website/forms/edit_artist.html", {
-        "artist": artist,
-        "form": form,
-    })
+    return render(
+        request,
+        "website/forms/edit_artist.html",
+        {
+            "artist": artist,
+            "form": form,
+        },
+    )
 
 
 @user_is_authenticated
@@ -67,15 +81,25 @@ def add_promoter(request):
             messages.success(request, "You have successfully added a promoter.")
             return redirect("website:user_profile:user_promoters", pk=request.user.id)
         else:
-            messages.error(request, "Your form is not valid or contains harmful language.")
-            return render(request, "website/forms/add_promoter.html", {
-                "form": form,
-            })
+            messages.error(
+                request, "Your form is not valid or contains harmful language."
+            )
+            return render(
+                request,
+                "website/forms/add_promoter.html",
+                {
+                    "form": form,
+                },
+            )
     else:
         form = AddPromoterForm()
-        return render(request, "website/forms/add_promoter.html", {
-            "form": form,
-        })
+        return render(
+            request,
+            "website/forms/add_promoter.html",
+            {
+                "form": form,
+            },
+        )
 
 
 @user_is_authenticated
@@ -88,10 +112,14 @@ def edit_promoter(request, pk):
         messages.success(request, "Promoter updated successfully!")
         return redirect("website:model_pages:promoter_page", pk=pk)
 
-    return render(request, "website/forms/edit_promoter.html", {
-        "promoter": promoter,
-        "form": form,
-    })
+    return render(
+        request,
+        "website/forms/edit_promoter.html",
+        {
+            "promoter": promoter,
+            "form": form,
+        },
+    )
 
 
 @user_is_authenticated
@@ -116,15 +144,25 @@ def add_venue(request):
             messages.success(request, "You have successfully added a venue.")
             return redirect("website:user_profile:user_venues", pk=request.user.id)
         else:
-            messages.error(request, "Your form is not valid or contains harmful language.")
-            return render(request, "website/forms/add_venue.html", {
-                "form": form,
-            })
+            messages.error(
+                request, "Your form is not valid or contains harmful language."
+            )
+            return render(
+                request,
+                "website/forms/add_venue.html",
+                {
+                    "form": form,
+                },
+            )
     else:
         form = AddVenueForm()
-        return render(request, "website/forms/add_venue.html", {
-            "form": form,
-        })
+        return render(
+            request,
+            "website/forms/add_venue.html",
+            {
+                "form": form,
+            },
+        )
 
 
 @user_is_authenticated
@@ -137,10 +175,14 @@ def edit_venue(request, pk):
         messages.success(request, "Updated successfully!")
         return redirect("website:model_pages:venue_page", pk=pk)
 
-    return render(request, "website/forms/edit_venue.html", {
-        "venue": venues_qs,
-        "form": form,
-    })
+    return render(
+        request,
+        "website/forms/edit_venue.html",
+        {
+            "venue": venues_qs,
+            "form": form,
+        },
+    )
 
 
 @user_is_authenticated
@@ -165,31 +207,50 @@ def add_event(request):
             messages.success(request, "You have successfully added an event.")
             return redirect("website:user_profile:user_events", pk=request.user.id)
         else:
-            messages.error(request, "Your form is not valid or contains harmful language.")
-            return render(request, "website/forms/add_event.html", {
-                "form": form,
-            })
+            messages.error(
+                request, "Your form is not valid or contains harmful language."
+            )
+            return render(
+                request,
+                "website/forms/add_event.html",
+                {
+                    "form": form,
+                },
+            )
     else:
         form = AddEventForm(user=request.user)
-        return render(request, "website/forms/add_event.html", {
-            "form": form,
-        })
+        return render(
+            request,
+            "website/forms/add_event.html",
+            {
+                "form": form,
+            },
+        )
 
 
 @user_is_authenticated
 def edit_event(request, pk):
     events_qs = get_object_or_404(Event, id=pk)
-    form = AddEventForm(request.POST or None, request.FILES or None, instance=events_qs, user=request.user)
+    form = AddEventForm(
+        request.POST or None,
+        request.FILES or None,
+        instance=events_qs,
+        user=request.user,
+    )
 
     if form.is_valid() and form.check_for_moderation():
         form.save()
         messages.success(request, "Updated successfully!")
         return redirect("website:model_pages:event_page", pk=pk)
 
-    return render(request, "website/forms/edit_event.html", {
-        "event": events_qs,
-        "form": form,
-    })
+    return render(
+        request,
+        "website/forms/edit_event.html",
+        {
+            "event": events_qs,
+            "form": form,
+        },
+    )
 
 
 @user_is_authenticated

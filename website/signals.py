@@ -42,6 +42,7 @@ def add_user_to_newsletter(sender, instance, **kwargs):
 #             NewsletterSub(email=instance).delete()
 #             print("User removed from newsletter list.")
 
+
 @receiver(post_save, sender=AuthUser)
 def remove_user_from_newsletter(sender, instance, **kwargs):
     print("\nSignals post_save was caught!")
