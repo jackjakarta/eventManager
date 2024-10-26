@@ -48,9 +48,7 @@ class GPTAssistantsApi:
     def create_message(self, prompt):
         self.prompt = prompt
         self.message = self.client.beta.threads.messages.create(
-            thread_id=self.thread.id,
-            role="user",
-            content=self.prompt
+            thread_id=self.thread.id, role="user", content=self.prompt
         )
 
     def create_run(self, custom_instructions=""):
@@ -58,16 +56,13 @@ class GPTAssistantsApi:
         self.run = self.client.beta.threads.runs.create(
             thread_id=self.thread.id,
             assistant_id=self.assistant_id,
-            instructions=self.custom_instructions
+            instructions=self.custom_instructions,
         )
 
     def retrieve_run(self):
         self.run = self.client.beta.threads.runs.retrieve(
-            thread_id=self.thread.id,
-            run_id=self.run.id
+            thread_id=self.thread.id, run_id=self.run.id
         )
 
     def list_messages(self):
-        self.messages = self.client.beta.threads.messages.list(
-            thread_id=self.thread.id
-        )
+        self.messages = self.client.beta.threads.messages.list(thread_id=self.thread.id)

@@ -13,7 +13,9 @@ def subscribe_newsletter(request):
         if email is not None:
             if not NewsletterSub.objects.filter(email=email).exists():
                 NewsletterSub.objects.create(email=email)
-                messages.success(request, "Thank you for subscribing to our Newsletter.")
+                messages.success(
+                    request, "Thank you for subscribing to our Newsletter."
+                )
                 send_register_newsletter_email(email)
             else:
                 messages.error(request, "You are already subscribed to the newsletter.")

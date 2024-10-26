@@ -12,7 +12,9 @@ AuthUserModel = get_user_model()
 
 @receiver(pre_save, sender=AuthUserModel)
 def inactivate_user(instance, **kwargs):
-    is_social_user = hasattr(instance, 'is_social_auth') and instance.is_social_auth is True
+    is_social_user = (
+        hasattr(instance, "is_social_auth") and instance.is_social_auth is True
+    )
     if not instance.pk and not is_social_user:
         instance.is_active = False
         instance.password = None
@@ -20,8 +22,10 @@ def inactivate_user(instance, **kwargs):
 
 @receiver(post_save, sender=AuthUserModel)
 def create_activation(sender, instance, created, **kwargs):
-    print('!!! Signal post_save was triggered!')
-    is_social_user = hasattr(instance, 'is_social_auth') and instance.is_social_auth is True
+    print("!!! Signal post_save was triggered!")
+    is_social_user = (
+        hasattr(instance, "is_social_auth") and instance.is_social_auth is True
+    )
     try:
         with transaction.atomic():
             if created:

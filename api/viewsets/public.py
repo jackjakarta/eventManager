@@ -1,7 +1,15 @@
-from rest_framework.decorators import api_view, permission_classes, authentication_classes
+from rest_framework.decorators import (
+    api_view,
+    permission_classes,
+    authentication_classes,
+)
 from rest_framework.response import Response
 
-from api.serializers.public import PublicArtistSerializer, PublicPromoterSerializer, PublicVenueSerializer
+from api.serializers.public import (
+    PublicArtistSerializer,
+    PublicPromoterSerializer,
+    PublicVenueSerializer,
+)
 from api.serializers.public import PublicEventSerializer
 from website.models import Artist, Event, Promoter, Venue
 

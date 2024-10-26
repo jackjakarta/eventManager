@@ -7,28 +7,57 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('website', '0004_venue_city'),
+        ("website", "0004_venue_city"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Promoter',
+            name="Promoter",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-                ('name', models.CharField(max_length=120, unique=True, verbose_name='Promoter')),
-                ('city', models.CharField(blank=True, max_length=120, verbose_name='Promoter Location')),
-                ('email', models.EmailField(max_length=250, verbose_name='Promoter Email')),
-                ('website', models.URLField(blank=True, verbose_name='Promoter Website')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
+                (
+                    "name",
+                    models.CharField(
+                        max_length=120, unique=True, verbose_name="Promoter"
+                    ),
+                ),
+                (
+                    "city",
+                    models.CharField(
+                        blank=True, max_length=120, verbose_name="Promoter Location"
+                    ),
+                ),
+                (
+                    "email",
+                    models.EmailField(max_length=250, verbose_name="Promoter Email"),
+                ),
+                (
+                    "website",
+                    models.URLField(blank=True, verbose_name="Promoter Website"),
+                ),
             ],
             options={
-                'db_table': 'promoters',
+                "db_table": "promoters",
             },
         ),
         migrations.AddField(
-            model_name='event',
-            name='promoter',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='website.promoter'),
+            model_name="event",
+            name="promoter",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="website.promoter",
+            ),
         ),
     ]

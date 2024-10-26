@@ -9,8 +9,15 @@ from .models import AuthUser, UserAPIKey, Activation
 @admin.register(AuthUser)
 class AuthUserAdmin(BaseUserAdmin):
     ordering = ("email",)
-    list_display = ('email', 'first_name', 'last_name', 'is_staff', 'is_superuser', 'id')
-    search_fields = ('email', 'first_name', 'last_name')
+    list_display = (
+        "email",
+        "first_name",
+        "last_name",
+        "is_staff",
+        "is_superuser",
+        "id",
+    )
+    search_fields = ("email", "first_name", "last_name")
 
     fieldsets = (
         (None, {"fields": ("email", "password")}),
@@ -35,7 +42,13 @@ class AuthUserAdmin(BaseUserAdmin):
             None,
             {
                 "classes": ("wide",),
-                "fields": ("first_name", "last_name", "email", "password1", "password2"),
+                "fields": (
+                    "first_name",
+                    "last_name",
+                    "email",
+                    "password1",
+                    "password2",
+                ),
             },
         ),
     )
@@ -49,10 +62,30 @@ class UserAPIKeyModelAdmin(APIKeyModelAdmin):
 
 @admin.register(Activation)
 class ActivationAdmin(admin.ModelAdmin):
-    list_display = ("user", "token", "expires_at", "activated_at", )
-    ordering = ("user", )
-    readonly_fields = ("user", "token", "expires_at", "activated_at", )
+    list_display = (
+        "user",
+        "token",
+        "expires_at",
+        "activated_at",
+    )
+    ordering = ("user",)
+    readonly_fields = (
+        "user",
+        "token",
+        "expires_at",
+        "activated_at",
+    )
 
     fieldsets = (
-        (_("Activation Information"), {"fields": ("user", "token", "expires_at", "activated_at", )}),
+        (
+            _("Activation Information"),
+            {
+                "fields": (
+                    "user",
+                    "token",
+                    "expires_at",
+                    "activated_at",
+                )
+            },
+        ),
     )

@@ -12,4 +12,5 @@ def user_is_authenticated(view_func):
             return redirect("website:user_auth:login")
 
         return view_func(request, *args, **kwargs)
+
     return _wrapped_view

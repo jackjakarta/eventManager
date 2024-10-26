@@ -6,13 +6,45 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('website', '0025_artist_bio'),
+        ("website", "0025_artist_bio"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='profile',
-            name='fav_genre',
-            field=models.CharField(blank=True, choices=[('rock', 'Rock'), ('pop', 'Pop'), ('hip_hop', 'Hip Hop'), ('electronic', 'Electronic'), ('jazz', 'Jazz'), ('blues', 'Blues'), ('country', 'Country'), ('classical', 'Classical'), ('reggae', 'Reggae'), ('metal', 'Metal'), ('folk', 'Folk'), ('rnb', 'R&B'), ('indie', 'Indie'), ('punk', 'Punk'), ('soul', 'Soul'), ('funk', 'Funk'), ('techno', 'Techno'), ('disco', 'Disco'), ('ambient', 'Ambient'), ('reggaeton', 'Reggaeton'), ('ska', 'Ska'), ('gospel', 'Gospel'), ('trance', 'Trance'), ('dancehall', 'Dancehall'), ('opera', 'Opera')], default=None, max_length=120, verbose_name='Favorite Music Genre'),
+            model_name="profile",
+            name="fav_genre",
+            field=models.CharField(
+                blank=True,
+                choices=[
+                    ("rock", "Rock"),
+                    ("pop", "Pop"),
+                    ("hip_hop", "Hip Hop"),
+                    ("electronic", "Electronic"),
+                    ("jazz", "Jazz"),
+                    ("blues", "Blues"),
+                    ("country", "Country"),
+                    ("classical", "Classical"),
+                    ("reggae", "Reggae"),
+                    ("metal", "Metal"),
+                    ("folk", "Folk"),
+                    ("rnb", "R&B"),
+                    ("indie", "Indie"),
+                    ("punk", "Punk"),
+                    ("soul", "Soul"),
+                    ("funk", "Funk"),
+                    ("techno", "Techno"),
+                    ("disco", "Disco"),
+                    ("ambient", "Ambient"),
+                    ("reggaeton", "Reggaeton"),
+                    ("ska", "Ska"),
+                    ("gospel", "Gospel"),
+                    ("trance", "Trance"),
+                    ("dancehall", "Dancehall"),
+                    ("opera", "Opera"),
+                ],
+                default=None,
+                max_length=120,
+                verbose_name="Favorite Music Genre",
+            ),
         ),
     ]

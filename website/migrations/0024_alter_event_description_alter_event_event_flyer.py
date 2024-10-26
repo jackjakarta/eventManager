@@ -6,18 +6,20 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('website', '0023_delete_apikey'),
+        ("website", "0023_delete_apikey"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='event',
-            name='description',
+            model_name="event",
+            name="description",
             field=models.TextField(blank=True, max_length=350),
         ),
         migrations.AlterField(
-            model_name='event',
-            name='event_flyer',
-            field=models.ImageField(default=None, upload_to='event_flyers/', verbose_name='Event Flyer'),
+            model_name="event",
+            name="event_flyer",
+            field=models.ImageField(
+                default=None, upload_to="event_flyers/", verbose_name="Event Flyer"
+            ),
         ),
     ]

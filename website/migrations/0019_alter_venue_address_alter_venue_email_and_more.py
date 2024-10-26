@@ -8,41 +8,77 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('website', '0018_alter_dalleimage_image'),
+        ("website", "0018_alter_dalleimage_image"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='venue',
-            name='address',
-            field=models.CharField(max_length=250, null=True, verbose_name='Venue Address'),
+            model_name="venue",
+            name="address",
+            field=models.CharField(
+                max_length=250, null=True, verbose_name="Venue Address"
+            ),
         ),
         migrations.AlterField(
-            model_name='venue',
-            name='email',
-            field=models.EmailField(blank=True, max_length=254, verbose_name='Venue Email'),
+            model_name="venue",
+            name="email",
+            field=models.EmailField(
+                blank=True, max_length=254, verbose_name="Venue Email"
+            ),
         ),
         migrations.AlterField(
-            model_name='venue',
-            name='website',
-            field=models.URLField(blank=True, verbose_name='Venue Website'),
+            model_name="venue",
+            name="website",
+            field=models.URLField(blank=True, verbose_name="Venue Website"),
         ),
         migrations.CreateModel(
-            name='Artist',
+            name="Artist",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-                ('name', models.CharField(max_length=120, verbose_name='Artist/Band Name')),
-                ('email', models.EmailField(blank=True, max_length=250, verbose_name='Booking Email')),
-                ('website', models.URLField(blank=True, verbose_name='Artist Link')),
-                ('city', models.CharField(blank=True, max_length=120, verbose_name='Artist City')),
-                ('country', models.CharField(max_length=120, verbose_name='Artist Country')),
-                ('manager', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
+                (
+                    "name",
+                    models.CharField(max_length=120, verbose_name="Artist/Band Name"),
+                ),
+                (
+                    "email",
+                    models.EmailField(
+                        blank=True, max_length=250, verbose_name="Booking Email"
+                    ),
+                ),
+                ("website", models.URLField(blank=True, verbose_name="Artist Link")),
+                (
+                    "city",
+                    models.CharField(
+                        blank=True, max_length=120, verbose_name="Artist City"
+                    ),
+                ),
+                (
+                    "country",
+                    models.CharField(max_length=120, verbose_name="Artist Country"),
+                ),
+                (
+                    "manager",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
             options={
-                'db_table': 'artists',
+                "db_table": "artists",
             },
         ),
     ]

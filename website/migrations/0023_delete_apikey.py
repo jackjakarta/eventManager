@@ -6,11 +6,11 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('website', '0022_promoter_image'),
+        ("website", "0022_promoter_image"),
     ]
 
     operations = [
         migrations.DeleteModel(
-            name='APIKey',
+            name="APIKey",
         ),
     ]

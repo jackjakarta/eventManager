@@ -44,17 +44,18 @@ def register_user(request):
             if form.is_valid():
                 form.save()
 
-                messages.success(request, "You have successfully registered. Check your email to activate "
-                                          "your account.")
+                messages.success(
+                    request,
+                    "You have successfully registered. Check your email to activate "
+                    "your account.",
+                )
                 return redirect("website:static_pages:home")
             else:
                 messages.error(request, "Your form is not valid.")
                 return redirect("website:user_auth:register")
         else:
             form = SignUpForm()
-            return render(request, "website/auth/register.html", {
-                "form": form
-            })
+            return render(request, "website/auth/register.html", {"form": form})
     else:
         messages.error(request, "You are already registered.")
         return redirect("website:static_pages:home")
@@ -70,6 +71,4 @@ def generate_api_key(request):
     api_key, key = UserAPIKey.objects.create_key(name=api_key_name, user=request.user)
     api_key.save()
 
-    return render(request, "website/auth/api_key.html", {
-      "api_key": key
-    })
+    return render(request, "website/auth/api_key.html", {"api_key": key})

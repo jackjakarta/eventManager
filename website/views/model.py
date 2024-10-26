@@ -10,89 +10,129 @@ from users.utils.decorators import user_is_authenticated
 def artists(request):
     artists_qs = Artist.objects.all()
     paginator = Paginator(artists_qs, 9)
-    page_number = request.GET.get('page')
+    page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
 
-    return render(request, "website/artists/artists.html", {
-        "page_obj": page_obj,
-    })
+    return render(
+        request,
+        "website/artists/artists.html",
+        {
+            "page_obj": page_obj,
+        },
+    )
 
 
 def artist_page(request, pk):
     artist_qs = get_object_or_404(Artist, id=pk)
-    return render(request, "website/artists/artist_page.html", {
-        "artist": artist_qs,
-    })
+    return render(
+        request,
+        "website/artists/artist_page.html",
+        {
+            "artist": artist_qs,
+        },
+    )
 
 
 def artist_events(request, pk):
     artist_name = get_object_or_404(Artist, id=pk)
     events_with_artist = Event.objects.filter(artists=pk)
-    return render(request, "website/artists/artist_events.html", {
-        "artist": artist_name,
-        "events": events_with_artist,
-    })
+    return render(
+        request,
+        "website/artists/artist_events.html",
+        {
+            "artist": artist_name,
+            "events": events_with_artist,
+        },
+    )
 
 
 def venues(request):
     venues_qs = Venue.objects.all().order_by("-updated_at")
     paginator = Paginator(venues_qs, 8)
-    page_number = request.GET.get('page')
+    page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
-    return render(request, "website/venues/venues.html", {
-        "page_obj": page_obj,
-    })
+    return render(
+        request,
+        "website/venues/venues.html",
+        {
+            "page_obj": page_obj,
+        },
+    )
 
 
 def venue_page(request, pk):
     venue = get_object_or_404(Venue, id=pk)
-    return render(request, "website/venues/venue_page.html", {
-        "venue": venue,
-    })
+    return render(
+        request,
+        "website/venues/venue_page.html",
+        {
+            "venue": venue,
+        },
+    )
 
 
 def venue_events(request, pk):
     venue_name = get_object_or_404(Venue, id=pk)
     events_at_venue = Event.objects.filter(venue_id=pk)
-    return render(request, "website/venues/venue_events.html", {
-        "events": events_at_venue,
-        "venue": venue_name,
-    })
+    return render(
+        request,
+        "website/venues/venue_events.html",
+        {
+            "events": events_at_venue,
+            "venue": venue_name,
+        },
+    )
 
 
 def promoters(request):
     promoters_qs = Promoter.objects.all().order_by("-updated_at")
     paginator = Paginator(promoters_qs, 9)
-    page_number = request.GET.get('page')
+    page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
-    return render(request, "website/promoters/promoters.html", {
-        "page_obj": page_obj,
-    })
+    return render(
+        request,
+        "website/promoters/promoters.html",
+        {
+            "page_obj": page_obj,
+        },
+    )
 
 
 def promoter_page(request, pk):
     promoter = get_object_or_404(Promoter, id=pk)
-    return render(request, "website/promoters/promoter_page.html", {
-        "promoter": promoter,
-    })
+    return render(
+        request,
+        "website/promoters/promoter_page.html",
+        {
+            "promoter": promoter,
+        },
+    )
 
 
 def events(request):
     events_qs = Event.objects.all().order_by("event_date")
     paginator = Paginator(events_qs, 10)
-    page_number = request.GET.get('page')
+    page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
 
-    return render(request, "website/events/events.html", {
-        "page_obj": page_obj,
-    })
+    return render(
+        request,
+        "website/events/events.html",
+        {
+            "page_obj": page_obj,
+        },
+    )
 
 
 def event_page(request, pk):
     event = get_object_or_404(Event, id=pk)
-    return render(request, "website/events/event_page.html", {
-        "event": event,
-    })
+    return render(
+        request,
+        "website/events/event_page.html",
+        {
+            "event": event,
+        },
+    )
 
 
 @user_is_authenticated
@@ -126,10 +166,14 @@ def events_search(request):
         searched = request.POST["searched"]
         events_qs = Event.objects.filter(name__contains=searched.title())
         paginator = Paginator(events_qs, 10)
-        page_number = request.GET.get('page')
+        page_number = request.GET.get("page")
         page_obj = paginator.get_page(page_number)
 
-        return render(request, "website/events/events_search.html", {
-            "searched": searched,
-            "page_obj": page_obj,
-        })
+        return render(
+            request,
+            "website/events/events_search.html",
+            {
+                "searched": searched,
+                "page_obj": page_obj,
+            },
+        )

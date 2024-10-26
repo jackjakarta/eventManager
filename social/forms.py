@@ -6,7 +6,11 @@ from website.utils.moderation import check_moderate
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ("image", "event", "description", )
+        fields = (
+            "image",
+            "event",
+            "description",
+        )
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop("user", None)
@@ -29,7 +33,7 @@ class PostForm(forms.ModelForm):
 class PostCommentForm(forms.ModelForm):
     class Meta:
         model = PostComment
-        fields = ("text", )
+        fields = ("text",)
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop("user", None)

@@ -31,7 +31,7 @@ def send_contact_mail(name, message, reply_to):
         subject=subject,
         message=user_message,
         from_email=settings.EMAIL_HOST_USER,
-        recipient_list=["support@evntmngr.xyz"]
+        recipient_list=["support@evntmngr.xyz"],
     )
 
 

@@ -7,13 +7,20 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('website', '0028_profile_fav_artist'),
+        ("website", "0028_profile_fav_artist"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='profile',
-            name='fav_artist',
-            field=models.ForeignKey(blank=True, default=None, null=True, on_delete=django.db.models.deletion.SET_NULL, to='website.artist', verbose_name='Favorite Artist'),
+            model_name="profile",
+            name="fav_artist",
+            field=models.ForeignKey(
+                blank=True,
+                default=None,
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                to="website.artist",
+                verbose_name="Favorite Artist",
+            ),
         ),
     ]

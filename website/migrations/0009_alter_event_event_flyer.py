@@ -6,13 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('website', '0008_venue_manager'),
+        ("website", "0008_venue_manager"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='event',
-            name='event_flyer',
-            field=models.ImageField(default=None, null=True, upload_to='event_flyers/', verbose_name='Event Flyer'),
+            model_name="event",
+            name="event_flyer",
+            field=models.ImageField(
+                default=None,
+                null=True,
+                upload_to="event_flyers/",
+                verbose_name="Event Flyer",
+            ),
         ),
     ]

@@ -10,25 +10,46 @@ AuthUser = get_user_model()
 class SignUpForm(forms.ModelForm):
     class Meta:
         model = AuthUser
-        fields = ("email", "first_name", "last_name", "is_newsletter_sub", )
+        fields = (
+            "email",
+            "first_name",
+            "last_name",
+            "is_newsletter_sub",
+        )
         labels = {
             "email": "",
             "first_name": "",
             "last_name": "",
-            "is_newsletter_sub": ""
+            "is_newsletter_sub": "",
         }
         widgets = {
-            "email": forms.TextInput(attrs={"class": "form-control", "placeholder": "Email Address"}),
-            "first_name": forms.TextInput(attrs={"class": "form-control", "placeholder": "First Name"}),
-            "last_name": forms.TextInput(attrs={"class": "form-control", "placeholder": "Last Name"}),
-            "is_newsletter_sub": forms.CheckboxInput(attrs={"class": "form-check-input"}),
+            "email": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "Email Address"}
+            ),
+            "first_name": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "First Name"}
+            ),
+            "last_name": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "Last Name"}
+            ),
+            "is_newsletter_sub": forms.CheckboxInput(
+                attrs={"class": "form-check-input"}
+            ),
         }
 
 
 class AddArtistForm(forms.ModelForm):
     class Meta:
         model = Artist
-        fields = ("name", "bio", "image", "email", "website", "city", "country", )
+        fields = (
+            "name",
+            "bio",
+            "image",
+            "email",
+            "website",
+            "city",
+            "country",
+        )
         labels = {
             "name": "",
             "bio": "",
@@ -36,16 +57,28 @@ class AddArtistForm(forms.ModelForm):
             "website": "",
             "city": "",
             "country": "",
-            "image": "Artist Image:"
+            "image": "Artist Image:",
         }
         widgets = {
-            "name": forms.TextInput(attrs={"class": "form-control", "placeholder": "Artist/Band Name"}),
-            "bio": forms.Textarea(attrs={"class": "form-control", "placeholder": "Artist Bio"}),
-            "email": forms.TextInput(attrs={"class": "form-control", "placeholder": "Booking Email"}),
-            "website": forms.TextInput(attrs={"class": "form-control", "placeholder": "Social Link"}),
-            "city": forms.TextInput(attrs={"class": "form-control", "placeholder": "City"}),
+            "name": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "Artist/Band Name"}
+            ),
+            "bio": forms.Textarea(
+                attrs={"class": "form-control", "placeholder": "Artist Bio"}
+            ),
+            "email": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "Booking Email"}
+            ),
+            "website": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "Social Link"}
+            ),
+            "city": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "City"}
+            ),
             "country": forms.Select(attrs={"class": "form-select"}),
-            "image": forms.ClearableFileInput(attrs={"class": "form-control", "placeholder": "Artist Image"}),
+            "image": forms.ClearableFileInput(
+                attrs={"class": "form-control", "placeholder": "Artist Image"}
+            ),
         }
 
     def __init__(self, *args, **kwargs):
@@ -69,7 +102,12 @@ class AddArtistForm(forms.ModelForm):
 class AddPromoterForm(forms.ModelForm):
     class Meta:
         model = Promoter
-        fields = ("name", "city", "email", "website", )
+        fields = (
+            "name",
+            "city",
+            "email",
+            "website",
+        )
         labels = {
             "name": "",
             "city": "",
@@ -77,10 +115,18 @@ class AddPromoterForm(forms.ModelForm):
             "website": "",
         }
         widgets = {
-            "name": forms.TextInput(attrs={"class": "form-control", "placeholder": "Name"}),
-            "city": forms.TextInput(attrs={"class": "form-control", "placeholder": "City"}),
-            "email": forms.TextInput(attrs={"class": "form-control", "placeholder": "Email"}),
-            "website": forms.TextInput(attrs={"class": "form-control", "placeholder": "Website"}),
+            "name": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "Name"}
+            ),
+            "city": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "City"}
+            ),
+            "email": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "Email"}
+            ),
+            "website": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "Website"}
+            ),
         }
 
     def __init__(self, *args, **kwargs):
@@ -104,7 +150,16 @@ class AddPromoterForm(forms.ModelForm):
 class AddVenueForm(forms.ModelForm):
     class Meta:
         model = Venue
-        fields = ("name", "address", "city", "country", "zip_code", "website", "email", "image", )
+        fields = (
+            "name",
+            "address",
+            "city",
+            "country",
+            "zip_code",
+            "website",
+            "email",
+            "image",
+        )
         labels = {
             "name": "",
             "address": "",
@@ -116,14 +171,30 @@ class AddVenueForm(forms.ModelForm):
             "image": "Venue Image or Logo",
         }
         widgets = {
-            "name": forms.TextInput(attrs={"class": "form-control", "placeholder": "Venue Name"}),
-            "address": forms.TextInput(attrs={"class": "form-control", "placeholder": "Address"}),
-            "city": forms.TextInput(attrs={"class": "form-control", "placeholder": "City"}),
-            "country": forms.Select(attrs={"class": "form-select", "placeholder": "Country"}),
-            "zip_code": forms.TextInput(attrs={"class": "form-control", "placeholder": "Zip Code"}),
-            "website": forms.TextInput(attrs={"class": "form-control", "placeholder": "Website"}),
-            "email": forms.TextInput(attrs={"class": "form-control", "placeholder": "Email"}),
-            "image": forms.ClearableFileInput(attrs={"class": "form-control", "placeholder": "Image or Logo"}),
+            "name": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "Venue Name"}
+            ),
+            "address": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "Address"}
+            ),
+            "city": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "City"}
+            ),
+            "country": forms.Select(
+                attrs={"class": "form-select", "placeholder": "Country"}
+            ),
+            "zip_code": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "Zip Code"}
+            ),
+            "website": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "Website"}
+            ),
+            "email": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "Email"}
+            ),
+            "image": forms.ClearableFileInput(
+                attrs={"class": "form-control", "placeholder": "Image or Logo"}
+            ),
         }
 
     def __init__(self, *args, **kwargs):
@@ -167,9 +238,11 @@ class AddEventForm(forms.ModelForm):
         super(AddEventForm, self).__init__(*args, **kwargs)
 
         if self.user:
-            self.fields['venue'].queryset = Venue.objects.filter(manager=self.user)
-            self.fields['promoter'].queryset = Promoter.objects.filter(manager=self.user)
-            self.fields['artists'].queryset = Artist.objects.filter(manager=self.user)
+            self.fields["venue"].queryset = Venue.objects.filter(manager=self.user)
+            self.fields["promoter"].queryset = Promoter.objects.filter(
+                manager=self.user
+            )
+            self.fields["artists"].queryset = Artist.objects.filter(manager=self.user)
 
     def check_for_moderation(self):
         if not check_moderate(self.cleaned_data.get("description")):
@@ -188,7 +261,11 @@ class AddEventForm(forms.ModelForm):
 class EditProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ("avatar", "fav_genre", "fav_artist", )
+        fields = (
+            "avatar",
+            "fav_genre",
+            "fav_artist",
+        )
 
         labels = {
             "avatar": "Avatar",
@@ -206,19 +283,21 @@ class EditProfileForm(forms.ModelForm):
 class NewsletterCheckBoxForm(forms.ModelForm):
     class Meta:
         model = AuthUser
-        fields = ("is_newsletter_sub", )
+        fields = ("is_newsletter_sub",)
 
         labels = {"is_newsletter_sub": "Newsletter"}
 
 
 class DallEImageForm(forms.Form):
-    image_prompt = forms.CharField(max_length=1000, widget=forms.Textarea(
-        attrs={
-            "class": "form-control",
-            "placeholder": "A vibrant and captivating image featuring the iconic Taj Mahal..."
-        }
-    ),
-        label=""
+    image_prompt = forms.CharField(
+        max_length=1000,
+        widget=forms.Textarea(
+            attrs={
+                "class": "form-control",
+                "placeholder": "A vibrant and captivating image featuring the iconic Taj Mahal...",
+            }
+        ),
+        label="",
     )
 
 
@@ -228,9 +307,9 @@ class GPTAssistantsApiForm(forms.Form):
         widget=forms.Textarea(
             attrs={
                 "class": "form-control",
-                "placeholder": "A techno party at the lake..."
+                "placeholder": "A techno party at the lake...",
             },
         ),
         label="",
-        required=True
+        required=True,
     )

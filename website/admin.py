@@ -7,17 +7,70 @@ from .models import Venue, Event, Promoter, Artist, Profile, NewsletterSub
 
 @admin.register(Artist)
 class ArtistAdmin(admin.ModelAdmin):
-    list_display = ("name", "email", "country", "website", "manager", "created_at", )
-    list_filter = ("country", )
-    ordering = ("name", "country", "manager", "created_at", )
-    search_fields = ("name", "country", "city", )
-    readonly_fields = ("get_artist_image", "created_at", )
+    list_display = (
+        "name",
+        "email",
+        "country",
+        "website",
+        "manager",
+        "created_at",
+    )
+    list_filter = ("country",)
+    ordering = (
+        "name",
+        "country",
+        "manager",
+        "created_at",
+    )
+    search_fields = (
+        "name",
+        "country",
+        "city",
+    )
+    readonly_fields = (
+        "get_artist_image",
+        "created_at",
+    )
 
     fieldsets = (
-        (_("Artist Image"), {"fields": ("get_artist_image", "image", )}),
-        (_("Artist Contact"), {"fields": ("name", "email", "website", )}),
-        (_("Artist Bio"), {"fields": ("city", "country", "bio", )}),
-        (_("Artist Management"), {"fields": ("manager", "created_at", )})
+        (
+            _("Artist Image"),
+            {
+                "fields": (
+                    "get_artist_image",
+                    "image",
+                )
+            },
+        ),
+        (
+            _("Artist Contact"),
+            {
+                "fields": (
+                    "name",
+                    "email",
+                    "website",
+                )
+            },
+        ),
+        (
+            _("Artist Bio"),
+            {
+                "fields": (
+                    "city",
+                    "country",
+                    "bio",
+                )
+            },
+        ),
+        (
+            _("Artist Management"),
+            {
+                "fields": (
+                    "manager",
+                    "created_at",
+                )
+            },
+        ),
     )
 
     def get_artist_image(self, obj):
@@ -29,24 +82,67 @@ class ArtistAdmin(admin.ModelAdmin):
 
 @admin.register(Venue)
 class VenueAdmin(admin.ModelAdmin):
-    list_display = ("name", "address", "zip_code", "city", "country", "website", "email", "created_at", )
-    list_filter = ("city", "country", )
-    ordering = ("created_at", "name", )
-    search_fields = ("name", "city", "country", )
-    readonly_fields = ("get_venue_image", "updated_at", )
+    list_display = (
+        "name",
+        "address",
+        "zip_code",
+        "city",
+        "country",
+        "website",
+        "email",
+        "created_at",
+    )
+    list_filter = (
+        "city",
+        "country",
+    )
+    ordering = (
+        "created_at",
+        "name",
+    )
+    search_fields = (
+        "name",
+        "city",
+        "country",
+    )
+    readonly_fields = (
+        "get_venue_image",
+        "updated_at",
+    )
 
     fieldsets = (
-        (_("Venue Image"), {"fields": ("get_venue_image", "image", )}),
-        (_("Venue Contact Information"), {"fields": (
-            "name",
-            "address",
-            "zip_code",
-            "city",
-            "country",
-            "email",
-            "website",
-        )}),
-        (_("Venue Management"), {"fields": ("manager", "updated_at", )})
+        (
+            _("Venue Image"),
+            {
+                "fields": (
+                    "get_venue_image",
+                    "image",
+                )
+            },
+        ),
+        (
+            _("Venue Contact Information"),
+            {
+                "fields": (
+                    "name",
+                    "address",
+                    "zip_code",
+                    "city",
+                    "country",
+                    "email",
+                    "website",
+                )
+            },
+        ),
+        (
+            _("Venue Management"),
+            {
+                "fields": (
+                    "manager",
+                    "updated_at",
+                )
+            },
+        ),
     )
 
     def get_venue_image(self, obj):
@@ -58,17 +154,76 @@ class VenueAdmin(admin.ModelAdmin):
 
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
-    list_display = ("name", "event_date", "venue", "event_type", "manager", "get_event_flyer", "created_at", )
-    list_filter = ("event_type", "venue", "promoter", "artists", "genre", )
-    ordering = ("created_at", "name", "venue", "event_type", "manager", "event_date", )
-    search_fields = ("name", "venue", "manager", "event_type",)
-    readonly_fields = ("get_event_flyer", "get_event_flyer_big", "attendees", )
+    list_display = (
+        "name",
+        "event_date",
+        "venue",
+        "event_type",
+        "manager",
+        "get_event_flyer",
+        "created_at",
+    )
+    list_filter = (
+        "event_type",
+        "venue",
+        "promoter",
+        "artists",
+        "genre",
+    )
+    ordering = (
+        "created_at",
+        "name",
+        "venue",
+        "event_type",
+        "manager",
+        "event_date",
+    )
+    search_fields = (
+        "name",
+        "venue",
+        "manager",
+        "event_type",
+    )
+    readonly_fields = (
+        "get_event_flyer",
+        "get_event_flyer_big",
+        "attendees",
+    )
 
     fieldsets = (
-        (_("Event Flyer"), {"fields": ("get_event_flyer_big", "event_flyer",)}),
-        (_("Event Information"), {"fields": ("name", "event_date", "description", "event_type", "genre", )}),
-        (_("Event Management"), {"fields": ("manager", "venue", "promoter", "artists", )}),
-        (_("Event Attendees"), {"fields": ("attendees", )}),
+        (
+            _("Event Flyer"),
+            {
+                "fields": (
+                    "get_event_flyer_big",
+                    "event_flyer",
+                )
+            },
+        ),
+        (
+            _("Event Information"),
+            {
+                "fields": (
+                    "name",
+                    "event_date",
+                    "description",
+                    "event_type",
+                    "genre",
+                )
+            },
+        ),
+        (
+            _("Event Management"),
+            {
+                "fields": (
+                    "manager",
+                    "venue",
+                    "promoter",
+                    "artists",
+                )
+            },
+        ),
+        (_("Event Attendees"), {"fields": ("attendees",)}),
     )
 
     def get_event_flyer(self, obj):
@@ -86,24 +241,79 @@ class EventAdmin(admin.ModelAdmin):
 
 @admin.register(Promoter)
 class PromoterAdmin(admin.ModelAdmin):
-    list_display = ("name", "city", "email", "website", "created_at", )
-    list_filter = ("city", )
-    ordering = ("created_at", "name", "city", )
-    search_fields = ("name", "city", )
+    list_display = (
+        "name",
+        "city",
+        "email",
+        "website",
+        "created_at",
+    )
+    list_filter = ("city",)
+    ordering = (
+        "created_at",
+        "name",
+        "city",
+    )
+    search_fields = (
+        "name",
+        "city",
+    )
 
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ("user", "display_avatar", "fav_genre", "fav_artist", "created_at", )
-    list_filter = ("fav_genre", "fav_artist", )
-    ordering = ("user", "fav_genre", "created_at", )
-    search_fields = ("fav_genre", )
-    readonly_fields = ("display_avatar", "display_avatar_big", "user", "user_name", )
+    list_display = (
+        "user",
+        "display_avatar",
+        "fav_genre",
+        "fav_artist",
+        "created_at",
+    )
+    list_filter = (
+        "fav_genre",
+        "fav_artist",
+    )
+    ordering = (
+        "user",
+        "fav_genre",
+        "created_at",
+    )
+    search_fields = ("fav_genre",)
+    readonly_fields = (
+        "display_avatar",
+        "display_avatar_big",
+        "user",
+        "user_name",
+    )
 
     fieldsets = (
-        (_("Avatar"), {"fields": ("display_avatar_big", "avatar",)}),
-        (_("Contact Information"), {"fields": ("user_name", "user", )}),
-        (_("Profile Information"), {"fields": ("fav_genre", "fav_artist", )}),
+        (
+            _("Avatar"),
+            {
+                "fields": (
+                    "display_avatar_big",
+                    "avatar",
+                )
+            },
+        ),
+        (
+            _("Contact Information"),
+            {
+                "fields": (
+                    "user_name",
+                    "user",
+                )
+            },
+        ),
+        (
+            _("Profile Information"),
+            {
+                "fields": (
+                    "fav_genre",
+                    "fav_artist",
+                )
+            },
+        ),
     )
 
     def user_name(self, obj):
@@ -127,6 +337,12 @@ class ProfileAdmin(admin.ModelAdmin):
 
 @admin.register(NewsletterSub)
 class NewsletterSubAdmin(admin.ModelAdmin):
-    list_display = ("email", "created_at",)
-    ordering = ("email", "created_at",)
-    search_fields = ("email", )
+    list_display = (
+        "email",
+        "created_at",
+    )
+    ordering = (
+        "email",
+        "created_at",
+    )
+    search_fields = ("email",)
